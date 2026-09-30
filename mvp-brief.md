@@ -3,7 +3,7 @@
 > MVP pré-comercial personalizado para demonstrar valor antes de qualquer discovery interno.
 >
 > **Estado:** A CONSTRUIR  
-> **Versão:** 0.1  
+> **Versão:** 0.2  
 > **Base:** Inteligência Operacional pública + Metodologia RIGHTWARE de Inteligência Operacional
 
 ---
@@ -321,3 +321,50 @@ e minimizar:
 6. escrever `demo-script.md`;
 7. testar apresentação de 5–10 minutos;
 8. preparar mensagem de abordagem.
+
+
+---
+
+## 15. Arquitetura de implementação
+
+**DECISÃO**
+
+O MVP COLUS será implementado diretamente neste repositório, como aplicação independente.
+
+Não será criado como tenant dentro do repositório Páscoa.
+
+O Páscoa será usado para:
+
+- estudar fluxos;
+- portar componentes;
+- reutilizar páginas;
+- reaproveitar padrões de UX;
+- reaproveitar estrutura de mocks;
+- reutilizar lógica genérica quando fizer sentido.
+
+### Não portar como arquitetura
+
+- tenant switching;
+- tenant registry;
+- Super Admin multi-tenant;
+- runtime tenant resolution;
+- gestão de várias escolas no mesmo deploy.
+
+### Regra
+
+> **Páscoa é referência de produto; COLUS é um deployment próprio.**
+
+---
+
+## 16. ERP
+
+Para o MVP, fluxos de ERP podem continuar representados dentro da experiência EduCore para demonstrar a jornada completa.
+
+Contudo, a direção futura é tratar o ERP como sistema separado e integrável.
+
+Portanto:
+
+- não acoplar nova lógica desnecessariamente à interface;
+- preferir contratos/serviços claros;
+- evitar arquitetura que impeça futura extração para API/ERP separado;
+- não apresentar o backend ERP produtivo como concluído quando ainda for demonstrativo.
