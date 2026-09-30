@@ -3,7 +3,7 @@
 > Documento vivo de inteligência comercial e operacional para preparação da abordagem EduCore ao **COLUS — Colégio Universo dos Sonhos, Limitada**.
 >
 > **Estado:** PESQUISA ATIVA  
-> **Versão:** 0.2  
+> **Versão:** 0.3  
 > **Data de início:** 2026-09-30  
 > **Natureza:** Inteligência pré-comercial / OSINT / preparação de proposta  
 > **Regra:** separar sempre FACTO CONFIRMADO, INDÍCIO, HIPÓTESE e RECOMENDAÇÃO.
@@ -67,13 +67,23 @@ Fonte:
 - https://www.inm.gov.mz/pt-br/content/br-n%C2%BA-76-de-200423-boletim-da-rep%C3%BAblica-iii-serie
 - Cópia pesquisável: https://archive.gazettes.africa/archive/mz/2023/mz-government-gazette-series-iii-dated-2023-04-20-no-76.pdf
 
-## 3.2 Administração e representação legal
+## 3.2 Administração, participação societária e representação legal
 
 **CONFIRMADO**
 
 O registo societário publicado indica **Jorgete de Jesus Pinto** como administradora única.
 
 O documento também estabelece que a sociedade se obriga por duas assinaturas: **Jorgete de Jesus Pinto** e **Juma Júnior Jorgete Cangy**.
+
+O capital social publicado em 2023 atribui **40% a Jorgete de Jesus Pinto** e **30% a Juma Júnior Jorgete Cangy**. Os 30% remanescentes aparecem distribuídos por outros membros da estrutura familiar societária.
+
+### Leitura para o mapa de decisão
+
+**CONFIRMADO quanto à estrutura de 2023 / A VALIDAR quanto ao presente**
+
+Jorgete e Juma concentravam conjuntamente **70% do capital social publicado** e ambos aparecem na regra de assinatura da sociedade. Isto torna-os stakeholders de elevada relevância para uma proposta com impacto estratégico, financeiro ou tecnológico.
+
+A composição societária pode ter sido alterada desde 2023; deve ser reconfirmada antes de qualquer uso formal.
 
 ### Leitura comercial
 
@@ -1017,3 +1027,57 @@ Continuam sem confirmação pública:
 - organograma operacional;
 - decisor de tecnologia.
 
+
+
+---
+
+# 26. Refinamento do mapa de decisão — v0.3
+
+## Stakeholders com evidência forte
+
+### Jorgete de Jesus Pinto
+
+**CONFIRMADO NO REGISTO DE 2023**
+
+- administradora única;
+- participação de 40% no capital social publicado;
+- uma das assinaturas necessárias para obrigar a sociedade.
+
+**Implicação comercial:** provável relevância elevada em aprovação institucional e financeira, sujeita a confirmação do cargo atual.
+
+### Juma Júnior Jorgete Cangy
+
+**CONFIRMADO NO REGISTO DE 2023 + EVIDÊNCIA INSTITUCIONAL EM 2026**
+
+- participação de 30% no capital social publicado;
+- uma das assinaturas necessárias para obrigar a sociedade;
+- identificado publicamente como Engenheiro Civil;
+- presença em atividade promovida pelo próprio COLUS em 2026.
+
+**Implicação comercial:** stakeholder de elevada prioridade para mapeamento, especialmente para proposta que combine tecnologia, infraestrutura operacional e estratégia.
+
+## Stakeholders ainda desconhecidos
+
+Ainda precisamos identificar:
+
+- responsável/diretor(a) geral atual;
+- diretor(a) pedagógico(a);
+- responsável administrativo/financeiro;
+- responsável de TIC;
+- tesouraria;
+- secretaria;
+- responsável por comunicação/marketing.
+
+## Estratégia de abordagem preliminar
+
+**RECOMENDAÇÃO**
+
+Não iniciar outreach assumindo cargos operacionais não confirmados.
+
+A primeira abordagem deve procurar chegar a:
+
+1. administração/direção;
+2. pessoa responsável por tecnologia ou operações;
+3. financeiro, se a conversa avançar para propinas e pagamentos.
+
+A proposta EduCore terá maior probabilidade de avançar se o processo envolver simultaneamente **patrocínio executivo + responsável operacional**.
