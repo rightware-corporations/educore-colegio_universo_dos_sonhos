@@ -3,7 +3,7 @@
 > Documento vivo de inteligência comercial e operacional para preparação da abordagem EduCore ao **COLUS — Colégio Universo dos Sonhos, Limitada**.
 >
 > **Estado:** PESQUISA ATIVA  
-> **Versão:** 0.4  
+> **Versão:** 0.5  
 > **Data de início:** 2026-09-30  
 > **Natureza:** Inteligência pré-comercial / OSINT / preparação de proposta  
 > **Regra:** separar sempre FACTO CONFIRMADO, INDÍCIO, HIPÓTESE e RECOMENDAÇÃO.
@@ -1835,3 +1835,735 @@ Esse documento deve ser usado antes ou durante o primeiro contacto e conter apen
 5. próximo passo desejado.
 
 Após discovery real com o COLUS, atualizar este documento e substituir hipóteses por factos confirmados antes de produzir a proposta comercial final.
+
+
+---
+
+# 35. Metodologia RIGHTWARE de Inteligência Operacional — v1
+
+## 35.1 Estado da metodologia
+
+**DECISÃO OPERACIONAL DESTE PROJETO**
+
+Para a abordagem comercial do EduCore ao COLUS, a equipa deve realizar **Inteligência Operacional antes de apresentar o produto em profundidade**.
+
+O princípio é:
+
+> **Primeiro compreender o sistema real, o problema e os critérios de decisão. Só depois posicionar a solução.**
+
+A aplicação desta metodologia a outros produtos e unidades da RIGHTWARE é uma **RECOMENDAÇÃO DE PADRONIZAÇÃO**, não uma decisão corporativa geral formalizada neste documento.
+
+## 35.2 Fundamentação
+
+A metodologia foi refinada a partir de cinco materiais de Introdução à Engenharia disponíveis no repositório de pesquisa do projeto:
+
+1. **11. Metodologia da Solução dos Problemas**
+2. **4. Os Problemas na Engenharia**
+3. **6A. Modelo**
+4. **8. Pesquisa Tecnológica**
+5. **9. Comunicação**
+
+Os princípios úteis foram adaptados ao contexto de inteligência comercial, descoberta operacional, arquitetura de solução e pré-venda tecnológica.
+
+### Ideias centrais incorporadas
+
+- não confundir o problema com a solução atualmente utilizada;
+- formular o problema antes de procurar alternativas;
+- distinguir **Estado A** (situação atual) de **Estado B** (situação desejada);
+- identificar condicionantes reais antes de desenhar a solução;
+- definir critérios de avaliação;
+- trabalhar com hipóteses provisórias e testá-las;
+- observar, pesquisar, analisar e sintetizar;
+- modelar sistemas complexos de forma simplificada, sem fingir que o modelo é a realidade;
+- considerar múltiplas alternativas antes da decisão;
+- avaliar benefício, custo, risco e viabilidade;
+- documentar a solução para que terceiros a possam compreender;
+- acompanhar a implementação e reabrir o problema quando a realidade mudar;
+- adaptar a comunicação ao receptor.
+
+---
+
+# 36. Pipeline operacional
+
+A Inteligência Operacional passa a seguir o seguinte ciclo:
+
+**OBSERVAR → FORMULAR → ANALISAR → MODELAR → PESQUISAR → HIPOTETIZAR → VALIDAR → GERAR ALTERNATIVAS → DECIDIR → ESPECIFICAR → COMUNICAR → IMPLEMENTAR → ACOMPANHAR → REATIVAR**
+
+## Etapa 1 — Observar
+
+### Objetivo
+
+Reconhecer necessidades, comportamentos, estrutura, sinais operacionais e contexto antes de definir o problema.
+
+### Fontes
+
+- presença institucional pública;
+- documentos;
+- websites;
+- redes sociais;
+- processos observáveis;
+- entrevistas;
+- discovery;
+- dados internos fornecidos pelo cliente;
+- mercado e concorrência.
+
+### Output
+
+**Evidence Log**
+
+Cada observação recebe classificação:
+
+- CONFIRMADO;
+- INDÍCIO;
+- HIPÓTESE;
+- NÃO CONFIRMADO.
+
+### Regra
+
+Observação não é diagnóstico.
+
+---
+
+## Etapa 2 — Formular o problema
+
+### Objetivo
+
+Definir claramente **o que precisa mudar**, sem assumir prematuramente a tecnologia que fará a mudança.
+
+### Estrutura
+
+**Estado A → transformação desejada → Estado B**
+
+### Exemplo COLUS
+
+**Estado A a validar:** informação académica, financeira e de comunicação pode estar distribuída entre diferentes processos.
+
+**Estado B desejável:** informação institucional consistente, acessível ao interveniente correto e disponível no momento necessário.
+
+### Regra crítica
+
+Não formular:
+
+> “O COLUS precisa do EduCore.”
+
+Formular:
+
+> “Que transformação operacional ou de experiência é necessária, para quem e com que resultado?”
+
+O EduCore só entra depois.
+
+---
+
+## Etapa 3 — Analisar
+
+### Objetivo
+
+Decompor o sistema para compreender entradas, saídas, variáveis, condicionantes e critérios.
+
+### Para cada processo mapear
+
+- entrada;
+- ator;
+- ação;
+- sistema/ferramenta;
+- dado produzido;
+- decisão;
+- saída;
+- exceções;
+- dependências;
+- tempo;
+- custo;
+- risco.
+
+### Exemplo
+
+**Processo:** pagamento de propina
+
+Entrada → cobrança / referência / obrigação  
+Ator → encarregado / financeiro  
+Transformação → pagamento + confirmação + reconciliação  
+Saída → conta atualizada + recibo + indicador financeiro
+
+### Output
+
+**Process Map + Constraint Map**
+
+---
+
+## Etapa 4 — Modelar
+
+### Objetivo
+
+Construir uma representação suficientemente simples para raciocinar sobre a organização sem tentar reproduzir toda a realidade.
+
+### Modelos recomendados
+
+1. **Modelo diagramático** — fluxos e relações;
+2. **Modelo de atores** — quem interage com quem;
+3. **Modelo de dados** — quais entidades precisam de uma fonte de verdade;
+4. **Modelo de jornada** — experiência do utilizador;
+5. **Modelo económico** — custos, esforço e benefício;
+6. **Modelo de decisão** — decisor, influenciadores, utilizadores e bloqueadores.
+
+### Modelo base COLUS
+
+**Aluno** como entidade central ligada a:
+
+- encarregado;
+- professor;
+- turma;
+- secretaria;
+- financeiro;
+- direção;
+- eventos;
+- documentos;
+- comunicação.
+
+### Regra
+
+> **O modelo é instrumento de pensamento, comunicação e previsão — não é a realidade.**
+
+Sempre registar hipóteses simplificadoras.
+
+---
+
+## Etapa 5 — Pesquisar
+
+### Objetivo
+
+Reduzir incerteza antes de fazer recomendações.
+
+### Método adaptado
+
+**Pesquisa bibliográfica/documental → observação → hipótese → validação → análise → síntese**
+
+### Hierarquia de fontes
+
+1. informação fornecida diretamente pelo cliente;
+2. documentos oficiais;
+3. sistemas/dados observados em demonstração;
+4. fontes institucionais próprias;
+5. fontes públicas confiáveis;
+6. agregadores/diretórios;
+7. inferências.
+
+### Output
+
+**Research Log**
+
+Cada conclusão deve poder responder:
+
+- Qual é a fonte?
+- Qual é a data?
+- Quão confiável é?
+- O que esta fonte realmente prova?
+- O que ainda não prova?
+
+---
+
+## Etapa 6 — Formular hipóteses
+
+### Objetivo
+
+Criar explicações provisórias que orientem a investigação.
+
+### Forma
+
+> **Se [evidência] for representativa do processo real, então [hipótese] pode existir, produzindo [impacto].**
+
+### Exemplo
+
+> Se a comunicação com encarregados estiver distribuída entre vários canais, pode existir perda de rastreabilidade e aumento de trabalho administrativo.
+
+### Regra
+
+Hipótese deve ser **refutável**.
+
+Se não existe nenhuma informação que possa provar que a hipótese está errada, ela é fraca.
+
+---
+
+## Etapa 7 — Validar
+
+### Objetivo
+
+Transformar hipóteses em factos ou eliminá-las.
+
+### Ferramentas
+
+- perguntas de discovery;
+- walkthrough do processo;
+- observação de sistemas;
+- amostra de dados;
+- métricas;
+- demonstração do fluxo atual;
+- entrevistas com diferentes stakeholders.
+
+### Estados possíveis
+
+- CONFIRMADA;
+- PARCIALMENTE CONFIRMADA;
+- REFUTADA;
+- INCONCLUSIVA.
+
+### Regra
+
+Hipóteses refutadas devem permanecer registadas no histórico para evitar que reapareçam como “factos” mais tarde.
+
+---
+
+## Etapa 8 — Gerar alternativas
+
+### Objetivo
+
+Evitar a conclusão automática de que o produto atual da RIGHTWARE é sempre a resposta completa.
+
+### Tipos de alternativa
+
+- manter processo atual;
+- otimizar processo sem software novo;
+- integrar ferramenta existente;
+- configurar módulo existente;
+- desenvolver extensão;
+- substituir sistema;
+- implementar gradualmente;
+- construir solução específica.
+
+### Regra
+
+> **Não rejeitar alternativas prematuramente e não se satisfazer prematuramente com a primeira solução.**
+
+---
+
+## Etapa 9 — Definir critérios e decidir
+
+### Objetivo
+
+Comparar alternativas segundo critérios relevantes para o cliente e para a viabilidade de execução.
+
+### Critérios possíveis
+
+- impacto operacional;
+- valor para utilizadores;
+- custo;
+- tempo de implementação;
+- complexidade;
+- risco;
+- segurança;
+- integração;
+- adoção;
+- manutenção;
+- escalabilidade;
+- retorno económico;
+- reversibilidade;
+- dependências.
+
+### Output
+
+**Decision Matrix**
+
+A decisão não deve ser baseada apenas em quantidade de funcionalidades.
+
+---
+
+## Etapa 10 — Especificar a solução
+
+### Objetivo
+
+Transformar a alternativa escolhida numa definição executável.
+
+### Especificar
+
+- escopo;
+- módulos;
+- utilizadores;
+- dados;
+- integrações;
+- migração;
+- segurança;
+- permissões;
+- implantação;
+- treinamento;
+- suporte;
+- métricas de sucesso;
+- exclusões;
+- dependências;
+- prazo;
+- custos.
+
+### Regra
+
+Nenhuma proposta comercial final deve esconder dependências importantes em texto genérico.
+
+---
+
+## Etapa 11 — Comunicar
+
+### Objetivo
+
+Fazer com que cada stakeholder compreenda o valor relevante para a sua função.
+
+### Princípio
+
+A qualidade da solução é insuficiente se o receptor não compreender:
+
+- o problema;
+- a transformação;
+- o valor;
+- o risco;
+- o esforço;
+- o próximo passo.
+
+### Comunicação por receptor
+
+**Administração:** controlo, risco, investimento, retorno.  
+**Direção:** indicadores, operação, decisões.  
+**Pedagógico:** acompanhamento académico.  
+**Financeiro:** receita, dívida, reconciliação, auditoria.  
+**Professor:** simplicidade e redução de carga.  
+**Encarregado:** visibilidade e conveniência.  
+**TIC:** arquitetura, segurança, integrações e suporte.
+
+### Regra
+
+A linguagem e a demonstração devem ser adaptadas ao receptor.
+
+---
+
+## Etapa 12 — Implementar
+
+### Objetivo
+
+Converter a especificação aprovada em operação real.
+
+### Componentes
+
+- preparação;
+- configuração;
+- migração;
+- integração;
+- testes;
+- formação;
+- piloto;
+- rollout;
+- suporte inicial.
+
+### Regra
+
+Venda concluída não significa problema resolvido.
+
+---
+
+## Etapa 13 — Acompanhar
+
+### Objetivo
+
+Comparar o resultado real com o Estado B definido no início.
+
+### Medir
+
+- adoção;
+- tempo de processo;
+- erros;
+- volume de suporte;
+- satisfação;
+- utilização;
+- receita/cobrança quando aplicável;
+- disponibilidade;
+- segurança;
+- resultados operacionais.
+
+### Output
+
+**Operational Review**
+
+---
+
+## Etapa 14 — Reativar
+
+### Objetivo
+
+Reabrir o processo quando:
+
+- o problema mudou;
+- surgiram novas necessidades;
+- o sistema ficou limitado;
+- a organização cresceu;
+- apareceu tecnologia melhor;
+- os critérios de sucesso mudaram.
+
+### Resultado
+
+O Estado B anterior pode tornar-se o novo Estado A.
+
+A Inteligência Operacional é, portanto, um ciclo e não um relatório estático.
+
+---
+
+# 37. Canvas de Inteligência Operacional
+
+Para cada oportunidade, preencher:
+
+| Campo | Pergunta |
+|---|---|
+| Organização | Quem é a entidade e qual o contexto? |
+| Estado A | Como funciona hoje? |
+| Estado B | Que resultado deseja atingir? |
+| Problema | Que transformação é necessária? |
+| Evidências | O que sabemos de forma verificável? |
+| Hipóteses | O que ainda estamos a inferir? |
+| Atores | Quem executa, utiliza, decide e influencia? |
+| Entradas | Que dados/recursos entram no processo? |
+| Saídas | Que resultado o processo precisa produzir? |
+| Condicionantes | O que é obrigatório ou limitado? |
+| Critérios | Como será julgada uma boa solução? |
+| Alternativas | Que diferentes caminhos existem? |
+| Solução proposta | Qual caminho ficou tecnicamente/comercialmente justificado? |
+| Economia | Quanto custa e qual valor produz? |
+| Riscos | O que pode falhar? |
+| Validação | Como provaremos que funciona? |
+| Comunicação | Como explicar a cada stakeholder? |
+| Implementação | Como colocar em operação? |
+| Métricas | Como medir sucesso? |
+| Follow-up | Quando reavaliar? |
+
+---
+
+# 38. Artefactos padrão da Inteligência Operacional
+
+## Obrigatórios antes da proposta final
+
+1. **Intelligence Brief**
+   - perfil da organização;
+   - evidências;
+   - contexto;
+   - fontes.
+
+2. **Evidence Log**
+   - facto;
+   - fonte;
+   - data;
+   - confiança.
+
+3. **Hypothesis Register**
+   - hipótese;
+   - fundamento;
+   - como validar;
+   - estado.
+
+4. **Operational Map**
+   - atores;
+   - processos;
+   - sistemas;
+   - dados;
+   - dependências.
+
+5. **Discovery Brief**
+   - perguntas prioritárias;
+   - objetivos da reunião;
+   - gaps de informação.
+
+6. **Opportunity Map**
+   - evidência → problema possível → validação → capacidade → benefício.
+
+7. **Decision Map**
+   - decisor económico;
+   - decisor operacional;
+   - influenciadores;
+   - utilizadores;
+   - bloqueadores.
+
+8. **Solution Fit**
+   - necessidade confirmada;
+   - capacidade existente;
+   - configuração;
+   - integração;
+   - desenvolvimento necessário;
+   - gap.
+
+9. **Demo Script**
+   - história;
+   - personas;
+   - fluxo;
+   - funcionalidades estritamente relevantes.
+
+10. **Proposal Basis**
+   - escopo;
+   - volumes;
+   - integrações;
+   - migração;
+   - implementação;
+   - riscos;
+   - pricing inputs.
+
+---
+
+# 39. Gates de decisão
+
+## Gate 0 — Lead identificado
+
+Pergunta:
+
+> Existe informação suficiente para justificar investigação?
+
+Se não, arquivar ou manter em observação.
+
+## Gate 1 — Intelligence Qualified
+
+Requisitos:
+
+- organização identificada;
+- contexto básico;
+- evidência de potencial fit;
+- possíveis stakeholders;
+- hipótese de valor.
+
+Resultado:
+
+**GO → discovery**  
+ou  
+**NO-GO → não investir mais tempo agora.**
+
+## Gate 2 — Problem Qualified
+
+Requisitos:
+
+- Estado A compreendido;
+- problema validado;
+- Estado B desejado;
+- impacto percebido;
+- prioridade.
+
+Resultado:
+
+**GO → solution design/demo**
+
+## Gate 3 — Solution Qualified
+
+Requisitos:
+
+- capacidades necessárias conhecidas;
+- gaps identificados;
+- integrações compreendidas;
+- implementação plausível;
+- principais riscos conhecidos.
+
+Resultado:
+
+**GO → proposta comercial**
+
+## Gate 4 — Commercial Qualified
+
+Requisitos:
+
+- decisor;
+- orçamento/processo de aprovação;
+- escopo;
+- timing;
+- condições comerciais.
+
+Resultado:
+
+**GO → negociação/fecho**
+
+## Gate 5 — Implementation Ready
+
+Requisitos:
+
+- contrato/aceitação;
+- responsáveis;
+- dados;
+- plano técnico;
+- critérios de sucesso.
+
+Resultado:
+
+**GO → implementação**
+
+---
+
+# 40. Regras anti-erro
+
+1. **Não confundir solução existente com o problema.**
+2. **Não confundir ausência de evidência com evidência de ausência.**
+3. **Não transformar hipótese em facto por repetição.**
+4. **Não entrar em detalhe técnico antes de formular o problema.**
+5. **Não apresentar todas as funcionalidades só porque existem.**
+6. **Não prometer integração antes de validar API, dados e dependências.**
+7. **Não apresentar ROI sem baseline.**
+8. **Não usar concorrente para humilhar ou pressionar o potencial cliente.**
+9. **Não assumir que o decisor legal é o utilizador operacional.**
+10. **Não otimizar apenas para fechar a venda; otimizar para adoção e resultado.**
+11. **Não tratar o primeiro modelo operacional como realidade definitiva.**
+12. **Não terminar o processo na entrega; acompanhar e reavaliar.**
+
+---
+
+# 41. Aplicação imediata ao COLUS
+
+Com a metodologia formalizada, o COLUS encontra-se atualmente entre:
+
+**Gate 1 — Intelligence Qualified**  
+e  
+**Gate 2 — Problem Qualified**
+
+### O que já existe
+
+- perfil institucional;
+- evidências públicas;
+- benchmark;
+- mapa inicial de stakeholders;
+- hipóteses;
+- Opportunity Map;
+- arquitetura preliminar de demo.
+
+### O que falta para Gate 2
+
+- sistema atual;
+- processos reais;
+- dores confirmadas;
+- prioridades;
+- volumes;
+- experiência atual dos encarregados;
+- financeiro/propinas;
+- responsáveis operacionais;
+- visão digital da direção.
+
+### Consequência
+
+**RECOMENDAÇÃO**
+
+O próximo artefacto correto é o **Discovery Brief COLUS**.
+
+Não é necessário aprofundar indefinidamente OSINT antes do primeiro contacto. A principal incerteza restante só pode ser reduzida através de informação direta do COLUS.
+
+---
+
+# 42. Fontes metodológicas internas utilizadas
+
+Materiais analisados em 30-09-2026:
+
+- `11._Metodologia_da_solução_dos_problemas.pdf`
+- `4-Os problemas na Engenharia-2023-pdf.pdf`
+- `6A-Modelo-2023-pdf.pdf`
+- `8. PESQUISA TECNOLÓGICA-2023-pdf.pdf`
+- `9. COMUNICAÇÃO-2023-pdf.pdf`
+
+Origem: pasta Google Drive de materiais de Introdução à Engenharia disponibilizada para este projeto.
+
+### Síntese de contribuição
+
+**Metodologia da solução dos problemas**
+→ formulação, análise, alternativas, decisão, especificação, viabilidade e ciclo do projeto.
+
+**Problemas na Engenharia**
+→ Estado A/Estado B, critérios, condicionantes, objetivos contraditórios e natureza económica dos problemas.
+
+**Modelo**
+→ representação simplificada do sistema, modelos como instrumentos de pensamento, comunicação, previsão e controlo.
+
+**Pesquisa Tecnológica**
+→ pesquisa, observação, hipótese, validação, análise e síntese.
+
+**Comunicação**
+→ adaptação da mensagem ao receptor, clareza, precisão, objetividade e documentação da solução.
