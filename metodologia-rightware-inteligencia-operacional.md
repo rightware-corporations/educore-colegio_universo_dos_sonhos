@@ -677,3 +677,151 @@ Se houver interesse:
 Só então:
 
 **moldamos a solução final à realidade interna da organização.**
+
+
+---
+
+# 17. Princípio do “fato à medida”
+
+**DECISÃO DE MÉTODO RIGHTWARE**
+
+A Inteligência Operacional não existe para esperar até que a RIGHTWARE saiba tudo sobre o potencial cliente.
+
+Existe para saber **o suficiente para desenhar uma primeira versão que pareça feita para ele**.
+
+A analogia operacional é:
+
+> **Não entramos de mãos vazias para tirar medidas. Levamos já um fato desenhado para aquela pessoa. Depois, com a aprovação dela, fazemos os ajustes finos.**
+
+Isto significa:
+
+**Pesquisa suficiente → desenho específico → MVP personalizado → reação do cliente → ajuste autorizado**
+
+e não:
+
+**pesquisa interminável → tentativa de conhecer tudo → só depois construir.**
+
+## 17.1 Regra de suficiência
+
+A investigação pré-contacto deve parar quando já existe informação suficiente para responder a estas quatro perguntas:
+
+1. Quem é esta organização?
+2. Que contexto público a distingue?
+3. Que 1–3 oportunidades fazem sentido testar?
+4. O que conseguimos mostrar concretamente sem depender de informação interna?
+
+Se estas quatro respostas estiverem suficientemente fortes, a próxima unidade de trabalho deve ser **personalização/MVP**, não mais pesquisa por hábito.
+
+## 17.2 O objetivo psicológico e comercial
+
+A personalização prévia reduz o esforço mental do potencial cliente.
+
+Em vez de pedir que imagine:
+
+> “Como seria este sistema aplicado à nossa empresa?”
+
+a RIGHTWARE permite que ele veja:
+
+> **“Isto já parece nosso.”**
+
+O cliente passa a reagir a algo concreto.
+
+A conversa tende a mudar de:
+
+- “não sei se precisamos”;
+- “mandem uma proposta”;
+- “o que exatamente vocês fazem?”;
+
+para:
+
+- “esta parte faz sentido”;
+- “aqui trabalhamos de outra maneira”;
+- “precisamos acrescentar isto”;
+- “quem mais precisa ver isto é X”.
+
+É nessa reação que nasce a informação operacional de maior qualidade.
+
+## 17.3 Personalização em três camadas
+
+### Camada 1 — Visual
+
+- nome;
+- identidade;
+- terminologia;
+- estrutura familiar ao cliente;
+- contexto reconhecível.
+
+### Camada 2 — Narrativa
+
+Mostrar apenas capacidades ligadas às hipóteses mais fortes da conta.
+
+O produto deixa de ser apresentado como catálogo.
+
+Passa a contar uma história específica.
+
+### Camada 3 — Funcional
+
+Criar fluxos demonstráveis coerentes com a organização:
+
+- atores;
+- jornadas;
+- eventos;
+- dashboards;
+- resultados.
+
+A terceira camada é a que transforma um template com branding numa verdadeira personalização pré-comercial.
+
+## 17.4 A Inteligência Operacional continua essencial
+
+Este método **não reduz a importância da investigação**.
+
+Pelo contrário: a investigação passa a ter um objetivo claro.
+
+Não pesquisamos para acumular dados.
+
+Pesquisamos para tomar melhores decisões sobre:
+
+- o que construir;
+- o que não construir;
+- o que mostrar;
+- o que omitir;
+- qual narrativa usar;
+- qual stakeholder procurar;
+- qual hipótese testar.
+
+A Inteligência Operacional é, portanto, o **sistema de orientação do MVP**, não uma barreira burocrática antes dele.
+
+## 17.5 Critério de qualidade
+
+Uma boa personalização pré-comercial deve provocar a sensação:
+
+> **“Vocês pensaram nisto para nós.”**
+
+Sem fingir:
+
+> “Nós já conhecemos toda a vossa operação.”
+
+A RIGHTWARE deve ocupar precisamente esse espaço:
+
+**contexto suficiente para ser relevante + humildade suficiente para permitir correção.**
+
+## 17.6 Regra de velocidade
+
+Quando a inteligência já permite construir algo convincente:
+
+> **construir passa a gerar mais informação do que continuar a pesquisar.**
+
+O MVP torna-se também um instrumento de investigação.
+
+A reação do cliente ao MVP revela:
+
+- prioridades;
+- objeções;
+- linguagem;
+- processos;
+- stakeholders;
+- gaps;
+- urgência;
+- capacidade de decisão.
+
+Por isso, após o ponto de suficiência, **mostrar é uma forma superior de aprender**.
