@@ -85,7 +85,7 @@ A camada de dados precisa de uma fronteira explícita.
 | `TenantContext` | troca de escolas | IGNORAR | arquitetura abandonada |
 | `data/tenants.ts` | registry de escolas | IGNORAR | repo é single-school |
 | `platform/tenancy` | entitlements tenant runtime | IGNORAR / EXTRAIR IDEIAS | não necessário no deploy single-school |
-| PlatformAdminPage | Super Admin multi-tenant | IGNORAR | fora do COLUS |
+| PlatformAdminPage | Super Admin RIGHTWARE | PORTAR + REFATORAR | manter consola proprietária, remover tenant switching/criação de tenants |
 | `types/tenant.ts` | tipos multi-tenant | IGNORAR / SUBSTITUIR | criar SchoolConfig simples |
 | `types/roles.ts` | papéis do ERP | PORTAR | modelo útil |
 | `roleNavigation.ts` | menu por perfil | PORTAR + CONFIGURAR | bom padrão |
@@ -468,7 +468,7 @@ para evitar que páginas gigantes concentrem tudo.
 3. Dados da instituição hard-coded no AuthContext.
 4. Páginas muito grandes contendo UI + regra de negócio + estado + dados.
 5. Multi-tenancy no runtime.
-6. Super Admin de tenants dentro da aplicação da escola.
+6. Super Admin multi-tenant. O Super Admin RIGHTWARE permanece, mas controla apenas a instância atual.
 7. financeiro inseparável da camada de apresentação.
 8. lógica de demonstração sem caminho claro para API futura.
 
