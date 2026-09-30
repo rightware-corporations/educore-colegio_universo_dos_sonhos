@@ -1,139 +1,116 @@
 # Auditoria Base — EduCore Colégio Páscoa → COLUS
 
-> Repositório de referência técnica para o MVP COLUS:
+> Repositório de referência funcional e visual:
 > `rightware-corporations/educore-colegio-pascoa`
 >
-> **Branch de referência:** `tenant/colegio-pascoa-live`
-> **Data da auditoria inicial:** 2026-09-30
-> **Objetivo:** identificar o que reutilizar, configurar e personalizar para construir o MVP COLUS sem reconstruir o EduCore.
+> **Branch observada:** `tenant/colegio-pascoa-live`
+> **Data da revisão:** 2026-09-30
+> **Objetivo:** identificar o que aprender e reutilizar do Páscoa sem repetir a antiga arquitetura multi-tenant.
 
 ---
 
-## 1. Correção de referência
+## 1. Decisão arquitetural atual
 
-A base correta para estudo e reaproveitamento do MVP COLUS é o **EduCore Colégio Páscoa**, não o repositório Belo Horizonte.
+**DECISÃO RIGHTWARE PARA O EDUCORE**
 
-O Colégio Páscoa já representa uma segunda implementação/tenant da mesma plataforma EduCore e, portanto, é a referência mais útil para aprender como criar uma nova experiência escolar sem fazer fork conceptual do produto.
+O modelo multi-tenant num único projeto/deploy deixou de ser a direção operacional.
 
----
+A experiência mostrou dificuldade e ambiguidade no deployment de múltiplas escolas dentro do mesmo projeto, especialmente em plataformas de deploy como Railway e serviços equivalentes.
 
-## 2. Arquitetura observada
+A estratégia atual passa a ser:
 
-O repositório está organizado em:
+> **1 escola = 1 repositório = 1 aplicação/deployment independente.**
 
-- `frontend/`
-- `backend/`
-- `database/`
-- `docs/handoff/`
+Assim:
 
-### Estado atual confirmado pelos handoffs
+- Colégio Páscoa tem o seu repositório;
+- COLUS tem o seu repositório;
+- futuras escolas terão repositórios próprios;
+- deployments, variáveis de ambiente, domínio e ciclo de release ficam isolados por escola.
 
-- frontend funcional para apresentação;
-- multi-tenant foundation de apresentação implementada;
-- dados principais ainda baseados em mocks;
-- autenticação de produção ainda não implementada;
-- backend de produção não implementado;
-- base de dados de produção não implementada;
-- integrações reais não implementadas;
-- tenant provisioning de produção ainda não implementado.
-
-Isto significa que o repositório é adequado como **base de MVP/demonstração**, não como prova de backend produtivo concluído.
+O nome da branch do Páscoa contém `tenant/` porque nasceu durante a fase multi-tenant. Isso é **legado histórico**, não a arquitetura que deve ser reproduzida no COLUS.
 
 ---
 
-## 3. Princípio multi-tenant já definido
+## 2. O que continua reutilizável
 
-O handoff principal estabelece:
+Separar **reutilização de produto** de **multi-tenancy operacional**.
 
-**EduCore = produto-base SaaS**
+Continuamos a reutilizar:
 
-Cada escola = **tenant configurável**.
+- componentes;
+- fluxos;
+- UX;
+- páginas por perfil;
+- módulos;
+- padrões de navegação;
+- lógica demonstrativa;
+- contratos de domínio;
+- modelos de dados quando aplicáveis;
+- design system;
+- estrutura de demo;
+- testes úteis;
+- ideias e decisões de produto.
 
-Diferenças por escola devem ser tratadas por:
+Não devemos reutilizar como arquitetura de produção:
 
-- configuração;
-- branding;
-- theme;
-- roles;
-- module entitlements;
-- feature flags;
-- conteúdo;
-- extensões controladas.
-
-Evitar:
-
-- fork completo por escola;
-- duplicação de lógica;
-- condicionais de negócio hard-coded por cliente.
-
-Esta arquitetura encaixa diretamente com o método RIGHTWARE de “fato à medida”: personalizar profundamente a experiência sem destruir a reutilização do core.
-
----
-
-## 4. Tenant Colégio Páscoa
-
-Configuração observada:
-
-- tenant id: `tenant-pascoa-002`;
-- slug: `colegio-pascoa`;
-- locale: `pt-MZ`;
-- timezone: `Africa/Maputo`;
-- currency: `MZN`;
-- experience preset: `modern`;
-- roles ativos:
-  - student;
-  - guardian;
-  - teacher;
-  - pedagogy;
-  - executive;
-  - secretary;
-  - finance.
-
-### Core modules observados
-
-- student_registry;
-- admissions;
-- enrollment;
-- academic;
-- timetable;
-- attendance;
-- assessments;
-- gradebook;
-- finance;
-- treasury;
-- documents;
-- communication;
-- knowledge;
-- reporting.
+- tenant registry;
+- tenant resolver;
+- Super Admin multi-tenant;
+- runtime switching de escolas;
+- module entitlements dependentes de tenant;
+- armazenamento de múltiplas escolas no mesmo deploy;
+- lógica `tenant_id` apenas para suportar várias escolas no mesmo sistema.
 
 ---
 
-## 5. O que o Páscoa prova para o COLUS
+## 3. Como ler o repositório Páscoa
 
-O Páscoa demonstra que já existe estrutura para:
+O Páscoa deve ser estudado como:
 
-1. criar tenant escolar distinto;
-2. aplicar branding próprio;
-3. escolher preset visual;
-4. controlar módulos;
-5. controlar roles;
-6. manter o mesmo ERP core;
-7. ter landing pública diferente;
-8. ter login personalizado;
-9. preservar atribuição EduCore;
-10. gerir tenant via camada de plataforma de apresentação.
+### Referência de produto
+O que o EduCore já sabe fazer.
 
-Portanto, o MVP COLUS não deve começar como projeto novo.
+### Referência de experiência
+Como apresentar uma escola de forma convincente.
 
-Deve começar como **Tenant 003 do EduCore**, seguindo a mesma fundação.
+### Referência de fluxos
+Como ligar Secretaria, Professor, Encarregado, Pedagogia, Financeiro e Direção.
+
+### Referência de componentes
+O que podemos portar para o novo repositório.
+
+**Não** como blueprint de multi-tenancy.
 
 ---
 
-## 6. Funcionalidade de apresentação já desenhada
+## 4. Estado funcional observado
 
-O handoff `09_PRESENTATION_MVP_FUNCTIONALITY.md` define como requisito que o ERP pareça conectado entre perfis.
+O repositório Páscoa contém:
 
-Fluxos de referência:
+- frontend React funcional para apresentação;
+- landing personalizada;
+- login personalizado;
+- páginas por perfil;
+- mocks extensos;
+- fluxos transacionais de apresentação planeados;
+- handoffs detalhados;
+- estrutura de frontend madura para reutilização.
+
+Também declara explicitamente:
+
+- backend de produção: não implementado;
+- base de dados de produção: não implementada;
+- integrações reais: não implementadas;
+- autenticação de produção: não implementada.
+
+Portanto, o Páscoa é sobretudo uma **base funcional/demonstrativa**.
+
+---
+
+## 5. Fluxos que devemos reaproveitar
+
+O documento `09_PRESENTATION_MVP_FUNCTIONALITY.md` continua altamente relevante.
 
 ### Secretaria
 criar/gerir aluno → turma → encarregado → visibilidade pedagógica.
@@ -142,93 +119,159 @@ criar/gerir aluno → turma → encarregado → visibilidade pedagógica.
 marcar presença → encarregado vê → justifica → pedagogia acompanha.
 
 ### Avaliações
-professor cria → pedagogia aprova → aluno/encarregado vê → notas são publicadas.
+professor cria → aprovação/publicação → aluno e encarregado acompanham.
 
 ### Pedagogia
-intervenções e acompanhamento de risco.
+intervenções e acompanhamento académico.
 
 ### Encarregado
-acompanhar educando → justificar ausência → pagamentos → recibos → mensagens.
+acompanhar educando → justificar ausência → comunicação → pagamentos.
 
 ### Financeiro
-submissão → validação/rejeição → saldo → recibo → indicadores.
+pagamento → validação → saldo → recibo → indicadores.
 
 ### Direção
-KPIs → aprovações → auditoria → relatórios.
+KPIs → auditoria → relatórios → acompanhamento.
 
-A história de demonstração recomendada já é transversal:
+A história integrada continua válida para o COLUS:
 
 **Secretaria → Professor → Encarregado → Pedagogia → Financeiro → Direção**
 
 ---
 
-## 7. Reutilização para COLUS
+## 6. Mapa de reutilização corrigido
 
-| Área Páscoa | Decisão COLUS |
+| Área do Páscoa | Decisão COLUS |
 |---|---|
-| Tenant foundation | REUTILIZAR |
+| Design system | REUTILIZAR |
+| Componentes UI | REUTILIZAR |
+| Páginas de perfis | REUTILIZAR / ADAPTAR |
+| Fluxos ERP demonstrativos | REUTILIZAR |
+| Mock data structure | REUTILIZAR / SUBSTITUIR DADOS |
+| Landing structure | USAR COMO REFERÊNCIA, NÃO COPIAR IDENTIDADE |
+| Login structure | REUTILIZAR / PERSONALIZAR |
+| Routing | REUTILIZAR onde fizer sentido |
 | Roles | REUTILIZAR inicialmente |
-| Core modules | REUTILIZAR / selecionar |
-| Tenant config | CRIAR tenant COLUS |
-| Branding | SUBSTITUIR por COLUS |
-| Landing pública | PERSONALIZAR |
-| Login | PERSONALIZAR |
+| Módulos | REUTILIZAR seletivamente |
 | Media Páscoa | NÃO REUTILIZAR |
-| Dados mock | CRIAR dataset COLUS fictício |
-| ERP routes | REUTILIZAR |
-| Entitlements | REUTILIZAR |
-| Platform admin | REUTILIZAR para apresentação |
-| Demo cross-role | REUTILIZAR estrutura |
-| Backend/database | NÃO TRATAR COMO PRODUÇÃO |
-| Integrações | NÃO PROMETER sem validação |
+| Tenant registry | NÃO REUTILIZAR |
+| Tenant context/resolution | NÃO REUTILIZAR como arquitetura |
+| Platform Super Admin multi-tenant | NÃO REUTILIZAR para COLUS |
+| Tenant switching | NÃO REUTILIZAR |
+| Tenant entitlements runtime | NÃO REUTILIZAR como requisito estrutural |
+| Backend/database placeholder | NÃO TRATAR COMO PRODUÇÃO |
+| Integrações simuladas | NÃO APRESENTAR COMO REAIS |
 
 ---
 
-## 8. Primeira decisão técnica para COLUS
+## 7. Arquitetura do repositório COLUS
 
-Criar um terceiro tenant:
+O repositório:
 
-- id sugerido: `tenant-colus-003`;
-- slug: `colus` ou `colegio-universo-dos-sonhos`;
-- nome: `Colégio Universo dos Sonhos`;
-- locale: `pt-MZ`;
-- timezone: `Africa/Maputo`;
-- currency: `MZN`;
-- experience preset: a decidir com base na identidade COLUS;
-- roles: iniciar com o core existente;
-- modules: selecionar de acordo com o MVP.
+`rightware-corporations/educore-colegio_universo_dos_sonhos`
 
-Esta identificação é interna/demonstrativa e pode ser ajustada antes da implementação.
+deve continuar a ser a unidade independente do COLUS.
 
----
+Direção recomendada:
 
-## 9. O que estudar em seguida dentro do Páscoa
+```text
+educore-colegio_universo_dos_sonhos/
+├── frontend/
+├── backend/        # quando necessário
+├── database/       # quando necessário
+├── docs/
+└── ...
+```
 
-Prioridade técnica:
+A identidade da escola pode continuar configurável internamente através de um ficheiro único, por exemplo:
 
-1. `frontend/src/data/tenants.ts`
-2. `frontend/src/contexts/TenantContext*`
-3. `frontend/src/platform/tenancy/*`
-4. `frontend/src/pages/public/*`
-5. `frontend/src/pages/auth/*`
-6. `frontend/src/pages/role/*`
-7. `frontend/src/data/mockData.ts`
-8. tenant Páscoa media/landing;
-9. routing e entitlements;
-10. estado compartilhado usado pelos fluxos funcionais.
+`school.config.ts`
 
-Objetivo: identificar exatamente **quais ficheiros precisam ser alterados para adicionar COLUS como tenant sem tocar desnecessariamente no core**.
+Isso é **configuração de uma única instituição**, não multi-tenancy.
 
 ---
 
-## 10. Próximo output
+## 8. Produto comum sem deploy comum
 
-Depois desta auditoria inicial, produzir:
+Separar repositórios não significa abandonar o core comum.
 
-**Mapa de Implementação COLUS**
+O objetivo é manter:
 
-com:
+> **mesmos princípios + componentes reutilizáveis + deployments independentes.**
 
-`FICHEIRO/COMPONENTE → REUTILIZAR → CONFIGURAR → PERSONALIZAR → NÃO TOCAR`
+No futuro, a reutilização técnica pode evoluir para:
 
-Depois disso começa a implementação do Tenant COLUS.
+- packages internos;
+- biblioteca de componentes;
+- módulos partilhados;
+- templates;
+- automação de bootstrap de novo colégio;
+- upstream controlado;
+- sincronização seletiva de melhorias.
+
+Mas cada escola continua operacionalmente independente no deploy.
+
+---
+
+## 9. ERP como sistema separado
+
+**DIREÇÃO DE PRODUTO INFORMADA PELO PROJETO**
+
+O ERP não deve ser assumido como inseparável do EduCore para sempre.
+
+A direção é que exista futuramente um **ERP separado**, reutilizável, com ciclo de vida próprio, integrado ao EduCore por contratos/API.
+
+Modelo conceptual:
+
+```text
+EDUCORE — experiência escolar / produto da instituição
+        ↓ integração
+ERP RIGHTWARE — operações transacionais reutilizáveis
+        ↓
+serviços financeiros / académicos / administrativos / outros módulos
+```
+
+Isto permite que o ERP seja usado noutras soluções e contextos, sem obrigar todas as escolas a partilhar o mesmo deploy do EduCore.
+
+A fronteira exata entre EduCore e ERP ainda deve ser formalizada antes de implementação produtiva.
+
+---
+
+## 10. O que estudar agora no Páscoa
+
+A auditoria técnica deve priorizar:
+
+1. páginas e componentes de `frontend/src/pages/role/*`;
+2. `frontend/src/data/mockData.ts`;
+3. router e estrutura de navegação;
+4. landing e login como padrões de composição;
+5. componentes comuns;
+6. estado partilhado dos fluxos funcionais;
+7. formulários e ações que já simulam ERP real;
+8. testes relevantes;
+9. styling e design tokens;
+10. dependências necessárias.
+
+### Baixa prioridade / legado
+
+- `frontend/src/data/tenants.ts`;
+- `TenantContext` para troca de escolas;
+- `platform/tenancy/*`;
+- Super Admin de tenants;
+- fluxo de criação/suspensão de tenants.
+
+Esses elementos podem ser úteis apenas como referência histórica ou para extrair componentes, não como arquitetura do COLUS.
+
+---
+
+## 11. Próximo output
+
+Produzir o:
+
+# Mapa de Implementação COLUS
+
+Estrutura:
+
+`FICHEIRO/COMPONENTE → COPIAR/PORTAR → ADAPTAR → REESCREVER → IGNORAR`
+
+A prioridade passa a ser descobrir o **mínimo conjunto de código do Páscoa necessário para vestir o COLUS**, mantendo o novo repositório limpo e independente.
