@@ -3,7 +3,7 @@
 > Documento vivo de inteligência comercial e operacional para preparação da abordagem EduCore ao **COLUS — Colégio Universo dos Sonhos, Limitada**.
 >
 > **Estado:** PESQUISA ATIVA  
-> **Versão:** 0.5  
+> **Versão:** 0.6  
 > **Data de início:** 2026-09-30  
 > **Natureza:** Inteligência pré-comercial / OSINT / preparação de proposta  
 > **Regra:** separar sempre FACTO CONFIRMADO, INDÍCIO, HIPÓTESE e RECOMENDAÇÃO.
@@ -2501,11 +2501,15 @@ Resultado:
 
 # 41. Aplicação imediata ao COLUS
 
-Com a metodologia formalizada, o COLUS encontra-se atualmente entre:
+## Sequência operacional corrigida
 
-**Gate 1 — Intelligence Qualified**  
-e  
-**Gate 2 — Problem Qualified**
+Para esta conta, a RIGHTWARE **não deve iniciar com discovery interno**.
+
+O COLUS encontra-se em:
+
+**Gate 1 — Intelligence Ready**  
+e deve avançar para  
+**Gate 2 — MVP Ready**
 
 ### O que já existe
 
@@ -2515,27 +2519,31 @@ e
 - mapa inicial de stakeholders;
 - hipóteses;
 - Opportunity Map;
-- arquitetura preliminar de demo.
+- narrativa preliminar;
+- arquitetura inicial de demo.
 
-### O que falta para Gate 2
+### O que falta antes do primeiro contacto
 
-- sistema atual;
-- processos reais;
-- dores confirmadas;
-- prioridades;
-- volumes;
-- experiência atual dos encarregados;
-- financeiro/propinas;
-- responsáveis operacionais;
-- visão digital da direção.
+- selecionar 1–3 teses prioritárias;
+- definir o cenário exato do MVP;
+- personalizar branding e dados simulados;
+- construir experiência demonstrável;
+- preparar o script de apresentação;
+- preparar a mensagem de abordagem.
 
 ### Consequência
 
-**RECOMENDAÇÃO**
+**DECISÃO OPERACIONAL**
 
-O próximo artefacto correto é o **Discovery Brief COLUS**.
+O próximo artefacto correto é o **MVP Brief COLUS**, não um questionário de discovery.
 
-Não é necessário aprofundar indefinidamente OSINT antes do primeiro contacto. A principal incerteza restante só pode ser reduzida através de informação direta do COLUS.
+A abordagem deve ser:
+
+**pesquisa pública → MVP personalizado → apresentação → interesse → validação autorizada.**
+
+Informação interna sobre sistemas, processos, propinas, volumes e integrações só deverá ser solicitada depois de o COLUS demonstrar interesse e aceitar aprofundar a solução.
+
+O ficheiro `discovery-brief.md` foi reposicionado para funcionar como **Validation Brief pós-interesse**.
 
 ---
 
@@ -2567,3 +2575,80 @@ Origem: pasta Google Drive de materiais de Introdução à Engenharia disponibil
 
 **Comunicação**
 → adaptação da mensagem ao receptor, clareza, precisão, objetividade e documentação da solução.
+
+
+---
+
+# 43. Correção estratégica — pré-venda orientada a demonstração
+
+**DECISÃO OPERACIONAL PARA O COLUS**
+
+A Inteligência Operacional pré-contacto deve permanecer baseada em informação pública e legitimamente acessível.
+
+A RIGHTWARE não deve depender da escola para descobrir o suficiente para preparar a primeira proposta visual.
+
+## Antes do interesse
+
+**RIGHTWARE faz:**
+
+- investigação;
+- modelação;
+- benchmarking;
+- formulação de hipóteses;
+- escolha da tese;
+- construção do MVP;
+- personalização;
+- preparação da narrativa.
+
+**RIGHTWARE não pede:**
+
+- detalhes internos de cobrança;
+- arquitetura interna;
+- dados de alunos;
+- volumes confidenciais;
+- processos sensíveis;
+- acessos;
+- credenciais;
+- documentação privada.
+
+## Depois do interesse
+
+O COLUS pode então participar na validação porque já existe:
+
+- contexto;
+- demonstração;
+- prova de execução;
+- proposta tangível;
+- razão legítima para aprofundar.
+
+A fase deixa de ser “conte-nos como funciona a vossa escola” e passa a ser:
+
+> **“Mostrámos a direção proposta. Agora queremos ajustá-la à vossa realidade.”**
+
+---
+
+# 44. Risco principal deste modelo e mitigação
+
+O modelo de construir antes de pedir informação cria vantagem comercial, mas também cria risco de desperdício.
+
+## Risco
+
+Investir demasiado num lead que pode nunca responder ou não ter orçamento.
+
+## Mitigação
+
+O MVP pré-contacto deve ser:
+
+- rápido;
+- time-boxed;
+- modular;
+- reutilizável;
+- baseado no produto existente;
+- suficientemente convincente para demonstrar visão;
+- incompleto de propósito onde dependemos de informação interna.
+
+### Regra
+
+> **Pré-venda personalizada não deve transformar-se em desenvolvimento customizado gratuito.**
+
+O objetivo é demonstrar capacidade e relevância, não terminar o projeto antes de existir cliente.
