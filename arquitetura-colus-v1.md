@@ -539,6 +539,7 @@ Arquitetura só será considerada fechada depois de decidir:
 - [x] estratégia repo/deploy;
 - [x] single-school configuration;
 - [x] separação de multi-tenancy;
+- [x] manutenção do Super Admin RIGHTWARE por instância;
 - [x] perfis base;
 - [x] princípio cross-role;
 - [x] boundary de dados;
@@ -569,3 +570,15 @@ Quando todos os itens críticos estiverem resolvidos, alterar o estado deste doc
 
 e só então iniciar a implementação.
 
+
+
+---
+# 19. Super Admin RIGHTWARE
+
+O Super Admin é uma superfície proprietária da RIGHTWARE e permanece em todas as implementações EduCore.
+
+No COLUS ele não funcionará como gestor de múltiplos tenants. Funcionará como **control plane da instância COLUS**.
+
+Deve manter identidade e estrutura consistentes com os outros repos EduCore, permitindo controlar configuração, módulos, papéis, branding, feature flags, estado da aplicação e ferramentas de suporte.
+
+Documento de referência: `super-admin-rightware.md`.
