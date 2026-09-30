@@ -259,3 +259,15 @@ Estes conceitos continuam úteis, mas devem funcionar no contexto de **uma únic
 A RIGHTWARE deve otimizar simultaneamente para:
 
 **consistência do produto + independência operacional por cliente.**
+
+
+---
+## 12. Super Admin comum em deployments separados
+
+A estratégia `1 escola = 1 repo = 1 deployment` **não elimina o Super Admin**.
+
+Cada deployment deve incluir a mesma superfície proprietária **EduCore / RIGHTWARE Super Admin**, com escopo sobre a instância daquela escola.
+
+O que desaparece é o runtime multi-tenant e a troca de escolas dentro da mesma aplicação. O que permanece é o control plane RIGHTWARE.
+
+No futuro, estas consolas por instância podem também reportar para uma consola central de fleet management da RIGHTWARE.
