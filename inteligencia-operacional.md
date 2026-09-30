@@ -3,7 +3,7 @@
 > Documento vivo de inteligência comercial e operacional para preparação da abordagem EduCore ao **COLUS — Colégio Universo dos Sonhos, Limitada**.
 >
 > **Estado:** PESQUISA ATIVA  
-> **Versão:** 0.3  
+> **Versão:** 0.4  
 > **Data de início:** 2026-09-30  
 > **Natureza:** Inteligência pré-comercial / OSINT / preparação de proposta  
 > **Regra:** separar sempre FACTO CONFIRMADO, INDÍCIO, HIPÓTESE e RECOMENDAÇÃO.
@@ -578,9 +578,17 @@ Esta narrativa só deve ser consolidada depois da fase de descoberta.
 - [ ] comparação competitiva aprofundada.
 
 ## Fase 2 — Opportunity Map EduCore
+**EM CURSO**
+
 Converter evidências em:
 
 **Evidência → Necessidade possível → Pergunta de validação → Capacidade EduCore → Benefício → Prova/Demonstração**
+
+- [x] mapa v1 por domínio operacional;
+- [x] perguntas de discovery ligadas à demo;
+- [x] critérios de validação/desqualificação;
+- [ ] validar capacidades EduCore existentes vs. roadmap;
+- [ ] transformar o mapa validado em narrativa comercial final.
 
 ## Fase 3 — Estratégia comercial
 Produzir:
@@ -1081,3 +1089,749 @@ A primeira abordagem deve procurar chegar a:
 3. financeiro, se a conversa avançar para propinas e pagamentos.
 
 A proposta EduCore terá maior probabilidade de avançar se o processo envolver simultaneamente **patrocínio executivo + responsável operacional**.
+
+
+---
+
+# 27. Fase 2 — COLUS Opportunity Map v1
+
+## 27.1 Tese da conta
+
+**RECOMENDAÇÃO ESTRATÉGICA**
+
+A oportunidade EduCore no COLUS não deve ser tratada como venda de um “software escolar” isolado.
+
+A tese a testar é:
+
+> **Uma plataforma única pode ligar administração, operação académica, finanças e família, dando à direção maior controlo e aos encarregados maior visibilidade sobre a vida escolar dos seus educandos.**
+
+Esta tese baseia-se em evidências públicas sobre:
+
+- amplitude de ensino da 1.ª à 12.ª classe;
+- presença recorrente da família no posicionamento institucional;
+- comunicação pública orientada a tecnologia, futuro e experiência;
+- variedade de atividades académicas e extracurriculares;
+- existência de benchmark digital relevante no mercado local.
+
+As dores internas, ferramentas atuais e impacto financeiro continuam por validar.
+
+---
+
+## 27.2 Opportunity Map — Direção e administração
+
+### Evidência observada
+
+- operação educacional abrangente;
+- estrutura societária com stakeholders claramente relevantes;
+- atividade institucional diversificada;
+- maturidade pública de gestão interna não observável.
+
+### Hipótese
+
+**HIPÓTESE**
+
+A direção pode não possuir uma visão única e imediata de indicadores académicos, financeiros e operacionais, especialmente se dados estiverem distribuídos entre diferentes processos ou sistemas.
+
+### Perguntas de discovery
+
+1. Que indicadores a direção acompanha semanalmente?
+2. Quanto tempo demora para obter número de alunos ativos, faltas, saldos em atraso ou desempenho por turma?
+3. Os relatórios são gerados automaticamente ou preparados manualmente?
+4. Existe uma visão consolidada da escola em tempo real?
+5. Que decisões hoje dependem de pedir dados à secretaria, pedagogia ou financeiro?
+
+### Capacidade EduCore a demonstrar se validada
+
+- dashboard executivo;
+- indicadores académicos;
+- indicadores financeiros;
+- alertas;
+- relatórios;
+- filtros por classe, turma, período e estado;
+- perfis e permissões.
+
+### Benefício potencial
+
+- menos dependência de relatórios manuais;
+- tomada de decisão mais rápida;
+- maior visibilidade institucional;
+- responsabilização por área;
+- dados consistentes entre departamentos.
+
+### Demonstração recomendada
+
+**“Visão da escola em 60 segundos”**
+
+Abrir o painel da direção e responder rapidamente:
+
+- quantos alunos estão ativos;
+- quantas faltas ocorreram;
+- que pagamentos estão pendentes;
+- que eventos estão próximos;
+- que alunos/processos exigem atenção.
+
+### Sinal de oportunidade forte
+
+Se a direção disser que precisa solicitar ou consolidar dados manualmente.
+
+### Sinal de baixa prioridade
+
+Se já existir BI integrado, atualizado e amplamente utilizado.
+
+---
+
+## 27.3 Opportunity Map — Académico
+
+### Evidência observada
+
+**CONFIRMADO**
+
+O COLUS opera formalmente da **1.ª à 12.ª classe**.
+
+### Hipótese
+
+**HIPÓTESE**
+
+A amplitude de níveis pode gerar complexidade em:
+
+- turmas;
+- disciplinas;
+- horários;
+- professores;
+- presenças;
+- avaliações;
+- boletins;
+- transições entre períodos/classes.
+
+### Perguntas de discovery
+
+1. Como são criadas turmas e disciplinas?
+2. Como são atribuídos professores?
+3. Quem lança presenças?
+4. Onde são registadas notas?
+5. Como ocorre o fecho de pautas/períodos?
+6. Como são produzidos boletins?
+7. Existe controlo de alterações de notas?
+8. Como a direção identifica alunos com faltas ou baixo desempenho?
+
+### Capacidade EduCore a demonstrar se validada
+
+- estrutura académica;
+- turmas e disciplinas;
+- atribuição docente;
+- presenças;
+- avaliações;
+- boletins;
+- histórico do aluno;
+- relatórios de desempenho;
+- alertas académicos.
+
+### Benefício potencial
+
+- redução de duplicação;
+- padronização do processo académico;
+- maior rastreabilidade;
+- acesso mais rápido a histórico;
+- melhor acompanhamento do aluno.
+
+### Demonstração recomendada
+
+**Fluxo professor → direção → encarregado**
+
+1. professor marca presença;
+2. regista avaliação;
+3. informação fica disponível conforme permissão;
+4. direção acompanha;
+5. encarregado recebe/consulta informação relevante.
+
+### Sinal de oportunidade forte
+
+Excel, papel, múltiplos ficheiros ou sistemas desconectados.
+
+### Sinal de baixa prioridade
+
+Sistema académico atual cobre todo o ciclo com boa adoção e integração.
+
+---
+
+## 27.4 Opportunity Map — Pais e encarregados
+
+### Evidência observada
+
+**CONFIRMADO**
+
+A família aparece repetidamente na comunicação institucional do COLUS e em atividades da escola.
+
+### Hipótese
+
+**HIPÓTESE PRIORITÁRIA**
+
+Existe potencial para transformar o relacionamento escola–família de comunicação episódica para acompanhamento contínuo.
+
+### Perguntas de discovery
+
+1. Como um encarregado sabe se o educando faltou hoje?
+2. Como recebe notas e boletins?
+3. Onde consulta calendário e eventos?
+4. Como recebe comunicados urgentes?
+5. Como verifica situação de propinas?
+6. Precisa contactar a secretaria para informações simples?
+7. Existem grupos de WhatsApp por turma?
+8. Como é controlado quem recebe informação sobre cada aluno?
+
+### Capacidade EduCore a demonstrar se validada
+
+- perfil do encarregado;
+- associação encarregado–educando;
+- presença;
+- notas;
+- boletim;
+- calendário;
+- comunicados;
+- notificações;
+- estado financeiro;
+- documentos;
+- autorizações;
+- acompanhamento de múltiplos educandos numa conta.
+
+### Benefício potencial
+
+Para o encarregado:
+
+- maior visibilidade;
+- menos dependência de telefonemas;
+- informação centralizada;
+- acompanhamento em tempo útil.
+
+Para o COLUS:
+
+- menor carga de perguntas repetitivas;
+- comunicação institucional;
+- melhor rastreabilidade;
+- experiência digital coerente com o posicionamento da escola.
+
+### Demonstração recomendada
+
+**“O dia escolar visto pelo encarregado”**
+
+Mostrar uma experiência móvel:
+
+- educando entrou/presente;
+- comunicado recebido;
+- resultado publicado;
+- evento próximo;
+- estado financeiro atualizado.
+
+### Sinal de oportunidade forte
+
+Informação atualmente distribuída entre chamadas, papel, WhatsApp, secretaria e reuniões.
+
+### Sinal de baixa prioridade
+
+App atual já possui adoção elevada e cobre integralmente estes fluxos.
+
+---
+
+## 27.5 Opportunity Map — Financeiro e propinas
+
+### Evidência observada
+
+**NÃO CONFIRMADO QUANTO AO PROCESSO ATUAL**
+
+O COLUS é uma instituição privada. A forma como gere cobrança, propinas, dívidas e reconciliação ainda não foi identificada publicamente.
+
+### Hipótese
+
+**HIPÓTESE DE ROI**
+
+Se existirem tarefas manuais na cobrança e reconciliação, o financeiro pode ser uma das áreas com retorno operacional mais mensurável.
+
+### Perguntas de discovery
+
+1. Como são lançadas propinas?
+2. Como são registados pagamentos?
+3. Quais meios de pagamento são aceites?
+4. Existe integração com banco/mobile money?
+5. Como ocorre reconciliação?
+6. Como são tratados pagamentos sem referência?
+7. Como são calculadas dívidas?
+8. Como os encarregados recebem avisos?
+9. Como são emitidos recibos?
+10. Que relatórios a direção recebe?
+11. Existem descontos, bolsas, irmãos ou planos especiais?
+12. Como é controlada autorização para alterações financeiras?
+
+### Capacidade EduCore a demonstrar se validada
+
+- contas do aluno/encarregado;
+- lançamentos;
+- planos de pagamento;
+- pagamentos;
+- reconciliação;
+- recibos;
+- saldos;
+- alertas;
+- relatórios;
+- permissões financeiras;
+- trilho de auditoria.
+
+### Benefício potencial
+
+- redução de trabalho administrativo;
+- maior precisão;
+- melhor cobrança;
+- visão de receita e dívida;
+- transparência para encarregados;
+- rastreabilidade de alterações.
+
+### Demonstração recomendada
+
+**Fluxo cobrança → pagamento → reconciliação → confirmação**
+
+Só mostrar integrações de pagamento que existam realmente no EduCore ou estejam tecnicamente validadas.
+
+### Sinal de oportunidade forte
+
+Reconciliação manual, comprovativos por WhatsApp, Excel paralelo, cobrança sem visibilidade consolidada.
+
+### Sinal de baixa prioridade
+
+ERP financeiro atual já resolve o processo e integra-se adequadamente com o académico.
+
+---
+
+## 27.6 Opportunity Map — Secretaria, admissões e matrícula
+
+### Evidência observada
+
+Nenhum fluxo público de candidatura/matrícula do COLUS foi identificado na pesquisa até agora.
+
+### Hipótese
+
+**HIPÓTESE**
+
+Pode existir oportunidade de digitalizar o percurso:
+
+**interesse → candidatura → documentação → aprovação → matrícula → criação automática do aluno**
+
+### Perguntas de discovery
+
+1. Onde começa uma candidatura?
+2. Como são recolhidos dados?
+3. Que documentos são necessários?
+4. Quem valida documentação?
+5. Como é acompanhada uma candidatura pendente?
+6. Dados são digitados novamente depois da aprovação?
+7. Como funciona renovação anual?
+8. Quanto tempo leva uma matrícula?
+9. Como são arquivados documentos?
+10. Como são tratados irmãos da mesma família?
+
+### Capacidade EduCore a demonstrar se validada
+
+- admissions;
+- formulários;
+- upload de documentos;
+- estados de candidatura;
+- validação;
+- matrícula;
+- criação automática do perfil;
+- dossier digital;
+- associação familiar.
+
+### Benefício potencial
+
+- menos papel;
+- menos redigitação;
+- menor tempo de atendimento;
+- dados mais consistentes;
+- rastreabilidade da candidatura.
+
+### Demonstração recomendada
+
+**“Da candidatura ao aluno ativo sem repetir dados”**
+
+### Benchmark interno
+
+A Woodrose demonstra publicamente que candidatura digital já é uma experiência presente no mercado local. Isso justifica avaliar o tema com o COLUS sem assumir que é uma deficiência atual.
+
+---
+
+## 27.7 Opportunity Map — Professores
+
+### Evidência observada
+
+A escola comunica uma oferta educacional diversificada, mas os fluxos internos de professores não são públicos.
+
+### Hipótese
+
+**HIPÓTESE**
+
+A adoção do EduCore dependerá fortemente de reduzir — e não aumentar — a carga administrativa do professor.
+
+### Perguntas de discovery
+
+1. Como professores recebem horários?
+2. Como registam presença?
+3. Como lançam notas?
+4. Usam telefone, computador ou ambos?
+5. Existem formulários/pautas em papel?
+6. Quantas vezes introduzem o mesmo dado?
+7. Quem corrige erros?
+8. Como recebem comunicados internos?
+
+### Capacidade EduCore a demonstrar se validada
+
+- experiência docente simples;
+- chamada/presença rápida;
+- lançamento de notas;
+- consulta de turmas;
+- calendário;
+- notificações;
+- acompanhamento de alunos.
+
+### Benefício potencial
+
+- menos tarefas repetitivas;
+- menos erro;
+- menos dependência de papel;
+- informação disponível mais cedo.
+
+### Regra de produto
+
+**RECOMENDAÇÃO**
+
+A demo para docentes deve privilegiar poucos cliques e utilização móvel. Uma solução que pareça “mais trabalho” para o professor terá forte risco de baixa adoção.
+
+---
+
+## 27.8 Opportunity Map — Comunicação e eventos
+
+### Evidência observada
+
+**CONFIRMADO**
+
+O COLUS publica regularmente atividades, eventos, visitas e iniciativas envolvendo comunidade escolar.
+
+### Hipótese
+
+**HIPÓTESE**
+
+A diversidade de atividades pode exigir coordenação de:
+
+- datas;
+- participantes;
+- autorizações;
+- lembretes;
+- informação aos encarregados.
+
+### Perguntas de discovery
+
+1. Como são comunicados eventos?
+2. Quem confirma participação?
+3. Como recolhem autorizações?
+4. Como lidam com alterações de horário?
+5. Existe calendário central?
+6. Como garantem que todos os encarregados receberam a informação?
+
+### Capacidade EduCore a demonstrar se validada
+
+- calendário;
+- eventos;
+- comunicados;
+- segmentação por turma/classe;
+- notificações;
+- confirmação/autorizações;
+- histórico de comunicação.
+
+### Benefício potencial
+
+- comunicação mais consistente;
+- menor risco de informação perdida;
+- melhor coordenação;
+- histórico institucional.
+
+---
+
+## 27.9 Opportunity Map — Segurança, privacidade e governança
+
+### Evidência observada
+
+**CONFIRMADO**
+
+O COLUS promoveu conteúdo/atividade sobre segurança TIC e proteção de dados no contexto educativo.
+
+### Hipótese
+
+**HIPÓTESE**
+
+Segurança pode ter boa receptividade como critério de compra, sobretudo porque a plataforma trata dados de menores, informação académica e financeira.
+
+### Perguntas de discovery
+
+1. Como são criadas e removidas contas?
+2. Existem contas partilhadas?
+3. Quem pode ver notas?
+4. Quem pode alterar dados financeiros?
+5. Há registo de alterações?
+6. Como ocorre recuperação de acesso?
+7. Existem backups?
+8. Como acessos de ex-funcionários são removidos?
+9. Existem políticas de retenção de dados?
+10. Quem tem acesso aos dados dos encarregados?
+
+### Capacidade EduCore a demonstrar se existente
+
+- RBAC;
+- princípio do menor privilégio;
+- logs/auditoria;
+- autenticação segura;
+- sessões;
+- backups;
+- controlo de acesso por função;
+- gestão do ciclo de vida de utilizadores.
+
+### Benefício potencial
+
+- redução de risco;
+- responsabilização;
+- proteção de dados;
+- maior confiança institucional.
+
+### Regra comercial
+
+Não prometer certificações, encriptação específica, SLA, residência de dados ou mecanismos de segurança sem validação técnica do produto.
+
+---
+
+## 27.10 Opportunity Map — Tecnologia e integrações
+
+### Evidência observada
+
+O stack tecnológico atual do COLUS continua desconhecido.
+
+### Objetivo de discovery
+
+Descobrir se a venda será:
+
+- greenfield;
+- substituição de sistema;
+- coexistência;
+- integração;
+- migração gradual.
+
+### Perguntas críticas
+
+1. Que sistemas usam hoje?
+2. Há contratos vigentes?
+3. Onde estão os dados?
+4. Existem APIs?
+5. Qual sistema é fonte oficial de dados?
+6. Existem ficheiros Excel essenciais?
+7. Que integrações são indispensáveis?
+8. Quantos anos de histórico precisam migrar?
+9. Que dispositivos e conectividade estão disponíveis?
+10. Existe equipa técnica interna?
+
+### Implicação
+
+**RECOMENDAÇÃO**
+
+Não fechar escopo, prazo ou preço de implementação antes de compreender migração e integrações.
+
+---
+
+# 28. Priorização da reunião de discovery
+
+A primeira reunião não deve tentar descobrir tudo.
+
+## Bloco 1 — situação atual
+
+Pergunta de abertura:
+
+> **“Hoje, desde a matrícula de um aluno até ao acompanhamento pelos pais e controlo das propinas, que sistemas e processos o COLUS utiliza?”**
+
+Esta pergunta permite mapear o ecossistema antes de apresentar funcionalidades.
+
+## Bloco 2 — fricção
+
+Perguntas:
+
+- Onde existe mais trabalho manual?
+- Onde a informação se perde ou atrasa?
+- Que processo gera mais perguntas dos pais?
+- Que relatório é difícil obter?
+- O que a direção gostaria de acompanhar em tempo real?
+
+## Bloco 3 — prioridade estratégica
+
+Pergunta:
+
+> **“Se pudessem transformar digitalmente apenas três processos nos próximos 12 meses, quais escolheriam?”**
+
+## Bloco 4 — decisão
+
+Descobrir:
+
+- quem decide;
+- quem influencia;
+- quem usará;
+- quem aprova orçamento;
+- quem valida tecnologia;
+- timing.
+
+---
+
+# 29. Matriz “não apresentar antes de validar”
+
+| Tema | Não assumir | Validar primeiro |
+|---|---|---|
+| ERP | “Não têm sistema” | sistema atual e satisfação |
+| WhatsApp | “Gerem tudo por WhatsApp” | canais reais |
+| Propinas | “Reconciliação é manual” | processo financeiro |
+| Pais | “Não conseguem acompanhar” | experiência atual |
+| Professores | “Usam papel/Excel” | workflow docente |
+| Portal | “Não existe portal” | ferramentas privadas |
+| Segurança | “Têm falhas” | arquitetura e práticas atuais |
+| Concorrência | “Estão atrás da Woodrose” | estratégia própria do COLUS |
+| ROI | “Vamos reduzir custos em X%” | baseline real |
+| Implementação | “Migração será simples” | dados, integrações e legado |
+
+---
+
+# 30. Arquitetura preliminar da demo COLUS
+
+**ESTADO: RECOMENDAÇÃO / A VALIDAR**
+
+Se o discovery confirmar as hipóteses principais, a demo deve contar uma história única em vez de mostrar menus.
+
+## Cenário central
+
+**Um aluno, um encarregado, um professor, a secretaria, o financeiro e a direção — todos ligados ao mesmo registo.**
+
+### Sequência
+
+1. **Secretaria**
+   - aluno é admitido/matriculado;
+   - dados e encarregado ficam associados.
+
+2. **Professor**
+   - abre turma;
+   - marca presença;
+   - lança avaliação.
+
+3. **Encarregado**
+   - vê presença;
+   - consulta avaliação;
+   - recebe comunicado;
+   - acompanha calendário.
+
+4. **Financeiro**
+   - consulta conta;
+   - regista/reconcilia pagamento;
+   - estado é atualizado.
+
+5. **Direção**
+   - visualiza indicadores;
+   - identifica faltas, dívida e desempenho;
+   - consulta histórico/auditoria.
+
+### Mensagem implícita
+
+> **Uma escola. Uma fonte de verdade. Diferentes experiências para cada interveniente.**
+
+---
+
+# 31. Proposta de valor preliminar por stakeholder
+
+| Stakeholder | Valor a testar |
+|---|---|
+| Administração | controlo e visibilidade da operação |
+| Direção pedagógica | acompanhamento académico centralizado |
+| Financeiro | cobrança, saldos e reconciliação com rastreabilidade |
+| Secretaria | menos duplicação e processos mais rápidos |
+| Professor | menos tarefas administrativas |
+| Encarregado | acompanhamento contínuo do educando |
+| Aluno | experiência escolar mais organizada |
+| TIC | plataforma governável, segura e integrável |
+
+---
+
+# 32. Critérios para avançar para proposta comercial
+
+**RECOMENDAÇÃO**
+
+Não produzir pricing final apenas porque há interesse verbal.
+
+Antes da proposta, obter pelo menos:
+
+- [ ] número aproximado de alunos;
+- [ ] número de utilizadores internos;
+- [ ] sistemas atuais;
+- [ ] principais dores confirmadas;
+- [ ] módulos prioritários;
+- [ ] necessidades de migração;
+- [ ] integrações necessárias;
+- [ ] meios de pagamento desejados;
+- [ ] decisor económico;
+- [ ] decisor técnico/operacional;
+- [ ] horizonte de implementação;
+- [ ] processo de aprovação.
+
+---
+
+# 33. Riscos comerciais identificados
+
+## R1 — apresentar demasiado cedo
+
+Uma apresentação completa antes de compreender o sistema atual pode transformar EduCore numa lista genérica de funcionalidades.
+
+**Mitigação:** discovery antes de proposta detalhada.
+
+## R2 — excesso de módulos
+
+Mostrar tudo pode diluir a mensagem.
+
+**Mitigação:** demonstrar apenas os fluxos ligados às prioridades confirmadas.
+
+## R3 — comparação competitiva explícita
+
+Usar concorrentes como argumento direto pode gerar resistência.
+
+**Mitigação:** manter benchmark como inteligência interna.
+
+## R4 — promessa de integração não validada
+
+Integrações financeiras, mobile money ou sistemas legados podem alterar custo e prazo.
+
+**Mitigação:** validação técnica antes de compromisso.
+
+## R5 — baixa adoção docente
+
+Mesmo boa tecnologia falha se aumentar a carga do professor.
+
+**Mitigação:** UX simples, piloto e formação.
+
+## R6 — preço antes do valor
+
+Apresentar preço antes de quantificar utilizadores, escopo e valor dificulta posicionamento.
+
+**Mitigação:** qualificar conta e escopo primeiro.
+
+---
+
+# 34. Próxima decisão operacional
+
+**RECOMENDAÇÃO**
+
+A Fase 2 já possui informação suficiente para preparar um **Discovery Brief** de 1 página.
+
+Esse documento deve ser usado antes ou durante o primeiro contacto e conter apenas:
+
+1. o que sabemos;
+2. o que queremos descobrir;
+3. cinco perguntas críticas;
+4. hipótese de valor;
+5. próximo passo desejado.
+
+Após discovery real com o COLUS, atualizar este documento e substituir hipóteses por factos confirmados antes de produzir a proposta comercial final.
