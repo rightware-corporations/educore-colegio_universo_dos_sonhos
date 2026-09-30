@@ -156,7 +156,7 @@ A história integrada continua válida para o COLUS:
 | Media Páscoa | NÃO REUTILIZAR |
 | Tenant registry | NÃO REUTILIZAR |
 | Tenant context/resolution | NÃO REUTILIZAR como arquitetura |
-| Platform Super Admin multi-tenant | NÃO REUTILIZAR para COLUS |
+| Platform Super Admin | PORTAR / REDEFINIR | manter como consola RIGHTWARE da instância, removendo gestão multi-tenant |
 | Tenant switching | NÃO REUTILIZAR |
 | Tenant entitlements runtime | NÃO REUTILIZAR como requisito estrutural |
 | Backend/database placeholder | NÃO TRATAR COMO PRODUÇÃO |
@@ -257,8 +257,10 @@ A auditoria técnica deve priorizar:
 - `frontend/src/data/tenants.ts`;
 - `TenantContext` para troca de escolas;
 - `platform/tenancy/*`;
-- Super Admin de tenants;
-- fluxo de criação/suspensão de tenants.
+- lógica de criação/troca de tenants dentro do mesmo runtime;
+- registry multi-tenant.
+
+**Manter:** a superfície Super Admin RIGHTWARE como consola proprietária da instância COLUS.
 
 Esses elementos podem ser úteis apenas como referência histórica ou para extrair componentes, não como arquitetura do COLUS.
 
