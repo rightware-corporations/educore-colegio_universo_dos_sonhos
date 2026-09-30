@@ -3,7 +3,7 @@
 > Documento vivo de inteligência comercial e operacional para preparação da abordagem EduCore ao **COLUS — Colégio Universo dos Sonhos, Limitada**.
 >
 > **Estado:** PESQUISA ATIVA  
-> **Versão:** 0.1  
+> **Versão:** 0.2  
 > **Data de início:** 2026-09-30  
 > **Natureza:** Inteligência pré-comercial / OSINT / preparação de proposta  
 > **Regra:** separar sempre FACTO CONFIRMADO, INDÍCIO, HIPÓTESE e RECOMENDAÇÃO.
@@ -564,7 +564,8 @@ Esta narrativa só deve ser consolidada depois da fase de descoberta.
 - [ ] organograma/decisores;
 - [ ] dimensão estimada de alunos;
 - [ ] análise sistemática de conteúdo social;
-- [ ] comparação competitiva.
+- [x] comparação competitiva inicial (benchmark digital Woodrose).
+- [ ] comparação competitiva aprofundada.
 
 ## Fase 2 — Opportunity Map EduCore
 Converter evidências em:
@@ -628,3 +629,391 @@ Ao continuar o trabalho:
 3. registar novas descobertas no Research Log;
 4. ligar cada recomendação comercial a uma evidência ou pergunta de discovery;
 5. manter apresentação, proposta e demo subordinadas à inteligência operacional, e não o contrário.
+
+
+---
+
+# 20. Segunda ronda de investigação — footprint digital, processos e decisores
+
+## 20.1 Domínio institucional `colus.ac.mz`
+
+**CONFIRMADO**
+
+O perfil Instagram fornecido pelo projeto utiliza o email institucional:
+
+**info@colus.ac.mz**
+
+Isto confirma utilização do domínio `colus.ac.mz` pelo menos para correio institucional.
+
+**NÃO CONFIRMADO**
+
+Na segunda ronda de pesquisa pública não foi localizado um website indexado e acessível associado a `colus.ac.mz`, nem páginas públicas indexadas para:
+
+- portal do aluno;
+- portal do encarregado;
+- login académico;
+- sistema de gestão;
+- Moodle;
+- Google Classroom;
+- Microsoft 365;
+- candidatura/matrícula online.
+
+A tentativa de consulta direta do domínio através da ferramenta de pesquisa web não devolveu uma página acessível.
+
+### Interpretação correta
+
+Isto **não permite concluir que o domínio esteja inativo**, nem que não existam serviços internos, subdomínios ou aplicações privadas.
+
+O que podemos afirmar comercialmente é apenas:
+
+> O COLUS possui identidade de email em domínio próprio, mas a pesquisa pública até 30-09-2026 não revelou uma experiência web/portal institucional claramente indexada.
+
+### Perguntas para discovery
+
+- O domínio é utilizado apenas para email ou também hospeda aplicações?
+- Existe portal interno não público?
+- Que fornecedor gere email, DNS e alojamento?
+- A escola utiliza contas institucionais para professores e alunos?
+- Existe autenticação centralizada?
+
+---
+
+## 20.2 Matrículas, admissões e propinas — segunda pesquisa
+
+**NÃO CONFIRMADO**
+
+Foram realizadas pesquisas específicas por combinações de:
+
+- COLUS + matrículas;
+- COLUS + inscrições;
+- COLUS + propinas;
+- COLUS + pagamento;
+- COLUS + portal;
+- COLUS + sistema;
+- COLUS + aplicação.
+
+Até esta ronda não foi encontrada fonte pública fiável que descreva:
+
+- formulário de candidatura;
+- processo de renovação de matrícula;
+- tabela de propinas;
+- modalidade de pagamento;
+- portal financeiro;
+- submissão digital de comprovativos;
+- emissão digital de recibos.
+
+### Implicação
+
+A ausência destes dados públicos transforma o processo de admissão e cobrança num **bloco prioritário da reunião de descoberta**.
+
+Não deve ser usado como alegação de que o processo é manual.
+
+---
+
+## 20.3 Sistemas e stack tecnológico
+
+**NÃO CONFIRMADO**
+
+A pesquisa pública não identificou fornecedor ou produto associado ao COLUS para:
+
+- ERP escolar;
+- SIS/SIGA;
+- LMS;
+- portal académico;
+- gestão financeira escolar;
+- controlo de acesso;
+- presença;
+- app para famílias;
+- plataforma de comunicação escolar.
+
+Também não surgiram resultados públicos relacionando o domínio institucional a Google Workspace, Microsoft 365, Moodle ou plataformas equivalentes.
+
+### Estado da hipótese
+
+**HIPÓTESE**
+
+Há possibilidade de a infraestrutura operacional ser:
+
+1. predominantemente interna e não indexada;
+2. composta por ferramentas generalistas;
+3. composta por software escolar sem presença pública;
+4. parcialmente manual.
+
+Nenhuma destas alternativas está confirmada.
+
+---
+
+## 20.4 Sinal adicional sobre Juma Cangy
+
+**CONFIRMADO**
+
+Publicações do próprio COLUS identificam **Juma Cangy como Engenheiro Civil** e mostram a sua participação numa atividade escolar dedicada à engenharia.
+
+A Ordem dos Engenheiros de Moçambique também lista **Juma Júnior Jorgete Cangy** na especialidade de Engenharia Civil em documentação pública recente.
+
+Fontes:
+- COLUS / LinkedIn institucional;
+- Ordem dos Engenheiros de Moçambique: https://ordeng.org.mz/wp-content/uploads/2025/12/CE2.pdf
+- Boletim da República do COLUS.
+
+### Leitura comercial
+
+**INDÍCIO FORTE**
+
+Juma Cangy não aparece apenas no registo societário: existe também presença observável em atividade institucional do colégio.
+
+Isso eleva a relevância dele no **mapa preliminar de stakeholders**, embora ainda não confirme o seu cargo operacional nem autoridade específica sobre tecnologia.
+
+### Discovery necessário
+
+Identificar se participa em:
+
+- estratégia;
+- investimentos;
+- infraestrutura;
+- tecnologia;
+- administração;
+- aprovação de fornecedores.
+
+---
+
+## 20.5 Família como eixo de posicionamento
+
+**CONFIRMADO**
+
+Além do evento desportivo com participação obrigatória/conjunta de aluno e encarregado, o COLUS publicou conteúdo específico no **Dia Internacional da Família**, descrevendo a família como elemento de amor, união, apoio e base de valores e sonhos.
+
+Fonte:
+- https://www.linkedin.com/company/col%C3%A9gio-universo-dos-sonhos
+
+### Implicação para EduCore
+
+**RECOMENDAÇÃO**
+
+A apresentação não deve tratar o portal do encarregado como um simples módulo adicional.
+
+Se a descoberta confirmar necessidade, a ligação **escola ↔ família** pode tornar-se um dos pilares centrais da narrativa comercial.
+
+---
+
+# 21. Benchmark competitivo digital — Matola-Rio
+
+## 21.1 Woodrose International School
+
+A Woodrose é particularmente relevante como benchmark por possuir unidade em **Matola-Rio** e operar no mercado privado de educação.
+
+### Evidências digitais
+
+**CONFIRMADO**
+
+A Woodrose mantém:
+
+- website institucional;
+- página específica da unidade Matola-Rio;
+- candidatura/inscrição digital;
+- **Sistema Integrado de Gestão Académica** para alunos;
+- **SIGA Woodrose** com autenticação;
+- Student Portal;
+- formulários digitais de admissão;
+- fluxo público que recolhe dados e documentos do estudante.
+
+Fontes:
+
+- Website institucional: https://woodroseschool.co.mz/
+- Matola-Rio: https://woodroseschool.co.mz/matola-branch
+- Portal académico: https://aluno.woodroseschool.co.mz/
+- SIGA: https://siga.woodroseschool.co.mz/
+- Formulário de inscrição: https://form.jotform.com/212712192460549
+
+O formulário de inscrição público para 2027 evidencia digitalização de elementos como:
+
+- novo ingresso / renovação / retorno;
+- seleção da unidade;
+- upload de fotografia e identificação;
+- dados de contacto;
+- responsável por pagamentos;
+- modalidades de pagamento;
+- dados relacionados com propinas;
+- regras de regularização de dívidas.
+
+### Significado estratégico
+
+**CONFIRMADO COMO BENCHMARK, NÃO COMO DOR DO COLUS**
+
+No mesmo mercado geográfico existe pelo menos uma instituição privada com experiência digital pública claramente estruturada.
+
+Portanto, transformação digital escolar não deve ser apresentada ao COLUS apenas como eficiência administrativa interna.
+
+Pode também ter dimensão de:
+
+- experiência do encarregado;
+- conveniência;
+- percepção de modernidade;
+- capacidade institucional;
+- competitividade no segmento privado.
+
+### Regra de comunicação
+
+Não apresentar Woodrose de forma agressiva nem afirmar que o COLUS está “atrás”.
+
+Usar o benchmark internamente para calibrar o nível de experiência que já existe no mercado.
+
+---
+
+## 21.2 Colégio Esperança de Moçambique
+
+**CONFIRMADO**
+
+O Colégio Esperança, também em Matola-Rio/Chinonquila, comunica publicamente:
+
+- ensino primário e secundário;
+- inscrições abertas;
+- posicionamento em disciplina e inglês;
+- website próprio (`cemoc.net`).
+
+Fonte:
+- https://www.schoolandcollegelistings.com/MZ/Matola-Rio/108745887936943/Col%C3%A9gio-Esperan%C3%A7a
+
+**NÃO CONFIRMADO**
+
+A pesquisa atual não revelou portal académico ou processo digital equivalente ao observado na Woodrose.
+
+---
+
+# 22. Atualização do mapa de oportunidade
+
+| Evidência | Leitura | Pergunta de validação | Oportunidade EduCore potencial | Confiança |
+|---|---|---|---|---|
+| Email institucional `@colus.ac.mz` | Existe identidade digital institucional mínima | Que serviços estão ligados ao domínio? | Identidade, integrações e comunicação institucional | Média |
+| Nenhum website/portal COLUS claramente indexado na pesquisa | Footprint público de sistemas é limitado | Existe portal ou aplicação privada? | Portal web/app se houver gap real | Baixa |
+| Nenhum processo público de matrícula encontrado | Processo externo não é observável | Como é feita candidatura e matrícula hoje? | Admissions workflow | Baixa |
+| Nenhum processo público de propinas encontrado | Gestão financeira externa não é observável | Como é feita cobrança e reconciliação? | Billing, ledger, notificações e reconciliação | Baixa |
+| Juma Cangy aparece juridicamente e em atividade escolar | Possível stakeholder de influência | Qual o papel atual na escola? | Ajustar mapa de decisão e abordagem | Média/Alta |
+| Família aparece repetidamente na comunicação institucional | Família é parte visível da identidade COLUS | Como o encarregado acompanha o aluno hoje? | Parent experience como pilar | Alta para narrativa |
+| Concorrente local possui portal + SIGA + admissão digital | Digitalização já existe no mercado local | Como COLUS se quer diferenciar digitalmente? | Posicionamento competitivo + modernização | Alta como contexto |
+
+---
+
+# 23. Hipóteses comerciais priorizadas — v0.2
+
+Estas hipóteses orientam investigação e discovery. **Não são conclusões sobre o funcionamento atual do COLUS.**
+
+## H1 — Experiência do encarregado pode ser a maior alavanca narrativa
+
+Motivos:
+
+- família aparece repetidamente na comunicação;
+- eventos envolvem encarregados diretamente;
+- EduCore pode transformar acompanhamento esporádico em visibilidade contínua.
+
+**Prioridade: ALTA**
+
+## H2 — Gestão académica integrada pode ser relevante devido à amplitude 1.ª–12.ª
+
+Motivos:
+
+- múltiplos níveis de ensino;
+- diferentes processos académicos;
+- potencial complexidade de turmas, professores, avaliações e relatórios.
+
+**Prioridade: ALTA**
+
+## H3 — Financeiro/propinas pode produzir ROI administrativo mensurável
+
+Motivo:
+
+- escolas privadas dependem de cobrança recorrente, mas o processo específico do COLUS continua desconhecido.
+
+**Prioridade: ALTA PARA DISCOVERY / NÃO CONFIRMADA COMO DOR**
+
+## H4 — Posicionamento digital pode ter valor competitivo
+
+Motivo:
+
+- concorrente em Matola-Rio já oferece publicamente portal, SIGA e candidatura digital;
+- COLUS comunica tecnologia e futuro na dimensão pedagógica.
+
+**Prioridade: MÉDIA/ALTA**
+
+## H5 — Segurança e governança podem diferenciar RIGHTWARE
+
+Motivos:
+
+- COLUS demonstrou interesse pedagógico em segurança TIC;
+- EduCore lida com dados de menores, académicos e financeiros.
+
+**Prioridade: MÉDIA**
+
+---
+
+# 24. Critérios de qualificação da oportunidade
+
+Na primeira conversa com COLUS, tentar obter respostas suficientes para classificar cada dimensão:
+
+| Dimensão | Pergunta-chave | Sinal forte de oportunidade |
+|---|---|---|
+| Académico | Como gerem presenças, notas, turmas e boletins? | múltiplos sistemas / Excel / retrabalho |
+| Financeiro | Como controlam propinas e dívidas? | reconciliação manual / pouca visibilidade |
+| Encarregados | Como um pai acompanha o aluno? | informação dispersa / dependência de mensagens |
+| Secretaria | Como fazem matrícula e documentos? | papel / duplicação / filas |
+| Gestão | Quanto tempo leva obter indicadores? | relatórios manuais / dados fragmentados |
+| Tecnologia | Que plataformas usam? | sistemas isolados / sem API / baixa adoção |
+| Segurança | Como controlam permissões e dados? | contas partilhadas / ausência de trilhos |
+| Estratégia | Que experiência digital querem oferecer? | intenção explícita de modernização |
+
+---
+
+# 25. Research log — ronda 2
+
+## 2026-09-30 — Footprint digital, decisores e benchmark
+
+Pesquisas adicionais:
+
+- domínio `colus.ac.mz`;
+- email `info@colus.ac.mz`;
+- portal/aluno/encarregado;
+- ERP/SIGA/LMS;
+- matrículas e inscrições;
+- propinas e pagamentos;
+- direção e colaboradores;
+- Juma Cangy;
+- benchmark de escolas privadas em Matola-Rio.
+
+### Novas fontes relevantes
+
+1. LinkedIn institucional do COLUS  
+   https://www.linkedin.com/company/col%C3%A9gio-universo-dos-sonhos
+2. Ordem dos Engenheiros de Moçambique  
+   https://ordeng.org.mz/wp-content/uploads/2025/12/CE2.pdf
+3. Woodrose International School  
+   https://woodroseschool.co.mz/
+4. Woodrose Matola-Rio  
+   https://woodroseschool.co.mz/matola-branch
+5. Sistema Integrado de Gestão Académica Woodrose  
+   https://aluno.woodroseschool.co.mz/
+6. SIGA Woodrose  
+   https://siga.woodroseschool.co.mz/
+7. Formulário de matrícula Woodrose  
+   https://form.jotform.com/212712192460549
+8. Colégio Esperança — presença pública  
+   https://www.schoolandcollegelistings.com/MZ/Matola-Rio/108745887936943/Col%C3%A9gio-Esperan%C3%A7a
+
+### Resultado da ronda
+
+A pesquisa reforçou três pontos:
+
+1. **família** é um eixo real da comunicação do COLUS;
+2. **Juma Cangy** merece permanecer no mapa de stakeholders a validar;
+3. existe um **benchmark digital forte no mercado local**, sobretudo Woodrose.
+
+Continuam sem confirmação pública:
+
+- stack interno do COLUS;
+- sistema financeiro;
+- matrículas;
+- propinas;
+- portal;
+- número de alunos;
+- organograma operacional;
+- decisor de tecnologia.
+
