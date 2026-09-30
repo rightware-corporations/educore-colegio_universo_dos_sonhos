@@ -3,7 +3,7 @@
 > Documento vivo de inteligência comercial e operacional para preparação da abordagem EduCore ao **COLUS — Colégio Universo dos Sonhos, Limitada**.
 >
 > **Estado:** PESQUISA ATIVA  
-> **Versão:** 0.6  
+> **Versão:** 0.7  
 > **Data de início:** 2026-09-30  
 > **Natureza:** Inteligência pré-comercial / OSINT / preparação de proposta  
 > **Regra:** separar sempre FACTO CONFIRMADO, INDÍCIO, HIPÓTESE e RECOMENDAÇÃO.
@@ -2652,3 +2652,37 @@ O MVP pré-contacto deve ser:
 > **Pré-venda personalizada não deve transformar-se em desenvolvimento customizado gratuito.**
 
 O objetivo é demonstrar capacidade e relevância, não terminar o projeto antes de existir cliente.
+
+
+---
+
+# 45. Decisão de arquitetura e deployment
+
+**DECISÃO RIGHTWARE**
+
+Para o COLUS, a estratégia multi-tenant num único projeto/deploy **não será utilizada**.
+
+A direção atual é:
+
+> **1 escola = 1 repositório = 1 deployment independente.**
+
+O repositório do Colégio Páscoa será usado como referência funcional, visual e de fluxos, mas o COLUS será implementado no seu próprio repositório.
+
+## Implicações
+
+- não criar `tenant-colus-003`;
+- não depender de tenant switching;
+- não portar Super Admin multi-tenant como requisito;
+- não gerir múltiplas escolas no mesmo runtime;
+- reutilizar componentes e padrões, não a arquitetura multi-tenant;
+- manter deploy, domínio, environment e release independentes por escola.
+
+## ERP
+
+A direção futura é separar o ERP do EduCore, tratando-o como sistema reutilizável e integrável através de contratos/API.
+
+Para o MVP pré-comercial, fluxos administrativos e financeiros podem continuar visíveis dentro do EduCore para demonstrar a experiência completa, mas a implementação deve evitar acoplamento desnecessário que dificulte futura separação.
+
+Documento arquitetural de referência:
+
+`arquitetura-produto-deploy.md`
