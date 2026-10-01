@@ -1,6 +1,6 @@
 # Hero Direction — Landing COLUS
 
-> **Estado:** SUPERSEDIDO PARCIALMENTE POR ABERTURA MORPH-DRIVEN  
+> **Estado:** APROVADO COMO ESTADO FINAL DO MORPH  
 > **Versão:** 0.1  
 > **Data:** 2026-10-01  
 > **Escopo:** primeira dobra da landing pública COLUS.
@@ -439,3 +439,15 @@ Referências principais:
 
 - `conceito-interacao-abertura-colus.md`
 - `intro-morph-colus.drawio`
+
+
+---
+
+# 21. Aprovação
+
+O Hero deste documento permanece válido como **estado final da abertura morph-driven** e está aprovado nessa função.
+
+Referência de interação aprovada:
+
+- `conceito-interacao-abertura-colus.md`
+- `intro-morph-colus.drawio` V0.3
