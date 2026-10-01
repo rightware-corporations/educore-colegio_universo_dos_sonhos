@@ -2,7 +2,7 @@
 
 > **Estado:** DECISÃO ARQUITETURAL  
 > **Data:** 2026-09-30  
-> **Escopo:** superfície administrativa proprietária da RIGHTWARE presente em cada implementação EduCore.
+> **Escopo:** superfície administrativa proprietária da RIGHTWARE, presente nas implementações EduCore e ligada ao Control Plane central.
 
 ---
 
@@ -108,11 +108,15 @@ A consola é comum como **produto administrativo**, mas cada deployment controla
 - segurança;
 - manutenção.
 
-### P2 — plataforma futura
+### P0/P1 — Control Plane central
 
 - fleet view das várias instalações EduCore;
+- total de escolas e estado ativo/inativo/degradado;
 - versões por cliente;
 - estado dos deployments;
+- último heartbeat;
+- módulos ativos;
+- feature flags;
 - rollout controlado;
 - suporte remoto autorizado;
 - observabilidade central;
@@ -273,3 +277,36 @@ Mas não deve duplicar toda a consola operacional do ERP.
 > **O Super Admin é uma superfície RIGHTWARE, não uma funcionalidade específica de tenant.**
 
 Por isso deve existir em todas as implementações EduCore, mesmo quando cada escola tem repo e deployment próprios.
+
+
+---
+
+## 12. Fonte de verdade central
+
+O Super Admin deve consumir uma **Control Plane API comum**, ligada a uma **base de dados central RIGHTWARE**.
+
+Isto permite que o mesmo ecrã, aberto a partir de qualquer implementação EduCore, consiga ver a fleet real de escolas.
+
+### O que é central
+
+- school registry;
+- instances/deployments;
+- modules/entitlements;
+- feature flags;
+- releases;
+- heartbeat/health;
+- licensing;
+- support audit.
+
+### O que não deve ser centralizado aqui por defeito
+
+- dados completos dos alunos;
+- notas;
+- presenças;
+- documentos;
+- pagamentos detalhados;
+- comunicação escolar.
+
+Esses pertencem ao Data Plane de cada escola ou aos produtos operacionais próprios, como o ERP.
+
+Documento de referência: `arquitetura-saas-distribuida.md`.
