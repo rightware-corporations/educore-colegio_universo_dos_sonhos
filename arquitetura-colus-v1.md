@@ -540,6 +540,7 @@ Arquitetura só será considerada fechada depois de decidir:
 - [x] single-school configuration;
 - [x] separação de multi-tenancy;
 - [x] manutenção do Super Admin RIGHTWARE por instância;
+- [x] Control Plane central e base de dados global RIGHTWARE;
 - [x] perfis base;
 - [x] princípio cross-role;
 - [x] boundary de dados;
@@ -582,3 +583,25 @@ No COLUS ele não funcionará como gestor de múltiplos tenants. Funcionará com
 Deve manter identidade e estrutura consistentes com os outros repos EduCore, permitindo controlar configuração, módulos, papéis, branding, feature flags, estado da aplicação e ferramentas de suporte.
 
 Documento de referência: `super-admin-rightware.md`.
+
+
+---
+
+# 20. COLUS como instância do SaaS distribuído
+
+O COLUS terá:
+
+- repositório próprio;
+- deployment próprio;
+- experiência profundamente personalizada;
+- configuração e módulos próprios;
+- Data Plane próprio para os dados escolares;
+- integração com o **Control Plane central RIGHTWARE**.
+
+O Super Admin da rota `/platform` deve consumir o mesmo Control Plane usado pelas restantes escolas.
+
+Portanto, ao entrar no Super Admin a partir do COLUS, a RIGHTWARE poderá ver a fleet global, não apenas o COLUS, desde que a identidade do utilizador tenha privilégios globais RIGHTWARE.
+
+A aplicação escolar continua isolada; a visão global existe apenas no plano administrativo RIGHTWARE.
+
+Documento de referência: `arquitetura-saas-distribuida.md`.
