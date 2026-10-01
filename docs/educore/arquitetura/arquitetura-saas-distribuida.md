@@ -4,7 +4,7 @@
 > **Data:** 2026-10-01  
 > **Escopo:** aplicação ao EduCore do framework geral RIGHTWARE de SaaS distribuído.
 >
-> **Framework geral:** `arquitetura-rightware-saas-distribuida.md`
+> **Framework geral:** `../../rightware/frameworks/arquitetura-rightware-saas-distribuida.md`
 
 ---
 
