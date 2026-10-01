@@ -583,7 +583,7 @@ No COLUS ele não funcionará como gestor de múltiplos tenants. Funcionará com
 
 Deve manter identidade e estrutura consistentes com os outros repos EduCore, permitindo controlar configuração, módulos, papéis, branding, feature flags, estado da aplicação e ferramentas de suporte.
 
-Documento de referência: `super-admin-rightware.md`.
+Documento de referência: `../../educore/arquitetura/super-admin-rightware.md`.
 
 
 ---
@@ -605,7 +605,7 @@ Portanto, ao entrar no Super Admin a partir do COLUS, a RIGHTWARE poderá ver a 
 
 A aplicação escolar continua isolada; a visão global existe apenas no plano administrativo RIGHTWARE.
 
-Documento de referência: `arquitetura-saas-distribuida.md`.
+Documento de referência: `../../educore/arquitetura/arquitetura-saas-distribuida.md`.
 
 
 ---
