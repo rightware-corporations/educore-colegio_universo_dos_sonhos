@@ -467,3 +467,30 @@ O wireframe deve traduzir esta direção em:
 - comportamento desktop/mobile;
 - notas de motion.
 
+
+
+---
+
+# 22. Wireframe estrutural criado
+
+Foi criado:
+
+`landing-colus-wireframe.drawio`
+
+Estado:
+
+- V0.1 estrutural;
+- desktop + mobile;
+- sem design pixel-perfect;
+- sem ligação pública ao portal;
+- já incorpora Hero, Manifesto, Descobrir, Criar, Futuro & Tecnologia, Vida COLUS, Família/Comunidade, Transformar, Depoimentos, Contacto e Footer.
+
+Próxima revisão deve avaliar:
+
+- ordem das secções;
+- altura/proporção;
+- quantidade de media;
+- headline do hero;
+- CTA principal;
+- equilíbrio entre tecnologia e humanidade;
+- se alguma secção deve ser fundida/removida.
