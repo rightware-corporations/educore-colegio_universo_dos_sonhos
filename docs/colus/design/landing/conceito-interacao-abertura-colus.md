@@ -1,7 +1,7 @@
 # Conceito de Interação — Abertura Morph COLUS
 
-> **Estado:** DIREÇÃO CRIATIVA / PRÉ-HIGH-FIDELITY  
-> **Versão:** 0.2  
+> **Estado:** APROVADO — BASE DE INTERAÇÃO PARA HIGH-FIDELITY  
+> **Versão:** 0.3  
 > **Data:** 2026-10-01  
 > **Objetivo:** substituir a abertura convencional de “hero com foto/vídeo” por uma experiência de marca viva, scroll-driven e tecnicamente elegante.
 >
@@ -965,3 +965,14 @@ Book Aperture revela media
 ```
 
 Esta é a base para o storyboard visual V0.2.
+
+
+---
+
+# 31. Aprovação
+
+A abertura morph-driven, incluindo a coreografia desktop e mobile dos primeiros estados, foi **aprovada em 2026-10-01**.
+
+A partir deste ponto, esta direção passa a ser referência oficial para o high-fidelity da abertura da landing COLUS.
+
+Alterações estruturais futuras devem ser tratadas como revisão desta direção, e não como nova exploração aberta.
