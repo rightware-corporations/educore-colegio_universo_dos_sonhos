@@ -312,3 +312,27 @@ Fechado até agora:
 - wireframe estrutural V0.1 em `landing-colus-wireframe.drawio`.
 
 A landing ainda precisa de crítica/revisão antes de seguir para design visual final.
+
+
+---
+
+# 16. Aprovação — abertura da Landing
+
+Em 2026-10-01 foi aprovada a direção da abertura da landing COLUS:
+
+- intro morph-driven;
+- símbolo COLUS como origem da interação;
+- Book Open / Book Aperture;
+- Light Device como halo/reveal;
+- Radial System com uso funcional controlado;
+- scroll nativo;
+- composição distinta para desktop e mobile;
+- Hero como estado final do morph.
+
+Referências:
+
+- `landing/conceito-interacao-abertura-colus.md`
+- `landing/intro-morph-colus.drawio`
+- `landing/hero-direction-colus.md`
+
+Este ponto deixa de estar em exploração e pode avançar para high-fidelity.
