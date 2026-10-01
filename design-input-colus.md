@@ -1,6 +1,6 @@
 # Design Input — COLUS / EduCore
 
-> **Estado:** AGUARDA DIREÇÃO DE PRODUTO  
+> **Estado:** DIREÇÃO DA LANDING EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Objetivo:** recolher decisões de experiência e personalização antes do início do código.
 
@@ -295,3 +295,20 @@ Para evitar desenhar tudo ao mesmo tempo, fechar nesta ordem:
 10. narrativa final da demo;
 11. módulos ocultos;
 12. Definition of Done final.
+
+
+---
+
+# 15. Progresso — Landing
+
+Fechado até agora:
+
+- landing como experiência pública independente;
+- nenhuma ligação pública ao portal;
+- direção criativa;
+- auditoria visual;
+- identidade visual preliminar;
+- arquitetura de conteúdo;
+- wireframe estrutural V0.1 em `landing-colus-wireframe.drawio`.
+
+A landing ainda precisa de crítica/revisão antes de seguir para design visual final.
