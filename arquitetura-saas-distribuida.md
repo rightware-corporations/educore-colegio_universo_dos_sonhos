@@ -1,12 +1,16 @@
 # Arquitetura SaaS Distribuída — EduCore / RIGHTWARE
 
-> **Estado:** DECISÃO ARQUITETURAL  
+> **Estado:** DECISÃO ARQUITETURAL EDUCORE  
 > **Data:** 2026-10-01  
-> **Escopo:** modelo SaaS com experiências escolares profundamente personalizadas, deployments independentes e controlo central RIGHTWARE.
+> **Escopo:** aplicação ao EduCore do framework geral RIGHTWARE de SaaS distribuído.
+>
+> **Framework geral:** `arquitetura-rightware-saas-distribuida.md`
 
 ---
 
 ## 1. Definição
+
+Esta arquitetura é a especialização EduCore do padrão **RIGHTWARE Distributed SaaS Architecture**.
 
 O EduCore não será um SaaS clássico em que todos os clientes utilizam exatamente a mesma aplicação visual e operacional.
 
