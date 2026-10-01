@@ -1,6 +1,6 @@
 # Hero Direction — Landing COLUS
 
-> **Estado:** DIREÇÃO CRIATIVA FECHADA PARA WIREFRAME DETALHADO  
+> **Estado:** SUPERSEDIDO PARCIALMENTE POR ABERTURA MORPH-DRIVEN  
 > **Versão:** 0.1  
 > **Data:** 2026-10-01  
 > **Escopo:** primeira dobra da landing pública COLUS.
@@ -406,3 +406,36 @@ O Hero está pronto para high fidelity quando:
 Direção aprovada para wireframe detalhado:
 
 > **Hero full-bleed + header overlay + conteúdo lower-left + Light Device subtil + CTA principal único + Open Book Transition.**
+
+
+---
+
+# 20. Evolução — Hero deixa de ser ponto de partida estático
+
+A direção atual passa a ser:
+
+```text
+BRAND STAGE
+→ MORPH DO SÍMBOLO
+→ SCROLL COMPOSITION
+→ MEDIA REVEAL
+→ HERO ASSEMBLED
+```
+
+Portanto, o Hero descrito neste documento é agora o **estado final da primeira transformação**, não o primeiro frame da landing.
+
+## Consequência
+
+- mark começa grande;
+- livro abre;
+- luz sobe;
+- radiais dispersam;
+- alguns pontos tornam-se elementos funcionais;
+- media é revelado pela geometria da marca;
+- headline, CTA e header entram progressivamente;
+- Hero final mantém a composição editorial já definida.
+
+Referências principais:
+
+- `conceito-interacao-abertura-colus.md`
+- `intro-morph-colus.drawio`
