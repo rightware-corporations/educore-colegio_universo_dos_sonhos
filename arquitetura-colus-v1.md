@@ -1,6 +1,6 @@
 # Arquitetura COLUS V1 — EduCore
 
-> **Estado:** DESIGN EM CURSO — NÃO IMPLEMENTAR AINDA  
+> **Estado:** BASE ARQUITETURAL FECHADA — AGUARDA DESIGN FUNCIONAL / NÃO IMPLEMENTAR AINDA  
 > **Versão:** 0.1  
 > **Data:** 2026-09-30  
 > **Objetivo:** fechar a arquitetura do MVP COLUS antes de qualquer port ou escrita de código.
@@ -541,6 +541,7 @@ Arquitetura só será considerada fechada depois de decidir:
 - [x] separação de multi-tenancy;
 - [x] manutenção do Super Admin RIGHTWARE por instância;
 - [x] Control Plane central e base de dados global RIGHTWARE;
+- [x] contrato instância ↔ Control Plane ↔ Super Admin;
 - [x] perfis base;
 - [x] princípio cross-role;
 - [x] boundary de dados;
@@ -605,3 +606,58 @@ Portanto, ao entrar no Super Admin a partir do COLUS, a RIGHTWARE poderá ver a 
 A aplicação escolar continua isolada; a visão global existe apenas no plano administrativo RIGHTWARE.
 
 Documento de referência: `arquitetura-saas-distribuida.md`.
+
+
+---
+
+# 21. Ponto de entrada do desenho funcional
+
+A base arquitetural necessária para evitar retrabalho estrutural está agora suficientemente definida.
+
+Já estão fechados:
+
+- repo/deploy independente por escola;
+- SaaS multi-instance;
+- Control Plane central;
+- Data Plane isolado;
+- Experience Plane profundamente personalizável;
+- Super Admin RIGHTWARE;
+- heartbeat;
+- contrato inicial de configuração/health;
+- fronteira futura EduCore ↔ ERP;
+- repository contracts;
+- demo state partilhado;
+- separação entre landing e portal;
+- modelo de papéis.
+
+## O que falta agora não é infraestrutura abstrata.
+
+Falta decidir **como o COLUS deve ser vivido pelo utilizador**.
+
+A próxima fase precisa de input direto de produto/design sobre:
+
+1. primeira impressão da aplicação;
+2. landing;
+3. login;
+4. dashboard inicial;
+5. módulos P0;
+6. ordem e hierarquia dos módulos;
+7. diferenças entre perfis;
+8. experiência do encarregado;
+9. experiência da direção;
+10. experiência do professor;
+11. experiência da secretaria;
+12. papel do financeiro no MVP;
+13. identidade visual;
+14. narrativa da demo;
+15. o que mostrar e o que ocultar na V1.
+
+### Gate atual
+
+> **PRODUCT DESIGN INPUT REQUIRED**
+
+Ainda não é:
+
+> **ARCHITECTURE READY — PODEMOS COMEÇAR A IMPLEMENTAÇÃO**
+
+Esse gate só será emitido depois de fechar o desenho funcional acima.
