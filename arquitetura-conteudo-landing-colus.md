@@ -1,7 +1,7 @@
 # Arquitetura de Conteúdo — Landing COLUS
 
 > **Estado:** FASE A → PREPARAÇÃO DO WIREFRAME  
-> **Versão:** 0.1  
+> **Versão:** 0.2  
 > **Data:** 2026-10-01  
 > **Base:** Inteligência Operacional + Auditoria Visual + Direção Criativa + Identidade Visual Preliminar.
 >
@@ -557,3 +557,66 @@ O wireframe deve concentrar-se em:
 - anotações de interação.
 
 Ainda não é o design pixel-perfect.
+
+
+---
+
+# 19. Revisão V0.2 — alinhamento com wireframe V0.3
+
+Após crítica estrutural, a sequência foi refinada para reduzir a sensação de blocos independentes.
+
+## Alterações
+
+### Hero
+- composição assimétrica;
+- conteúdo lower-left;
+- um CTA principal;
+- header transparente sobre o hero;
+- Open Book Device na transição.
+
+### Manifesto
+- maior espaço;
+- ritmo mais calmo;
+- função de pausa entre impacto e storytelling.
+
+### Descobrir + Criar
+Deixam de ser duas secções equivalentes e passam a formar:
+
+> **APRENDER EM MOVIMENTO**
+
+com dois momentos narrativos internos.
+
+### Futuro & Tecnologia
+Passa a ser uma secção assinatura, não uma grelha de cards.
+
+### Vida COLUS
+Media-led, com branding reduzido.
+
+### Closing
+Mais sofisticado, usando light/halo e brand orange de forma controlada.
+
+## Sequência atual
+
+```text
+Header transparente
+→ Hero
+→ Manifesto
+→ Aprender em Movimento
+   → Descobrir
+   → Criar
+→ Futuro & Tecnologia
+→ Vida COLUS
+→ Pertencer
+→ Transformar
+→ Depoimentos
+→ Convite
+→ Footer
+```
+
+Documento de revisão:
+
+`critica-wireframe-landing-colus-v02.md`
+
+Wireframe atual:
+
+`landing-colus-wireframe.drawio` — V0.3.
