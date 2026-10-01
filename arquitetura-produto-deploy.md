@@ -271,3 +271,33 @@ Cada deployment deve incluir a mesma superfície proprietária **EduCore / RIGHT
 O que desaparece é o runtime multi-tenant e a troca de escolas dentro da mesma aplicação. O que permanece é o control plane RIGHTWARE.
 
 No futuro, estas consolas por instância podem também reportar para uma consola central de fleet management da RIGHTWARE.
+
+
+---
+
+## 13. Control Plane central
+
+A independência de deployment não elimina o SaaS central.
+
+Todas as instâncias EduCore devem ligar-se a um **Control Plane RIGHTWARE comum**, com:
+
+- base de dados central de escolas/instâncias;
+- módulos;
+- feature flags;
+- versões;
+- heartbeat;
+- health;
+- licenças;
+- auditoria de suporte.
+
+Assim:
+
+```text
+Deploy separado por escola
++ Control Plane central
+= SaaS multi-instance
+```
+
+A experiência de cada escola pode ser profundamente distinta sem perder controlo central.
+
+Ver: `arquitetura-saas-distribuida.md`.
