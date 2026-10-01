@@ -5,7 +5,7 @@
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="2" value="LANDING COLUS — WIREFRAME ESTRUTURAL V0.1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#0F172A;fontSize=14;align=left;verticalAlign=top;fontSize=20;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="10" width="900" height="30" as="geometry"/></mxCell>
+        <mxCell id="2" value="LANDING COLUS — WIREFRAME ESTRUTURAL V0.2" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#0F172A;fontSize=14;align=left;verticalAlign=top;fontSize=20;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="40" y="10" width="900" height="30" as="geometry"/></mxCell>
         <mxCell id="3" value="Desktop" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#0F172A;fontSize=14;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;" vertex="1" parent="1"><mxGeometry x="40" y="42" width="200" height="24" as="geometry"/></mxCell>
         <mxCell id="4" value="Mobile" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#0F172A;fontSize=14;align=left;verticalAlign=top;fontSize=12;fontColor=#64748B;" vertex="1" parent="1"><mxGeometry x="1020" y="42" width="200" height="24" as="geometry"/></mxCell>
         <mxCell id="5" value="REGRA GLOBAL: landing pública sem Portal, Login, Área do Aluno ou acesso interno." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#F18136;fillColor=#FFF7ED;fontColor=#9A3412;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="40" y="72" width="1340" height="50" as="geometry"/></mxCell>
@@ -38,6 +38,17 @@
         <mxCell id="32" value="NOTAS DE INTERAÇÃO&#xa;• vídeo sem áudio automático&#xa;• prefers-reduced-motion&#xa;• lazy loading&#xa;• galeria não-genérica&#xa;• motion subtil&#xa;• CTA público apenas&#xa;• portal totalmente separado" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0C5898;fillColor=#EFF6FF;fontColor=#0F172A;fontSize=13;align=left;verticalAlign=middle;spacingLeft=18;" vertex="1" parent="1"><mxGeometry x="1440" y="140" width="380" height="280" as="geometry"/></mxCell>
         <mxCell id="33" value="PALETA PROVISÓRIA&#xa;Orange observado: #F18136&#xa;Deep Blue observado: #0C5898&#xa;Bright Blue observado: #2899EF&#xa;&#xa;Valores extraídos de screenshot; confirmar com assets oficiais." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#F18136;fillColor=#FFF7ED;fontColor=#0F172A;fontSize=13;align=left;verticalAlign=middle;spacingLeft=18;" vertex="1" parent="1"><mxGeometry x="1440" y="440" width="380" height="210" as="geometry"/></mxCell>
         <mxCell id="34" value="PRÓXIMO PASSO&#xa;Usar este wireframe para crítica estrutural.&#xa;Depois criar versão V0.2 com proporções finais, media escolhida e copy aprovada.&#xa;&#xa;Ainda NÃO é design final nem código." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#64748B;fillColor=#F8FAFC;fontColor=#0F172A;fontSize=13;align=left;verticalAlign=middle;spacingLeft=18;" vertex="1" parent="1"><mxGeometry x="1440" y="680" width="380" height="220" as="geometry"/></mxCell>
+
+        <mxCell id="brand-note-1" value="BRAND DEVICE MAP&#xa;&#xa;HERO → Light Device + radial muito subtil&#xa;MANIFESTO → Open Book curve&#xa;DESCOBRIR → quase sem device&#xa;CRIAR → radial dots pontuais&#xa;FUTURO &amp; TECNOLOGIA → Light/Radial com maior intensidade&#xa;VIDA COLUS → media lidera, branding mínimo&#xa;PERTENCER → Open Book curve suave&#xa;TRANSFORMAR → radial/expansão&#xa;DEPOIMENTOS → marca baixa&#xa;CONVITE → mark + brand orange&#xa;FOOTER → logo principal ou mark" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#0C5898;fillColor=#EFF6FF;fontColor=#0F172A;fontSize=13;align=left;verticalAlign=middle;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="940" width="380" height="420" as="geometry"/>
+        </mxCell>
+        <mxCell id="brand-note-2" value="INTENSIDADE DE MARCA&#xa;&#xa;ALTA → Hero / Futuro &amp; Tecnologia / Closing CTA&#xa;MÉDIA → Manifesto / Criar / Transformar&#xa;BAIXA → Descobrir / Vida COLUS / Depoimentos / Contactos&#xa;&#xa;Regra: fotografia e conteúdo lideram; devices apoiam." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#F18136;fillColor=#FFF7ED;fontColor=#0F172A;fontSize=13;align=left;verticalAlign=middle;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="1390" width="380" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="brand-note-3" value="MARCA DIGITAL&#xa;&#xa;N1 Logo principal → formal / footer&#xa;N2 Mark → header compacto / mobile / splash&#xa;N3 Devices → livro / luz / radiais / pontos&#xa;N4 Motion → abrir / irradiar / revelar / conectar&#xa;&#xa;Não repetir o logo completo como decoração." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#64748B;fillColor=#F8FAFC;fontColor=#0F172A;fontSize=13;align=left;verticalAlign=middle;spacingLeft=18;" vertex="1" parent="1">
+          <mxGeometry x="1440" y="1680" width="380" height="300" as="geometry"/>
+        </mxCell>
+
       </root>
     </mxGraphModel>
   </diagram>
