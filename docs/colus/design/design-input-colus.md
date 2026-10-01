@@ -336,3 +336,31 @@ Referências:
 - `landing/hero-direction-colus.md`
 
 Este ponto deixa de estar em exploração e pode avançar para high-fidelity.
+
+
+---
+
+# 17. High-Fidelity iniciado
+
+A landing entrou em high-fidelity visual.
+
+Artefactos atuais:
+
+- `landing/high-fidelity-direction-colus.md`
+- `landing/landing-colus-hifi.drawio`
+
+Decisões de trabalho atuais:
+
+- Warm Paper `#FFF8EF`;
+- Deep Ink `#071A2A`;
+- Orange observado `#F18136`;
+- Deep Blue observado `#0C5898`;
+- Bright Blue observado `#2899EF`;
+- Manrope para interface/body;
+- Newsreader para momentos editoriais;
+- Hero final assimétrico;
+- Book Aperture como memória geométrica do símbolo;
+- mobile tratado como composição própria;
+- Manifesto como desaceleração visual após o morph.
+
+Estas decisões ainda são high-fidelity V0.1 e podem ser refinadas sem alterar a coreografia morph já aprovada.
