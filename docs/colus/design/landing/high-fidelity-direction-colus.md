@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.2 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.3 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1003,3 +1003,135 @@ Depois desta V0.2, o próximo trabalho visual é:
 > **APRENDER EM MOVIMENTO — Descobrir + Criar**
 
 Essa secção deverá herdar apenas parte do sistema gráfico e introduzir a primeira grande narrativa de conteúdo depois do Manifesto.
+
+
+---
+
+# 34. Aprender em Movimento — direção integrada
+
+A primeira grande narrativa depois do Manifesto passa a ser:
+
+> **APRENDER EM MOVIMENTO**
+
+com dois momentos:
+
+- **01 / Descobrir**
+- **02 / Criar**
+
+A direção detalhada está em:
+
+> `aprender-em-movimento-colus.md`
+
+## Conceito principal
+
+> **Learning Trail**
+
+Um eixo vivo nasce do node laranja residual do Manifesto e conduz toda a secção.
+
+Ele não funciona como timeline corporativa.
+
+Funciona como:
+
+- trajetória;
+- conexão;
+- progressão;
+- assinatura visual;
+- ponte entre media e conteúdo.
+
+---
+
+# 35. Desktop — comportamento
+
+A secção usa um stage sticky aproximado de 190–230vh.
+
+O viewport mantém:
+
+- narrativa à esquerda;
+- media stage à direita;
+- Trail a atravessar a composição.
+
+### Descobrir
+
+Atmosfera:
+- clara;
+- humana;
+- observacional;
+- Brand Blue discreto.
+
+Media:
+- começa como uma imagem dominante;
+- abre espaço para um detalhe;
+- reorganiza-se sem virar galeria.
+
+### Criar
+
+A energia cresce.
+
+Media:
+- layered composition;
+- uma peça principal;
+- duas peças secundárias no máximo;
+- labels contextuais pontuais.
+
+O Trail muda de Blue para Orange na passagem.
+
+---
+
+# 36. Mobile — comportamento
+
+No mobile, não usar o sticky longo do desktop.
+
+A narrativa passa a ser vertical.
+
+O Trail vira uma linha simples que acompanha:
+
+> 01 Descobrir → media → detalhe → 02 Criar → media → copy
+
+O objetivo é preservar identidade e continuidade sem transformar o scroll mobile num demo técnico.
+
+---
+
+# 37. Relação com os brand devices
+
+Nesta secção:
+
+- **Axis / Trail** → principal;
+- **Radial Nodes** → pontuais;
+- **Open Book** → memória discreta em masks/crops;
+- **Light Device** → praticamente ausente.
+
+Isto reduz repetição da abertura.
+
+---
+
+# 38. Saída para Futuro & Tecnologia
+
+A secção Criar termina com:
+
+- Orange mais presente;
+- Bright Blue pontual;
+- Trail mais energético.
+
+No fim, o Trail alarga-se e entra no próximo plano Deep Blue.
+
+A passagem deve parecer:
+
+> **energia que cresce até entrar no futuro.**
+
+Não uma troca seca de secção.
+
+---
+
+# 39. Gate V0.3
+
+O high-fidelity já cobre:
+
+- Intro Morph;
+- Hero Assembly;
+- Hero → Manifesto;
+- Manifesto;
+- Aprender em Movimento.
+
+Próximo foco:
+
+> **FUTURO & TECNOLOGIA — secção assinatura.**
