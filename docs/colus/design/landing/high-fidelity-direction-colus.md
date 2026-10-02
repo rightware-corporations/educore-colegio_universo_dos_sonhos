@@ -29,41 +29,21 @@ A abertura deve carregar a maior intensidade visual. Depois, a landing desaceler
 
 # Ficheiro canónico de design
 
-A landing passa a ter **um único ficheiro Draw.io ativo**:
+A landing tem um único artefacto visual ativo:
 
 > `landing-colus-master.drawio`
 
-Este ficheiro contém várias páginas internas e deve concentrar toda a experiência:
+E esse ficheiro usa **um único canvas contínuo**.
 
-- índice/fluxo completo;
-- abertura morph aprovada;
-- high-fidelity;
-- Hero;
-- Manifesto;
-- Aprender em Movimento;
-- Futuro & Tecnologia;
-- Vida COLUS;
-- Pertencer;
-- Transformar;
-- Depoimentos;
-- Convite;
-- Footer.
+Não existe mais uma página/tab separada por secção como estrutura principal de trabalho.
 
-## Regra
+A sequência visual fica fisicamente montada no mesmo canvas:
 
-Não criar novos ficheiros `.drawio` ativos para partes isoladas da landing.
+> Abertura → Hero → Manifesto → Aprender em Movimento → Futuro & Tecnologia → Vida COLUS → restantes blocos.
 
-Quando uma nova secção for desenhada:
+O objetivo é poder abrir um único ficheiro e acompanhar a experiência completa sem trocar de tabs ou de ficheiros.
 
-> **adicionar uma nova página ou atualizar uma página dentro de `landing-colus-master.drawio`.**
-
-Os antigos `intro-morph-colus.drawio` e `landing-colus-hifi.drawio` foram movidos para `archive/` apenas como histórico.
-
-A abertura aprovada permanece preservada integralmente dentro da página:
-
-> **01 — Abertura Morph V0.3 (APROVADO)**
-
-do master.
+Os ficheiros multipage e versões isoladas anteriores permanecem apenas em `archive/`.
 
 ---
 
@@ -1251,7 +1231,7 @@ O Signal Field reduz intensidade e dissolve-se em media humano para preparar:
 Direção detalhada:
 
 - `futuro-tecnologia-colus.md`
-- `landing-colus-master.drawio` — página **04 — Futuro & Tecnologia V0.1**
+- `landing-colus-master.drawio` — bloco **Futuro & Tecnologia** no canvas contínuo
 
 ---
 
@@ -1363,7 +1343,7 @@ O último frame humano cresce e conduz para:
 Direção detalhada:
 
 - `vida-colus.md`
-- `landing-colus-master.drawio` — página **05 — Vida COLUS V0.1**
+- `landing-colus-master.drawio` — bloco **Vida COLUS** no canvas contínuo
 
 ---
 
