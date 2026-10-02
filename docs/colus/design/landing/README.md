@@ -54,7 +54,7 @@ A pasta `archive/` conserva versões históricas e backups. Não é fonte de ver
 
 A narrativa pública está completa em design, do Intro Morph ao Footer.
 
-O master já passou pela revisão/consolidação global. A implementação continua bloqueada até fechar **Asset Plan** e **Motion Spec técnico**.
+O master já passou pela revisão/consolidação global. **Asset Plan** e **Motion Spec técnico** estão fechados.
 
 
 ## Fonte de verdade após consolidação
@@ -68,8 +68,21 @@ Ordem:
 
 Estado atual:
 
-> **MASTER HIGH-FIDELITY V0.18 — DESENHADO + CONSOLIDADO**
+> **HIGH-FIDELITY V0.21 — LANDING IMPLEMENTATION READY**
 
 Próximo passo:
 
-> **ASSET PLAN**
+> **FRONTEND IMPLEMENTATION PLAN**
+
+
+## Motion Spec
+
+Referência técnica final:
+
+- `motion-spec-tecnico-colus.md`
+
+Estado do gate:
+
+> **LANDING IMPLEMENTATION READY**
+
+OPEN-01 — idioma do Footer permanece editorial e não bloqueia a implementação estrutural.
