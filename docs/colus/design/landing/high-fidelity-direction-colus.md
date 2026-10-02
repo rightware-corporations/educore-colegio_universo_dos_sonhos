@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.16 — CONSOLIDAÇÃO GLOBAL  
+> **Estado:** HIGH-FIDELITY V0.17 — CONSOLIDAÇÃO GLOBAL  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -2209,3 +2209,112 @@ Todos os itens P0 da auditoria global estão agora resolvidos.
 Próximo passo:
 
 > **TYPOGRAPHY + GRID RESPONSIVE SYSTEM**
+
+
+---
+
+# 64. Typography + Grid Responsive System
+
+Foi fechado o sistema tipográfico e responsivo da landing.
+
+## Tipografia
+
+### Manrope
+Função:
+
+> **estrutura, precisão e interface**
+
+Usado em:
+
+- Hero;
+- headings tecnológicos;
+- navegação;
+- CTA;
+- labels;
+- body funcional;
+- Footer.
+
+Pesos:
+
+- 400;
+- 500;
+- 600;
+- 700.
+
+### Newsreader
+Função:
+
+> **humanidade, manifesto e voz editorial**
+
+Usado seletivamente em:
+
+- Manifesto;
+- Pertencer;
+- Depoimentos;
+- Convite Final.
+
+Não usar em Header, CTA, labels, progress ou Footer navigation.
+
+## Escalas principais
+
+- Display XL → Hero
+- Display L → signature sections
+- Display M → editorial sections
+- H2 / H3
+- Body L / Body / Small / Caption / Label
+
+Displays usam `clamp()` para evitar múltiplas media queries.
+
+## Grid
+
+### Desktop ≥1280
+- 12 colunas;
+- max-width 1440px;
+- gutters 64–80px.
+
+### Desktop 1024–1279
+- 12 colunas;
+- gutters 40–48px.
+
+### Tablet 768–1023
+- 8 colunas;
+- gutter 32px.
+
+### Mobile <768
+- 4 colunas;
+- gutter 20–24px;
+- gap 16px.
+
+## Responsive behavior
+
+Mobile não é desktop comprimido.
+
+No mobile:
+
+- sem long pinning;
+- nodes reduzidos em ~40–50%;
+- máximo dois media simultâneos;
+- crops próprios;
+- CTA 52–56px;
+- safe areas respeitadas.
+
+## Full-bleed
+
+Hero media, Futuro stage, Vida media, Transformar background e Footer podem escapar do container.
+
+A copy e controlos continuam alinhados ao grid.
+
+Direção detalhada:
+
+- `typography-grid-responsive-colus.md`
+- `landing-colus-master.drawio` — painel **Typography + Grid Responsive V0.1**
+
+---
+
+# 65. Gate V0.17
+
+Typography + Grid Responsive System consolidado.
+
+Próximo passo:
+
+> **MASTER HIGH-FIDELITY CONSOLIDATION PASS**
