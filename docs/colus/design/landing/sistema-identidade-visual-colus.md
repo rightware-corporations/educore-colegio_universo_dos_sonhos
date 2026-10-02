@@ -129,31 +129,54 @@ forma central.
 
 ---
 
-## 4.3 Radial Dot System
+## 4.3 Community Ring / Radial Node System
 
 Origem:
-pontos/raios que circundam o símbolo.
+o anel superior do símbolo, formado por **figuras humanas estilizadas ligadas em círculo**, com cabeças/nodes separados.
+
+Não deve ser lido apenas como “raios solares”.
+
+A leitura principal é:
+
+> **comunidade + ligação + energia partilhada.**
 
 ### Pode inspirar
 
-- partículas organizadas;
-- orbitais;
+#### Community Ring
+- arcos relacionais;
+- composição entre pessoas/media;
+- secções de família/comunidade;
+- grupos incompletos em torno de um centro;
+- transições de pertença.
+
+#### Radial Nodes
 - progress indicators;
 - section markers;
+- context markers;
 - bullet system;
-- decoration around media;
 - motion paths;
+- pequenos pontos de ativação;
 - data visualization accents.
 
 ### Conceito
 
-> **Conhecimento que irradia.**
+> **Conhecimento que une e irradia.**
 
-### Cuidado
+### Regra
 
-Nunca transformar a página num padrão de bolinhas.
+O **Community Ring** é o device humano.
 
-Usar em momentos específicos.
+Os **Radial Nodes** são a abstração funcional secundária.
+
+Não transformar a página num padrão de bolinhas e não usar orbitais de ficção científica.
+
+### Aplicação principal atual
+
+Na landing:
+
+> **PERTENCER → Community Ring**
+
+onde o anel de pessoas é reinterpretado como relação entre escola, alunos e famílias.
 
 ---
 
@@ -205,6 +228,9 @@ halo subtil cresce atrás da headline/media.
 
 #### Hover
 pequeno deslocamento radial/expansão, não bounce.
+
+#### Pertencer
+Story Marker → arco → Community Ring → eixo aberto para Transformar.
 
 ---
 
