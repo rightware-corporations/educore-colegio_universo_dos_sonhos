@@ -875,3 +875,34 @@ Referências:
 Próximo foco:
 
 > **COPY STATUS — LOCKED / WORKING / PLACEHOLDER**
+
+
+---
+
+# 32. Consolidação — Copy Status V0.1
+
+Toda a copy foi classificada como:
+
+- **LOCKED**
+- **WORKING**
+- **PLACEHOLDER**
+- **INTERNAL ONLY**
+
+Pontos principais:
+
+- slogan Hero fica LOCKED;
+- creative copy permanece WORKING;
+- testemunhos e contactos continuam PLACEHOLDER;
+- nomes técnicos dos devices são INTERNAL ONLY;
+- estrutura/footer branding fica LOCKED;
+- idioma dos labels do Footer ainda é decisão pendente.
+
+Referências:
+
+- `landing/copy-status-colus.md`
+- `landing/landing-colus-master.drawio` — painel Copy Status
+- `landing/high-fidelity-direction-colus.md` — V0.15
+
+Próximo foco:
+
+> **CONTACTOS + CTA DESTINATIONS**
