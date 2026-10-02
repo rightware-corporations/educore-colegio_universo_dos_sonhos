@@ -784,3 +784,52 @@ Referências:
 Próximo foco:
 
 > **HEADER + ANCHORS GLOBAL SYSTEM**
+
+
+---
+
+# 30. Consolidação — Header + Anchors V0.1
+
+Foi fechado o sistema global de Header e navegação pública.
+
+Anchors:
+
+- O Colégio → Manifesto;
+- Experiência → Aprender em Movimento;
+- Futuro → Futuro & Tecnologia;
+- Comunidade → Pertencer;
+- Contactos → Convite Final;
+- Marcar uma visita → Contactos.
+
+Estados:
+
+- Intro: hidden;
+- Hero: transparent/dark;
+- secções claras: Light Sticky;
+- secções escuras: Dark Sticky;
+- Footer: Header recolhe.
+
+Mobile:
+
+- mark + menu;
+- 5 anchors + CTA;
+- sem Portal/Login.
+
+Implementação prevista:
+
+- anchors reais;
+- IntersectionObserver;
+- scroll-margin-top;
+- section theme explícito;
+- reduced motion;
+- focus/keyboard completos.
+
+Referências:
+
+- `landing/header-anchors-colus.md`
+- `landing/landing-colus-master.drawio` — painel Header + Anchors
+- `landing/high-fidelity-direction-colus.md` — V0.13
+
+Próximo foco:
+
+> **SCROLL BUDGET GLOBAL**
