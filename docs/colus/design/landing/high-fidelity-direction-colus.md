@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.5 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.6 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1268,3 +1268,116 @@ O high-fidelity cobre agora:
 Próximo foco:
 
 > **VIDA COLUS — experiência editorial / fotoensaio vivo**
+
+
+---
+
+# 42. Vida COLUS — direção integrada
+
+Depois de Futuro & Tecnologia, a intensidade tecnológica baixa e a fotografia volta a dominar.
+
+Conceito:
+
+> **LIVING REEL**
+
+A secção deixa de funcionar como stage tecnológico e passa a ser um **fotoensaio vivo**.
+
+## Estrutura
+
+Três atos:
+
+- **Imersão**
+- **Ritmo**
+- **Presença**
+
+### Imersão
+Um media grande domina 70–85% do viewport.
+
+Objetivo:
+
+> entrar na escola, não observá-la de fora.
+
+### Ritmo
+A composição abre para:
+
+- 1 frame principal;
+- 1 secundário;
+- 1 detalhe.
+
+Sem masonry e sem grelha simétrica.
+
+### Presença
+O movimento desacelera e uma fotografia humana forte assume protagonismo.
+
+Essa imagem prepara emocionalmente a próxima secção:
+
+> **PERTENCER**
+
+## Story Markers
+
+Os nodes residuais do Signal Field tornam-se pequenos Story Markers:
+
+- dot laranja;
+- linha curta;
+- label de 2–5 palavras.
+
+Exemplos:
+
+- Em movimento
+- Fora da sala
+- Expressão
+- Descoberta
+
+Sem introduzir datas, locais ou programas específicos não confirmados.
+
+## Brand intensity
+
+Nesta secção:
+
+- Orange → markers;
+- Blue → pontual;
+- Book → memória discreta;
+- Light Device → ausente;
+- mark/logo → não repetir.
+
+A fotografia é a identidade principal.
+
+## Mobile
+
+No mobile:
+
+- media full-width;
+- caption;
+- media vertical;
+- detalhe;
+- media humano de saída.
+
+Sem masonry e sem horizontal scroll obrigatório.
+
+## Saída
+
+O último frame humano cresce e conduz para:
+
+> **Crescer é uma jornada partilhada.**
+
+Direção detalhada:
+
+- `vida-colus.md`
+- `landing-colus-master.drawio` — página **04 — Vida COLUS V0.1**
+
+---
+
+# 43. Gate V0.6
+
+O high-fidelity cobre agora:
+
+- Intro Morph;
+- Hero Assembly;
+- Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia;
+- Vida COLUS.
+
+Próximo foco:
+
+> **PERTENCER — Família & Comunidade**
