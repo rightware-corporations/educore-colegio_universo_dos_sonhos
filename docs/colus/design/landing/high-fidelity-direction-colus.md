@@ -27,54 +27,45 @@ A abertura deve carregar a maior intensidade visual. Depois, a landing desaceler
 
 ---
 
-# Hierarquia visual dos artefactos
+# Ficheiro canónico de design
 
-Existe uma distinção importante entre os dois ficheiros principais de design.
+A landing passa a ter **um único ficheiro Draw.io ativo**:
 
-## Fonte de verdade da abertura
+> `landing-colus-master.drawio`
 
-> `intro-morph-colus.drawio` — **V0.3 APROVADO**
+Este ficheiro contém várias páginas internas e deve concentrar toda a experiência:
 
-Este ficheiro define a abertura real:
-
-- proporção e presença do mark;
-- decomposição do símbolo;
-- abertura do livro;
-- Book Aperture;
-- Light Device;
-- radials/nodes;
-- comportamento desktop;
-- comportamento mobile;
-- coreografia de scroll.
-
-**Nenhum visual posterior deve simplificar ou substituir esta abertura sem uma revisão explícita.**
-
-## Função do board high-fidelity
-
-> `landing-colus-hifi.drawio`
-
-Este ficheiro existe para:
-
-- tokens;
-- tipografia;
-- cor;
-- componentes;
-- Hero já montado;
+- índice/fluxo completo;
+- abertura morph aprovada;
+- high-fidelity;
+- Hero;
 - Manifesto;
 - Aprender em Movimento;
-- secções seguintes;
-- visão integrada da landing.
+- Futuro & Tecnologia;
+- Vida COLUS;
+- Pertencer;
+- Transformar;
+- Depoimentos;
+- Convite;
+- Footer.
 
-Os primeiros estados que aparecem neste board são **referências esquemáticas**, não uma segunda proposta para o morph.
+## Regra
 
-### Regra
+Não criar novos ficheiros `.drawio` ativos para partes isoladas da landing.
 
-Se houver divergência visual entre os dois ficheiros:
+Quando uma nova secção for desenhada:
 
-> **o `intro-morph-colus.drawio` prevalece para a abertura.**
+> **adicionar uma nova página ou atualizar uma página dentro de `landing-colus-master.drawio`.**
 
-O board high-fidelity deve herdar essa solução e continuar a experiência a partir dela.
+Os antigos `intro-morph-colus.drawio` e `landing-colus-hifi.drawio` foram movidos para `archive/` apenas como histórico.
 
+A abertura aprovada permanece preservada integralmente dentro da página:
+
+> **01 — Abertura Morph V0.3 (APROVADO)**
+
+do master.
+
+---
 
 # 2. Paleta de trabalho
 
