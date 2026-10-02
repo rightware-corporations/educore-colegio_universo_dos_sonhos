@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.11 — LANDING PÚBLICA FECHADA EM DESIGN  
+> **Estado:** HIGH-FIDELITY V0.12 — CONSOLIDAÇÃO GLOBAL  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1810,3 +1810,83 @@ Na landing COLUS, a linha legal final é:
 Além disso, os **logos EduCore e RIGHTWARE permanecem obrigatórios no Footer**.
 
 A marca COLUS não substitui a assinatura de produto da RIGHTWARE.
+
+
+---
+
+# 54. Motion Hierarchy global
+
+Foi fechada a hierarquia de motion da landing.
+
+Direção:
+
+> **2 signature moments + 3 narrative blocks + 4 subtle blocks + Footer static.**
+
+## Signature
+
+- Intro Morph;
+- Futuro & Tecnologia.
+
+## Narrative
+
+- Hero → Manifesto;
+- Aprender em Movimento;
+- Transformar.
+
+## Subtle
+
+- Vida COLUS;
+- Pertencer;
+- Depoimentos;
+- Convite Final.
+
+## Static / Utility
+
+- Footer.
+
+## Primitives globais
+
+A implementação deve reduzir os vários devices conceptuais a:
+
+- **Path**
+- **Node**
+- **Mask**
+- **Light / Halo**
+- **Media Window**
+
+O objetivo é que Learning Trail, Signal Field, Community Ring, Rise Axis e Horizon pareçam evoluções do mesmo sistema — não efeitos independentes.
+
+## Regra de simultaneidade
+
+Por viewport:
+
+> **1 movimento dominante + 1 secundário + 1 micro-interação.**
+
+## Handoffs
+
+Cada secção entrega um elemento à seguinte:
+
+> Book/Light → Hero → Book curve/media → Node → Learning Trail → Signal Field → Story Marker → Community Ring → Rise Axis → Horizon Node → Halo → Footer estático.
+
+## Mobile
+
+A intensidade de motion deve cair para aproximadamente 50–60% do desktop, preservando narrativa e eliminando pinning longo.
+
+## Reduced motion
+
+A experiência continua integral com states finais, sem morph longo, sem parallax e sem dependência da animação.
+
+Direção detalhada:
+
+- `motion-hierarchy-colus.md`
+- `landing-colus-master.drawio` — painel **Motion Hierarchy — Consolidação Global V0.1**
+
+---
+
+# 55. Gate V0.12
+
+Motion Hierarchy global consolidada.
+
+Próximo passo:
+
+> **HEADER + ANCHORS GLOBAL SYSTEM**
