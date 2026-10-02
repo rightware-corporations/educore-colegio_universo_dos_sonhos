@@ -491,7 +491,7 @@ Decisões:
 Referências:
 
 - `landing/futuro-tecnologia-colus.md`
-- `landing/landing-colus-master.drawio` — página 05
+- `landing/landing-colus-master.drawio` — página 04
 - `landing/high-fidelity-direction-colus.md` — V0.5
 
 Próximo foco:
