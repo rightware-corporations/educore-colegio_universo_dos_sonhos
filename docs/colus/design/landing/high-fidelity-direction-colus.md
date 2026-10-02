@@ -1251,7 +1251,7 @@ O Signal Field reduz intensidade e dissolve-se em media humano para preparar:
 Direção detalhada:
 
 - `futuro-tecnologia-colus.md`
-- `landing-colus-master.drawio` — página **03 — Futuro & Tecnologia V0.1**
+- `landing-colus-master.drawio` — página **04 — Futuro & Tecnologia V0.1**
 
 ---
 
@@ -1363,7 +1363,7 @@ O último frame humano cresce e conduz para:
 Direção detalhada:
 
 - `vida-colus.md`
-- `landing-colus-master.drawio` — página **04 — Vida COLUS V0.1**
+- `landing-colus-master.drawio` — página **05 — Vida COLUS V0.1**
 
 ---
 
