@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.12 — CONSOLIDAÇÃO GLOBAL  
+> **Estado:** HIGH-FIDELITY V0.13 — CONSOLIDAÇÃO GLOBAL  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1890,3 +1890,82 @@ Motion Hierarchy global consolidada.
 Próximo passo:
 
 > **HEADER + ANCHORS GLOBAL SYSTEM**
+
+
+---
+
+# 56. Header + Anchors global system
+
+Foi fechado o comportamento global do Header público.
+
+## Navegação
+
+- **O Colégio** → `#o-colegio` → Manifesto
+- **Experiência** → `#experiencia` → Aprender em Movimento
+- **Futuro** → `#futuro` → Futuro & Tecnologia
+- **Comunidade** → `#comunidade` → Pertencer
+- **Contactos** → `#contactos` → Convite Final
+- **Marcar uma visita** → `#contactos`
+
+Vida COLUS, Transformar e Depoimentos continuam narrativos e não aumentam a densidade da navegação.
+
+## Estados do Header
+
+> **H0 Intro hidden → H1 Assembly → H2 Hero transparent/dark → H3 Light Sticky → H4 Dark Sticky → H5 Footer Exit**
+
+O Header nasce do próprio Intro Morph.
+
+Não existe Header completo sobre o Splash inicial.
+
+## Theme switching
+
+Cada secção declara explicitamente:
+
+- hidden;
+- transparent;
+- light;
+- dark.
+
+O Header não tenta inferir contraste a partir dos pixels do media.
+
+## Auto-hide
+
+Depois do Hero:
+
+- scroll down → recolhe;
+- scroll up → regressa;
+- permanece visível com foco, menu aberto ou interação com CTA.
+
+## Mobile
+
+- mark + menu;
+- altura 60–64px;
+- overlay/sheet simples;
+- cinco anchors;
+- CTA;
+- sem Portal/Login.
+
+## Implementação
+
+- anchors reais/deep-linkáveis;
+- `scroll-margin-top`;
+- IntersectionObserver;
+- focus visible;
+- `aria-current='location'`;
+- reduced motion;
+- Header desaparece antes do Footer.
+
+Direção detalhada:
+
+- `header-anchors-colus.md`
+- `landing-colus-master.drawio` — painel **Header + Anchors — Global System V0.1**
+
+---
+
+# 57. Gate V0.13
+
+Header + Anchors global consolidado.
+
+Próximo passo:
+
+> **SCROLL BUDGET GLOBAL**
