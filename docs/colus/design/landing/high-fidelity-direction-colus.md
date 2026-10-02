@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.14 — CONSOLIDAÇÃO GLOBAL  
+> **Estado:** HIGH-FIDELITY V0.15 — CONSOLIDAÇÃO GLOBAL  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -2053,3 +2053,89 @@ Scroll Budget global consolidado.
 Próximo passo:
 
 > **COPY STATUS — LOCKED / WORKING / PLACEHOLDER**
+
+
+---
+
+# 60. Copy Status global
+
+Foi classificada toda a copy da landing em três estados:
+
+- **LOCKED**
+- **WORKING**
+- **PLACEHOLDER**
+
+Também foi separado um quarto estado técnico:
+
+- **INTERNAL ONLY**
+
+para nomes de devices/conceitos que nunca devem aparecer na landing pública.
+
+## LOCKED
+
+Inclui:
+
+- COLÉGIO UNIVERSO DOS SONHOS;
+- Juntos Tornamos Sonhos Em Realidade;
+- navegação principal;
+- labels estruturais principais;
+- TIC / Engenharia / Ciência / Segurança Digital;
+- VOZES COLUS;
+- copyright COLUS;
+- Powered by EduCore · A RIGHTWARE Product;
+- estrutura de marca do Footer.
+
+## WORKING
+
+Inclui:
+
+- supporting copy do Hero;
+- Manifesto;
+- Descobrir / Criar;
+- Futuro;
+- Vida COLUS;
+- Pertencer;
+- Transformar;
+- Convite Final;
+- labels de CTA enquanto o destino operacional não estiver validado;
+- língua dos labels globais do Footer.
+
+## PLACEHOLDER
+
+Inclui:
+
+- testemunhos;
+- identificação de testemunhos;
+- contactos finais;
+- destinos reais dos CTAs;
+- contexto específico de media;
+- métricas/claims/programas/infraestruturas não confirmados.
+
+## Internal only
+
+Nomes como:
+
+- Learning Trail;
+- Signal Field;
+- Community Ring;
+- Rise Field;
+- Voice in Focus;
+- Return to Light;
+- Scene Window.
+
+Nunca devem ser renderizados como copy pública.
+
+Direção detalhada:
+
+- `copy-status-colus.md`
+- `landing-colus-master.drawio` — painel **Copy Status V0.1**
+
+---
+
+# 61. Gate V0.15
+
+Copy Status consolidado.
+
+Próximo passo:
+
+> **CONTACTOS + CTA DESTINATIONS**
