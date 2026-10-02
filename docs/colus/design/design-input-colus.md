@@ -400,3 +400,39 @@ Referências:
 Próximo foco:
 
 > **APRENDER EM MOVIMENTO — Descobrir + Criar**
+
+
+---
+
+# 19. High-Fidelity V0.3 — Aprender em Movimento
+
+Foi definida a primeira grande narrativa de conteúdo depois do Manifesto:
+
+> **APRENDER EM MOVIMENTO**
+
+Estrutura:
+
+- **01 / Descobrir**
+- **02 / Criar**
+
+Direção principal:
+
+- Learning Trail nasce do node residual do Manifesto;
+- desktop usa sticky editorial media stage;
+- Descobrir começa com uma imagem dominante;
+- transição Blue → Orange conduz à fase Criar;
+- Criar usa layered media composition, sem cards iguais;
+- brand intensity média;
+- Light Device praticamente ausente;
+- mobile usa narrativa vertical, sem sticky longo;
+- saída expande o Trail para preparar Futuro & Tecnologia.
+
+Referências:
+
+- `landing/aprender-em-movimento-colus.md`
+- `landing/high-fidelity-direction-colus.md` — V0.3
+- `landing/landing-colus-hifi.drawio` — V0.3
+
+Próximo foco:
+
+> **FUTURO & TECNOLOGIA — secção assinatura**
