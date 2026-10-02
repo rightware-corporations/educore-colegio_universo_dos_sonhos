@@ -746,3 +746,41 @@ Elementos de marca obrigatórios no Footer:
 - relação explícita **A RIGHTWARE Product**.
 
 A marca institucional COLUS é titular do copyright do site, enquanto EduCore/RIGHTWARE permanecem visíveis como assinatura da plataforma/produto.
+
+
+---
+
+# 29. Consolidação — Motion Hierarchy V0.1
+
+Foi consolidado o sistema global de motion da landing.
+
+Hierarquia:
+
+- **Signature:** Intro Morph; Futuro & Tecnologia.
+- **Narrative:** Hero → Manifesto; Aprender em Movimento; Transformar.
+- **Subtle:** Vida COLUS; Pertencer; Depoimentos; Convite Final.
+- **Static / Utility:** Footer.
+
+Primitives globais:
+
+- Path;
+- Node;
+- Mask;
+- Light / Halo;
+- Media Window.
+
+Regra:
+
+> **1 movimento dominante + 1 secundário + 1 micro-interação por viewport.**
+
+Mobile reduz a intensidade para aproximadamente 50–60% do desktop.
+
+Referências:
+
+- `landing/motion-hierarchy-colus.md`
+- `landing/landing-colus-master.drawio` — painel Motion Hierarchy
+- `landing/high-fidelity-direction-colus.md` — V0.12
+
+Próximo foco:
+
+> **HEADER + ANCHORS GLOBAL SYSTEM**
