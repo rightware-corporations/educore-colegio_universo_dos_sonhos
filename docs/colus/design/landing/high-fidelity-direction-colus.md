@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.20 — MASTER CONSOLIDADO / ASSET GATE FECHADO  
+> **Estado:** HIGH-FIDELITY V0.21 — LANDING IMPLEMENTATION READY  
 > **Atualizado:** 2026-10-02  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -2487,3 +2487,121 @@ Para produção pública, media com pessoas continua sujeito a autorização e s
 Próximo passo:
 
 > **MOTION SPEC TÉCNICO**
+
+
+---
+
+# 70. Motion Spec Técnico V1.0
+
+O Motion Spec técnico foi fechado.
+
+Stack alvo:
+
+- React;
+- TypeScript;
+- Framer Motion;
+- SVG;
+- CSS;
+- IntersectionObserver.
+
+Princípios:
+
+- native scroll;
+- sem scroll-jacking;
+- sem snap obrigatório;
+- transforms/opacity como base;
+- SVG para Path/Node/Mark;
+- um sistema global de motion, não uma engine por secção.
+
+## Ranges principais
+
+### Intro
+- 200vh;
+- silence → book open → light rise → aperture → radial separation → hero assembly.
+
+### Hero → Manifesto
+- 170vh;
+- hero estável → crop shift → Book curve → Warm Paper → manifesto.
+
+### Aprender
+- 185vh;
+- Descobrir → handoff → Criar → Signal Field.
+
+### Futuro
+- 230vh;
+- TIC → Engenharia device-led → Ciência → Segurança Digital → exit.
+
+### Vida
+- 155vh;
+- mostly natural / media-led.
+
+### Pertencer
+- 130vh;
+- Community Ring → media → ring opens → Rise Axis.
+
+### Transformar
+- 165vh;
+- Expressar → Construir → Avançar → Horizon.
+
+### Depoimentos
+- natural;
+- IntersectionObserver / quote reveal.
+
+### Convite
+- 95vh;
+- Horizon Node → Halo → mark → headline → CTA/contactos.
+
+### Footer
+- static / utility.
+
+## Mobile
+
+- 50–60% da intensidade desktop;
+- sem long pinning;
+- scenes empilhadas;
+- paths simplificados;
+- máximo dois media simultâneos.
+
+## Reduced Motion
+
+- Hero final direto;
+- poster sem autoplay;
+- paths no state final;
+- sem parallax;
+- scroll lengths reduzidos;
+- nenhuma informação perdida.
+
+## Performance
+
+- máximo um vídeo grande ativo;
+- poster obrigatório;
+- lazy media;
+- pausar vídeo fora do viewport;
+- sem listeners de scroll independentes por secção.
+
+Referência:
+
+- `motion-spec-tecnico-colus.md`
+- `landing-colus-master.drawio` — painel **Motion Spec Técnico V1.0**
+
+---
+
+# 71. Gate V0.21
+
+Asset Gate:
+
+> **CLOSED**
+
+Motion Spec:
+
+> **CLOSED**
+
+Estado:
+
+> **LANDING IMPLEMENTATION READY**
+
+OPEN-01 — idioma do Footer permanece uma decisão editorial não-bloqueante.
+
+Próximo passo:
+
+> **FRONTEND IMPLEMENTATION PLAN → depois código React/TSX**
