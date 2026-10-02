@@ -1074,3 +1074,38 @@ Estado:
 Próximo gate:
 
 > **MOTION SPEC TÉCNICO**
+
+
+---
+
+# 38. Motion Spec Técnico V1.0 — fechado
+
+Foi concluído o último gate técnico da landing.
+
+Referência:
+
+- `landing/motion-spec-tecnico-colus.md`
+- `landing/landing-colus-master.drawio` — painel Motion Spec Técnico V1.0
+
+Fechado:
+
+- scroll progress por secção;
+- ranges;
+- transforms;
+- masks;
+- handoffs;
+- media playback;
+- mobile motion;
+- reduced motion;
+- performance guardrails;
+- component architecture esperada.
+
+Estado:
+
+> **LANDING IMPLEMENTATION READY**
+
+O próximo passo deixa de ser design.
+
+Próximo:
+
+> **FRONTEND IMPLEMENTATION PLAN → React/TSX**
