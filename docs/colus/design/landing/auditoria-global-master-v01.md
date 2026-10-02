@@ -419,3 +419,19 @@ Referência:
 Próximo P0:
 
 > **P0.4 — Scroll Budget global**
+
+
+## P0.4 — Scroll Budget global
+> **RESOLVIDO**
+
+Referência:
+- `scroll-budget-colus.md`
+
+Budget preferido:
+
+- desktop → ~1430–1490vh + Footer natural;
+- mobile → ~1150–1350svh + Footer natural.
+
+Próximo P0:
+
+> **P0.5 — Copy status**
