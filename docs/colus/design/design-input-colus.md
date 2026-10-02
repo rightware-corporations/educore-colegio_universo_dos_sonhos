@@ -630,3 +630,37 @@ Referências:
 Próximo foco:
 
 > **DEPOIMENTOS**
+
+
+---
+
+# 26. High-Fidelity V0.9 — Depoimentos
+
+Foi definida a secção:
+
+> **DEPOIMENTOS**
+
+Conceito:
+
+> **Voice in Focus**
+
+Decisões:
+
+- uma voz de cada vez;
+- sem cards, estrelas ou review widget;
+- Horizon Node herda o horizonte de Transformar;
+- media/retrato é opcional;
+- mobile usa sequência vertical;
+- sem auto-rotation;
+- demonstrador usa placeholders explícitos até existirem testemunhos reais/autorizados;
+- saída prepara o convite final.
+
+Referências:
+
+- `landing/depoimentos-colus.md`
+- `landing/landing-colus-master.drawio` — bloco Depoimentos
+- `landing/high-fidelity-direction-colus.md` — V0.9
+
+Próximo foco:
+
+> **CONVITE FINAL + FOOTER**
