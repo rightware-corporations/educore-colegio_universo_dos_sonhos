@@ -1,6 +1,6 @@
 # Design Input — COLUS / EduCore
 
-> **Estado:** DIREÇÃO DA LANDING EM DESENVOLVIMENTO  
+> **Estado:** LANDING PÚBLICA CONSOLIDADA — IMPLEMENTAÇÃO AINDA BLOQUEADA  
 > **Data:** 2026-10-01  
 > **Objetivo:** recolher decisões de experiência e personalização antes do início do código.
 
@@ -987,3 +987,38 @@ Referências:
 Próximo foco:
 
 > **MASTER HIGH-FIDELITY CONSOLIDATION PASS**
+
+
+---
+
+# 35. Master High-Fidelity Consolidation V0.18
+
+A landing pública foi consolidada como uma única especificação canónica.
+
+Fonte visual:
+- `landing/landing-colus-master.drawio`
+
+Contrato global:
+- `landing/high-fidelity-direction-colus.md`
+
+Consolidação:
+- `landing/master-high-fidelity-consolidation-colus.md`
+
+Limpeza concluída:
+- decisões antigas/superseded identificadas;
+- gates históricos sem próximos passos obsoletos;
+- Intro canónico dentro do master;
+- Footer mobile representado;
+- sistema global de motion/grid/header/scroll/copy/contactos fechado.
+
+Estado:
+> **DESENHADA + CONSOLIDADA**
+
+Não iniciar frontend ainda.
+
+Faltam os gates:
+1. **Asset Plan**
+2. **Motion Spec técnico**
+
+Depois:
+> **LANDING IMPLEMENTATION READY**
