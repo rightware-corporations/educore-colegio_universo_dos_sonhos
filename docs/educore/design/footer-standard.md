@@ -81,13 +81,19 @@ Redes abaixo:
 
 # 5. Barra inferior
 
-## Esquerda
+## Esquerda — implementação institucional
 
-> **© 2026 RIGHTWARE. All rights reserved.**
+O copyright principal pertence à instituição apresentada pela landing.
 
-separador
+Para o COLUS:
 
-> **EduCore is a RIGHTWARE product.**
+> **© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.**
+
+A atribuição tecnológica vem imediatamente depois:
+
+> **Powered by EduCore · A RIGHTWARE Product**
+
+No site institucional do próprio EduCore, pode ser usada a variante corporativa RIGHTWARE.
 
 ## Direita
 
@@ -140,14 +146,17 @@ A variante Light continua válida como alternativa do produto.
 
 # 8. Não alterar
 
-Não substituir no Footer:
+Elementos obrigatórios em todas as implementações EduCore:
 
-- EduCore por logo COLUS;
-- RIGHTWARE Product lockup;
+- **logo EduCore**;
+- **logo / lockup RIGHTWARE**;
+- indicação **A RIGHTWARE Product**;
 - arquitetura das quatro colunas;
 - barra legal inferior;
 - redes definidas;
 - relação explícita EduCore / RIGHTWARE.
+
+Na landing de uma escola, a marca institucional da escola pode aparecer no conteúdo e no copyright, mas **não substitui os logos EduCore e RIGHTWARE no Footer**.
 
 Adaptações futuras devem ser apenas de implementação/responsividade, não de conceito.
 
@@ -183,3 +192,31 @@ As imagens fornecidas pelo utilizador são a referência visual primária para:
 - arquitetura de conteúdo.
 
 O desenho no master COLUS é representação de integração e não substitui os assets oficiais.
+
+---
+
+# 11. Regra de marca
+
+O Footer é também a assinatura de produto da RIGHTWARE.
+
+Por isso:
+
+> **EduCore + RIGHTWARE devem estar sempre visíveis no Footer.**
+
+Para implementações de escolas:
+
+```text
+copyright
+→ instituição cliente
+
+powered by
+→ EduCore
+
+product/company attribution
+→ RIGHTWARE
+```
+
+Exemplo COLUS:
+
+> **© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.**  
+> **Powered by EduCore · A RIGHTWARE Product**
