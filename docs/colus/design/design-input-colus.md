@@ -949,3 +949,41 @@ Referências:
 Próximo foco:
 
 > **TYPOGRAPHY + GRID RESPONSIVE SYSTEM**
+
+
+---
+
+# 34. Consolidação — Typography + Grid Responsive V0.1
+
+Foi fechado o sistema de tipografia e grid da landing.
+
+Tipografia:
+
+- Manrope → estrutura / interface;
+- Newsreader → voz editorial seletiva.
+
+Grid:
+
+- desktop → 12 colunas;
+- tablet → 8 colunas;
+- mobile → 4 colunas;
+- max content width → 1440px.
+
+Responsive:
+
+- typography fluida com clamp();
+- sticky reduzido em tablet;
+- sem long pinning em mobile;
+- media usa crops próprios por breakpoint;
+- nodes e densidade visual reduzem em mobile;
+- Footer responde sem perder a arquitetura definida.
+
+Referências:
+
+- `landing/typography-grid-responsive-colus.md`
+- `landing/landing-colus-master.drawio` — painel Typography + Grid Responsive
+- `landing/high-fidelity-direction-colus.md` — V0.17
+
+Próximo foco:
+
+> **MASTER HIGH-FIDELITY CONSOLIDATION PASS**
