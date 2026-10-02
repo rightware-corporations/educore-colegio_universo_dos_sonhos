@@ -455,3 +455,42 @@ onde cada candidato será classificado como:
 Depois disso:
 
 > **MOTION SPEC TÉCNICO**
+
+---
+
+# 20. Estado após download manual — V0.2
+
+O utilizador forneceu uma nova recolha direta do Instagram:
+
+- 31 imagens;
+- 7 vídeos;
+- imagens em ~1080px;
+- dois vídeos landscape adequados como candidatos Hero.
+
+Auditoria:
+
+- `asset-audit-colus-v02.md`
+
+Estado:
+
+> **ASSET GATE PARCIALMENTE RESOLVIDO**
+
+Coberto:
+- Hero candidates;
+- Manifesto;
+- Aprender;
+- Futuro / Ciência;
+- Vida COLUS;
+- Transformar / Expressar;
+- Transformar / Construir.
+
+Ainda em falta:
+- mark/logo oficial;
+- TIC / Segurança Digital;
+- Engenharia;
+- Meninas nas TIC;
+- Família/encarregados;
+- visita externa Museu/Umbelúzi;
+- melhor asset Transformar / Avançar.
+
+Não iniciar Motion Spec final até fechar estes gaps P0.
