@@ -401,3 +401,22 @@ O Copy Status passa se:
 Próximo passo:
 
 > **CONTACTOS + CTA DESTINATIONS**
+
+---
+
+# 18. Atualização após Contactos + CTA Destinations
+
+Os contactos deixam de ser um placeholder único e passam a ter estados individuais:
+
+- **+258 84 700 0242** → PUBLICLY_CORROBORATED;
+- **Matola-Rio · KM 16** → PUBLICLY_CORROBORATED;
+- **info@colus.ac.mz** → PUBLICLY_OBSERVED / VERIFY_BEFORE_PRODUCTION;
+- **@colus_mz** → PUBLICLY_OBSERVED / VERIFY_BEFORE_PRODUCTION.
+
+Os destinos dos CTAs ficam definidos para o demonstrador:
+
+- Header/Hero visita → `#contactos`;
+- Convite visita → email público;
+- Falar connosco → telefone público.
+
+Isto não transforma os canais em claims de workflow interno.
