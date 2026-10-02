@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.7 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.8 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1453,3 +1453,96 @@ O high-fidelity cobre agora:
 Próximo foco:
 
 > **TRANSFORMAR — confiança, protagonismo e futuro**
+
+
+---
+
+# 46. Transformar — direção integrada
+
+Depois de Pertencer, o Community Ring abre-se e deixa um eixo ascendente.
+
+Conceito:
+
+> **RISE FIELD**
+
+A secção usa esse eixo como progressão de confiança e possibilidade.
+
+Headline de trabalho:
+
+> **Quando a confiança cresce, novos caminhos tornam-se possíveis.**
+
+## Estrutura
+
+Três momentos editoriais:
+
+- **01 / Expressar**
+- **02 / Construir**
+- **03 / Avançar**
+
+Não são cards nem módulos.
+
+São estágios da mesma progressão.
+
+## Device principal
+
+O **Rise Axis** evolui:
+
+> linha fina → faixa luminosa → eixo de composição → horizonte
+
+Sem seta literal, gráfico de crescimento, foguete ou cliché de “subida”.
+
+## Desktop
+
+- stage Deep Ink;
+- headline de grande escala;
+- eixo vertical fora do centro;
+- media de expressão;
+- media técnico/prático;
+- media humano final;
+- Orange com intensidade alta mas controlada.
+
+## Mobile
+
+No mobile:
+
+- eixo lateral;
+- três momentos empilhados;
+- um media dominante por vez;
+- horizonte final full-width;
+- sem sticky longo.
+
+## Saída
+
+O eixo abre horizontalmente e torna-se horizonte.
+
+A intensidade baixa para preparar:
+
+> **DEPOIMENTOS**
+
+A passagem conceptual é:
+
+> **possibilidade → silêncio → voz → confiança**
+
+Direção detalhada:
+
+- `transformar-colus.md`
+- `landing-colus-master.drawio` — bloco **Transformar** no canvas contínuo
+
+---
+
+# 47. Gate V0.8
+
+O high-fidelity cobre agora:
+
+- Intro Morph;
+- Hero Assembly;
+- Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia;
+- Vida COLUS;
+- Pertencer;
+- Transformar.
+
+Próximo foco:
+
+> **DEPOIMENTOS — confiança sem cards genéricos**
