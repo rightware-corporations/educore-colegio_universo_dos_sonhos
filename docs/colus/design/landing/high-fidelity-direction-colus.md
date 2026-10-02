@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.8 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.9 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1546,3 +1546,95 @@ O high-fidelity cobre agora:
 Próximo foco:
 
 > **DEPOIMENTOS — confiança sem cards genéricos**
+
+
+---
+
+# 48. Depoimentos — direção integrada
+
+Depois de Transformar, a landing desacelera e passa da possibilidade para a prova humana.
+
+Conceito:
+
+> **VOICE IN FOCUS**
+
+A secção mostra uma voz de cada vez.
+
+Não utiliza:
+
+- cards de review;
+- cinco estrelas;
+- carrossel genérico;
+- citações inventadas;
+- métricas sociais sem fonte.
+
+## Device principal
+
+O horizonte herdado de Transformar permanece e passa a usar um único:
+
+> **Horizon Node**
+
+O node marca a voz ativa e mantém continuidade visual.
+
+## Conteúdo
+
+Enquanto não existirem testemunhos reais/autorizados, o demonstrador usa placeholders explícitos:
+
+> **TESTEMUNHO REAL / AUTORIZADO — A INSERIR**
+
+e:
+
+> **NOME / RELAÇÃO COM A ESCOLA — A VALIDAR**
+
+Nenhuma quote deve ser fabricada.
+
+## Desktop
+
+- Deep Ink;
+- quote grande;
+- media/retrato opcional;
+- identificação discreta;
+- progressão 01 / 02 / 03 quando houver várias vozes.
+
+## Mobile
+
+- vozes em sequência vertical;
+- sem slider obrigatório;
+- sem auto-rotation;
+- media opcional;
+- leitura confortável.
+
+## Saída
+
+O Horizon Node chega ao extremo, deixa um halo subtil e prepara:
+
+> **Venha conhecer de perto o Universo dos Sonhos.**
+
+A passagem é:
+
+> **confiança → proximidade → convite**
+
+Direção detalhada:
+
+- `depoimentos-colus.md`
+- `landing-colus-master.drawio` — bloco **Depoimentos** no canvas contínuo
+
+---
+
+# 49. Gate V0.9
+
+O high-fidelity cobre agora:
+
+- Intro Morph;
+- Hero Assembly;
+- Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia;
+- Vida COLUS;
+- Pertencer;
+- Transformar;
+- Depoimentos.
+
+Próximo foco:
+
+> **CONVITE FINAL + FOOTER**
