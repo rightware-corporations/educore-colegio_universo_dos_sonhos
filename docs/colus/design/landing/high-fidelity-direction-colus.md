@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.15 — CONSOLIDAÇÃO GLOBAL  
+> **Estado:** HIGH-FIDELITY V0.16 — CONSOLIDAÇÃO GLOBAL  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -2139,3 +2139,73 @@ Copy Status consolidado.
 Próximo passo:
 
 > **CONTACTOS + CTA DESTINATIONS**
+
+
+---
+
+# 62. Contactos + CTA Destinations
+
+Foi fechado o comportamento dos contactos públicos e dos CTAs sem inventar um workflow interno do COLUS.
+
+## Contactos usados no demonstrador
+
+### Publicamente corroborado
+- **+258 84 700 0242**
+- **Matola-Rio · KM 16**
+
+### Publicamente observado / revalidar antes de produção
+- **info@colus.ac.mz**
+- **@colus_mz**
+
+Outros números anteriormente observados não entram nesta versão.
+
+## Localização visual
+
+Os contactos COLUS ficam no:
+
+> **Convite Final**
+
+e não no Footer EduCore / RIGHTWARE.
+
+Contact strip:
+
+> info@colus.ac.mz · +258 84 700 0242 · Matola-Rio · KM 16 · @colus_mz
+
+## Routing
+
+### Header / Hero
+- Marcar uma visita → `#contactos`
+- Descobrir o COLUS → `#o-colegio`
+
+### Convite Final
+- Marcar uma visita → `mailto:info@colus.ac.mz?subject=Pedido%20de%20visita%20ao%20COLUS`
+- Falar connosco → `tel:+258847000242`
+
+Isto inicia contacto através de canais públicos e **não afirma que existe booking, WhatsApp, chat ou formulário operacional**.
+
+## Não implementar nesta fase
+
+- WhatsApp CTA;
+- agenda/booking;
+- formulário com submissão;
+- mapa/pin;
+- chat;
+- horário oficial;
+- SLA.
+
+Direção detalhada:
+
+- `contactos-cta-colus.md`
+- `landing-colus-master.drawio` — painel **Contactos + CTA Destinations V0.1**
+
+---
+
+# 63. Gate V0.16
+
+Contactos + CTA Destinations consolidados.
+
+Todos os itens P0 da auditoria global estão agora resolvidos.
+
+Próximo passo:
+
+> **TYPOGRAPHY + GRID RESPONSIVE SYSTEM**
