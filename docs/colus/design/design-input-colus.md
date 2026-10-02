@@ -364,3 +364,39 @@ Decisões de trabalho atuais:
 - Manifesto como desaceleração visual após o morph.
 
 Estas decisões ainda são high-fidelity V0.1 e podem ser refinadas sem alterar a coreografia morph já aprovada.
+
+
+---
+
+# 18. High-Fidelity V0.2 — Hero Assembly + Manifesto
+
+Foi detalhada a passagem:
+
+```text
+Book Aperture
+→ Hero Assembly
+→ pausa de leitura
+→ Open To Meaning
+→ Manifesto
+```
+
+Decisões atuais:
+
+- Axis do símbolo origina o kicker institucional;
+- headline entra em dois comportamentos tipográficos distintos;
+- header completa-se apenas no final da montagem;
+- Hero mantém uma pausa curta antes da saída;
+- Hero → Manifesto usa Open Book Bridge;
+- media mantém continuidade de container/crop;
+- Deep Ink evolui para Warm Paper sem wipe reto;
+- Manifesto reduz drasticamente a intensidade de branding/motion;
+- mobile possui composição e transição próprias.
+
+Referências:
+
+- `landing/high-fidelity-direction-colus.md` — V0.2;
+- `landing/landing-colus-hifi.drawio` — V0.2.
+
+Próximo foco:
+
+> **APRENDER EM MOVIMENTO — Descobrir + Criar**
