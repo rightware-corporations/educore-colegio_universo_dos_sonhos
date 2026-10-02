@@ -591,3 +591,42 @@ Referências:
 Próximo foco:
 
 > **TRANSFORMAR**
+
+
+---
+
+# 25. High-Fidelity V0.8 — Transformar
+
+Foi definida a secção:
+
+> **TRANSFORMAR**
+
+Conceito:
+
+> **Rise Field**
+
+Estrutura:
+
+- 01 / Expressar;
+- 02 / Construir;
+- 03 / Avançar.
+
+Decisões:
+
+- eixo herdado do Community Ring;
+- Orange ganha intensidade sem virar bloco sólido;
+- media continua humano e contextual;
+- sem clichés de crescimento, foguetes ou setas;
+- mobile usa axis lateral e progressão vertical;
+- eixo final abre num horizonte;
+- saída desacelera para Depoimentos.
+
+Referências:
+
+- `landing/transformar-colus.md`
+- `landing/landing-colus-master.drawio` — bloco Transformar
+- `landing/high-fidelity-direction-colus.md` — V0.8
+
+Próximo foco:
+
+> **DEPOIMENTOS**
