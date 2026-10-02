@@ -453,3 +453,24 @@ Estados usados:
 Próximo P0:
 
 > **P0.6 — Contactos + CTA destinations**
+
+
+## P0.6 — Contactos + CTA destinations
+> **RESOLVIDO**
+
+Referência:
+- `contactos-cta-colus.md`
+
+Decisões:
+- contactos COLUS no Convite Final;
+- Header/Hero usam anchor `#contactos`;
+- CTA final usa email/telefone públicos;
+- nenhum booking/WhatsApp/form/mapa é inventado.
+
+## Estado P0
+
+> **TODOS OS ITENS P0 DA AUDITORIA GLOBAL ESTÃO RESOLVIDOS.**
+
+Próximo nível:
+
+> **P1 — Typography + Grid Responsive System**
