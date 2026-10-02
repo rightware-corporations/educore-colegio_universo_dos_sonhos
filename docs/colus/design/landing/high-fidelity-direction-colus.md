@@ -1739,7 +1739,7 @@ Foi integrado a partir da definição visual fornecida pelo utilizador.
 
 Padrão reutilizável documentado em:
 
-> `../../educore/design/footer-standard.md`
+> `../../../educore/design/footer-standard.md`
 
 ## Estrutura preservada
 
