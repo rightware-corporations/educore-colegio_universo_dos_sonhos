@@ -711,7 +711,7 @@ O Footer definido pelo utilizador foi integrado sem reinvenção.
 
 Fonte de padrão:
 
-- `../educore/design/footer-standard.md`
+- `../../educore/design/footer-standard.md`
 
 Aplicação COLUS:
 
