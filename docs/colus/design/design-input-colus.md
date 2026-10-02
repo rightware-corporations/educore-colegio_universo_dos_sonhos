@@ -730,3 +730,19 @@ Com isto, a landing pública está definida do Intro Morph ao Footer.
 Próximo gate:
 
 > **REVISÃO GLOBAL / CONSOLIDAÇÃO ANTES DE IMPLEMENTAÇÃO**
+
+
+### Regra final de Footer — COLUS
+
+Linha legal aprovada:
+
+> **© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.**  
+> **Powered by EduCore · A RIGHTWARE Product**
+
+Elementos de marca obrigatórios no Footer:
+
+- logo EduCore;
+- logo RIGHTWARE;
+- relação explícita **A RIGHTWARE Product**.
+
+A marca institucional COLUS é titular do copyright do site, enquanto EduCore/RIGHTWARE permanecem visíveis como assinatura da plataforma/produto.
