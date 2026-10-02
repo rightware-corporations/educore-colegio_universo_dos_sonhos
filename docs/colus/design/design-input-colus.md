@@ -833,3 +833,45 @@ Referências:
 Próximo foco:
 
 > **SCROLL BUDGET GLOBAL**
+
+
+---
+
+# 31. Consolidação — Scroll Budget V0.1
+
+Foi fechado o budget global de scroll.
+
+Desktop preferido:
+
+> **~1430–1490vh + Footer natural**
+
+Mobile:
+
+> **~1150–1350svh + Footer natural**
+
+Sticky relevante fica limitado a:
+
+- Intro Morph;
+- Futuro & Tecnologia;
+- Aprender em Movimento;
+- Transformar.
+
+Os restantes blocos usam fluxo natural ou partial hold.
+
+Regras:
+
+- sem scroll-jacking;
+- sem snap obrigatório;
+- fast scroll suportado;
+- anchors aterram em states legíveis;
+- reduced motion reduz também o espaço de scroll reservado à animação.
+
+Referências:
+
+- `landing/scroll-budget-colus.md`
+- `landing/landing-colus-master.drawio` — painel Scroll Budget
+- `landing/high-fidelity-direction-colus.md` — V0.14
+
+Próximo foco:
+
+> **COPY STATUS — LOCKED / WORKING / PLACEHOLDER**
