@@ -2686,3 +2686,54 @@ Para o MVP pré-comercial, fluxos administrativos e financeiros podem continuar 
 Documento arquitetural de referência:
 
 `arquitetura-produto-deploy.md`
+
+
+---
+
+# 46. Revalidação pública de contactos — 02-10-2026
+
+## Telefone
+
+**PUBLICAMENTE CORROBORADO**
+
+> **+258 84 700 0242**
+
+O número continua listado em diretório público recente associado ao COLUS.
+
+Fonte:
+- https://www.schoolandcollegelistings.com/MZ/Matola-Rio/320463751142676/Col%C3%A9gio-Universo-Dos-Sonhos-Mz
+
+## Localização
+
+**CORROBORADA**
+
+Forma pública curta:
+> **Matola-Rio · KM 16**
+
+O diretório público recente lista `MATOLA KM16 / Matola-Rio`, enquanto o registo legal mantém sede em Chinonanquila “B”, Matola Rio, distrito de Boane.
+
+Fontes:
+- diretório público acima;
+- Boletim da República / Imprensa Nacional já referenciado neste documento.
+
+## Email e Instagram
+
+Continuam registados a partir do perfil público anteriormente observado no projeto:
+
+- **info@colus.ac.mz**
+- **@colus_mz**
+
+Estado:
+> **PUBLICLY OBSERVED / REVALIDAR ANTES DE PRODUÇÃO OU OUTREACH**
+
+## Decisão para o demonstrador
+
+Usar:
+- +258 84 700 0242;
+- Matola-Rio · KM 16;
+- info@colus.ac.mz;
+- @colus_mz.
+
+Mas manter internamente a distinção entre `PUBLICLY_CORROBORATED` e `PUBLICLY_OBSERVED`.
+
+Não usar os outros números anteriormente observados nesta versão sem nova revalidação.
