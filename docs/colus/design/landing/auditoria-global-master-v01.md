@@ -506,3 +506,44 @@ Ainda permanece como decisão editorial separada:
 Próximo passo de design:
 
 > **MASTER HIGH-FIDELITY CONSOLIDATION PASS**
+
+
+---
+
+# 12. Master Consolidation Pass — resultado
+
+> **CONCLUÍDO**
+
+## P1.1 — headlines aspiracionais consecutivas
+> **RESOLVIDO POR HIERARQUIA TIPOGRÁFICA**
+
+Hero usa Display XL; signature sections usam Display L; editorial sections usam Display M/H2.
+
+## P1.2 — repetição line/node
+> **RESOLVIDO POR PRIMITIVES GLOBAIS**
+
+Path / Node / Mask / Light / Media Window são a base comum.
+
+## P1.3 — tipografia
+> **RESOLVIDO**
+
+## Responsive / mobile baseline
+> **RESOLVIDO**
+
+O Footer mobile passa a ter frame explícito no master.
+
+## P1.4 — idioma do Footer
+> **ABERTO / NÃO BLOQUEIA ASSET PLAN**
+
+Não traduzir automaticamente.
+
+## Estado após consolidação
+
+> **MASTER HIGH-FIDELITY CONSOLIDADO**
+
+Ainda faltam:
+- Asset Plan;
+- Motion Spec técnico.
+
+Próximo passo:
+> **ASSET PLAN**
