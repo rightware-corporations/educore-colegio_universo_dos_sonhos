@@ -474,3 +474,35 @@ Decisões:
 Próximo nível:
 
 > **P1 — Typography + Grid Responsive System**
+
+
+## P1.3 — Tipografia
+> **RESOLVIDO**
+
+Referência:
+- `typography-grid-responsive-colus.md`
+
+Decisões:
+- Manrope estrutural;
+- Newsreader editorial seletiva;
+- escalas fluidas com clamp();
+- max-widths por role.
+
+## P1 — Responsive baseline
+> **RESOLVIDO COMO SISTEMA BASE**
+
+Decisões:
+- 12 / 8 / 4 colunas;
+- breakpoints funcionais;
+- mobile sem long pinning;
+- crop próprio;
+- densidade reduzida;
+- safe area coberta.
+
+Ainda permanece como decisão editorial separada:
+
+> **P1.4 — idioma do Footer global**
+
+Próximo passo de design:
+
+> **MASTER HIGH-FIDELITY CONSOLIDATION PASS**
