@@ -494,3 +494,35 @@ Ainda em falta:
 - melhor asset Transformar / Avançar.
 
 Não iniciar Motion Spec final até fechar estes gaps P0.
+
+
+---
+
+# 21. Fecho do Asset Gate — V0.3
+
+O utilizador forneceu uma ronda final de assets adicionais.
+
+Decisão:
+
+> **não fazer nova recolha.**
+
+Os gaps restantes foram absorvidos por adaptação de design:
+
+- Engenharia → scene device-led;
+- Pertencer → comunidade/ligação humana, sem identificar pessoas como pais/encarregados;
+- Museu/Umbelúzi → descoberta prática sem caption específica;
+- mark → derived SVG device baseado no logo raster;
+- Meninas nas TIC → participação feminina em contexto TIC, sem alegar evento específico;
+- Avançar → frame de realização/progressão.
+
+Referência final:
+
+- `asset-final-selection-colus-v03.md`
+
+Estado:
+
+> **ASSET GATE CLOSED FOR PRIVATE MVP / DEMO**
+
+Próximo passo:
+
+> **MOTION SPEC TÉCNICO**
