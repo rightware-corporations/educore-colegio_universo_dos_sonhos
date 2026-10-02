@@ -1046,3 +1046,31 @@ Estado:
 Ainda faltam os gaps P0 de marca, TIC, Engenharia, Meninas nas TIC, Família/encarregados, visita externa e um asset mais forte para Avançar.
 
 Não iniciar implementação ainda.
+
+
+---
+
+# 37. Asset Gate V0.3 — fechado
+
+A recolha foi encerrada para ganhar velocidade.
+
+Os gaps restantes não bloqueiam mais o MVP porque foram convertidos em decisões de design:
+
+- Engenharia → scene device-led;
+- Pertencer → comunidade;
+- descoberta externa → aprendizagem prática;
+- mark → derived SVG device;
+- participação feminina em TIC sem claim de evento específico;
+- Avançar → realização/progressão.
+
+Referência:
+
+- `landing/asset-final-selection-colus-v03.md`
+
+Estado:
+
+> **ASSET GATE CLOSED FOR PRIVATE MVP / DEMO**
+
+Próximo gate:
+
+> **MOTION SPEC TÉCNICO**
