@@ -1,7 +1,7 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.17 — CONSOLIDAÇÃO GLOBAL  
-> **Data:** 2026-10-01  
+> **Estado:** HIGH-FIDELITY V0.18 — MASTER CONSOLIDADO / IMPLEMENTAÇÃO AINDA BLOQUEADA  
+> **Atualizado:** 2026-10-02  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
 > Este documento transforma a direção aprovada em decisões visuais concretas. Ainda não é código.
@@ -39,7 +39,7 @@ Não existe mais uma página/tab separada por secção como estrutura principal 
 
 A sequência visual fica fisicamente montada no mesmo canvas:
 
-> Abertura → Hero → Manifesto → Aprender em Movimento → Futuro & Tecnologia → Vida COLUS → restantes blocos.
+> Abertura → Hero → Manifesto → Aprender em Movimento → Futuro & Tecnologia → Vida COLUS → Pertencer → Transformar → Depoimentos → Convite Final → Footer.
 
 O objetivo é poder abrir um único ficheiro e acompanhar a experiência completa sem trocar de tabs ou de ficheiros.
 
@@ -2318,3 +2318,103 @@ Typography + Grid Responsive System consolidado.
 Próximo passo:
 
 > **MASTER HIGH-FIDELITY CONSOLIDATION PASS**
+
+
+---
+
+# 66. Master High-Fidelity Consolidation V0.18
+
+Foi concluído o passe de consolidação do master.
+
+## Fonte de verdade
+
+Ordem de autoridade:
+
+1. `landing-colus-master.drawio`
+2. `high-fidelity-direction-colus.md`
+3. specs especializadas
+4. `archive/`
+
+Em conflito, vence a decisão global mais recente.
+
+## Limpeza aplicada
+
+- `mask/portal` → **mask/aperture**;
+- gates antigos deixam de apontar para secções já concluídas;
+- Intro no próprio master passa a ser fonte visual canónica;
+- antigo board de tokens fica apenas como apêndice;
+- Footer recebe frame mobile explícito;
+- Convite Final passa a incluir o handoff real para Footer;
+- nomes conceptuais continuam INTERNAL ONLY.
+
+## Canonical system
+
+### Motion
+- Signature → Intro + Futuro
+- Narrative → Hero/Manifesto + Aprender + Transformar
+- Subtle → Vida + Pertencer + Depoimentos + Convite
+- Static → Footer
+
+### Grid
+- desktop 12;
+- tablet 8;
+- mobile 4.
+
+### Typography
+- Manrope estrutural;
+- Newsreader editorial seletiva.
+
+### Scroll
+- desktop ~1430–1490vh + Footer natural;
+- mobile ~1150–1350svh + Footer natural.
+
+### Header
+- Intro hidden;
+- Hero assembled/transparent;
+- Light/Dark sticky;
+- Footer exit.
+
+### Content
+- LOCKED / WORKING / PLACEHOLDER / INTERNAL ONLY.
+
+## Footer mobile
+
+O master passa a representar explicitamente:
+
+> EduCore → navegação 2 colunas → RIGHTWARE → social → legal
+
+sem miniaturizar o desktop.
+
+## Decisão ainda aberta
+
+> **OPEN-01 — idioma dos labels do Footer**
+
+A arquitetura e branding estão fechados; a língua ainda não deve ser alterada automaticamente.
+
+## Gate
+
+A landing está:
+
+> **DESENHADA + CONSOLIDADA**
+
+Ainda não abrir implementação.
+
+Faltam:
+
+1. **Asset Plan**
+2. **Motion Spec técnico**
+
+Depois destes dois:
+
+> **LANDING IMPLEMENTATION READY**
+
+Referência:
+
+- `master-high-fidelity-consolidation-colus.md`
+- `landing-colus-master.drawio` — painel **Canonical Contract V0.18**
+
+---
+
+# 67. Próximo passo
+
+> **ASSET PLAN — inventário exato de logo, foto, vídeo, posters e media por secção.**
