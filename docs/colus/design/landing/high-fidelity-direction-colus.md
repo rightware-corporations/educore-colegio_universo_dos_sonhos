@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.10 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.11 — LANDING PÚBLICA FECHADA EM DESIGN  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1727,3 +1727,74 @@ O high-fidelity cobre agora:
 Único bloco público ainda por integrar:
 
 > **FOOTER — usar definição já existente, sem reinventar**
+
+
+---
+
+# 52. Footer — padrão EduCore / RIGHTWARE integrado
+
+O Footer não foi reinventado.
+
+Foi integrado a partir da definição visual fornecida pelo utilizador.
+
+Padrão reutilizável documentado em:
+
+> `../../educore/design/footer-standard.md`
+
+## Estrutura preservada
+
+- EduCore logo;
+- tagline:
+  **Integrated school management for stronger institutions.**
+- PLATFORM;
+- SOLUTIONS;
+- SUPPORT;
+- COMPANY;
+- RIGHTWARE Product lockup;
+- LinkedIn / YouTube / X / Instagram;
+- copyright;
+- product attribution;
+- Privacy Policy;
+- Terms of Service;
+- Cookie Policy;
+- System Status.
+
+## Variante usada na landing COLUS
+
+> **DARK FOOTER**
+
+A razão é composicional: o Convite Final termina claro / Warm Paper, por isso a variante dark cria uma fronteira terminal limpa.
+
+A variante Light permanece válida no sistema EduCore.
+
+## Regra
+
+O Footer é global do produto EduCore / RIGHTWARE.
+
+Não deve ser redesenhado por escola.
+
+A implementação COLUS apenas o integra no contexto da landing.
+
+---
+
+# 53. Gate V0.11 — Landing pública completa
+
+A narrativa visual da landing está agora definida de ponta a ponta:
+
+- Intro Morph;
+- Hero Assembly;
+- Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia;
+- Vida COLUS;
+- Pertencer;
+- Transformar;
+- Depoimentos;
+- Convite Final;
+- Footer EduCore / RIGHTWARE.
+
+O próximo passo já não é inventar novas secções.
+
+É:
+
+> **REVISÃO GLOBAL DO MASTER + CONSOLIDAÇÃO HIGH-FIDELITY ANTES DE IMPLEMENTAÇÃO**
