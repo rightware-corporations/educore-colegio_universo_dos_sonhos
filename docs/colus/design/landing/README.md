@@ -10,13 +10,15 @@ Este ficheiro contém várias páginas internas e deve evoluir desde a abertura 
 
 ### Páginas atuais
 
-- **00 — Índice / Fluxo Completo**
 - **01 — Abertura Morph V0.3 (APROVADO)**
-- **02 — Landing High-Fidelity V0.4**
-- **03 — Futuro & Tecnologia V0.1**
-- **04 — Vida COLUS V0.1**
+- **02 — Hero + Manifesto V0.2**
+- **03 — Aprender em Movimento V0.1**
+- **04 — Futuro & Tecnologia V0.1**
+- **05 — Vida COLUS V0.1**
+- **90 — Tokens + Component Language V0.4**
+- **00 — Índice / Estado do Master**
 
-Novas secções devem entrar no mesmo ficheiro como novas páginas ou revisões das páginas existentes.
+O ficheiro abre diretamente na **Abertura Morph**, e o índice fica no fim apenas como mapa.
 
 ## Regra
 
