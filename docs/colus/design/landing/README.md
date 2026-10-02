@@ -13,6 +13,7 @@ Este ficheiro contém várias páginas internas e deve evoluir desde a abertura 
 - **00 — Índice / Fluxo Completo**
 - **01 — Abertura Morph V0.3 (APROVADO)**
 - **02 — Landing High-Fidelity V0.4**
+- **03 — Futuro & Tecnologia V0.1**
 
 Novas secções devem entrar no mesmo ficheiro como novas páginas ou revisões das páginas existentes.
 
