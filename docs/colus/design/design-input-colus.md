@@ -701,3 +701,32 @@ Referências:
 Próximo e último foco da landing:
 
 > **FOOTER — integrar a definição já existente do utilizador**
+
+
+---
+
+# 28. High-Fidelity V0.11 — Footer integrado
+
+O Footer definido pelo utilizador foi integrado sem reinvenção.
+
+Fonte de padrão:
+
+- `../educore/design/footer-standard.md`
+
+Aplicação COLUS:
+
+- variante Dark;
+- integrada depois do Convite Final;
+- estrutura EduCore / RIGHTWARE preservada;
+- sem substituir pelo logo COLUS;
+- sem alterar colunas, lockup, social ou legal.
+
+Referência visual:
+
+- `landing/landing-colus-master.drawio` — bloco Footer
+
+Com isto, a landing pública está definida do Intro Morph ao Footer.
+
+Próximo gate:
+
+> **REVISÃO GLOBAL / CONSOLIDAÇÃO ANTES DE IMPLEMENTAÇÃO**
