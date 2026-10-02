@@ -976,3 +976,15 @@ A abertura morph-driven, incluindo a coreografia desktop e mobile dos primeiros 
 A partir deste ponto, esta direção passa a ser referência oficial para o high-fidelity da abertura da landing COLUS.
 
 Alterações estruturais futuras devem ser tratadas como revisão desta direção, e não como nova exploração aberta.
+
+
+---
+
+# 32. Artefacto visual canónico
+
+A coreografia aprovada deste documento está preservada em:
+
+> `landing-colus-master.drawio`  
+> página **01 — Abertura Morph V0.3 (APROVADO)**
+
+O antigo ficheiro isolado de Intro Morph permanece apenas em `archive/` como histórico.
