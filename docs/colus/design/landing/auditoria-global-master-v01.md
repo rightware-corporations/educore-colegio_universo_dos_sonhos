@@ -435,3 +435,21 @@ Budget preferido:
 Próximo P0:
 
 > **P0.5 — Copy status**
+
+
+## P0.5 — Copy status
+> **RESOLVIDO**
+
+Referência:
+- `copy-status-colus.md`
+
+Estados usados:
+
+- LOCKED;
+- WORKING;
+- PLACEHOLDER;
+- INTERNAL ONLY.
+
+Próximo P0:
+
+> **P0.6 — Contactos + CTA destinations**
