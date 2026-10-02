@@ -243,25 +243,29 @@ Decisão ainda aberta:
 
 Não resolver automaticamente.
 
-## OPEN-02 — assets finais
+## CLOSED-02 — Asset Plan
 
-Precisamos fechar:
-- logo/mark vetorial;
-- media por secção;
-- Hero video/photo;
-- posters;
-- autorizações;
-- testemunhos.
+Fechado para o MVP/demo privado em:
 
-## OPEN-03 — Motion Spec técnico
+- `asset-final-selection-colus-v03.md`
 
-A hierarquia está fechada, mas falta converter os momentos principais em:
+Os gaps literais foram absorvidos por adaptações de design aprovadas.
+
+## CLOSED-03 — Motion Spec técnico
+
+Fechado em:
+
+- `motion-spec-tecnico-colus.md`
+
+Inclui:
 - scroll progress;
 - transforms;
 - masks;
 - ranges;
 - fallbacks;
-- reduced-motion states.
+- media playback;
+- mobile states;
+- reduced motion.
 
 ---
 
@@ -271,14 +275,12 @@ A landing está:
 
 > **DESENHADA + CONSOLIDADA**
 
-Mas o código ainda não deve começar.
+Os dois gates técnicos finais estão fechados:
 
-Faltam os dois gates técnicos finais:
+1. **Asset Plan — CLOSED**;
+2. **Motion Spec técnico — CLOSED**.
 
-1. **Asset Plan**;
-2. **Motion Spec técnico**.
-
-Depois destes dois:
+Estado:
 
 > **LANDING IMPLEMENTATION READY**
 
@@ -286,4 +288,4 @@ Depois destes dois:
 
 # 14. Próximo passo
 
-> **ASSET PLAN — inventário exato de logo, foto, vídeo, posters e media por secção.**
+> **FRONTEND IMPLEMENTATION PLAN → depois código React/TSX.**
