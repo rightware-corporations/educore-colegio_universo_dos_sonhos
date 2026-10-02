@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.3 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.4 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -23,6 +23,58 @@ Queremos:
 A abertura deve carregar a maior intensidade visual. Depois, a landing desacelera e deixa fotografia, conteúdo e espaço respirarem.
 
 ---
+
+
+---
+
+# Hierarquia visual dos artefactos
+
+Existe uma distinção importante entre os dois ficheiros principais de design.
+
+## Fonte de verdade da abertura
+
+> `intro-morph-colus.drawio` — **V0.3 APROVADO**
+
+Este ficheiro define a abertura real:
+
+- proporção e presença do mark;
+- decomposição do símbolo;
+- abertura do livro;
+- Book Aperture;
+- Light Device;
+- radials/nodes;
+- comportamento desktop;
+- comportamento mobile;
+- coreografia de scroll.
+
+**Nenhum visual posterior deve simplificar ou substituir esta abertura sem uma revisão explícita.**
+
+## Função do board high-fidelity
+
+> `landing-colus-hifi.drawio`
+
+Este ficheiro existe para:
+
+- tokens;
+- tipografia;
+- cor;
+- componentes;
+- Hero já montado;
+- Manifesto;
+- Aprender em Movimento;
+- secções seguintes;
+- visão integrada da landing.
+
+Os primeiros estados que aparecem neste board são **referências esquemáticas**, não uma segunda proposta para o morph.
+
+### Regra
+
+Se houver divergência visual entre os dois ficheiros:
+
+> **o `intro-morph-colus.drawio` prevalece para a abertura.**
+
+O board high-fidelity deve herdar essa solução e continuar a experiência a partir dela.
+
 
 # 2. Paleta de trabalho
 
