@@ -906,3 +906,46 @@ Referências:
 Próximo foco:
 
 > **CONTACTOS + CTA DESTINATIONS**
+
+
+---
+
+# 33. Consolidação — Contactos + CTA Destinations V0.1
+
+Foi fechado o comportamento dos canais públicos sem inventar processos internos.
+
+Contactos do demonstrador:
+
+- +258 84 700 0242 → publicamente corroborado;
+- Matola-Rio · KM 16 → publicamente corroborado;
+- info@colus.ac.mz → público observado / revalidar antes de produção;
+- @colus_mz → público observado / revalidar antes de produção.
+
+Routing:
+
+- Header/Hero `Marcar uma visita` → `#contactos`;
+- `Descobrir o COLUS` → `#o-colegio`;
+- Convite `Marcar uma visita` → mailto do email público;
+- Convite `Falar connosco` → telefone público.
+
+Os contactos ficam no Convite Final.
+
+Não adicionar nesta fase:
+
+- WhatsApp;
+- booking;
+- formulário;
+- mapa;
+- chat;
+- horário oficial;
+- SLA.
+
+Referências:
+
+- `landing/contactos-cta-colus.md`
+- `landing/landing-colus-master.drawio` — painel Contactos + CTA
+- `landing/high-fidelity-direction-colus.md` — V0.16
+
+Próximo foco:
+
+> **TYPOGRAPHY + GRID RESPONSIVE SYSTEM**
