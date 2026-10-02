@@ -664,3 +664,40 @@ Referências:
 Próximo foco:
 
 > **CONVITE FINAL + FOOTER**
+
+
+---
+
+# 27. High-Fidelity V0.10 — Convite Final
+
+Foi definido o fecho narrativo antes do Footer:
+
+> **CONVITE FINAL**
+
+Conceito:
+
+> **Return to Light**
+
+Decisões:
+
+- Horizon Node de Depoimentos transforma-se em halo;
+- Light Device regressa como proximidade;
+- mark subtil;
+- headline central;
+- CTA principal: **Marcar uma visita**;
+- CTA secundário: **Falar connosco →**;
+- Open Book memory na base;
+- sem media pesado;
+- mobile possui fecho próprio;
+- Portal/Login continuam ausentes;
+- Footer não foi desenhado neste passo.
+
+Referências:
+
+- `landing/convite-final-colus.md`
+- `landing/landing-colus-master.drawio` — bloco Convite Final
+- `landing/high-fidelity-direction-colus.md` — V0.10
+
+Próximo e último foco da landing:
+
+> **FOOTER — integrar a definição já existente do utilizador**
