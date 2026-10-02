@@ -39,6 +39,7 @@ Já contém:
 - Pertencer V0.1;
 - Transformar V0.1;
 - Depoimentos V0.1;
+- Convite Final V0.1;
 - apêndice de Tokens + Component Language.
 
 Os próximos blocos devem ser acrescentados no mesmo canvas, em continuidade.
