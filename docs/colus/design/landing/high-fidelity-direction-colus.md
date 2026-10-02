@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.19 — MASTER CONSOLIDADO / ASSET GATE PARCIAL  
+> **Estado:** HIGH-FIDELITY V0.20 — MASTER CONSOLIDADO / ASSET GATE FECHADO  
 > **Atualizado:** 2026-10-02  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -2453,3 +2453,37 @@ Gate atual:
 > **MASTER CONSOLIDADO + ASSET GATE PARCIAL**
 
 Próximo passo continua a ser fechar os gaps do Asset Plan antes do Motion Spec técnico final.
+
+
+---
+
+# 69. Asset Gate — fechado V0.3
+
+A ronda final de assets permite encerrar a recolha.
+
+Decisões de adaptação:
+
+- Engenharia → device-led, sem foto falsa;
+- Meninas nas TIC → aluna em contexto digital como participação feminina, sem claim de evento;
+- Pertencer → comunidade/ligação humana;
+- Museu/Umbelúzi → discovery/practical learning sem caption específica;
+- Brand mark → derived SVG device a partir da referência raster;
+- Transformar / Avançar → frame de realização/troféu.
+
+Pack final preparado externamente ao repo:
+
+> **colus-assets-final-v03.zip**
+
+Referência:
+
+- `asset-final-selection-colus-v03.md`
+
+Estado:
+
+> **ASSET GATE CLOSED FOR PRIVATE MVP / DEMO**
+
+Para produção pública, media com pessoas continua sujeito a autorização e substituição por originais aprovados quando necessário.
+
+Próximo passo:
+
+> **MOTION SPEC TÉCNICO**
