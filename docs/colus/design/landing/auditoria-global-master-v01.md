@@ -396,3 +396,26 @@ Ordem proposta:
 Próximo passo:
 
 > **CONSOLIDAÇÃO HIGH-FIDELITY — começar pela Motion Hierarchy global.**
+
+---
+
+# 11. Resoluções após auditoria
+
+## P0.1 — Motion hierarchy
+> **RESOLVIDO**
+
+Referência:
+- `motion-hierarchy-colus.md`
+
+## P0.2 — Sistema global do Header
+> **RESOLVIDO**
+
+## P0.3 — Mapeamento da navegação
+> **RESOLVIDO**
+
+Referência:
+- `header-anchors-colus.md`
+
+Próximo P0:
+
+> **P0.4 — Scroll Budget global**
