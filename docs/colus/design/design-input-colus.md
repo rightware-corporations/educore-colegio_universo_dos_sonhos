@@ -1022,3 +1022,27 @@ Faltam os gates:
 
 Depois:
 > **LANDING IMPLEMENTATION READY**
+
+
+---
+
+# 36. Asset Gate V0.2 — download manual
+
+Foi recebida uma nova recolha direta do Instagram com:
+
+- 31 imagens em resolução ~1080px;
+- 7 vídeos;
+- candidatos Hero reais;
+- media suficiente para várias secções.
+
+Auditoria:
+
+- `landing/asset-audit-colus-v02.md`
+
+Estado:
+
+> **ASSET GATE PARCIALMENTE RESOLVIDO**
+
+Ainda faltam os gaps P0 de marca, TIC, Engenharia, Meninas nas TIC, Família/encarregados, visita externa e um asset mais forte para Avançar.
+
+Não iniciar implementação ainda.
