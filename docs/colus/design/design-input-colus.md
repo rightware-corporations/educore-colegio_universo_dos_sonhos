@@ -332,7 +332,7 @@ Em 2026-10-01 foi aprovada a direção da abertura da landing COLUS:
 Referências:
 
 - `landing/conceito-interacao-abertura-colus.md`
-- `landing/intro-morph-colus.drawio`
+- `landing/landing-colus-master.drawio` — página 01
 - `landing/hero-direction-colus.md`
 
 Este ponto deixa de estar em exploração e pode avançar para high-fidelity.
@@ -347,7 +347,7 @@ A landing entrou em high-fidelity visual.
 Artefactos atuais:
 
 - `landing/high-fidelity-direction-colus.md`
-- `landing/landing-colus-hifi.drawio`
+- `landing/landing-colus-master.drawio`
 
 Decisões de trabalho atuais:
 
@@ -395,7 +395,7 @@ Decisões atuais:
 Referências:
 
 - `landing/high-fidelity-direction-colus.md` — V0.2;
-- `landing/landing-colus-hifi.drawio` — V0.2.
+- `landing/landing-colus-master.drawio` — V0.2.
 
 Próximo foco:
 
@@ -431,8 +431,27 @@ Referências:
 
 - `landing/aprender-em-movimento-colus.md`
 - `landing/high-fidelity-direction-colus.md` — V0.3
-- `landing/landing-colus-hifi.drawio` — V0.3
+- `landing/landing-colus-master.drawio` — V0.3
 
 Próximo foco:
 
 > **FUTURO & TECNOLOGIA — secção assinatura**
+
+
+---
+
+# 20. Consolidação Draw.io
+
+A landing passa a ter um único ficheiro visual canónico:
+
+> `landing/landing-colus-master.drawio`
+
+Objetivo:
+
+- abrir apenas um ficheiro;
+- acompanhar a experiência desde a abertura até ao footer;
+- manter páginas internas para detalhe sem fragmentar o projeto;
+- preservar a abertura Morph aprovada dentro do mesmo artefacto;
+- continuar todas as próximas secções no mesmo master.
+
+Os antigos Draw.io separados foram arquivados e deixam de fazer parte do fluxo ativo.
