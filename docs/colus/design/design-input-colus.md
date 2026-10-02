@@ -455,3 +455,45 @@ Objetivo:
 - continuar todas as próximas secções no mesmo master.
 
 Os antigos Draw.io separados foram arquivados e deixam de fazer parte do fluxo ativo.
+
+
+---
+
+# 21. High-Fidelity V0.5 — Futuro & Tecnologia
+
+Foi definida a secção assinatura:
+
+> **O futuro também se aprende.**
+
+Conceito:
+
+> **Signal Field**
+
+Estrutura:
+
+- 01 / TIC;
+- 02 / Engenharia;
+- 03 / Ciência;
+- 04 / Segurança Digital.
+
+Decisões:
+
+- quatro cenas, não quatro cards;
+- stage Deep Blue / Deep Ink;
+- Scene Window transformável;
+- Signal Field contínuo;
+- Light Device retorna com função de conexão;
+- sem estética SaaS, HUD, neon ou sci-fi genérico;
+- mobile usa cenas verticais, sem sticky longo;
+- saída humaniza a experiência e prepara Vida COLUS;
+- nenhum claim de equipamento, laboratório, certificação ou parceria sem validação.
+
+Referências:
+
+- `landing/futuro-tecnologia-colus.md`
+- `landing/landing-colus-master.drawio` — página 03
+- `landing/high-fidelity-direction-colus.md` — V0.5
+
+Próximo foco:
+
+> **VIDA COLUS**
