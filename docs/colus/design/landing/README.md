@@ -40,6 +40,7 @@ Já contém:
 - Transformar V0.1;
 - Depoimentos V0.1;
 - Convite Final V0.1;
+- Footer EduCore / RIGHTWARE;
 - apêndice de Tokens + Component Language.
 
 Os próximos blocos devem ser acrescentados no mesmo canvas, em continuidade.
@@ -47,3 +48,10 @@ Os próximos blocos devem ser acrescentados no mesmo canvas, em continuidade.
 ## Archive
 
 A pasta `archive/` conserva versões históricas e backups. Não é fonte de verdade para o trabalho ativo.
+
+
+## Estado atual
+
+A narrativa pública está completa em design, do Intro Morph ao Footer.
+
+O próximo trabalho deve ser revisão/consolidação global do master antes de implementação.
