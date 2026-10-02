@@ -36,6 +36,7 @@ Já contém:
 - Aprender em Movimento V0.1;
 - Futuro & Tecnologia V0.1;
 - Vida COLUS V0.1;
+- Pertencer V0.1;
 - apêndice de Tokens + Component Language.
 
 Os próximos blocos devem ser acrescentados no mesmo canvas, em continuidade.
