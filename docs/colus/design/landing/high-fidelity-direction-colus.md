@@ -1752,8 +1752,8 @@ Padrão reutilizável documentado em:
 - COMPANY;
 - RIGHTWARE Product lockup;
 - LinkedIn / YouTube / X / Instagram;
-- copyright;
-- product attribution;
+- copyright institucional do cliente;
+- product attribution EduCore / RIGHTWARE;
 - Privacy Policy;
 - Terms of Service;
 - Cookie Policy;
@@ -1798,3 +1798,15 @@ O próximo passo já não é inventar novas secções.
 É:
 
 > **REVISÃO GLOBAL DO MASTER + CONSOLIDAÇÃO HIGH-FIDELITY ANTES DE IMPLEMENTAÇÃO**
+
+
+## Regra de copyright e assinatura de marca
+
+Na landing COLUS, a linha legal final é:
+
+> **© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.**  
+> **Powered by EduCore · A RIGHTWARE Product**
+
+Além disso, os **logos EduCore e RIGHTWARE permanecem obrigatórios no Footer**.
+
+A marca COLUS não substitui a assinatura de produto da RIGHTWARE.
