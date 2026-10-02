@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.9 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.10 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1638,3 +1638,92 @@ O high-fidelity cobre agora:
 Próximo foco:
 
 > **CONVITE FINAL + FOOTER**
+
+
+---
+
+# 50. Convite Final — direção integrada
+
+O fecho da landing usa o conceito:
+
+> **RETURN TO LIGHT**
+
+A experiência volta a concentrar-se em luz, marca e convite, sem reconstruir um Hero nem um banner comercial.
+
+Headline:
+
+> **Venha conhecer de perto o Universo dos Sonhos.**
+
+CTAs:
+
+- **Marcar uma visita**
+- **Falar connosco →**
+
+## Device principal
+
+O Horizon Node vindo de Depoimentos expande-se e transforma-se num halo.
+
+O Light Device regressa pela última vez:
+
+- abertura → revelação;
+- Futuro & Tecnologia → conexão;
+- Convite Final → proximidade.
+
+O mark pode reaparecer de forma pequena/mediana, integrado na luz.
+
+## Composição
+
+Desktop:
+
+- Warm Paper / Warm White;
+- mark subtil;
+- halo amplo;
+- headline central;
+- supporting copy curta;
+- CTA principal + link secundário;
+- Open Book memory na base;
+- sem media pesado.
+
+Mobile:
+
+- mark;
+- headline;
+- copy;
+- CTA quase full-width;
+- link secundário;
+- Open Book memory;
+- muito espaço.
+
+## Footer
+
+O Convite Final termina **antes do Footer**.
+
+O Footer não foi redesenhado nem reinterpretado neste bloco.
+
+Foi deixada apenas a fronteira de passagem, para integrar posteriormente a definição já existente do utilizador.
+
+Direção detalhada:
+
+- `convite-final-colus.md`
+- `landing-colus-master.drawio` — bloco **Convite Final** no canvas contínuo
+
+---
+
+# 51. Gate V0.10
+
+O high-fidelity cobre agora:
+
+- Intro Morph;
+- Hero Assembly;
+- Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia;
+- Vida COLUS;
+- Pertencer;
+- Transformar;
+- Depoimentos;
+- Convite Final.
+
+Único bloco público ainda por integrar:
+
+> **FOOTER — usar definição já existente, sem reinventar**
