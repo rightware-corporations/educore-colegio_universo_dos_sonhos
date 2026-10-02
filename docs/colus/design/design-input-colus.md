@@ -332,7 +332,7 @@ Em 2026-10-01 foi aprovada a direção da abertura da landing COLUS:
 Referências:
 
 - `landing/conceito-interacao-abertura-colus.md`
-- `landing/landing-colus-master.drawio` — página 01
+- `landing/landing-colus-master.drawio` — abertura no início do canvas
 - `landing/hero-direction-colus.md`
 
 Este ponto deixa de estar em exploração e pode avançar para high-fidelity.
@@ -491,7 +491,7 @@ Decisões:
 Referências:
 
 - `landing/futuro-tecnologia-colus.md`
-- `landing/landing-colus-master.drawio` — página 04
+- `landing/landing-colus-master.drawio` — bloco Futuro & Tecnologia
 - `landing/high-fidelity-direction-colus.md` — V0.5
 
 Próximo foco:
@@ -531,9 +531,30 @@ Decisões:
 Referências:
 
 - `landing/vida-colus.md`
-- `landing/landing-colus-master.drawio` — página 05
+- `landing/landing-colus-master.drawio` — bloco Vida COLUS
 - `landing/high-fidelity-direction-colus.md` — V0.6
 
 Próximo foco:
 
 > **PERTENCER — Família & Comunidade**
+
+
+---
+
+# 23. Master convertido para canvas contínuo
+
+A estrutura multipage foi substituída por um **único canvas contínuo**.
+
+O `landing/landing-colus-master.drawio` contém fisicamente, em sequência vertical:
+
+- Abertura Morph;
+- Hero + Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia;
+- Vida COLUS;
+- espaço reservado para Pertencer → Transformar → Depoimentos → Convite → Footer;
+- apêndice visual de tokens/componentes.
+
+Objetivo:
+
+> abrir um único ficheiro e acompanhar todo o desenho da landing sem trocar de páginas internas.
