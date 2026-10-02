@@ -42,13 +42,17 @@ Conteúdo que depende de informação, autorização, asset ou validação exter
 
 Já estava marcada como working copy no Hero Direction.
 
+## LOCKED — CTAs
+
 **CTA principal**
 > Descobrir o COLUS
 
 **CTA secundário**
 > Marcar uma visita →
 
-Os rótulos estão estáveis para design, mas o comportamento/destino final do CTA de visita ainda depende do passo de Contactos.
+Destinos definidos para o demonstrador:
+- Descobrir o COLUS → `#o-colegio`;
+- Marcar uma visita → `#contactos`.
 
 ---
 
@@ -62,11 +66,12 @@ Os rótulos estão estáveis para design, mas o comportamento/destino final do C
 - Comunidade
 - Contactos
 
-## WORKING
+## LOCKED
 
 > Marcar uma visita
 
-O label pode entrar no demonstrador, mas a ação final continua por validar.
+Destino no demonstrador:
+> `#contactos`
 
 ---
 
@@ -253,13 +258,17 @@ Até existir autorização:
 **Supporting copy**
 > Descubra a experiência, o ambiente e a comunidade que dão vida ao COLUS.
 
+## LOCKED — CTAs
+
 **CTA primário**
 > Marcar uma visita
 
 **CTA secundário**
 > Falar connosco →
 
-Os labels podem ser implementados visualmente, mas os destinos reais permanecem PLACEHOLDER até o passo Contactos/CTA Destinations.
+Destinos do demonstrador:
+- Marcar uma visita → email público observado;
+- Falar connosco → telefone público corroborado.
 
 ---
 
@@ -367,7 +376,7 @@ Não renderizar estes nomes na landing pública.
 - Pertencer;
 - Transformar;
 - headline/copy Convite;
-- CTA labels enquanto os destinos não forem validados;
+
 - língua do Footer global.
 
 ## PLACEHOLDER
