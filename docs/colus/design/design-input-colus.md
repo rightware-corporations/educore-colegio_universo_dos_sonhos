@@ -497,3 +497,43 @@ Referências:
 Próximo foco:
 
 > **VIDA COLUS**
+
+
+---
+
+# 22. High-Fidelity V0.6 — Vida COLUS
+
+Foi definida a experiência editorial:
+
+> **VIDA COLUS**
+
+Conceito:
+
+> **Living Reel**
+
+Estrutura:
+
+- Imersão;
+- Ritmo;
+- Presença.
+
+Decisões:
+
+- fotoensaio vivo, não galeria;
+- fotografia protagonista;
+- 1 media principal + 1 secundário + 1 detalhe no máximo;
+- Story Markers substituem nodes tecnológicos;
+- branding low / medium-low;
+- sem masonry;
+- mobile usa narrativa vertical própria;
+- último frame humano prepara a secção Pertencer.
+
+Referências:
+
+- `landing/vida-colus.md`
+- `landing/landing-colus-master.drawio` — página 04
+- `landing/high-fidelity-direction-colus.md` — V0.6
+
+Próximo foco:
+
+> **PERTENCER — Família & Comunidade**
