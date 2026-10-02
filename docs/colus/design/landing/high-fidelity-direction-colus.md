@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.18 — MASTER CONSOLIDADO / IMPLEMENTAÇÃO AINDA BLOQUEADA  
+> **Estado:** HIGH-FIDELITY V0.19 — MASTER CONSOLIDADO / ASSET GATE PARCIAL  
 > **Atualizado:** 2026-10-02  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -2418,3 +2418,38 @@ Referência:
 # 67. Próximo passo
 
 > **ASSET PLAN — inventário exato de logo, foto, vídeo, posters e media por secção.**
+
+
+---
+
+# 68. Asset Gate — progresso V0.2
+
+A recolha manual direta do Instagram trouxe media em qualidade muito superior à primeira ronda.
+
+Disponível:
+- Hero video candidates;
+- media de ciência/prática;
+- desporto;
+- Spelling Bee/evento;
+- frames humanos;
+- media suficiente para Vida COLUS provisória.
+
+Continuam bloqueadores P0:
+- mark/logo oficial;
+- TIC;
+- Engenharia;
+- Meninas nas TIC;
+- Família/encarregados;
+- Museu/Umbelúzi;
+- asset mais forte para Transformar / Avançar.
+
+Referências:
+
+- `asset-audit-colus-v02.md`
+- `asset-plan-colus.md`
+
+Gate atual:
+
+> **MASTER CONSOLIDADO + ASSET GATE PARCIAL**
+
+Próximo passo continua a ser fechar os gaps do Asset Plan antes do Motion Spec técnico final.
