@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.6 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.7 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1361,3 +1361,95 @@ O high-fidelity cobre agora:
 Próximo foco:
 
 > **PERTENCER — Família & Comunidade**
+
+
+---
+
+# 44. Pertencer — direção integrada
+
+Depois de Vida COLUS, a narrativa deixa de mostrar apenas momentos e passa a mostrar **relações**.
+
+Conceito:
+
+> **COMMUNITY RING**
+
+O device deriva diretamente do anel superior do símbolo COLUS, entendido como figuras humanas ligadas em comunidade.
+
+Headline:
+
+> **Crescer é uma jornada partilhada.**
+
+## Estrutura
+
+A secção trabalha três relações editoriais:
+
+- **Acompanhar**
+- **Participar**
+- **Crescer juntos**
+
+Não aparecem como três cards.
+
+São integradas numa composição humana ligada por arcos e nodes.
+
+## Desktop
+
+- frame humano principal;
+- dois media relacionais secundários;
+- Community Ring incompleto;
+- headline no espaço central;
+- muito negative space.
+
+O ring não fecha totalmente.
+
+A composição deve parecer humana, não geométrica/perfeita.
+
+## Motion
+
+Fluxo:
+
+> relação → arco → comunidade → estabilidade → abertura.
+
+Sem rotação contínua.
+
+Sem carousel circular.
+
+## Mobile
+
+No mobile:
+
+- Community Ring vira curva lateral;
+- media segue narrativa vertical;
+- nodes acompanham o scroll;
+- sem círculo comprimido;
+- sem sticky longo.
+
+## Saída
+
+Um dos arcos do Community Ring abre e transforma-se num eixo ascendente.
+
+A passagem conceptual é:
+
+> **pertencer → ganhar confiança → transformar**
+
+Direção detalhada:
+
+- `pertencer-colus.md`
+- `landing-colus-master.drawio` — bloco **Pertencer** no canvas contínuo
+
+---
+
+# 45. Gate V0.7
+
+O high-fidelity cobre agora:
+
+- Intro Morph;
+- Hero Assembly;
+- Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia;
+- Vida COLUS;
+- Pertencer.
+
+Próximo foco:
+
+> **TRANSFORMAR — confiança, protagonismo e futuro**
