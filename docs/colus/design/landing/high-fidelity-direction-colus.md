@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.4 — EM DESENVOLVIMENTO  
+> **Estado:** HIGH-FIDELITY V0.5 — EM DESENVOLVIMENTO  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1178,3 +1178,93 @@ O high-fidelity já cobre:
 Próximo foco:
 
 > **FUTURO & TECNOLOGIA — secção assinatura.**
+
+
+---
+
+# 40. Futuro & Tecnologia — direção integrada
+
+A secção assinatura passa a usar o conceito:
+
+> **SIGNAL FIELD**
+
+Headline:
+
+> **O futuro também se aprende.**
+
+A função desta secção é elevar novamente a intensidade visual sem cair numa grelha de funcionalidades ou numa estética tecnológica genérica.
+
+## Estrutura
+
+Quatro cenas editoriais:
+
+- **01 / TIC**
+- **02 / Engenharia**
+- **03 / Ciência**
+- **04 / Segurança Digital**
+
+Estas cenas não aparecem como quatro cards.
+
+Usam um único stage Deep Blue / Deep Ink com:
+
+- Signal Field contínuo;
+- Scene Window principal;
+- nodes contextuais;
+- progress discreto;
+- transformação do mesmo media container.
+
+## Brand devices
+
+Nesta secção:
+
+- Learning Trail evolui para Signal Field;
+- Light Device retorna de forma controlada;
+- Radial/Community nodes ganham função contextual;
+- Open Book permanece apenas como memória de mask/crop.
+
+## Desktop
+
+Stage aproximado de 220–280vh, sticky 100vh, scroll nativo.
+
+A sequência é:
+
+> entrada → headline → TIC → Engenharia → Ciência → Segurança Digital → saída humanizada.
+
+## Mobile
+
+No mobile:
+
+- sem sticky longo;
+- quatro cenas empilhadas;
+- Signal Field vertical simplificado;
+- media forte;
+- progressão natural por scroll.
+
+## Saída
+
+A última cena não termina em mais tecnologia.
+
+O Signal Field reduz intensidade e dissolve-se em media humano para preparar:
+
+> **VIDA COLUS**
+
+Direção detalhada:
+
+- `futuro-tecnologia-colus.md`
+- `landing-colus-master.drawio` — página **03 — Futuro & Tecnologia V0.1**
+
+---
+
+# 41. Gate V0.5
+
+O high-fidelity cobre agora:
+
+- Intro Morph;
+- Hero Assembly;
+- Manifesto;
+- Aprender em Movimento;
+- Futuro & Tecnologia.
+
+Próximo foco:
+
+> **VIDA COLUS — experiência editorial / fotoensaio vivo**
