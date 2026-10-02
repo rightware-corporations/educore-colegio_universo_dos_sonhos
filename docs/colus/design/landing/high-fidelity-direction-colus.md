@@ -1,6 +1,6 @@
 # High-Fidelity Direction — Landing COLUS
 
-> **Estado:** HIGH-FIDELITY V0.13 — CONSOLIDAÇÃO GLOBAL  
+> **Estado:** HIGH-FIDELITY V0.14 — CONSOLIDAÇÃO GLOBAL  
 > **Data:** 2026-10-01  
 > **Base aprovada:** intro morph-driven + Hero final + identidade digital COLUS.
 >
@@ -1969,3 +1969,87 @@ Header + Anchors global consolidado.
 Próximo passo:
 
 > **SCROLL BUDGET GLOBAL**
+
+
+---
+
+# 58. Scroll Budget global
+
+Foi fechado o budget de scroll da landing para evitar uma experiência excessivamente longa.
+
+## Desktop
+
+Faixa preferida da narrativa, sem Footer:
+
+> **~1430–1490vh**
+
+Footer:
+
+> **altura natural / auto**
+
+Referência por bloco:
+
+- Intro Morph → **200vh**
+- Hero + Manifesto → **170vh**
+- Aprender em Movimento → **185vh**
+- Futuro & Tecnologia → **230vh**
+- Vida COLUS → **155vh**
+- Pertencer → **130vh**
+- Transformar → **165vh**
+- Depoimentos → **100–160vh**, conforme 1–3 vozes
+- Convite Final → **95vh**
+
+## Sticky contract
+
+### Forte
+- Intro Morph
+- Futuro & Tecnologia
+
+### Moderado
+- Aprender em Movimento
+- Transformar
+
+### Natural / partial
+- Hero + Manifesto
+- Vida COLUS
+- Pertencer
+
+### Natural
+- Depoimentos
+- Convite Final
+- Footer
+
+## Mobile
+
+Faixa de trabalho:
+
+> **~1150–1350svh + Footer natural**
+
+Mobile não replica o pinning desktop.
+
+## Fast-scroll
+
+- sem scroll-jacking;
+- sem snap obrigatório;
+- states interpolam diretamente;
+- nenhuma animação bloqueia input;
+- anchors aterram em states estáveis.
+
+## Reduced motion
+
+Reduced motion também reduz o comprimento das secções que reservavam espaço apenas para animação.
+
+Direção detalhada:
+
+- `scroll-budget-colus.md`
+- `landing-colus-master.drawio` — painel **Scroll Budget — Global V0.1**
+
+---
+
+# 59. Gate V0.14
+
+Scroll Budget global consolidado.
+
+Próximo passo:
+
+> **COPY STATUS — LOCKED / WORKING / PLACEHOLDER**
