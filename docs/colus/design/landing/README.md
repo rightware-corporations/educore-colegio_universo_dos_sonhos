@@ -2,36 +2,19 @@
 
 ## Ficheiro canónico
 
-Toda a landing deve ser trabalhada num único ficheiro:
+Toda a landing é trabalhada num único ficheiro:
 
 > **`landing-colus-master.drawio`**
 
-Este ficheiro contém várias páginas internas e deve evoluir desde a abertura até ao footer.
+## Regra atual
 
-### Páginas atuais
+O master usa **um único canvas contínuo**, não várias páginas internas.
 
-- **01 — Abertura Morph V0.3 (APROVADO)**
-- **02 — Hero + Manifesto V0.2**
-- **03 — Aprender em Movimento V0.1**
-- **04 — Futuro & Tecnologia V0.1**
-- **05 — Vida COLUS V0.1**
-- **90 — Tokens + Component Language V0.4**
-- **00 — Índice / Estado do Master**
-
-O ficheiro abre diretamente na **Abertura Morph**, e o índice fica no fim apenas como mapa.
-
-## Regra
-
-Não criar novos `.drawio` ativos para secções isoladas da landing.
-
-A pasta `archive/` contém versões históricas que não devem ser usadas como fonte de verdade.
-
-## Fluxo previsto até ao final
+A experiência deve ser lida verticalmente, do início ao fim:
 
 ```text
 Abertura Morph
-→ Hero Assembly
-→ Manifesto
+→ Hero + Manifesto
 → Aprender em Movimento
 → Futuro & Tecnologia
 → Vida COLUS
@@ -42,4 +25,21 @@ Abertura Morph
 → Footer
 ```
 
-O master deve terminar com a experiência completa de desktop e mobile.
+Os blocos já desenhados ficam fisicamente no mesmo canvas, um abaixo do outro.
+
+### Estado atual do canvas
+
+Já contém:
+
+- Abertura Morph V0.3 aprovada;
+- Hero + Manifesto V0.2;
+- Aprender em Movimento V0.1;
+- Futuro & Tecnologia V0.1;
+- Vida COLUS V0.1;
+- apêndice de Tokens + Component Language.
+
+Os próximos blocos devem ser acrescentados no mesmo canvas, em continuidade.
+
+## Archive
+
+A pasta `archive/` conserva versões históricas e backups. Não é fonte de verdade para o trabalho ativo.
