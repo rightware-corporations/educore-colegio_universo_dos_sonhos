@@ -438,7 +438,7 @@ Portanto, o Hero descrito neste documento é agora o **estado final da primeira 
 Referências principais:
 
 - `conceito-interacao-abertura-colus.md`
-- `intro-morph-colus.drawio`
+- `landing-colus-master.drawio` — página 01
 
 
 ---
@@ -450,4 +450,4 @@ O Hero deste documento permanece válido como **estado final da abertura morph-d
 Referência de interação aprovada:
 
 - `conceito-interacao-abertura-colus.md`
-- `intro-morph-colus.drawio` V0.3
+- `landing-colus-master.drawio` — página 01 V0.3
