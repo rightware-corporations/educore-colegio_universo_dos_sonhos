@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<mxfile host="app.diagrams.net" modified="2026-10-02T08:20:00.000Z" agent="RIGHTWARE EduCore" version="24.7.17" type="device">
-  <diagram id="landing-colus-hifi-v01" name="Landing COLUS HiFi V0.3">
+<mxfile host="app.diagrams.net" modified="2026-10-02T08:35:00.000Z" agent="RIGHTWARE EduCore" version="24.7.17" type="device">
+  <diagram id="landing-colus-hifi-v01" name="Landing COLUS HiFi V0.4">
     <mxGraphModel dx="1900" dy="1900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1900" pageHeight="5200" math="0" shadow="0">
       <root>
         <mxCell id="0"/>
         <mxCell id="1" parent="0"/>
-        <mxCell id="2" value="COLUS — HIGH-FIDELITY VISUAL BOARD V0.3" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#102231;fontSize=22;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="40" y="18" width="1000" height="34" as="geometry"/></mxCell>
+        <mxCell id="2" value="COLUS — HIGH-FIDELITY VISUAL BOARD V0.4" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#102231;fontSize=22;fontStyle=1;align=left;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="40" y="18" width="1000" height="34" as="geometry"/></mxCell>
         <mxCell id="3" value="Abertura aprovada → linguagem visual concreta" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#65727C;fontSize=13;fontStyle=0;align=left;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="40" y="54" width="800" height="24" as="geometry"/></mxCell>
         <mxCell id="4" value="WARM PAPER&#xa;#FFF8EF" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#E7E5E4;fillColor=#FFF8EF;fontColor=#102231;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="40" y="96" width="180" height="82" as="geometry"/></mxCell>
         <mxCell id="5" value="DEEP INK&#xa;#071A2A" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#071A2A;fillColor=#071A2A;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="235" y="96" width="180" height="82" as="geometry"/></mxCell>
@@ -202,6 +202,7 @@
         <mxCell id="196" value="→" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=none;fillColor=none;fontColor=#94A3B8;fontSize=22;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1120" y="4525" width="30" height="30" as="geometry"/></mxCell>
         <mxCell id="197" value="FUTURO &amp; TECNOLOGIA" style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#071A2A;fillColor=#071A2A;fontColor=#FFFFFF;fontSize=12;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1160" y="4485" width="300" height="110" as="geometry"/></mxCell>
         <mxCell id="198" value="GATE V0.3&#xa;&#xa;Aprender em Movimento definido: Learning Trail + media stage editorial no desktop + narrativa vertical própria no mobile. Próximo: FUTURO &amp; TECNOLOGIA — secção assinatura." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#071A2A;fillColor=#071A2A;fontColor=#FFFFFF;fontSize=14;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="40" y="4880" width="1720" height="110" as="geometry"/></mxCell>
+        <mxCell id="199" value="ABERTURA — FONTE DE VERDADE: intro-morph-colus.drawio V0.3 APROVADO. Os 4 painéis iniciais deste board são apenas referência esquemática de tokens/composição e NÃO substituem a coreografia, proporções ou geometria aprovadas no Intro Morph." style="rounded=1;whiteSpace=wrap;html=1;strokeColor=#F18136;fillColor=#FFF4E8;fontColor=#9A3412;fontSize=13;fontStyle=1;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="40" y="188" width="1720" height="58" as="geometry"/></mxCell>
       </root>
     </mxGraphModel>
   </diagram>
