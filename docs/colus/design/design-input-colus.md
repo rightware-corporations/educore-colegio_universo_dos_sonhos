@@ -558,3 +558,36 @@ O `landing/landing-colus-master.drawio` contém fisicamente, em sequência verti
 Objetivo:
 
 > abrir um único ficheiro e acompanhar todo o desenho da landing sem trocar de páginas internas.
+
+
+---
+
+# 24. High-Fidelity V0.7 — Pertencer
+
+Foi definida a secção:
+
+> **PERTENCER — Família & Comunidade**
+
+Conceito:
+
+> **Community Ring**
+
+Decisões:
+
+- o anel humano do símbolo COLUS passa a ter uso explícito;
+- a secção não usa layout genérico de “família + texto”;
+- Acompanhar → Participar → Crescer juntos formam relações editoriais, não cards;
+- ring incompleto liga media e conteúdo;
+- mobile usa curva lateral vertical;
+- saída abre o ring e transforma-o num eixo para Transformar.
+
+Referências:
+
+- `landing/pertencer-colus.md`
+- `landing/sistema-identidade-visual-colus.md`
+- `landing/landing-colus-master.drawio` — bloco Pertencer
+- `landing/high-fidelity-direction-colus.md` — V0.7
+
+Próximo foco:
+
+> **TRANSFORMAR**
