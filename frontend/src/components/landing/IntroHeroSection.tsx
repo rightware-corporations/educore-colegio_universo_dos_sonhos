@@ -284,18 +284,16 @@ export function IntroHeroSection() {
         <motion.div
           style={{ opacity: finalNodesOpacity }}
           className="pointer-events-none absolute inset-0 z-40 hidden lg:block"
-          aria-hidden="true"
         >
           {heroNodes.map((node) => (
             <a
               key={node.label}
               href={node.href}
-              tabIndex={-1}
-              className={`pointer-events-auto group absolute ${node.className}`}
+              className={`pointer-events-auto group absolute rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-colus-orange focus-visible:ring-offset-4 focus-visible:ring-offset-colus-ink ${node.className}`}
             >
               <span className="flex h-11 items-center gap-2">
                 <span className="h-3 w-3 rounded-full border border-white/80 bg-colus-orange shadow-[0_0_0_5px_rgba(241,129,54,.08)]" />
-                <span className="translate-x-1 whitespace-nowrap rounded-full bg-colus-ink/72 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white opacity-0 backdrop-blur-sm transition group-hover:translate-x-0 group-hover:opacity-100">
+                <span className="translate-x-1 whitespace-nowrap rounded-full bg-colus-ink/72 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-white opacity-0 backdrop-blur-sm transition group-hover:translate-x-0 group-hover:opacity-100 group-focus:translate-x-0 group-focus:opacity-100">
                   {node.label}
                 </span>
               </span>
