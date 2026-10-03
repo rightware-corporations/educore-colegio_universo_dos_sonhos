@@ -134,85 +134,106 @@ export function LandingHeader() {
       {skipLink}
       <header
         className={[
-          "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition duration-300 lg:pt-0",
-        autoHidden ? "-translate-y-full" : "translate-y-0",
-        theme === "transparent" ? "bg-transparent" : "",
-        theme === "dark" ? "border-b border-white/10 bg-colus-ink/90 backdrop-blur-md" : "",
-        theme === "light" ? "border-b border-black/5 bg-colus-white/90 backdrop-blur-md" : "",
+          "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:pt-0",
+          autoHidden ? "-translate-y-full" : "translate-y-0",
+          theme === "transparent" ? "bg-transparent" : "",
+          theme === "dark"
+            ? "border-b border-white/10 bg-colus-ink/90 backdrop-blur-md"
+            : "",
+          theme === "light"
+            ? "border-b border-black/5 bg-colus-white/90 backdrop-blur-md"
+            : "",
         ].join(" ")}
       >
-      <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-5 md:px-8 lg:h-[72px] lg:px-16">
-        <a href="#top" aria-label="Colégio Universo dos Sonhos" className="shrink-0">
-          <ColusMark className="h-11 w-14" compact />
-        </a>
+        <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-5 md:px-8 lg:h-[72px] lg:px-16">
+          <a href="#top" aria-label="Colégio Universo dos Sonhos" className="shrink-0">
+            <ColusMark className="h-11 w-14" compact />
+          </a>
 
-        <nav className="ml-auto hidden items-center gap-7 lg:flex" aria-label="Navegação principal">
-          {links.map(([label, id]) => (
-            <a
-              key={id}
-              href={`#${id}`}
-              className={[
-                "relative py-2 text-sm font-semibold transition-colors",
-                dark ? "text-white/80 hover:text-white" : "text-colus-text/75 hover:text-colus-text",
-              ].join(" ")}
-            >
-              {label}
-              {active === id && (
-                <span className="absolute inset-x-0 -bottom-0.5 mx-auto h-0.5 w-5 rounded-full bg-colus-orange" />
-              )}
-            </a>
-          ))}
-        </nav>
-
-        <a
-          href="#contactos"
-          className={[
-            "ml-auto hidden rounded-full px-5 py-2.5 text-sm font-bold transition lg:inline-flex",
-            dark
-              ? "bg-colus-orange text-colus-ink hover:translate-y-[-1px]"
-              : "bg-colus-ink text-white hover:translate-y-[-1px]",
-          ].join(" ")}
-        >
-          Marcar uma visita
-        </a>
-
-        <button
-          type="button"
-          className={[
-            "ml-auto inline-flex h-11 w-11 items-center justify-center rounded-full lg:hidden",
-            dark ? "text-white" : "text-colus-ink",
-          ].join(" ")}
-          aria-label={open ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={open}
-          onClick={() => setOpen((value) => !value)}
-        >
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-
-      {open && (
-        <div className={dark ? "bg-colus-ink text-white" : "bg-colus-white text-colus-ink"}>
-          <nav className="mx-auto grid max-w-[1440px] gap-1 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-2 md:px-8 lg:pb-6">
+          <nav
+            className="ml-auto hidden items-center gap-7 lg:flex"
+            aria-label="Navegação principal"
+          >
             {links.map(([label, id]) => (
               <a
                 key={id}
                 href={`#${id}`}
-                className="rounded-xl px-3 py-3 text-base font-semibold"
-                onClick={() => setOpen(false)}
+                aria-current={active === id ? "location" : undefined}
+                className={[
+                  "relative py-2 text-sm font-semibold transition-colors",
+                  dark
+                    ? "text-white/80 hover:text-white"
+                    : "text-colus-text/75 hover:text-colus-text",
+                ].join(" ")}
               >
                 {label}
+                {active === id && (
+                  <span
+                    className="absolute inset-x-0 -bottom-0.5 mx-auto h-0.5 w-5 rounded-full bg-colus-orange"
+                    aria-hidden="true"
+                  />
+                )}
               </a>
             ))}
-            <a
-              href="#contactos"
-              className="mt-2 rounded-full bg-colus-orange px-5 py-3 text-center text-sm font-bold text-colus-ink"
-              onClick={() => setOpen(false)}
-            >
-              Marcar uma visita
-            </a>
           </nav>
+
+          <a
+            href="#contactos"
+            className={[
+              "ml-auto hidden rounded-full px-5 py-2.5 text-sm font-bold transition lg:inline-flex",
+              dark
+                ? "bg-colus-orange text-colus-ink hover:translate-y-[-1px]"
+                : "bg-colus-ink text-white hover:translate-y-[-1px]",
+            ].join(" ")}
+          >
+            Marcar uma visita
+          </a>
+
+          <button
+            type="button"
+            className={[
+              "ml-auto inline-flex h-11 w-11 items-center justify-center rounded-full lg:hidden",
+              dark ? "text-white" : "text-colus-ink",
+            ].join(" ")}
+            aria-label={open ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={open}
+            aria-controls="landing-mobile-nav"
+            onClick={() => setOpen((value) => !value)}
+          >
+            {open ? <X /> : <Menu />}
+          </button>
         </div>
-      )}
+
+        {open && (
+          <div
+            id="landing-mobile-nav"
+            className={dark ? "bg-colus-ink text-white" : "bg-colus-white text-colus-ink"}
+          >
+            <nav
+              className="mx-auto grid max-w-[1440px] gap-1 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-2 md:px-8 lg:pb-6"
+              aria-label="Navegação mobile"
+            >
+              {links.map(([label, id]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  aria-current={active === id ? "location" : undefined}
+                  className="rounded-xl px-3 py-3 text-base font-semibold"
+                  onClick={() => setOpen(false)}
+                >
+                  {label}
+                </a>
+              ))}
+              <a
+                href="#contactos"
+                className="mt-2 rounded-full bg-colus-orange px-5 py-3 text-center text-sm font-bold text-colus-ink"
+                onClick={() => setOpen(false)}
+              >
+                Marcar uma visita
+              </a>
+            </nav>
+          </div>
+        )}
       </header>
     </>
   );
