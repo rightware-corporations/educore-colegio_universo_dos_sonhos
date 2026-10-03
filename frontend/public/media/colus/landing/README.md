@@ -8,7 +8,15 @@ This directory is the canonical runtime location for the curated COLUS landing a
 
 ## Installation
 
+### Windows / PowerShell
+
 From repository root:
+
+```powershell
+.\scripts\install-colus-assets.ps1 -ZipPath "C:\path\to\colus-assets-final-v03.zip"
+```
+
+### Bash / macOS / Linux
 
 ```bash
 bash scripts/install-colus-assets.sh /absolute/path/to/colus-assets-final-v03.zip
