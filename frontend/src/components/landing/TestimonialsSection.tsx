@@ -60,7 +60,7 @@ export function TestimonialsSection() {
             </div>
             <div className="mt-4 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.16em] text-white/30">
               <span>01</span>
-              <span>Voz autorizada antes de publicação</span>
+              <span>Vozes COLUS</span>
             </div>
           </div>
         </div>
