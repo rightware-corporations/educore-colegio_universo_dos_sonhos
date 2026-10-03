@@ -70,9 +70,9 @@ export function PertencerSection() {
               <circle cx="39" cy="584" r="6" fill="#F18136" />
             </svg>
 
-            <div className="space-y-12">
+            <div className="space-y-8">
               <article>
-                <div className="aspect-[4/5] overflow-hidden rounded-[30px_78px_30px_30px]">
+                <div className="aspect-[4/3] overflow-hidden rounded-[30px_78px_30px_30px]">
                   <LandingMedia
                     kind="image"
                     src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-INTERACAO-001.webp`}
@@ -86,7 +86,7 @@ export function PertencerSection() {
               </article>
 
               <article>
-                <div className="aspect-[4/5] overflow-hidden rounded-[74px_28px_28px_28px]">
+                <div className="aspect-[3/2] overflow-hidden rounded-[74px_28px_28px_28px]">
                   <LandingMedia
                     kind="image"
                     src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-COMUNIDADE-001.webp`}
@@ -102,7 +102,7 @@ export function PertencerSection() {
               </article>
 
               <article>
-                <div className="aspect-[4/5] overflow-hidden rounded-[28px_28px_74px_28px]">
+                <div className="ml-auto aspect-[4/3] w-[82%] overflow-hidden rounded-[28px_28px_74px_28px]">
                   <LandingMedia
                     kind="image"
                     src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-COMUNIDADE-002.webp`}
@@ -118,7 +118,7 @@ export function PertencerSection() {
               </article>
             </div>
 
-            <div className="ml-3 mt-10 flex h-24 items-start gap-3" aria-hidden="true">
+            <div className="ml-3 mt-8 flex h-16 items-start gap-3" aria-hidden="true">
               <span className="mt-1 h-3 w-3 rounded-full bg-colus-orange" />
               <span className="h-full w-px bg-gradient-to-b from-colus-orange to-colus-orange/0" />
             </div>
