@@ -14,7 +14,7 @@ export function ContactFooter() {
       <section
         id="contactos"
         data-header-theme="light"
-        className="relative min-h-[95vh] scroll-mt-24 overflow-hidden bg-colus-paper px-5 py-28 md:px-8 lg:px-16"
+        className="relative min-h-[100svh] scroll-mt-24 overflow-hidden bg-colus-paper px-5 py-28 md:px-8 lg:min-h-[95vh] lg:px-16"
       >
         <div className="pointer-events-none absolute left-1/2 top-1/2 h-[30rem] w-[30rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-colus-orange/15 blur-3xl" />
         <div className="relative z-10 mx-auto flex min-h-[68vh] max-w-[1440px] flex-col items-center justify-center text-center">
