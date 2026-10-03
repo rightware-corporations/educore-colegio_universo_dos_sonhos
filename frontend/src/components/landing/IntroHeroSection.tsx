@@ -54,6 +54,7 @@ function ReducedHero() {
               src={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4`}
               poster={`${MEDIA_ROOT}/01-hero/poster/COLUS-HERO-POSTER-001.jpg`}
               alt="Vida escolar COLUS em movimento"
+              priority
             />
           </div>
         </div>
@@ -214,6 +215,7 @@ export function IntroHeroSection() {
               src={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4`}
               poster={`${MEDIA_ROOT}/01-hero/poster/COLUS-HERO-POSTER-001.jpg`}
               alt="Vida escolar COLUS em movimento"
+              priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-colus-ink/28 via-transparent to-transparent" />
           </motion.div>
