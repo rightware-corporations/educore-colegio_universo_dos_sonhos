@@ -1,6 +1,6 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { ArrowDownRight, ArrowRight } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { LandingMedia } from "./LandingMedia";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
@@ -24,7 +24,7 @@ function ReducedHero() {
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-colus-orange">
             Colégio Universo dos Sonhos
           </p>
-          <h1 className="mt-4 max-w-[12ch] text-[clamp(44px,7vw,108px)] font-bold leading-[.94] tracking-[-.04em]">
+          <h1 className="mt-4 max-w-[12ch] text-[clamp(44px,13vw,58px)] font-bold lg:text-[clamp(72px,7vw,112px)] leading-[.94] tracking-[-.04em]">
             Juntos Tornamos
             <span className="block font-editorial font-medium text-colus-paper">
               Sonhos Em Realidade
@@ -66,10 +66,16 @@ function ReducedHero() {
 export function IntroHeroSection() {
   const ref = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const [heroVideoActive, setHeroVideoActive] = useState(false);
 
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
+  });
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const next = latest >= 0.48;
+    setHeroVideoActive((current) => (current === next ? current : next));
   });
 
   const background = useTransform(
@@ -126,11 +132,11 @@ export function IntroHeroSection() {
     <section ref={ref} id="top" className="relative h-[150svh] lg:h-[200vh]">
       <div
         data-header-theme="hidden"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[105svh] lg:h-[140vh]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[123svh] lg:h-[164vh]"
       />
       <div
         data-header-theme="transparent"
-        className="pointer-events-none absolute inset-x-0 top-[105svh] h-[45svh] lg:top-[140vh] lg:h-[60vh]"
+        className="pointer-events-none absolute inset-x-0 top-[123svh] h-[27svh] lg:top-[164vh] lg:h-[36vh]"
       />
 
       <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-[100svh] overflow-hidden lg:h-screen">
@@ -215,6 +221,7 @@ export function IntroHeroSection() {
               src={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4`}
               poster={`${MEDIA_ROOT}/01-hero/poster/COLUS-HERO-POSTER-001.jpg`}
               alt="Vida escolar COLUS em movimento"
+              active={heroVideoActive}
               priority
             />
             <div className="absolute inset-0 bg-gradient-to-r from-colus-ink/28 via-transparent to-transparent" />
@@ -238,7 +245,7 @@ export function IntroHeroSection() {
                 </motion.p>
               </div>
 
-              <h1 className="mt-4 max-w-[12ch] text-[clamp(44px,7vw,108px)] leading-[.94] tracking-[-.04em] text-white lg:mt-6">
+              <h1 className="mt-4 max-w-[12ch] text-[clamp(44px,13vw,58px)] leading-[.94] lg:text-[clamp(72px,7vw,112px)] tracking-[-.04em] text-white lg:mt-6">
                 <motion.span
                   style={{ clipPath: lineOneClip, y: lineOneY }}
                   className="block font-bold"
