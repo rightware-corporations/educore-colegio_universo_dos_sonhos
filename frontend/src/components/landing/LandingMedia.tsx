@@ -5,6 +5,7 @@ interface SharedMediaProps {
   alt: string;
   className?: string;
   priority?: boolean;
+  active?: boolean;
 }
 
 type LandingMediaProps =
@@ -40,6 +41,7 @@ export function LandingMedia(props: LandingMediaProps) {
       failed ||
       reduceMotion ||
       saveData ||
+      props.active === false ||
       !videoRef.current
     ) {
       return;
@@ -63,7 +65,7 @@ export function LandingMedia(props: LandingMediaProps) {
       observer.disconnect();
       video.pause();
     };
-  }, [failed, props.kind, reduceMotion, saveData]);
+  }, [failed, props.active, props.kind, reduceMotion, saveData]);
 
   if (failed) {
     return (
