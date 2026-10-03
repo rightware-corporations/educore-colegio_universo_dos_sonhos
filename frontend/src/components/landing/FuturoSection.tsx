@@ -104,9 +104,9 @@ export function FuturoSection() {
       ref={ref}
       id="futuro"
       data-header-theme="dark"
-      className="relative scroll-mt-24 overflow-hidden bg-colus-ink text-white lg:min-h-[230vh]"
+      className={`relative scroll-mt-24 overflow-hidden bg-colus-ink text-white ${reduceMotion ? "" : "lg:min-h-[230vh]"}`}
     >
-      <div className="lg:hidden">
+      <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] px-5 py-20 sm:px-6">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_8%,rgba(40,153,239,.15),transparent_22%)]" />
 
@@ -146,7 +146,7 @@ export function FuturoSection() {
         </div>
       </div>
 
-      <div className="hidden min-h-[230vh] lg:block">
+      <div className={reduceMotion ? "hidden" : "hidden min-h-[230vh] lg:block"}>
         <div className="sticky top-0 min-h-screen overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_64%_40%,rgba(12,88,152,.46),transparent_34%),radial-gradient(circle_at_84%_18%,rgba(40,153,239,.12),transparent_24%)]" />
 
