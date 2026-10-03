@@ -93,9 +93,9 @@ export function IntroHeroSection() {
   if (reduceMotion) return <ReducedHero />;
 
   return (
-    <section ref={ref} id="top" className="relative h-[200vh]">
-      <div data-header-theme="hidden" className="pointer-events-none absolute inset-x-0 top-0 h-[140vh]" />
-      <div data-header-theme="transparent" className="pointer-events-none absolute inset-x-0 top-[140vh] h-[60vh]" />
+    <section ref={ref} id="top" className="relative h-[150svh] lg:h-[200vh]">
+      <div data-header-theme="hidden" className="pointer-events-none absolute inset-x-0 top-0 h-[105svh] lg:h-[140vh]" />
+      <div data-header-theme="transparent" className="pointer-events-none absolute inset-x-0 top-[105svh] h-[45svh] lg:top-[140vh] lg:h-[60vh]" />
 
       <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-screen overflow-hidden">
         <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[min(60vw,600px)] w-[min(70vw,640px)] -translate-x-1/2 -translate-y-1/2">
