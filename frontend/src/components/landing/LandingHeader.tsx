@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { ColusMark } from "./ColusMark";
+import { ColusOfficialLogo } from "./ColusOfficialLogo";
 
 type HeaderTheme = "hidden" | "transparent" | "light" | "dark";
 
@@ -147,7 +147,7 @@ export function LandingHeader() {
       >
         <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-5 md:px-8 lg:h-[72px] lg:px-16">
           <a href="#top" aria-label="Colégio Universo dos Sonhos" className="shrink-0">
-            <ColusMark className="h-11 w-14" compact />
+            <ColusOfficialLogo className="h-14 w-14 rounded-xl object-contain lg:h-16 lg:w-16" />
           </a>
 
           <nav
