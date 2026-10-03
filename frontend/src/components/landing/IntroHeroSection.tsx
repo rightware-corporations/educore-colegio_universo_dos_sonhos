@@ -19,13 +19,18 @@ function ReducedHero() {
           </p>
           <h1 className="mt-6 max-w-[12ch] text-[clamp(44px,7vw,108px)] font-bold leading-[.94] tracking-[-.04em]">
             Juntos Tornamos
-            <span className="block font-editorial font-medium text-colus-paper">Sonhos Em Realidade</span>
+            <span className="block font-editorial font-medium text-colus-paper">
+              Sonhos Em Realidade
+            </span>
           </h1>
           <p className="mt-7 max-w-[52ch] text-base leading-7 text-white/70 md:text-lg">
             Uma experiência de aprendizagem que desperta curiosidade, confiança e visão de futuro.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-5">
-            <a href="#o-colegio" className="inline-flex min-h-14 items-center gap-3 rounded-full bg-colus-orange px-7 text-sm font-bold text-colus-ink">
+            <a
+              href="#o-colegio"
+              className="inline-flex min-h-14 items-center gap-3 rounded-full bg-colus-orange px-7 text-sm font-bold text-colus-ink"
+            >
               Descobrir o COLUS <ArrowDownRight className="h-4 w-4" />
             </a>
             <a href="#contactos" className="inline-flex items-center gap-2 text-sm font-semibold text-white">
@@ -76,8 +81,8 @@ export function IntroHeroSection() {
 
   const mediaOpacity = useTransform(scrollYProgress, [0.44, 0.62], [0, 1]);
   const mediaScale = useTransform(scrollYProgress, [0.44, 0.72], [0.52, 1]);
-  const mediaX = useTransform(scrollYProgress, [0.46, 0.82], ["0%", "18%"]);
-  const mediaY = useTransform(scrollYProgress, [0.46, 0.82], ["8%", "0%"]);
+  const mediaShiftX = useTransform(scrollYProgress, [0.46, 0.82], [-22, 0]);
+  const mediaShiftY = useTransform(scrollYProgress, [0.46, 0.82], [36, 0]);
 
   const kickerOpacity = useTransform(scrollYProgress, [0.56, 0.66], [0, 1]);
   const headlineOpacity = useTransform(scrollYProgress, [0.62, 0.8], [0, 1]);
@@ -93,56 +98,69 @@ export function IntroHeroSection() {
       <div data-header-theme="transparent" className="pointer-events-none absolute inset-x-0 top-[140vh] h-[60vh]" />
 
       <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-screen overflow-hidden">
-        <motion.div
-          style={{ opacity: markOpacity, scale: markScale }}
-          className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[min(60vw,600px)] w-[min(70vw,640px)] -translate-x-1/2 -translate-y-1/2"
-        >
-          <svg viewBox="0 0 320 260" className="h-full w-full overflow-visible">
-            <motion.g style={{ x: leftLeafX, rotate: leftLeafRotate, transformOrigin: "150px 185px" }}>
-              <path d="M28 172 C72 150 112 153 154 180 C116 182 83 195 48 222 C39 206 32 190 28 172 Z" fill="#0C5898" />
-            </motion.g>
-            <motion.g style={{ x: rightLeafX, rotate: rightLeafRotate, transformOrigin: "170px 185px" }}>
-              <path d="M292 172 C248 150 208 153 166 180 C204 182 237 195 272 222 C281 206 288 190 292 172 Z" fill="#1274B8" />
-            </motion.g>
+        <div className="pointer-events-none absolute left-1/2 top-1/2 z-10 h-[min(60vw,600px)] w-[min(70vw,640px)] -translate-x-1/2 -translate-y-1/2">
+          <motion.div style={{ opacity: markOpacity, scale: markScale }} className="h-full w-full">
+            <svg viewBox="0 0 320 260" className="h-full w-full overflow-visible">
+              <motion.g style={{ x: leftLeafX, rotate: leftLeafRotate, transformOrigin: "150px 185px" }}>
+                <path
+                  d="M28 172 C72 150 112 153 154 180 C116 182 83 195 48 222 C39 206 32 190 28 172 Z"
+                  fill="#0C5898"
+                />
+              </motion.g>
+              <motion.g style={{ x: rightLeafX, rotate: rightLeafRotate, transformOrigin: "170px 185px" }}>
+                <path
+                  d="M292 172 C248 150 208 153 166 180 C204 182 237 195 272 222 C281 206 288 190 292 172 Z"
+                  fill="#1274B8"
+                />
+              </motion.g>
 
-            <motion.g style={{ y: lightY, scale: lightScale, transformOrigin: "160px 120px" }} fill="#F18136">
-              <circle cx="160" cy="94" r="31" />
-              <rect x="150" y="116" width="20" height="58" rx="10" />
-            </motion.g>
+              <motion.g
+                style={{ y: lightY, scale: lightScale, transformOrigin: "160px 120px" }}
+                fill="#F18136"
+              >
+                <circle cx="160" cy="94" r="31" />
+                <rect x="150" y="116" width="20" height="58" rx="10" />
+              </motion.g>
 
-            <g fill="#F18136">
-              <circle cx="44" cy="58" r="7" />
-              <circle cx="83" cy="70" r="6" />
-              <circle cx="128" cy="82" r="6" />
-              <circle cx="192" cy="82" r="6" />
-              <circle cx="237" cy="70" r="6" />
-              <circle cx="276" cy="58" r="7" />
-            </g>
-          </svg>
-        </motion.div>
+              <g fill="#F18136">
+                <circle cx="44" cy="58" r="7" />
+                <circle cx="83" cy="70" r="6" />
+                <circle cx="128" cy="82" r="6" />
+                <circle cx="192" cy="82" r="6" />
+                <circle cx="237" cy="70" r="6" />
+                <circle cx="276" cy="58" r="7" />
+              </g>
+            </svg>
+          </motion.div>
+        </div>
 
         <motion.div
           style={{ opacity: haloOpacity }}
           className="pointer-events-none absolute right-[4vw] top-1/2 h-[62vh] w-[58vw] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(241,129,54,.25),rgba(40,153,239,.10)_35%,transparent_68%)] blur-2xl"
         />
 
-        <motion.div
-          style={{ opacity: mediaOpacity, scale: mediaScale, x: mediaX, y: mediaY }}
-          className="absolute left-1/2 top-1/2 z-20 h-[58vh] w-[min(72vw,900px)] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[42%_58%_44%_56%/38%_42%_58%_62%] lg:left-auto lg:right-[6vw] lg:w-[52vw]"
-        >
-          <LandingMedia
-            kind="video"
-            src={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4`}
-            poster={`${MEDIA_ROOT}/01-hero/poster/COLUS-HERO-POSTER-001.jpg`}
-            alt="Vida escolar COLUS em movimento"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-colus-ink/20 via-transparent to-transparent" />
-        </motion.div>
+        <div className="absolute left-1/2 top-1/2 z-20 h-[58vh] w-[min(72vw,900px)] -translate-x-1/2 -translate-y-1/2 lg:left-auto lg:right-[6vw] lg:w-[52vw] lg:translate-x-0">
+          <motion.div
+            style={{ opacity: mediaOpacity, scale: mediaScale, x: mediaShiftX, y: mediaShiftY }}
+            className="h-full w-full overflow-hidden rounded-[42%_58%_44%_56%/38%_42%_58%_62%]"
+          >
+            <LandingMedia
+              kind="video"
+              src={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4`}
+              poster={`${MEDIA_ROOT}/01-hero/poster/COLUS-HERO-POSTER-001.jpg`}
+              alt="Vida escolar COLUS em movimento"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-colus-ink/20 via-transparent to-transparent" />
+          </motion.div>
+        </div>
 
         <div className="absolute inset-0 z-30">
           <div className="mx-auto grid h-full max-w-[1440px] items-center px-5 md:px-8 lg:grid-cols-12 lg:px-16">
             <div className="pt-24 lg:col-span-5 lg:pt-0">
-              <motion.p style={{ opacity: kickerOpacity }} className="text-[11px] font-bold uppercase tracking-[0.2em] text-colus-orange">
+              <motion.p
+                style={{ opacity: kickerOpacity }}
+                className="text-[11px] font-bold uppercase tracking-[0.2em] text-colus-orange"
+              >
                 Colégio Universo dos Sonhos
               </motion.p>
               <motion.h1
@@ -150,13 +168,21 @@ export function IntroHeroSection() {
                 className="mt-6 max-w-[12ch] text-[clamp(44px,7vw,108px)] font-bold leading-[.94] tracking-[-.04em] text-white"
               >
                 Juntos Tornamos
-                <span className="block font-editorial font-medium text-colus-paper">Sonhos Em Realidade</span>
+                <span className="block font-editorial font-medium text-colus-paper">
+                  Sonhos Em Realidade
+                </span>
               </motion.h1>
-              <motion.p style={{ opacity: supportingOpacity }} className="mt-7 max-w-[52ch] text-base leading-7 text-white/70 md:text-lg">
+              <motion.p
+                style={{ opacity: supportingOpacity }}
+                className="mt-7 max-w-[52ch] text-base leading-7 text-white/70 md:text-lg"
+              >
                 Uma experiência de aprendizagem que desperta curiosidade, confiança e visão de futuro.
               </motion.p>
               <motion.div style={{ opacity: ctaOpacity }} className="mt-8 flex flex-wrap items-center gap-5">
-                <a href="#o-colegio" className="inline-flex min-h-14 items-center gap-3 rounded-full bg-colus-orange px-7 text-sm font-bold text-colus-ink transition hover:-translate-y-0.5">
+                <a
+                  href="#o-colegio"
+                  className="inline-flex min-h-14 items-center gap-3 rounded-full bg-colus-orange px-7 text-sm font-bold text-colus-ink transition hover:-translate-y-0.5"
+                >
                   Descobrir o COLUS <ArrowDownRight className="h-4 w-4" />
                 </a>
                 <a href="#contactos" className="inline-flex items-center gap-2 text-sm font-semibold text-white">
