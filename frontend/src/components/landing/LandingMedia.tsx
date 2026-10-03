@@ -1,26 +1,49 @@
+import { useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
+interface SharedMediaProps {
+  alt: string;
+  className?: string;
+  priority?: boolean;
+}
+
 type LandingMediaProps =
-  | {
+  | (SharedMediaProps & {
       kind: "image";
       src: string;
-      alt: string;
-      className?: string;
-    }
-  | {
+    })
+  | (SharedMediaProps & {
       kind: "video";
       src: string;
       poster?: string;
-      alt: string;
-      className?: string;
-    };
+    });
 
 export function LandingMedia(props: LandingMediaProps) {
   const [failed, setFailed] = useState(false);
+  const [saveData, setSaveData] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
-    if (props.kind !== "video" || failed || !videoRef.current) return;
+    const connection = (
+      navigator as Navigator & {
+        connection?: { saveData?: boolean };
+      }
+    ).connection;
+
+    setSaveData(Boolean(connection?.saveData));
+  }, []);
+
+  useEffect(() => {
+    if (
+      props.kind !== "video" ||
+      failed ||
+      reduceMotion ||
+      saveData ||
+      !videoRef.current
+    ) {
+      return;
+    }
 
     const video = videoRef.current;
     const observer = new IntersectionObserver(
@@ -40,7 +63,7 @@ export function LandingMedia(props: LandingMediaProps) {
       observer.disconnect();
       video.pause();
     };
-  }, [failed, props.kind]);
+  }, [failed, props.kind, reduceMotion, saveData]);
 
   if (failed) {
     return (
@@ -54,6 +77,19 @@ export function LandingMedia(props: LandingMediaProps) {
   }
 
   if (props.kind === "video") {
+    if ((reduceMotion || saveData) && props.poster) {
+      return (
+        <img
+          className={`h-full w-full object-cover ${props.className ?? ""}`}
+          src={props.poster}
+          alt={props.alt}
+          loading={props.priority ? "eager" : "lazy"}
+          decoding="async"
+          onError={() => setFailed(true)}
+        />
+      );
+    }
+
     return (
       <video
         ref={videoRef}
@@ -63,7 +99,7 @@ export function LandingMedia(props: LandingMediaProps) {
         muted
         playsInline
         loop
-        preload="metadata"
+        preload={props.priority ? "metadata" : "none"}
         aria-label={props.alt}
         onError={() => setFailed(true)}
       />
@@ -75,7 +111,8 @@ export function LandingMedia(props: LandingMediaProps) {
       className={`h-full w-full object-cover ${props.className ?? ""}`}
       src={props.src}
       alt={props.alt}
-      loading="lazy"
+      loading={props.priority ? "eager" : "lazy"}
+      decoding="async"
       onError={() => setFailed(true)}
     />
   );
