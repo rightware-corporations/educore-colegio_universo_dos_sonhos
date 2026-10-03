@@ -35,7 +35,7 @@ export function PertencerSection() {
       ref={ref}
       id="comunidade"
       data-header-theme="light"
-      className={`relative scroll-mt-24 overflow-hidden bg-colus-white ${reduceMotion ? "" : "lg:min-h-[130vh]"}`}
+      className="relative scroll-mt-24 overflow-hidden bg-colus-white"
     >
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="mx-auto max-w-[680px] px-5 py-20 sm:px-6">
@@ -126,8 +126,8 @@ export function PertencerSection() {
         </div>
       </div>
 
-      <div className={reduceMotion ? "hidden" : "hidden min-h-[130vh] lg:block"}>
-        <div className="sticky top-0 min-h-screen overflow-hidden py-20">
+      <div className={reduceMotion ? "hidden" : "hidden h-[130vh] lg:block"}>
+        <div className="sticky top-0 h-screen overflow-hidden py-20">
           <div className="mx-auto min-h-[calc(100vh-10rem)] max-w-[1440px] px-16">
             <motion.div
               style={reduceMotion ? undefined : { opacity: headlineOpacity, y: headlineY }}
