@@ -2,7 +2,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 
-const MEDIA_ROOT = "/media/colus/landing";
+const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
 export function VidaSection() {
   const ref = useRef<HTMLElement>(null);
