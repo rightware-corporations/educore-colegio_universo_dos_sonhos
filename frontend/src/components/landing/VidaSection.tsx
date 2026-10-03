@@ -52,7 +52,7 @@ export function VidaSection() {
         <article className="mt-10 lg:mt-12">
           <motion.div
             style={reduceMotion ? undefined : { scale: immersionScale, y: immersionY }}
-            className="relative h-[68svh] min-h-[500px] overflow-hidden rounded-[30px_82px_30px_30px] lg:h-[78vh]"
+            className="relative h-[58svh] min-h-[420px] overflow-hidden rounded-[30px_82px_30px_30px] lg:h-[78vh]"
           >
             <LandingMedia
               kind="image"
@@ -86,7 +86,7 @@ export function VidaSection() {
               style={reduceMotion ? undefined : { opacity: rhythmOpacity, y: rhythmY }}
               className="lg:col-span-7"
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[28px_28px_82px_28px] sm:aspect-[3/2] lg:h-[62vh] lg:aspect-auto">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[28px_28px_82px_28px] sm:aspect-[3/2] lg:h-[62vh] lg:aspect-auto">
                 <LandingMedia
                   kind="image"
                   src={`${MEDIA_ROOT}/05-vida-colus/COLUS-VIDA-EXPRESSAO-001.webp`}
@@ -102,7 +102,7 @@ export function VidaSection() {
               style={reduceMotion ? undefined : { opacity: rhythmOpacity }}
               className="lg:col-span-5 lg:pt-24"
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[78px_28px_28px_28px] lg:h-[50vh] lg:aspect-auto">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[78px_28px_28px_28px] lg:h-[50vh] lg:aspect-auto">
                 <LandingMedia
                   kind="image"
                   src={`${MEDIA_ROOT}/05-vida-colus/COLUS-VIDA-CULTURA-001.jpg`}
@@ -116,7 +116,7 @@ export function VidaSection() {
           </div>
         </div>
 
-        <article className="mt-16 lg:mt-24">
+        <article className="mt-12 lg:mt-24">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-4">
               <StoryMarker label="Em movimento" />
@@ -126,7 +126,7 @@ export function VidaSection() {
               style={reduceMotion ? undefined : { opacity: presenceOpacity, scale: presenceScale }}
               className="relative lg:col-span-8"
             >
-              <div className="relative aspect-[4/5] overflow-hidden rounded-[28px_88px_28px_28px] sm:aspect-[16/10] lg:h-[66vh] lg:aspect-auto">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[28px_88px_28px_28px] sm:aspect-[16/10] lg:h-[66vh] lg:aspect-auto">
                 <LandingMedia
                   kind="image"
                   src={`${MEDIA_ROOT}/05-vida-colus/COLUS-VIDA-SPORT-002.webp`}
