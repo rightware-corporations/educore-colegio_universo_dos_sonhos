@@ -121,7 +121,14 @@ export function LandingHeader() {
   const dark = theme === "dark" || theme === "transparent";
 
   return (
-    <header
+    <>
+      <a
+        href="#conteudo-principal"
+        className="fixed left-4 top-4 z-[70] -translate-y-24 rounded-full bg-colus-orange px-4 py-2 text-sm font-bold text-colus-ink transition focus:translate-y-0"
+      >
+        Saltar para o conteúdo
+      </a>
+      <header
       className={[
         "fixed inset-x-0 top-0 z-50 transition duration-300",
         autoHidden ? "-translate-y-full" : "translate-y-0",
@@ -202,6 +209,7 @@ export function LandingHeader() {
           </nav>
         </div>
       )}
-    </header>
+      </header>
+    </>
   );
 }
