@@ -107,24 +107,10 @@ export function IntroHeroSection() {
   const mediaShiftX = useTransform(scrollYProgress, [0.46, 0.82], ["-8vw", "0vw"]);
   const mediaShiftY = useTransform(scrollYProgress, [0.46, 0.82], ["5vh", "0vh"]);
 
-  const axisScale = useTransform(scrollYProgress, [0.52, 0.64], [0, 1]);
-  const kickerOpacity = useTransform(scrollYProgress, [0.56, 0.66], [0, 1]);
-  const lineOneClip = useTransform(
-    scrollYProgress,
-    [0.62, 0.76],
-    ["inset(0 0 100% 0)", "inset(0 0 0% 0)"],
-  );
-  const lineOneY = useTransform(scrollYProgress, [0.62, 0.76], [18, 0]);
-  const lineTwoClip = useTransform(
-    scrollYProgress,
-    [0.7, 0.84],
-    ["inset(0 100% 0 0)", "inset(0 0% 0 0)"],
-  );
-  const lineTwoY = useTransform(scrollYProgress, [0.7, 0.84], [14, 0]);
-  const supportingOpacity = useTransform(scrollYProgress, [0.78, 0.88], [0, 1]);
-  const supportingY = useTransform(scrollYProgress, [0.78, 0.88], [14, 0]);
-  const ctaOpacity = useTransform(scrollYProgress, [0.84, 0.94], [0, 1]);
-  const ctaY = useTransform(scrollYProgress, [0.84, 0.94], [12, 0]);
+  const copyOpacity = useTransform(scrollYProgress, [0.46, 0.58], [0, 1]);
+  const copyY = useTransform(scrollYProgress, [0.46, 0.62], [18, 0]);
+  const lineOneY = useTransform(scrollYProgress, [0.48, 0.58], [12, 0]);
+  const lineTwoY = useTransform(scrollYProgress, [0.52, 0.62], [14, 0]);
 
   if (reduceMotion) return <ReducedHero />;
 
@@ -230,47 +216,37 @@ export function IntroHeroSection() {
 
         <div className="absolute inset-0 z-30">
           <div className="mx-auto flex h-full max-w-[1440px] items-end px-5 pb-[6svh] md:px-8 lg:grid lg:grid-cols-12 lg:items-center lg:px-16 lg:pb-0">
-            <div className="w-full lg:col-span-5">
+            <motion.div
+              style={{ opacity: copyOpacity, y: copyY }}
+              className="w-full lg:col-span-5"
+            >
               <div className="flex items-center gap-3">
-                <motion.span
-                  aria-hidden="true"
-                  style={{ scaleX: axisScale }}
-                  className="h-px w-6 origin-left bg-colus-orange"
-                />
-                <motion.p
-                  style={{ opacity: kickerOpacity }}
-                  className="text-[10px] font-bold uppercase tracking-[0.2em] text-colus-orange md:text-[11px]"
-                >
+                <span aria-hidden="true" className="h-px w-6 bg-colus-orange" />
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-colus-orange md:text-[11px]">
                   Colégio Universo dos Sonhos
-                </motion.p>
+                </p>
               </div>
 
               <h1 className="mt-4 max-w-[12ch] text-[clamp(44px,13vw,58px)] leading-[.94] lg:text-[clamp(72px,7vw,112px)] tracking-[-.04em] text-white lg:mt-6">
                 <motion.span
-                  style={{ clipPath: lineOneClip, y: lineOneY }}
+                  style={{ y: lineOneY }}
                   className="block font-bold"
                 >
                   Juntos Tornamos
                 </motion.span>
                 <motion.span
-                  style={{ clipPath: lineTwoClip, y: lineTwoY }}
+                  style={{ y: lineTwoY }}
                   className="block font-editorial font-medium text-colus-paper"
                 >
                   Sonhos Em Realidade
                 </motion.span>
               </h1>
 
-              <motion.p
-                style={{ opacity: supportingOpacity, y: supportingY }}
-                className="mt-5 max-w-[52ch] text-[15px] leading-6 text-white/70 md:text-lg md:leading-7 lg:mt-7"
-              >
+              <p className="mt-5 max-w-[52ch] text-[15px] leading-6 text-white/70 md:text-lg md:leading-7 lg:mt-7">
                 Uma experiência de aprendizagem que desperta curiosidade, confiança e visão de futuro.
-              </motion.p>
+              </p>
 
-              <motion.div
-                style={{ opacity: ctaOpacity, y: ctaY }}
-                className="mt-6 flex flex-wrap items-center gap-5 lg:mt-8"
-              >
+              <div className="mt-6 flex flex-wrap items-center gap-5 lg:mt-8">
                 <a
                   href="#o-colegio"
                   className="group inline-flex min-h-14 items-center gap-3 rounded-full bg-colus-orange px-7 text-sm font-bold text-colus-ink transition hover:-translate-y-0.5"
@@ -285,8 +261,8 @@ export function IntroHeroSection() {
                   Marcar uma visita
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
         </div>
 
