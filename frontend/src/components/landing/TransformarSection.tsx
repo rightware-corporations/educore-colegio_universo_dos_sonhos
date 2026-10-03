@@ -44,6 +44,7 @@ export function TransformarSection() {
   return (
     <section
       ref={ref}
+      id="transformar"
       data-header-theme="dark"
       className="relative min-h-[145svh] overflow-hidden bg-colus-ink text-white lg:min-h-[165vh]"
     >
