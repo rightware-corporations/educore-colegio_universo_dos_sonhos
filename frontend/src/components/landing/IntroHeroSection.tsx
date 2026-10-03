@@ -3,7 +3,7 @@ import { ArrowDownRight, ArrowRight } from "lucide-react";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 
-const MEDIA_ROOT = "/media/colus/landing";
+const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
 function ReducedHero() {
   return (
