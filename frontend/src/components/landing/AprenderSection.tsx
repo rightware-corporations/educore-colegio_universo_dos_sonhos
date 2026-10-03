@@ -24,7 +24,7 @@ export function AprenderSection() {
       ref={ref}
       id="experiencia"
       data-header-theme="light"
-      className="relative min-h-[185vh] scroll-mt-24 overflow-hidden bg-colus-white"
+      className="relative min-h-[150svh] scroll-mt-24 overflow-hidden bg-colus-white lg:min-h-[185vh]"
     >
       <div className="sticky top-0 min-h-screen py-24">
         <div className="mx-auto grid min-h-[calc(100vh-12rem)] max-w-[1440px] items-center gap-10 px-5 md:px-8 lg:grid-cols-12 lg:px-16">
