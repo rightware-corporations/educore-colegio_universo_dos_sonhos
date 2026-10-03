@@ -45,7 +45,7 @@ export function TransformarSection() {
     <section
       ref={ref}
       data-header-theme="dark"
-      className="relative min-h-[165vh] overflow-hidden bg-colus-ink text-white"
+      className="relative min-h-[145svh] overflow-hidden bg-colus-ink text-white lg:min-h-[165vh]"
     >
       <div className="sticky top-0 min-h-screen overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_48%_22%,rgba(241,129,54,.18),transparent_28%),linear-gradient(180deg,#FFF8EF_0%,#071A2A_34%,#071A2A_100%)] opacity-95" />
