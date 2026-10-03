@@ -37,7 +37,7 @@ export function VidaSection() {
     <section
       ref={ref}
       data-header-theme="light"
-      className="relative overflow-hidden bg-colus-paper py-20 lg:min-h-[155vh] lg:py-24"
+      className={`relative overflow-hidden bg-colus-paper py-20 lg:py-24 ${reduceMotion ? "" : "lg:min-h-[155vh]"}`}
     >
       <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-16">
         <div className="max-w-3xl">
