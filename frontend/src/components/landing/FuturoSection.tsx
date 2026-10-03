@@ -101,7 +101,7 @@ export function FuturoSection() {
       ref={ref}
       id="futuro"
       data-header-theme="dark"
-      className="relative min-h-[230vh] scroll-mt-24 overflow-hidden bg-colus-ink text-white"
+      className="relative min-h-[180svh] scroll-mt-24 overflow-hidden bg-colus-ink text-white lg:min-h-[230vh]"
     >
       <div className="sticky top-0 min-h-screen overflow-hidden">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_64%_40%,rgba(12,88,152,.46),transparent_34%),radial-gradient(circle_at_84%_18%,rgba(40,153,239,.12),transparent_24%)]" />
