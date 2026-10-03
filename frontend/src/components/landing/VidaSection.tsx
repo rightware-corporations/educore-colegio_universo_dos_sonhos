@@ -75,7 +75,7 @@ export function VidaSection() {
 
         <div className="mt-14 lg:mt-20">
           <div className="mb-7 flex items-end justify-between gap-6">
-            <StoryMarker label="Ritmo editorial" />
+            <StoryMarker label="Descoberta" />
             <p className="hidden max-w-[30ch] text-right text-sm leading-6 text-colus-muted md:block">
               Expressão, cultura e descoberta em diferentes momentos da vida escolar.
             </p>
@@ -119,10 +119,7 @@ export function VidaSection() {
         <article className="mt-16 lg:mt-24">
           <div className="grid gap-8 lg:grid-cols-12 lg:items-center">
             <div className="lg:col-span-4">
-              <StoryMarker label="Presença" />
-              <p className="mt-5 max-w-[30ch] font-editorial text-[clamp(30px,3vw,48px)] font-medium leading-[1.08] tracking-[-.025em] text-colus-ink">
-                No fim, ficam as relações que dão sentido à experiência.
-              </p>
+              <StoryMarker label="Em movimento" />
             </div>
 
             <motion.div
