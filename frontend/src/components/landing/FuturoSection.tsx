@@ -117,10 +117,10 @@ export function FuturoSection() {
               Tecnologia, ciência e engenharia ganham significado quando desenvolvem capacidade, pensamento e responsabilidade.
             </p>
 
-            <div className="mt-12 space-y-8">
+            <div className="mt-10 space-y-6">
               {scenes.map((scene) => (
                 <article key={scene.number}>
-                  <div className="relative aspect-[4/5] overflow-hidden rounded-[28px_72px_28px_28px] border border-white/10 bg-colus-ink-soft">
+                  <div className="relative aspect-[4/3] overflow-hidden rounded-[28px_72px_28px_28px] border border-white/10 bg-colus-ink-soft">
                     <div className="absolute inset-0">{scene.media}</div>
                     <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/10 to-transparent" />
                     <div className="absolute inset-x-0 bottom-0 z-10 p-5">
@@ -133,7 +133,7 @@ export function FuturoSection() {
                     </div>
                   </div>
                   {scene.number !== "04" && (
-                    <div className="ml-6 h-10 w-px bg-gradient-to-b from-colus-bright-blue/45 to-colus-orange/55" />
+                    <div className="ml-6 h-7 w-px bg-gradient-to-b from-colus-bright-blue/45 to-colus-orange/55" />
                   )}
                 </article>
               ))}
