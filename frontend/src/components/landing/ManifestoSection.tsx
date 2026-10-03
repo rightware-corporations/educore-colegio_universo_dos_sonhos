@@ -74,7 +74,7 @@ export function ManifestoSection() {
             </h2>
 
             <p className="mt-7 max-w-[56ch] text-[15px] leading-7 text-colus-muted md:text-lg">
-              Curiosidade, conhecimento e confiança ganham espaço quando a aprendizagem se aproxima da vida, das pessoas e do mundo.
+              Conhecimento, curiosidade e experiências que ajudam cada aluno a descobrir possibilidades e crescer com confiança.
             </p>
 
             <div className="mt-10 h-px max-w-md bg-black/10">
