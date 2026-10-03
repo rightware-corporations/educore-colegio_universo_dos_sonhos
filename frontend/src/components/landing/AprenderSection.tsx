@@ -26,9 +26,9 @@ export function AprenderSection() {
       ref={ref}
       id="experiencia"
       data-header-theme="light"
-      className="relative scroll-mt-24 overflow-hidden bg-colus-white lg:min-h-[185vh]"
+      className={`relative scroll-mt-24 overflow-hidden bg-colus-white ${reduceMotion ? "" : "lg:min-h-[185vh]"}`}
     >
-      <div className="lg:hidden">
+      <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="mx-auto max-w-[680px] px-5 py-20 sm:px-6">
           <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-deep-blue">
             Aprender em movimento
@@ -97,7 +97,7 @@ export function AprenderSection() {
         </div>
       </div>
 
-      <div className="hidden min-h-[185vh] lg:block">
+      <div className={reduceMotion ? "hidden" : "hidden min-h-[185vh] lg:block"}>
         <div className="sticky top-0 min-h-screen py-24">
           <div className="mx-auto grid min-h-[calc(100vh-12rem)] max-w-[1440px] items-center gap-10 px-16 lg:grid-cols-12">
             <div className="relative z-20 lg:col-span-4">
