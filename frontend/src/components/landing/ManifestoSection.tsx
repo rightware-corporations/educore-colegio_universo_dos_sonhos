@@ -29,7 +29,7 @@ export function ManifestoSection() {
   return (
     <section
       ref={ref}
-      className="relative min-h-[145svh] overflow-hidden bg-colus-ink lg:min-h-[170vh]"
+      className={`relative overflow-hidden bg-colus-ink ${reduceMotion ? "" : "min-h-[145svh] lg:min-h-[170vh]"}`}
     >
       <div
         data-header-theme="transparent"
@@ -45,7 +45,7 @@ export function ManifestoSection() {
         aria-hidden="true"
       />
 
-      <div className="relative min-h-screen lg:sticky lg:top-0">
+      <div className={`relative min-h-screen ${reduceMotion ? "" : "lg:sticky lg:top-0"}`}>
         {!reduceMotion && (
           <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
             <motion.div
