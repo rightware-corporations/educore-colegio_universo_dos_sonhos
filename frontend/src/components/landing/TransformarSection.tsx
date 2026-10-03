@@ -51,7 +51,7 @@ export function TransformarSection() {
       ref={ref}
       id="transformar"
       data-header-theme="dark"
-      className={`relative overflow-hidden bg-colus-ink text-white ${reduceMotion ? "" : "lg:min-h-[165vh]"}`}
+      className="relative overflow-hidden bg-colus-ink text-white"
     >
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] px-5 py-20 sm:px-6">
@@ -96,8 +96,8 @@ export function TransformarSection() {
         </div>
       </div>
 
-      <div className={reduceMotion ? "hidden" : "hidden min-h-[165vh] lg:block"}>
-        <div className="sticky top-0 min-h-screen overflow-hidden">
+      <div className={reduceMotion ? "hidden" : "hidden h-[165vh] lg:block"}>
+        <div className="sticky top-0 h-screen overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_48%_22%,rgba(241,129,54,.18),transparent_28%),linear-gradient(180deg,#FFF8EF_0%,#071A2A_34%,#071A2A_100%)] opacity-95" />
           <svg viewBox="0 0 1400 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
