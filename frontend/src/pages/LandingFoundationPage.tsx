@@ -11,7 +11,7 @@ import { ContactFooter } from "@/components/landing/ContactFooter";
 
 export function LandingFoundationPage() {
   return (
-    <main className="min-h-screen bg-colus-paper text-colus-text">
+    <main id="conteudo-principal" className="min-h-screen bg-colus-paper text-colus-text">
       <LandingHeader />
       <IntroHeroSection />
       <ManifestoSection />
