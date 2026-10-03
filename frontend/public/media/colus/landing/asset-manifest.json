@@ -1,0 +1,182 @@
+{
+  "version": "v0.3",
+  "source_pack": "colus-assets-final-v03.zip",
+  "runtime_root": "frontend/public/media/colus/landing",
+  "status": "CLOSED_FOR_PRIVATE_MVP_DEMO",
+  "assets": [
+    {
+      "id": "COLUS-BRAND-LOGO-RASTER-001",
+      "path": "00-brand/COLUS-BRAND-LOGO-RASTER-001.jpg",
+      "section": "brand",
+      "role": "reference"
+    },
+    {
+      "id": "COLUS-HERO-VID-001",
+      "path": "01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4",
+      "section": "hero",
+      "role": "primary"
+    },
+    {
+      "id": "COLUS-HERO-VID-002",
+      "path": "01-hero/video/COLUS-HERO-VID-002-COURTYARD-SPORT.mp4",
+      "section": "hero",
+      "role": "alt"
+    },
+    {
+      "id": "COLUS-HERO-POSTER-001",
+      "path": "01-hero/poster/COLUS-HERO-POSTER-001.jpg",
+      "section": "hero",
+      "role": "poster-primary"
+    },
+    {
+      "id": "COLUS-HERO-POSTER-002",
+      "path": "01-hero/poster/COLUS-HERO-POSTER-002.jpg",
+      "section": "hero",
+      "role": "poster-alt"
+    },
+    {
+      "id": "COLUS-MANIFESTO-HUMANO-001",
+      "path": "02-manifesto/COLUS-MANIFESTO-HUMANO-001.webp",
+      "section": "manifesto",
+      "role": "primary"
+    },
+    {
+      "id": "COLUS-APRENDER-DESCOBRIR-001",
+      "path": "03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-001.webp",
+      "section": "aprender-descobrir",
+      "role": "primary"
+    },
+    {
+      "id": "COLUS-APRENDER-DESCOBRIR-002",
+      "path": "03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-002.webp",
+      "section": "aprender-descobrir",
+      "role": "secondary"
+    },
+    {
+      "id": "COLUS-APRENDER-CRIAR-001",
+      "path": "03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp",
+      "section": "aprender-criar",
+      "role": "primary"
+    },
+    {
+      "id": "COLUS-APRENDER-CRIAR-002",
+      "path": "03-aprender/criar/COLUS-APRENDER-CRIAR-002.webp",
+      "section": "aprender-criar",
+      "role": "alt"
+    },
+    {
+      "id": "COLUS-FUTURO-TIC-001",
+      "path": "04-futuro/tic/COLUS-FUTURO-TIC-001.jpg",
+      "section": "futuro-tic",
+      "role": "primary"
+    },
+    {
+      "id": "COLUS-FUTURO-TIC-002",
+      "path": "04-futuro/tic/COLUS-FUTURO-TIC-002.jpg",
+      "section": "futuro-tic",
+      "role": "alt"
+    },
+    {
+      "id": "COLUS-FUTURO-TIC-003",
+      "path": "04-futuro/tic/COLUS-FUTURO-TIC-003.jpg",
+      "section": "futuro-tic",
+      "role": "alt"
+    },
+    {
+      "id": "COLUS-FUTURO-TIC-FEMALE-001",
+      "path": "04-futuro/tic/COLUS-FUTURO-TIC-FEMALE-001.jpg",
+      "section": "futuro-tic",
+      "role": "female-participation"
+    },
+    {
+      "id": "COLUS-FUTURO-CIENCIA-VID-001",
+      "path": "04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001.mp4",
+      "section": "futuro-ciencia",
+      "role": "primary-video"
+    },
+    {
+      "id": "COLUS-FUTURO-CIENCIA-001",
+      "path": "04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp",
+      "section": "futuro-ciencia",
+      "role": "still"
+    },
+    {
+      "id": "COLUS-FUTURO-CIENCIA-VID-003",
+      "path": "04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-003.mp4",
+      "section": "futuro-ciencia",
+      "role": "alt-video"
+    },
+    {
+      "id": "COLUS-VIDA-SPORT-001",
+      "path": "05-vida-colus/COLUS-VIDA-SPORT-001.webp",
+      "section": "vida-colus",
+      "role": "sport-primary"
+    },
+    {
+      "id": "COLUS-VIDA-SPORT-002",
+      "path": "05-vida-colus/COLUS-VIDA-SPORT-002.webp",
+      "section": "vida-colus",
+      "role": "sport-alt"
+    },
+    {
+      "id": "COLUS-VIDA-EXPRESSAO-001",
+      "path": "05-vida-colus/COLUS-VIDA-EXPRESSAO-001.webp",
+      "section": "vida-colus",
+      "role": "expression"
+    },
+    {
+      "id": "COLUS-VIDA-SPELLING-VID-001",
+      "path": "05-vida-colus/COLUS-VIDA-SPELLING-VID-001.mp4",
+      "section": "vida-colus",
+      "role": "spelling-video"
+    },
+    {
+      "id": "COLUS-VIDA-CULTURA-001",
+      "path": "05-vida-colus/COLUS-VIDA-CULTURA-001.jpg",
+      "section": "vida-colus",
+      "role": "culture"
+    },
+    {
+      "id": "COLUS-VIDA-LITERARIO-001",
+      "path": "05-vida-colus/COLUS-VIDA-LITERARIO-001.webp",
+      "section": "vida-colus",
+      "role": "literary-alt"
+    },
+    {
+      "id": "COLUS-PERTENCER-COMUNIDADE-001",
+      "path": "06-pertencer/COLUS-PERTENCER-COMUNIDADE-001.webp",
+      "section": "pertencer",
+      "role": "community"
+    },
+    {
+      "id": "COLUS-PERTENCER-COMUNIDADE-002",
+      "path": "06-pertencer/COLUS-PERTENCER-COMUNIDADE-002.webp",
+      "section": "pertencer",
+      "role": "community-alt"
+    },
+    {
+      "id": "COLUS-PERTENCER-INTERACAO-001",
+      "path": "06-pertencer/COLUS-PERTENCER-INTERACAO-001.webp",
+      "section": "pertencer",
+      "role": "interaction-primary"
+    },
+    {
+      "id": "COLUS-TRANSFORMAR-EXPRESSAR-001",
+      "path": "07-transformar/expressar/COLUS-TRANSFORMAR-EXPRESSAR-001.webp",
+      "section": "transformar",
+      "role": "expressar"
+    },
+    {
+      "id": "COLUS-TRANSFORMAR-CONSTRUIR-001",
+      "path": "07-transformar/construir/COLUS-TRANSFORMAR-CONSTRUIR-001.webp",
+      "section": "transformar",
+      "role": "construir"
+    },
+    {
+      "id": "COLUS-TRANSFORMAR-AVANCAR-001",
+      "path": "07-transformar/avancar/COLUS-TRANSFORMAR-AVANCAR-001.webp",
+      "section": "transformar",
+      "role": "avancar"
+    }
+  ]
+}
