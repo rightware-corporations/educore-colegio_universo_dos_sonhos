@@ -1,0 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: "Manrope", system-ui, sans-serif;
+  color: #102231;
+  background: #fff8ef;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  --colus-orange: #f18136;
+  --colus-deep-blue: #0c5898;
+  --colus-bright-blue: #2899ef;
+  --colus-paper: #fff8ef;
+  --colus-white: #fffcf8;
+  --colus-ink: #071a2a;
+  --colus-ink-soft: #0b2436;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--colus-paper);
+}
+button, input, select, textarea { font: inherit; }
+a { color: inherit; text-decoration: none; }
+::selection { background: rgba(241, 129, 54, 0.24); }
