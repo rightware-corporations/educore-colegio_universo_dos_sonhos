@@ -22,12 +22,7 @@ function EngineeringDevice() {
           <circle cx="500" cy="130" r="7" />
         </g>
       </svg>
-      <div className="absolute bottom-8 left-8 max-w-[22rem]">
-        <p className="text-xs font-bold uppercase tracking-[0.16em] text-colus-orange">Device-led</p>
-        <p className="mt-3 text-sm leading-6 text-white/65">
-          Ideias ganham forma através de construção, experimentação e resolução de problemas.
-        </p>
-      </div>
+      <div className="absolute bottom-8 left-8 h-px w-28 bg-gradient-to-r from-colus-orange/70 to-transparent" aria-hidden="true" />
     </div>
   );
 }
@@ -63,7 +58,7 @@ export function FuturoSection() {
     {
       number: "02",
       label: "ENGENHARIA",
-      copy: "Transformar ideias em experiências, soluções e construção.",
+      copy: "Transformar ideias em soluções, experiências e construção.",
       media: <EngineeringDevice />,
     },
     {
@@ -74,6 +69,7 @@ export function FuturoSection() {
         <LandingMedia
           kind="video"
           src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001.mp4`}
+          poster={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`}
           alt="Experiência científica realizada em contexto escolar"
         />
       ),
