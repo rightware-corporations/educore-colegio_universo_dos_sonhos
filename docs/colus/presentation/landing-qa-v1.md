@@ -24,6 +24,16 @@ Intro Morph
 → Footer EduCore / RIGHTWARE
 ```
 
+### Brand mark
+
+O símbolo derivado em SVG **não é o logo oficial**. Ele só pode ser usado como dispositivo gráfico de Intro/Motion quando explicitamente previsto pela direção.
+
+Para qualquer apresentação formal da marca, usar o asset oficial:
+
+`frontend/public/media/colus/landing/colus-assets-final-v03/00-brand/COLUS-BRAND-LOGO-RASTER-001.jpg`
+
+Não reconstruir, redesenhar ou substituir o logo oficial por uma aproximação.
+
 ### Assets
 
 Os assets usados pela implementação apontam para:
