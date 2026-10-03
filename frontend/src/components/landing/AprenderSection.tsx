@@ -41,7 +41,7 @@ export function AprenderSection() {
             <h2 className="mt-4 max-w-[14ch] text-[clamp(34px,9vw,46px)] font-bold leading-[1.02] tracking-[-.035em] text-colus-ink">
               O conhecimento ganha vida quando existe espaço para explorar.
             </h2>
-            <div className="relative mt-7 aspect-[4/5] overflow-hidden rounded-[28px_72px_28px_28px]">
+            <div className="relative mt-7 aspect-[4/3] overflow-hidden rounded-[28px_72px_28px_28px]">
               <LandingMedia
                 kind="image"
                 src={`${MEDIA_ROOT}/03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-001.webp`}
@@ -52,7 +52,7 @@ export function AprenderSection() {
                 Aprender fora da sala
               </div>
             </div>
-            <div className="ml-5 mt-4 aspect-[16/10] w-[58%] overflow-hidden rounded-[20px_20px_52px_20px] border-[6px] border-colus-white shadow-soft">
+            <div className="ml-5 mt-4 aspect-[16/10] w-[52%] overflow-hidden rounded-[20px_20px_52px_20px] border-[6px] border-colus-white shadow-soft">
               <LandingMedia
                 kind="image"
                 src={`${MEDIA_ROOT}/03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-002.webp`}
@@ -61,7 +61,7 @@ export function AprenderSection() {
             </div>
           </article>
 
-          <div className="relative my-12 ml-4 h-20 w-px bg-gradient-to-b from-colus-deep-blue to-colus-orange">
+          <div className="relative my-10 ml-4 h-16 w-px bg-gradient-to-b from-colus-deep-blue to-colus-orange">
             <span className="absolute -left-[5px] top-0 h-3 w-3 rounded-full bg-colus-deep-blue" />
             <span className="absolute -bottom-1 -left-[5px] h-3 w-3 rounded-full bg-colus-orange" />
           </div>
@@ -74,7 +74,7 @@ export function AprenderSection() {
               Conhecimento, expressão e tecnologia encontram novas formas de ganhar vida.
             </h2>
 
-            <div className="relative mt-7 aspect-[4/5] overflow-hidden rounded-[72px_28px_28px_28px]">
+            <div className="relative mt-7 aspect-[4/3] overflow-hidden rounded-[72px_28px_28px_28px]">
               <LandingMedia
                 kind="image"
                 src={`${MEDIA_ROOT}/03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp`}
@@ -82,7 +82,7 @@ export function AprenderSection() {
               />
             </div>
 
-            <div className="-mt-16 ml-auto mr-3 aspect-[4/5] w-[42%] overflow-hidden rounded-[22px_22px_58px_22px] border-[6px] border-colus-white shadow-soft">
+            <div className="-mt-12 ml-auto mr-3 aspect-[4/5] w-[38%] overflow-hidden rounded-[22px_22px_58px_22px] border-[6px] border-colus-white shadow-soft">
               <LandingMedia
                 kind="image"
                 src={`${MEDIA_ROOT}/03-aprender/criar/COLUS-APRENDER-CRIAR-002.webp`}
