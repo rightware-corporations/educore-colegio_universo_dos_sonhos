@@ -19,7 +19,7 @@ export function PertencerSection() {
       ref={ref}
       id="comunidade"
       data-header-theme="light"
-      className="relative min-h-[130vh] scroll-mt-24 overflow-hidden bg-colus-white py-24"
+      className="relative min-h-[120svh] scroll-mt-24 overflow-hidden bg-colus-white py-24 lg:min-h-[130vh]"
     >
       <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-16">
         <div className="relative mx-auto min-h-[92vh] max-w-6xl">
