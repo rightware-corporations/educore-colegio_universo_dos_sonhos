@@ -13,6 +13,8 @@ export function TransformarSection() {
   const first = useTransform(scrollYProgress, [0.08, 0.24, 0.4], [0, 1, 0]);
   const second = useTransform(scrollYProgress, [0.34, 0.5, 0.66], [0, 1, 0]);
   const third = useTransform(scrollYProgress, [0.58, 0.74, 0.96], [0, 1, 1]);
+  const horizonOpacity = useTransform(scrollYProgress, [0.86, 0.96], [0, 1]);
+  const horizonScaleX = useTransform(scrollYProgress, [0.86, 1], [0.08, 1]);
 
   const moments = [
     {
@@ -107,6 +109,14 @@ export function TransformarSection() {
               style={{ pathLength: reduceMotion ? 1 : axisLength }}
             />
           </svg>
+
+          <motion.div
+            style={reduceMotion ? undefined : { opacity: horizonOpacity, scaleX: horizonScaleX }}
+            className="pointer-events-none absolute bottom-[12vh] left-1/2 z-10 h-px w-[72vw] max-w-[1040px] -translate-x-1/2 origin-center bg-white/18"
+            aria-hidden="true"
+          >
+            <span className="absolute -right-1 -top-[5px] h-3 w-3 rounded-full bg-colus-orange" />
+          </motion.div>
 
           <div className="relative z-10 mx-auto grid min-h-screen max-w-[1440px] items-center gap-8 px-16 py-24 lg:grid-cols-12">
             <div className="lg:col-span-5">
