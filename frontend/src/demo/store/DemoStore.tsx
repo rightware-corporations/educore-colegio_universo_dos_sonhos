@@ -89,6 +89,8 @@ function reducer(state: DemoState, action: Action): DemoState {
       };
     case "RESET":
       return initialState;
+    default:
+      return state;
   }
 }
 
