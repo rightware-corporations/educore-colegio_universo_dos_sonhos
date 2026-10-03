@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { ColusMark } from "./ColusMark";
 
@@ -16,6 +16,9 @@ export function LandingHeader() {
   const [theme, setTheme] = useState<HeaderTheme>("hidden");
   const [active, setActive] = useState("");
   const [open, setOpen] = useState(false);
+  const [autoHidden, setAutoHidden] = useState(false);
+  const lastScrollY = useRef(0);
+  const directionDistance = useRef(0);
 
   useEffect(() => {
     const themed = Array.from(
@@ -58,6 +61,61 @@ export function LandingHeader() {
     };
   }, []);
 
+  useEffect(() => {
+    if (theme === "hidden") {
+      setOpen(false);
+      setAutoHidden(false);
+    }
+  }, [theme]);
+
+  useEffect(() => {
+    const onScroll = () => {
+      if (open) {
+        setAutoHidden(false);
+        lastScrollY.current = window.scrollY;
+        directionDistance.current = 0;
+        return;
+      }
+
+      const currentY = window.scrollY;
+      const delta = currentY - lastScrollY.current;
+
+      if (currentY < window.innerHeight * 0.85) {
+        setAutoHidden(false);
+        directionDistance.current = 0;
+      } else if (delta > 0) {
+        directionDistance.current = Math.max(0, directionDistance.current) + delta;
+        if (directionDistance.current >= 16) setAutoHidden(true);
+      } else if (delta < 0) {
+        directionDistance.current = Math.min(0, directionDistance.current) + delta;
+        if (directionDistance.current <= -8) setAutoHidden(false);
+      }
+
+      lastScrollY.current = currentY;
+    };
+
+    lastScrollY.current = window.scrollY;
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
   if (theme === "hidden") return null;
 
   const dark = theme === "dark" || theme === "transparent";
@@ -65,7 +123,8 @@ export function LandingHeader() {
   return (
     <header
       className={[
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-300",
+        "fixed inset-x-0 top-0 z-50 transition duration-300",
+        autoHidden ? "-translate-y-full" : "translate-y-0",
         theme === "transparent" ? "bg-transparent" : "",
         theme === "dark" ? "border-b border-white/10 bg-colus-ink/90 backdrop-blur-md" : "",
         theme === "light" ? "border-b border-black/5 bg-colus-white/90 backdrop-blur-md" : "",
