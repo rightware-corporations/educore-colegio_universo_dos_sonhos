@@ -133,15 +133,15 @@ export function LandingHeader() {
     <>
       {skipLink}
       <header
-      className={[
-        "fixed inset-x-0 top-0 z-50 transition duration-300",
+        className={[
+          "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition duration-300 lg:pt-0",
         autoHidden ? "-translate-y-full" : "translate-y-0",
         theme === "transparent" ? "bg-transparent" : "",
         theme === "dark" ? "border-b border-white/10 bg-colus-ink/90 backdrop-blur-md" : "",
         theme === "light" ? "border-b border-black/5 bg-colus-white/90 backdrop-blur-md" : "",
-      ].join(" ")}
-    >
-      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center gap-6 px-5 md:px-8 lg:px-16">
+        ].join(" ")}
+      >
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-6 px-5 md:px-8 lg:h-[72px] lg:px-16">
         <a href="#top" aria-label="Colégio Universo dos Sonhos" className="shrink-0">
           <ColusMark className="h-11 w-14" compact />
         </a>
@@ -192,7 +192,7 @@ export function LandingHeader() {
 
       {open && (
         <div className={dark ? "bg-colus-ink text-white" : "bg-colus-white text-colus-ink"}>
-          <nav className="mx-auto grid max-w-[1440px] gap-1 px-5 pb-6 pt-2 md:px-8">
+          <nav className="mx-auto grid max-w-[1440px] gap-1 px-5 pb-[calc(1.5rem+env(safe-area-inset-bottom))] pt-2 md:px-8 lg:pb-6">
             {links.map(([label, id]) => (
               <a
                 key={id}
