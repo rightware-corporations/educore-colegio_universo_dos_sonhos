@@ -68,11 +68,11 @@ export function TransformarSection() {
             <div className="relative mt-12">
               <div className="absolute bottom-6 left-[19px] top-6 w-px bg-gradient-to-b from-colus-orange via-colus-bright-blue/55 to-colus-orange/35" />
 
-              <div className="space-y-10">
+              <div className="space-y-8">
                 {moments.map((moment) => (
                   <article key={moment.number} className="relative pl-12">
                     <span className="absolute left-[13px] top-5 z-20 h-3.5 w-3.5 rounded-full bg-colus-orange shadow-[0_0_0_6px_rgba(241,129,54,.09)]" />
-                    <div className="relative aspect-[4/5] overflow-hidden rounded-[28px_72px_28px_28px]">
+                    <div className="relative aspect-[4/3] overflow-hidden rounded-[28px_72px_28px_28px]">
                       <LandingMedia
                         kind="image"
                         src={`${MEDIA_ROOT}/${moment.src}`}
