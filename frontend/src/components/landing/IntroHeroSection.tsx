@@ -17,9 +17,9 @@ function ReducedHero() {
     <section
       id="top"
       data-header-theme="transparent"
-      className="relative min-h-screen overflow-hidden bg-colus-ink text-colus-white"
+      className="relative min-h-[100svh] overflow-hidden bg-colus-ink text-colus-white"
     >
-      <div className="mx-auto grid min-h-screen max-w-[1440px] items-end gap-8 px-5 pb-10 pt-20 md:px-8 lg:grid-cols-12 lg:items-center lg:px-16">
+      <div className="mx-auto grid min-h-[100svh] max-w-[1440px] items-end gap-8 px-5 pb-[calc(2.5rem+env(safe-area-inset-bottom))] pt-[calc(5rem+env(safe-area-inset-top))] md:px-8 lg:min-h-screen lg:grid-cols-12 lg:items-center lg:px-16 lg:pb-10 lg:pt-20">
         <div className="order-2 pb-4 lg:order-1 lg:col-span-5 lg:pb-0">
           <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-colus-orange">
             Colégio Universo dos Sonhos
@@ -133,7 +133,7 @@ export function IntroHeroSection() {
         className="pointer-events-none absolute inset-x-0 top-[105svh] h-[45svh] lg:top-[140vh] lg:h-[60vh]"
       />
 
-      <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-screen overflow-hidden">
+      <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-[100svh] overflow-hidden lg:h-screen">
         <motion.div
           aria-hidden="true"
           style={{ opacity: vignetteOpacity }}
