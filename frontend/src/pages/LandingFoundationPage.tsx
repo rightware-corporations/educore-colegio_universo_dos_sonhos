@@ -11,17 +11,19 @@ import { ContactFooter } from "@/components/landing/ContactFooter";
 
 export function LandingFoundationPage() {
   return (
-    <main id="conteudo-principal" className="min-h-screen bg-colus-paper text-colus-text">
+    <>
       <LandingHeader />
-      <IntroHeroSection />
-      <ManifestoSection />
-      <AprenderSection />
-      <FuturoSection />
-      <VidaSection />
-      <PertencerSection />
-      <TransformarSection />
-      <TestimonialsSection />
-      <ContactFooter />
-    </main>
+      <main id="conteudo-principal" className="min-h-screen bg-colus-paper text-colus-text">
+        <IntroHeroSection />
+        <ManifestoSection />
+        <AprenderSection />
+        <FuturoSection />
+        <VidaSection />
+        <PertencerSection />
+        <TransformarSection />
+        <TestimonialsSection />
+        <ContactFooter />
+      </main>
+    </>
   );
 }
