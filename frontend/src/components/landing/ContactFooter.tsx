@@ -1,7 +1,7 @@
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { useRef } from "react";
-import { ColusMark } from "./ColusMark";
+import { ColusOfficialSymbol } from "./ColusOfficialSymbol";
 
 const footerGroups = [
   ["PLATFORM", ["Overview", "Features", "Pricing", "Integrations"]],
@@ -22,7 +22,7 @@ export function ContactFooter() {
         ref={ref}
         id="contactos"
         data-header-theme="light"
-        className="relative min-h-[100svh] scroll-mt-24 overflow-hidden bg-colus-paper px-5 py-24 md:px-8 lg:min-h-[95vh] lg:px-16 lg:py-28"
+        className="relative isolate min-h-[100svh] scroll-mt-24 overflow-hidden bg-colus-paper px-5 py-24 md:px-8 lg:min-h-[95vh] lg:px-16 lg:py-28"
       >
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 0.72 }}
@@ -32,13 +32,14 @@ export function ContactFooter() {
           aria-hidden="true"
         />
 
-        <div className="relative z-10 mx-auto flex min-h-[72vh] max-w-[1440px] flex-col items-center justify-center text-center">
+        <div className="relative mx-auto flex min-h-[72vh] max-w-[1440px] flex-col items-center justify-center text-center">
           <motion.div
             initial={reduceMotion ? false : { opacity: 0, y: 12 }}
             animate={visible ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.48, delay: reduceMotion ? 0 : 0.06, ease: [0.22, 1, 0.36, 1] }}
+            className="mix-blend-multiply"
           >
-            <ColusMark className="h-24 w-28 md:h-28 md:w-32" compact />
+            <ColusOfficialSymbol className="h-24 md:h-28" />
           </motion.div>
 
           <motion.h2
