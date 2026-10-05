@@ -78,9 +78,9 @@ Do not fabricate testimonials, social proof, metrics, business claims, assets, i
 State: Landing-page implementation and visual QA are active. Two product/design decisions were implemented in the 2026-10-05 cycle (see sections 8 and 13).
 
 Latest code commit: `297e637502c0c5d86cf4ba3998959e0559da3928` (Convite Final symbol), preceded by `c9ae5133b11a3f6667201ed3f28845aa275c76d1` (testimonial removal). Base before this cycle: `492b0a8` (docs-only); previous code baseline `ea055622cc3cfd16af6f4b35c05949b2106b1bc3`.
-The handoff-update commit follows these two on local `main`.
+`ac73497` is the handoff commit for this cycle.
 
-**PUSH STATUS: NOT PUSHED.** The agent sandbox had no GitHub write credentials (`git push` failed: could not read username). These commits exist only in the agent's local clone until someone with credentials pushes them. Verify `origin/main` before assuming any of this is on GitHub.
+**PUSH STATUS: PUSHED.** `origin/main` was fast-forwarded `492b0a8..ac73497` on 2026-10-05 and confirmed with `git ls-remote`. A later docs-only commit recording this status may sit on top; verify `origin/main` before assuming.
 
 
 ## 7. CURRENT PHASE
@@ -223,9 +223,10 @@ Not decided (do not treat as approved): fixing the sticky-stage `overflow-hidden
 - ea05562...
 
 
-### Cycle 2026-10-05 commits (local; not pushed at time of writing)
+### Cycle 2026-10-05 commits (pushed to origin/main)
 - `c9ae5133b11a3f6667201ed3f28845aa275c76d1` — fix: remove testimonial placeholder from public landing (`LandingFoundationPage.tsx`)
 - `297e637502c0c5d86cf4ba3998959e0559da3928` — feat: use official COLUS symbol crop in Convite Final (`ColusOfficialSymbol.tsx` new, `ContactFooter.tsx`)
+- `ac7349715e8b8ec066501749443ab2873e9e17e9` — docs(handoff): record testimonial removal and Convite Final symbol cycle (`HANDOFF-COLUS-CURRENT.md`)
 
 ### Files of interest
 - `frontend/src/pages/LandingFoundationPage.tsx`
@@ -240,10 +241,9 @@ Not decided (do not treat as approved): fixing the sticky-stage `overflow-hidden
 
 Do not assume the landing is final.
 
-1. **Push** the local commits (the two implementation commits and the handoff commit) from an environment with GitHub credentials, then confirm `origin/main` matches.
-2. **Real-browser desktop QA** (`npm run dev` in `frontend/`, real fonts): confirm the Convite Final symbol is clean; if it is not, fall back to option 4.
-3. **Decision needed:** approve or reject fixing the sticky-stage `overflow-hidden` problem in Aprender/Futuro/Pertencer/Transformar (e.g. `overflow-clip`), with full re-QA of all four sections. This likely also resolves the Transformar desktop tail. Alternatives: a Transformar-only adjustment.
-4. After that decision: finish desktop QA of the whole landing, then full mobile QA, then re-verify the complete landing and update this file.
+1. **Real-browser desktop QA** (`npm run dev` in `frontend/`, real fonts): confirm the Convite Final symbol is clean; if it is not, fall back to option 4.
+2. **Decision needed:** approve or reject fixing the sticky-stage `overflow-hidden` problem in Aprender/Futuro/Pertencer/Transformar (e.g. `overflow-clip`), with full re-QA of all four sections. This likely also resolves the Transformar desktop tail. Alternatives: a Transformar-only adjustment.
+3. After that decision: finish desktop QA of the whole landing, then full mobile QA, then re-verify the complete landing and update this file.
 
 Separate approvals still pending: lockfile; recording decision C in the design docs; retiring/updating `NEW-CHAT-PROMPT-COLUS.md`; deleting `ColusMark.tsx`.
 
@@ -268,7 +268,7 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 
 2026-10-05
 
-Updated after: removal of the testimonial section from the public landing (decision C) and the Convite Final official-symbol crop (decision 3, conditional). Verification was partial and headless (see section 11). Nothing in section 12 marked "Open" has been resolved. Push to GitHub was not possible from the agent sandbox.
+Updated after: removal of the testimonial section from the public landing (decision C) and the Convite Final official-symbol crop (decision 3, conditional). Verification was partial and headless (see section 11). Nothing in section 12 marked "Open" has been resolved. Commits were pushed to `origin/main` (up to `ac73497`).
 
 Important: This file is intended to be updated continuously. It should remain in the repository and should not be treated as a one-time snapshot.
 
