@@ -3,7 +3,7 @@ import { useRef } from "react";
 
 export function TestimonialsSection() {
   const ref = useRef<HTMLElement>(null);
-  const inView = useInView(ref, { amount: 0.35, once: true });
+  const inView = useInView(ref, { amount: 0.12, once: true });
   const reduceMotion = useReducedMotion();
 
   const visible = reduceMotion || inView;
@@ -22,7 +22,7 @@ export function TestimonialsSection() {
       <div className="relative mx-auto flex min-h-[72vh] max-w-[1440px] items-center">
         <div className="w-full max-w-5xl">
           <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            initial={reduceMotion ? false : { opacity: 0.85, y: 8 }}
             animate={visible ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.52, ease: [0.22, 1, 0.36, 1] }}
             className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange"
@@ -31,7 +31,7 @@ export function TestimonialsSection() {
           </motion.p>
 
           <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 12 }}
+            initial={reduceMotion ? false : { opacity: 0.85, y: 8 }}
             animate={visible ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.58, delay: reduceMotion ? 0 : 0.06, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 max-w-[18ch] font-editorial text-[clamp(36px,4.3vw,68px)] font-medium leading-[1.04] tracking-[-.025em] text-colus-white"
@@ -40,7 +40,7 @@ export function TestimonialsSection() {
           </motion.p>
 
           <motion.p
-            initial={reduceMotion ? false : { opacity: 0, y: 10 }}
+            initial={reduceMotion ? false : { opacity: 0.85, y: 8 }}
             animate={visible ? { opacity: 1, y: 0 } : undefined}
             transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 text-sm font-semibold tracking-[0.08em] text-white/48"
