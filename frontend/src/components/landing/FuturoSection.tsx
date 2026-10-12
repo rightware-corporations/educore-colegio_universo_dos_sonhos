@@ -193,7 +193,7 @@ export function FuturoSection() {
             </div>
 
             <div className="relative min-h-[64vh] lg:col-span-8">
-              {desktopScenes.map((scene) => (
+              {desktopScenes.map((scene, index) => (
                 <motion.article
                   key={scene.number}
                   style={reduceMotion ? undefined : { clipPath: scene.clipPath }}
@@ -201,7 +201,10 @@ export function FuturoSection() {
                 >
                   <div className="absolute inset-0">{scene.media}</div>
                   <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/18 to-transparent" />
-                  <div className="relative z-10 max-w-xl p-10">
+                  <div
+                    aria-hidden={activeScene !== index}
+                    className={`relative z-10 max-w-xl p-10 transition-opacity duration-200 ${activeScene === index ? "opacity-100" : "opacity-0"}`}
+                  >
                     <p className="text-xs font-bold tracking-[0.18em] text-colus-orange">
                       {scene.number} / {scene.label}
                     </p>
