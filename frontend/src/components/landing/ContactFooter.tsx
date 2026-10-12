@@ -4,10 +4,18 @@ import { useRef } from "react";
 import { ColusOfficialSymbol } from "./ColusOfficialSymbol";
 
 const footerGroups = [
-  ["PLATFORM", ["Overview", "Features", "Pricing", "Integrations"]],
-  ["SOLUTIONS", ["Schools", "Multi-Campus", "Administrators", "Educators"]],
-  ["SUPPORT", ["Help Center", "Documentation", "Training", "Contact"]],
-  ["COMPANY", ["About", "Blog", "Careers", "News"]],
+  ["O COLÉGIO", [
+    { label: "A experiência COLUS", href: "#o-colegio" },
+    { label: "Aprender em movimento", href: "#experiencia" },
+    { label: "Futuro & Tecnologia", href: "#futuro" },
+    { label: "Comunidade", href: "#comunidade" },
+  ]],
+  ["CONTACTOS", [
+    { label: "Marcar uma visita", href: "#contactos" },
+    { label: "Email", href: "mailto:info@colus.ac.mz" },
+    { label: "Telefone", href: "tel:+258847000242" },
+    { label: "Instagram COLUS", href: "https://www.instagram.com/colus_mz" },
+  ]],
 ] as const;
 
 export function ContactFooter() {
@@ -149,31 +157,38 @@ export function ContactFooter() {
         className="bg-colus-ink px-5 py-14 text-white md:px-8 lg:px-16 lg:py-16"
       >
         <div className="mx-auto max-w-[1440px]">
-          <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.4fr_repeat(4,1fr)_1.4fr] lg:gap-8 lg:pb-14">
+          <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr] lg:gap-8 lg:pb-14">
             <div>
               <p className="text-2xl font-bold tracking-[-.03em]">EduCore</p>
               <p className="mt-4 max-w-[28ch] text-sm leading-6 text-white/55">
-                Integrated school management for stronger institutions.
+                Plataforma de gestão e acompanhamento escolar.
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4 lg:contents">
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:contents">
               {footerGroups.map(([title, items]) => (
-                <div key={title}>
+                <nav key={title} aria-label={title}>
                   <p className="text-xs font-bold tracking-[0.12em] text-white/45">{title}</p>
-                  <div className="mt-4 grid gap-2 text-sm text-white/65">
-                    {items.map((item) => (
-                      <span key={item}>{item}</span>
+                  <div className="mt-4 grid gap-3 text-sm text-white/65">
+                    {items.map(({ label, href }) => (
+                      <a
+                        key={label}
+                        href={href}
+                        target={href.startsWith("https://") ? "_blank" : undefined}
+                        rel={href.startsWith("https://") ? "noreferrer" : undefined}
+                        className="transition-colors hover:text-white focus-visible:underline"
+                      >
+                        {label}
+                      </a>
                     ))}
                   </div>
-                </div>
+                </nav>
               ))}
             </div>
 
             <div className="border-t border-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 lg:text-right">
               <p className="text-xl font-bold tracking-[0.08em]">RIGHTWARE</p>
-              <p className="mt-3 text-sm text-white/55">A RIGHTWARE Product</p>
-              <p className="mt-6 text-xs text-white/35">LinkedIn · YouTube · X · Instagram</p>
+              <p className="mt-3 text-sm text-white/55">Tecnologia ao serviço da educação.</p>
             </div>
           </div>
 
@@ -182,9 +197,7 @@ export function ContactFooter() {
               <p>© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.</p>
               <p className="mt-2">Powered by EduCore · A RIGHTWARE Product</p>
             </div>
-            <p className="max-w-xl md:text-right">
-              Privacy Policy · Terms of Service · Cookie Policy · System Status
-            </p>
+            <p className="max-w-xl md:text-right">Matola-Rio · KM 16 · Moçambique</p>
           </div>
         </div>
       </footer>
