@@ -26,7 +26,7 @@ export function AprenderSection() {
       ref={ref}
       id="experiencia"
       data-header-theme="light"
-      className="relative scroll-mt-24 overflow-hidden bg-colus-white"
+      className="relative scroll-mt-24 overflow-hidden bg-colus-white lg:overflow-visible"
     >
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="mx-auto max-w-[680px] px-5 py-20 sm:px-6">
