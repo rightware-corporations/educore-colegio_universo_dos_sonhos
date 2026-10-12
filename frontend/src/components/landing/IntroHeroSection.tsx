@@ -74,55 +74,55 @@ export function IntroHeroSection() {
   });
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const next = latest >= 0.4;
+    const next = latest >= 0.3;
     setHeroVideoActive((current) => (current === next ? current : next));
   });
 
   const background = useTransform(
     scrollYProgress,
-    [0, 0.22, 0.32, 0.48, 1],
+    [0, 0.16, 0.24, 0.4, 1],
     ["#FFF8EF", "#FFF8EF", "#F7F4EF", "#071A2A", "#071A2A"],
   );
-  const vignetteOpacity = useTransform(scrollYProgress, [0.12, 0.28, 0.48], [0, 0.18, 0.74]);
+  const vignetteOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.4], [0, 0.18, 0.74]);
 
-  const markOpacity = useTransform(scrollYProgress, [0, 0.35, 0.58], [1, 1, 0]);
+  const markOpacity = useTransform(scrollYProgress, [0, 0.2, 0.45], [1, 1, 0]);
   const markBreath = useTransform(scrollYProgress, [0, 0.055, 0.11], [1, 1.012, 1]);
 
-  const leafScale = useTransform(scrollYProgress, [0.1, 0.28], [1, 1.5]);
-  const leftLeafX = useTransform(scrollYProgress, [0.1, 0.28], ["0vw", "-14vw"]);
-  const rightLeafX = useTransform(scrollYProgress, [0.1, 0.28], ["0vw", "14vw"]);
-  const leafY = useTransform(scrollYProgress, [0.1, 0.28], ["0vh", "9vh"]);
-  const leftLeafRotate = useTransform(scrollYProgress, [0.1, 0.28], [0, -11]);
-  const rightLeafRotate = useTransform(scrollYProgress, [0.1, 0.28], [0, 11]);
+  const leafScale = useTransform(scrollYProgress, [0.08, 0.24], [1, 1.22]);
+  const leftLeafX = useTransform(scrollYProgress, [0.08, 0.24], ["0vw", "-8vw"]);
+  const rightLeafX = useTransform(scrollYProgress, [0.08, 0.24], ["0vw", "8vw"]);
+  const leafY = useTransform(scrollYProgress, [0.08, 0.24], ["0vh", "5vh"]);
+  const leftLeafRotate = useTransform(scrollYProgress, [0.08, 0.24], [0, -9]);
+  const rightLeafRotate = useTransform(scrollYProgress, [0.08, 0.24], [0, 9]);
 
-  const lightY = useTransform(scrollYProgress, [0.28, 0.46], ["0vh", "-7vh"]);
-  const lightScale = useTransform(scrollYProgress, [0.28, 0.46], [1, 1.5]);
-  const haloOpacity = useTransform(scrollYProgress, [0.28, 0.48, 0.9], [0, 0.82, 0.42]);
+  const lightY = useTransform(scrollYProgress, [0.22, 0.4], ["0vh", "-5vh"]);
+  const lightScale = useTransform(scrollYProgress, [0.22, 0.4], [1, 1.18]);
+  const haloOpacity = useTransform(scrollYProgress, [0.2, 0.4, 0.9], [0, 0.82, 0.42]);
 
-  const markDotsOpacity = useTransform(scrollYProgress, [0.31, 0.51], [1, 0]);
-  const finalNodesOpacity = useTransform(scrollYProgress, [0.6, 0.73], [0, 1]);
+  const markDotsOpacity = useTransform(scrollYProgress, [0.18, 0.38], [1, 0]);
+  const finalNodesOpacity = useTransform(scrollYProgress, [0.42, 0.55], [0, 1]);
 
-  const mediaOpacity = useTransform(scrollYProgress, [0.34, 0.5], [0, 1]);
-  const mediaScale = useTransform(scrollYProgress, [0.34, 0.59], [0.58, 1]);
-  const mediaShiftX = useTransform(scrollYProgress, [0.34, 0.64], ["-8vw", "0vw"]);
-  const mediaShiftY = useTransform(scrollYProgress, [0.34, 0.64], ["5vh", "0vh"]);
+  const mediaOpacity = useTransform(scrollYProgress, [0.22, 0.37], [0, 1]);
+  const mediaScale = useTransform(scrollYProgress, [0.22, 0.42], [0.78, 1]);
+  const mediaShiftX = useTransform(scrollYProgress, [0.22, 0.45], ["-5vw", "0vw"]);
+  const mediaShiftY = useTransform(scrollYProgress, [0.22, 0.45], ["3vh", "0vh"]);
 
-  const copyOpacity = useTransform(scrollYProgress, [0.4, 0.52], [0, 1]);
-  const copyY = useTransform(scrollYProgress, [0.4, 0.54], [18, 0]);
-  const lineOneY = useTransform(scrollYProgress, [0.4, 0.52], [12, 0]);
-  const lineTwoY = useTransform(scrollYProgress, [0.44, 0.54], [14, 0]);
+  const copyOpacity = useTransform(scrollYProgress, [0.27, 0.39], [0, 1]);
+  const copyY = useTransform(scrollYProgress, [0.27, 0.4], [16, 0]);
+  const lineOneY = useTransform(scrollYProgress, [0.27, 0.39], [12, 0]);
+  const lineTwoY = useTransform(scrollYProgress, [0.3, 0.42], [14, 0]);
 
   if (reduceMotion) return <ReducedHero />;
 
   return (
-    <section ref={ref} id="top" className="relative h-[150svh] lg:h-[210vh]">
+    <section ref={ref} id="top" className="relative h-[180svh] lg:h-[280vh]">
       <div
         data-header-theme="hidden"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[123svh] lg:h-[174vh]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[88svh] lg:h-[60vh]"
       />
       <div
         data-header-theme="transparent"
-        className="pointer-events-none absolute inset-x-0 top-[123svh] h-[27svh] lg:top-[174vh] lg:h-[36vh]"
+        className="pointer-events-none absolute inset-x-0 top-[88svh] h-[92svh] lg:top-[60vh] lg:h-[220vh]"
       />
 
       <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-[100svh] overflow-hidden lg:h-screen">
