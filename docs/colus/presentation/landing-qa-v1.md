@@ -87,7 +87,7 @@ Não renderizar publicamente nomes internos como:
 - Book Aperture;
 - Scene Window.
 
-Depoimentos permanecem placeholders explícitos até existir voz real/autorizada.
+A secção «Vozes COLUS» apresenta texto institucional sem aspas nem atribuição a uma pessoa real. Não existe testemunho inventado. Depoimentos reais só podem ser publicados após validação/autorização.
 
 ## 2. Correções técnicas já aplicadas
 
@@ -98,7 +98,20 @@ Depoimentos permanecem placeholders explícitos até existir voz real/autorizada
 - media abaixo da dobra continua lazy.
 - secondary videos usam preload conservador.
 
-## 3. Itens ainda pendentes antes de declarar QA final
+## 3. Passagem de correção após a gravação de 2026-10-05
+
+Correções integradas na branch `main` em 2026-10-12:
+
+- Aprender, Futuro, Pertencer e Transformar: o `overflow-hidden` externo passa a ser removido em desktop (`lg:overflow-visible`), mantendo clipping nos contentores internos. Isto permite ao `sticky` fixar-se ao viewport.
+- Futuro e Transformar: sequências de opacidade retemporizadas com sobreposição entre cenas, sem intervalo em que todas as imagens estão invisíveis.
+- Pertencer: título e fotografias entram com opacidade base elevada; o efeito permanece progressivo, mas o conteúdo nunca começa completamente invisível.
+- Vozes COLUS: componente incluído no fluxo real da landing entre Transformar e Convite Final. Texto institucional substitui marcadores `TESTEMUNHO A INSERIR` sem criar depoimentos fictícios.
+- Vozes COLUS: o texto começa legível mesmo com scroll rápido.
+- Footer EduCore/RIGHTWARE: eliminados textos de template genérico, navegação fictícia e links legais não implementados. Incluídos apenas destinos já presentes na landing e contactos previamente especificados.
+
+**Validação pendente:** estas são correções de código, não validação visual. É necessária uma nova gravação desktop para verificar sticky, saída de Futuro, leitura em Pertencer, presença da secção Vozes COLUS, Hero e Footer. O `npm run typecheck` e `npm run build` também continuam por validar localmente.
+
+## 4. Itens ainda pendentes antes de declarar QA final
 
 ### Visual QA real
 
@@ -143,7 +156,7 @@ Antes de produção pública:
 - inserir apenas depoimentos reais/autorizados;
 - preparar clips curtos de Hero/Ciência para reduzir peso.
 
-## 4. Gate atual
+## 5. Gate atual
 
 A landing está em:
 
