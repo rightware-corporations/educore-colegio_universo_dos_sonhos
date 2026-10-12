@@ -6,6 +6,7 @@ import { FuturoSection } from "@/components/landing/FuturoSection";
 import { VidaSection } from "@/components/landing/VidaSection";
 import { PertencerSection } from "@/components/landing/PertencerSection";
 import { TransformarSection } from "@/components/landing/TransformarSection";
+import { TestimonialsSection } from "@/components/landing/TestimonialsSection";
 import { ContactFooter } from "@/components/landing/ContactFooter";
 
 export function LandingFoundationPage() {
@@ -20,6 +21,7 @@ export function LandingFoundationPage() {
         <VidaSection />
         <PertencerSection />
         <TransformarSection />
+        <TestimonialsSection />
         <ContactFooter />
       </main>
     </>
