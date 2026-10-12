@@ -18,14 +18,14 @@ export function PertencerSection() {
     offset: ["start start", "end end"],
   });
 
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.22], [0, 1]);
-  const headlineY = useTransform(scrollYProgress, [0, 0.22], [16, 0]);
+  const headlineOpacity = useTransform(scrollYProgress, [0, 0.12], [0.92, 1]);
+  const headlineY = useTransform(scrollYProgress, [0, 0.12], [8, 0]);
   const ringLength = useTransform(scrollYProgress, [0.18, 0.52], [0.25, 0.8]);
   const ringFade = useTransform(scrollYProgress, [0.68, 0.9], [1, 0.42]);
 
-  const mediaA = useTransform(scrollYProgress, [0.18, 0.38], [0, 1]);
-  const mediaB = useTransform(scrollYProgress, [0.3, 0.5], [0, 1]);
-  const mediaC = useTransform(scrollYProgress, [0.42, 0.62], [0, 1]);
+  const mediaA = useTransform(scrollYProgress, [0, 0.15], [0.85, 1]);
+  const mediaB = useTransform(scrollYProgress, [0.05, 0.2], [0.8, 1]);
+  const mediaC = useTransform(scrollYProgress, [0.09, 0.24], [0.72, 1]);
 
   const handoffOpacity = useTransform(scrollYProgress, [0.72, 0.92], [0, 1]);
   const handoffScaleY = useTransform(scrollYProgress, [0.72, 0.96], [0.1, 1]);
@@ -35,7 +35,7 @@ export function PertencerSection() {
       ref={ref}
       id="comunidade"
       data-header-theme="light"
-      className="relative scroll-mt-24 overflow-hidden bg-colus-white"
+      className="relative scroll-mt-24 overflow-hidden bg-colus-white lg:overflow-visible"
     >
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="mx-auto max-w-[680px] px-5 py-20 sm:px-6">
@@ -126,7 +126,7 @@ export function PertencerSection() {
         </div>
       </div>
 
-      <div className={reduceMotion ? "hidden" : "hidden h-[130vh] lg:block"}>
+      <div className={reduceMotion ? "hidden" : "hidden h-[155vh] lg:block"}>
         <div className="sticky top-0 h-screen overflow-hidden py-20">
           <div className="mx-auto min-h-[calc(100vh-10rem)] max-w-[1440px] px-16">
             <motion.div
