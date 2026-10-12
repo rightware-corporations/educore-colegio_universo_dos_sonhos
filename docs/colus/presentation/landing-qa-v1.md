@@ -102,6 +102,7 @@ A secção «Vozes COLUS» apresenta texto institucional sem aspas nem atribuiç
 
 Correções integradas na branch `main` em 2026-10-12:
 
+- Intro/Hero: a abertura do vídeo e do texto principal foi antecipada no progresso do scroll, a ampliação do símbolo gráfico foi suavizada e o Hero tem mais espaço de leitura no desktop. O símbolo da Intro continua apenas um dispositivo motion derivado, não um logótipo oficial.
 - Aprender, Futuro, Pertencer e Transformar: o `overflow-hidden` externo passa a ser removido em desktop (`lg:overflow-visible`), mantendo clipping nos contentores internos. Isto permite ao `sticky` fixar-se ao viewport.
 - Futuro e Transformar: sequências de opacidade retemporizadas com sobreposição entre cenas, sem intervalo em que todas as imagens estão invisíveis.
 - Pertencer: título e fotografias entram com opacidade base elevada; o efeito permanece progressivo, mas o conteúdo nunca começa completamente invisível.
