@@ -1,14 +1,14 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
 import { LandingMedia } from "./LandingMedia";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
 function EngineeringDevice() {
   return (
-    <div className="relative h-full w-full overflow-hidden bg-[radial-gradient(circle_at_72%_22%,rgba(40,153,239,.18),transparent_24%),linear-gradient(145deg,#0B2436,#071A2A)]">
+    <div className="relative h-full w-full overflow-hidden bg-[radial-gradient(circle_at_72%_22%,rgba(40,153,239,.30),transparent_28%),linear-gradient(145deg,#0B2436,#071A2A)]">
       <svg viewBox="0 0 720 520" className="absolute inset-0 h-full w-full" aria-hidden="true">
-        <g fill="none" stroke="rgba(248,251,253,.18)" strokeWidth="1.5">
+        <g fill="none" stroke="rgba(248,251,253,.38)" strokeWidth="1.5">
           <path d="M90 388 L220 160 L360 388 Z" />
           <path d="M360 388 L500 130 L630 388 Z" />
           <circle cx="220" cy="160" r="48" />
@@ -36,10 +36,17 @@ export function FuturoSection() {
     offset: ["start start", "end end"],
   });
 
-  const op1 = useTransform(scrollYProgress, [0, 0.2, 0.3, 0.4], [1, 1, 1, 0]);
-  const op2 = useTransform(scrollYProgress, [0.31, 0.4, 0.52, 0.61], [0, 1, 1, 0]);
-  const op3 = useTransform(scrollYProgress, [0.52, 0.61, 0.7, 0.79], [0, 1, 1, 0]);
-  const op4 = useTransform(scrollYProgress, [0.7, 0.79, 1], [0, 1, 1]);
+  // Revealing the next full media window avoids ghosted texts during crossfades.
+  // The first scene stays visible underneath until the next scene covers it.
+  const revealEngineering = useTransform(scrollYProgress, [0.24, 0.36], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
+  const revealScience = useTransform(scrollYProgress, [0.48, 0.60], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
+  const revealSafety = useTransform(scrollYProgress, [0.73, 0.85], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
+  const [activeScene, setActiveScene] = useState(0);
+
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    const next = latest >= 0.79 ? 3 : latest >= 0.54 ? 2 : latest >= 0.3 ? 1 : 0;
+    setActiveScene((current) => current === next ? current : next);
+  });
   const fieldLength = useTransform(scrollYProgress, [0.02, 0.95], [0, 1]);
 
   const scenes = [
@@ -71,6 +78,7 @@ export function FuturoSection() {
           src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001.mp4`}
           poster={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`}
           alt="Experiência científica realizada em contexto escolar"
+          active={activeScene === 2}
         />
       ),
     },
@@ -89,10 +97,10 @@ export function FuturoSection() {
   ] as const;
 
   const desktopScenes = [
-    { ...scenes[0], opacity: op1 },
-    { ...scenes[1], opacity: op2 },
-    { ...scenes[2], opacity: op3 },
-    { ...scenes[3], opacity: op4 },
+    { ...scenes[0], clipPath: undefined },
+    { ...scenes[1], clipPath: revealEngineering },
+    { ...scenes[2], clipPath: revealScience },
+    { ...scenes[3], clipPath: revealSafety },
   ];
 
   return (
@@ -188,7 +196,7 @@ export function FuturoSection() {
               {desktopScenes.map((scene) => (
                 <motion.article
                   key={scene.number}
-                  style={reduceMotion ? undefined : { opacity: scene.opacity }}
+                  style={reduceMotion ? undefined : { clipPath: scene.clipPath }}
                   className="absolute inset-0 grid content-end overflow-hidden rounded-[32px_82px_32px_32px] border border-white/10 bg-colus-ink-soft"
                 >
                   <div className="absolute inset-0">{scene.media}</div>
