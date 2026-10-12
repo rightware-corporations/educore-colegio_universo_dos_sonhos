@@ -12,10 +12,10 @@ const heroNodes = [
   { label: "Transformar", href: "#transformar", className: "left-[56%] bottom-[9%]" },
 ] as const;
 
-function ReducedHero() {
+function FinalHero({ id = "top" }: { id?: string }) {
   return (
     <section
-      id="top"
+      id={id}
       data-header-theme="transparent"
       className="relative min-h-[100svh] overflow-hidden bg-colus-ink text-colus-white"
     >
@@ -112,17 +112,18 @@ export function IntroHeroSection() {
   const lineOneY = useTransform(scrollYProgress, [0.27, 0.39], [12, 0]);
   const lineTwoY = useTransform(scrollYProgress, [0.3, 0.42], [14, 0]);
 
-  if (reduceMotion) return <ReducedHero />;
+  if (reduceMotion) return <FinalHero />;
 
   return (
-    <section ref={ref} id="top" className="relative h-[180svh] lg:h-[280vh]">
+    <>
+    <section ref={ref} id="top" className="relative h-[180svh] lg:h-[190vh]">
       <div
         data-header-theme="hidden"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[88svh] lg:h-[60vh]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[145svh] lg:h-[150vh]"
       />
       <div
         data-header-theme="transparent"
-        className="pointer-events-none absolute inset-x-0 top-[88svh] h-[92svh] lg:top-[60vh] lg:h-[220vh]"
+        className="pointer-events-none absolute inset-x-0 top-[145svh] h-[35svh] lg:top-[150vh] lg:h-[40vh]"
       />
 
       <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-[100svh] overflow-hidden lg:h-screen">
@@ -287,5 +288,8 @@ export function IntroHeroSection() {
         </motion.div>
       </motion.div>
     </section>
+    {/* Persistent reading state: the narrative Hero is not just a transient scroll frame. */}
+    <FinalHero id="hero" />
+    </>
   );
 }
