@@ -112,6 +112,30 @@ Correções integradas na branch `main` em 2026-10-12:
 
 **Validação pendente:** estas são correções de código, não validação visual. É necessária uma nova gravação desktop para verificar sticky, saída de Futuro, leitura em Pertencer, presença da secção Vozes COLUS, Hero e Footer. O `npm run typecheck` e `npm run build` também continuam por validar localmente.
 
+## 3.1. Segunda gravação — 2026-10-12
+
+Revisão de vídeo local, 1920×1080, 48,4 s:
+
+- **00:00–00:09:** a marca gráfica expandiu mas o Hero com headline/video/CTAs não estabilizou tempo suficiente para ser visto na passagem; considerou-se **P0**.
+- **00:14–00:17:** Aprender mostrou sobretudo Descobrir; Criar não teve tempo de leitura claro nesta captura.
+- **00:18–00:22:** Futuro mostrou TIC/Engenharia com sobreposição escura e textos em fantasma na transição; Ciência e Segurança Digital não ficaram demonstradas de forma clara na gravação.
+- **00:29–00:34:** Pertencer aparece mais legível; o conteúdo desce para a parte inferior do viewport e a passagem continua abrupta.
+- **00:34–00:39:** Transformar exibiu sobretudo Avançar, sem uma amostra clara da sequência Expressar/Construir.
+- **00:40–00:47:** Vozes COLUS, Convite Final e Footer estão presentes. Vozes ainda precisa de conteúdo editorial/autorizado mais forte; não inventar testemunhos.
+
+Nova passagem de código integrada na `main`:
+
+- Intro/Hero: tempo de scroll desktop aumentado para **280vh**, media/copy visíveis mais cedo, redução da expansão do mark derivado; Header COLUS oficial mantém-se visível no estado de Hero transparente.
+- Aprender: desktop stage prolongado para **225vh**.
+- Futuro: desktop stage prolongado para **280vh**; troca de opacidade sobreposta por transição com janela revelada (`clip-path`) e maior contraste na engenharia; vídeo Ciência só é ativado quando a respetiva cena está ativa.
+- Transformar: desktop stage prolongado para **220vh**.
+
+**Não validados ainda no browser:** estas últimas mudanças foram feitas após a gravação. Verificar se as quatro cenas de Futuro e as três de Transformar são efetivamente legíveis em **slow scroll** e em **fast scroll**. Verificar também o Header e a ausência de overlaps em 1024px e em mobile.
+
+**Lacunas de conteúdo/assets ainda abertas:** testemunhos reais autorizados; versão oficial transparent/vector do logo COLUS para contextos sem placa branca; logos oficiais EduCore e RIGHTWARE no Footer; revisão de crops, peso/codec dos vídeos e dos dados de contacto.
+
+**Fora do gate da landing:** os oito perfis escolares, navegação de login/demo e integração SIGA/ERP exigem QA funcional separado. Uma gravação apenas da landing não valida nem invalida essas funcionalidades.
+
 ## 4. Itens ainda pendentes antes de declarar QA final
 
 ### Visual QA real
