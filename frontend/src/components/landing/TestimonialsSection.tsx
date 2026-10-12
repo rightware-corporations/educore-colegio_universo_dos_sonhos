@@ -36,7 +36,7 @@ export function TestimonialsSection() {
             transition={{ duration: 0.58, delay: reduceMotion ? 0 : 0.06, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 max-w-[18ch] font-editorial text-[clamp(36px,4.3vw,68px)] font-medium leading-[1.04] tracking-[-.025em] text-colus-white"
           >
-            TESTEMUNHO REAL / AUTORIZADO — A INSERIR
+            São as pessoas que dão vida a cada conquista.
           </motion.p>
 
           <motion.p
@@ -45,7 +45,7 @@ export function TestimonialsSection() {
             transition={{ duration: 0.5, delay: reduceMotion ? 0 : 0.12, ease: [0.22, 1, 0.36, 1] }}
             className="mt-8 text-sm font-semibold tracking-[0.08em] text-white/48"
           >
-            NOME / RELAÇÃO COM A ESCOLA — A VALIDAR
+            Alunos, famílias e educadores fazem desta escola uma comunidade.
           </motion.p>
 
           <div className="mt-16 max-w-4xl">
@@ -59,8 +59,8 @@ export function TestimonialsSection() {
               />
             </div>
             <div className="mt-4 flex items-center justify-between text-[10px] font-bold uppercase tracking-[0.16em] text-white/30">
-              <span>01</span>
-              <span>Vozes COLUS</span>
+              <span>A nossa comunidade</span>
+              <span>Histórias que nos ligam</span>
             </div>
           </div>
         </div>
