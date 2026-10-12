@@ -136,6 +136,27 @@ Nova passagem de código integrada na `main`:
 
 **Fora do gate da landing:** os oito perfis escolares, navegação de login/demo e integração SIGA/ERP exigem QA funcional separado. Uma gravação apenas da landing não valida nem invalida essas funcionalidades.
 
+## 3.2. Terceira gravação — 2026-10-12, 17:48
+
+Vídeo revisto: 44,1 segundos, 1920×1080.
+
+Constatações:
+- `00:00–00:08`: Intro Morph dominou a abertura, sem Hero legível.
+- `00:09–00:11`: Manifesto já entrou; o Hero com vídeo/copy/CTAs não apareceu estabilizado.
+- `00:12–00:18`: Aprender destacou sobretudo a primeira cena, Descobrir.
+- `00:19–00:22`: Futuro manteve a janela Engenharia, com textos de cenas sobrepostos; não ficou legível a sequência completa TIC → Engenharia → Ciência → Segurança Digital.
+- `00:25–00:30`: Vida COLUS mantém forte presença visual.
+- `00:31–00:34`: Pertencer está visível, mas transição para Transformar ainda brusca.
+- `00:34–00:37`: Transformar apresentou sobretudo Avançar.
+- `00:38–00:44`: Vozes COLUS, Convite Final e Footer aparecem sem placeholders genéricos.
+
+Alterações realizadas depois da gravação:
+- `LandingMotionQA.tsx`: overlay de diagnóstico **somente no Vite DEV** e **somente com `?motionQA=1`**, medindo diretamente posições DOM (sem depender de `useScroll`). Indica `p%`, altura do stage, CSS `position` do sticky e posição vertical.
+- `LandingFoundationPage.tsx`: integração da instrumentação desativada por defeito.
+- `FuturoSection.tsx`: legenda/copy só fica visível na cena ativa, evitando colisão de textos na janela de transição.
+
+**Próxima verificação obrigatória:** abrir `http://localhost:8080/?motionQA=1` na versão atualizada (porta conforme runtime local) e gravar a passagem por Intro/Hero e Futuro. Inspecionar se o progresso DOM atravessa 0–100%, se `sticky` permanece com topo 0 enquanto fixado, e contrastar com o estado visual. Não continuar a alterar alturas de secções sem este diagnóstico. Remover a query `motionQA` da URL para voltar à landing sem overlay.
+
 ## 4. Itens ainda pendentes antes de declarar QA final
 
 ### Visual QA real
