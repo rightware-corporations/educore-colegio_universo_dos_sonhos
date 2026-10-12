@@ -135,7 +135,7 @@ export function LandingHeader() {
       <header
         className={[
           "fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)] transition duration-[260ms] ease-[cubic-bezier(0.22,1,0.36,1)] lg:pt-0",
-          autoHidden ? "-translate-y-full" : "translate-y-0",
+          autoHidden && theme !== "transparent" ? "-translate-y-full" : "translate-y-0",
           theme === "transparent" ? "bg-transparent" : "",
           theme === "dark"
             ? "border-b border-white/10 bg-colus-ink/90 backdrop-blur-md"
