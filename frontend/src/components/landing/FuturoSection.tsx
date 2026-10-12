@@ -193,7 +193,7 @@ export function FuturoSection() {
             </div>
 
             <div className="relative min-h-[64vh] lg:col-span-8">
-              {desktopScenes.map((scene, index) => (
+              {desktopScenes.map((scene) => (
                 <motion.article
                   key={scene.number}
                   style={reduceMotion ? undefined : { clipPath: scene.clipPath }}
@@ -201,19 +201,17 @@ export function FuturoSection() {
                 >
                   <div className="absolute inset-0">{scene.media}</div>
                   <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/18 to-transparent" />
-                  <div
-                    aria-hidden={activeScene !== index}
-                    className={`relative z-10 max-w-xl p-10 transition-opacity duration-200 ${activeScene === index ? "opacity-100" : "opacity-0"}`}
-                  >
-                    <p className="text-xs font-bold tracking-[0.18em] text-colus-orange">
-                      {scene.number} / {scene.label}
-                    </p>
-                    <p className="mt-4 text-2xl font-semibold leading-8 text-white">
-                      {scene.copy}
-                    </p>
-                  </div>
                 </motion.article>
               ))}
+              {/* Caption stays outside the clipping masks so it remains legible. */}
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 rounded-b-[32px] bg-gradient-to-t from-colus-ink/95 via-colus-ink/60 to-transparent px-10 pb-10 pt-20">
+                <p className="text-xs font-bold tracking-[0.18em] text-colus-orange">
+                  {scenes[activeScene].number} / {scenes[activeScene].label}
+                </p>
+                <p className="mt-4 max-w-xl text-2xl font-semibold leading-8 text-white">
+                  {scenes[activeScene].copy}
+                </p>
+              </div>
             </div>
           </div>
         </div>
