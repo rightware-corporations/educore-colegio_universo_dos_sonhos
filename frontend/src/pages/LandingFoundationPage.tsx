@@ -1,4 +1,5 @@
 import { LandingHeader } from "@/components/landing/LandingHeader";
+import { LandingMotionQA } from "@/components/landing/LandingMotionQA";
 import { IntroHeroSection } from "@/components/landing/IntroHeroSection";
 import { ManifestoSection } from "@/components/landing/ManifestoSection";
 import { AprenderSection } from "@/components/landing/AprenderSection";
@@ -13,6 +14,7 @@ export function LandingFoundationPage() {
   return (
     <>
       <LandingHeader />
+      <LandingMotionQA />
       <main id="conteudo-principal" className="min-h-screen bg-colus-paper text-colus-text">
         <IntroHeroSection />
         <ManifestoSection />
