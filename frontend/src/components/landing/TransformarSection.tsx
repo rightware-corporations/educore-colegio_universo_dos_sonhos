@@ -10,9 +10,9 @@ export function TransformarSection() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
   const axisLength = useTransform(scrollYProgress, [0.04, 0.92], [0, 1]);
-  const first = useTransform(scrollYProgress, [0.08, 0.24, 0.4], [0, 1, 0]);
-  const second = useTransform(scrollYProgress, [0.34, 0.5, 0.66], [0, 1, 0]);
-  const third = useTransform(scrollYProgress, [0.58, 0.74, 0.96], [0, 1, 1]);
+  const first = useTransform(scrollYProgress, [0, 0.18, 0.4, 0.48], [1, 1, 1, 0]);
+  const second = useTransform(scrollYProgress, [0.39, 0.47, 0.65, 0.73], [0, 1, 1, 0]);
+  const third = useTransform(scrollYProgress, [0.64, 0.72, 1], [0, 1, 1]);
   const horizonOpacity = useTransform(scrollYProgress, [0.86, 0.96], [0, 1]);
   const horizonScaleX = useTransform(scrollYProgress, [0.86, 1], [0.08, 1]);
 
@@ -51,7 +51,7 @@ export function TransformarSection() {
       ref={ref}
       id="transformar"
       data-header-theme="dark"
-      className="relative overflow-hidden bg-colus-ink text-white"
+      className="relative overflow-hidden bg-colus-ink text-white lg:overflow-visible"
     >
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] px-5 py-20 sm:px-6">
