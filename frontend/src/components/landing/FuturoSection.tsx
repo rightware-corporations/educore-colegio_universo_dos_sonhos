@@ -36,10 +36,10 @@ export function FuturoSection() {
     offset: ["start start", "end end"],
   });
 
-  const op1 = useTransform(scrollYProgress, [0.08, 0.18, 0.3], [0, 1, 0]);
-  const op2 = useTransform(scrollYProgress, [0.26, 0.38, 0.5], [0, 1, 0]);
-  const op3 = useTransform(scrollYProgress, [0.46, 0.58, 0.7], [0, 1, 0]);
-  const op4 = useTransform(scrollYProgress, [0.66, 0.78, 0.94], [0, 1, 1]);
+  const op1 = useTransform(scrollYProgress, [0, 0.2, 0.3, 0.4], [1, 1, 1, 0]);
+  const op2 = useTransform(scrollYProgress, [0.31, 0.4, 0.52, 0.61], [0, 1, 1, 0]);
+  const op3 = useTransform(scrollYProgress, [0.52, 0.61, 0.7, 0.79], [0, 1, 1, 0]);
+  const op4 = useTransform(scrollYProgress, [0.7, 0.79, 1], [0, 1, 1]);
   const fieldLength = useTransform(scrollYProgress, [0.02, 0.95], [0, 1]);
 
   const scenes = [
@@ -100,7 +100,7 @@ export function FuturoSection() {
       ref={ref}
       id="futuro"
       data-header-theme="dark"
-      className="relative scroll-mt-24 overflow-hidden bg-colus-ink text-white"
+      className="relative scroll-mt-24 overflow-hidden bg-colus-ink text-white lg:overflow-visible"
     >
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] px-5 py-20 sm:px-6">
