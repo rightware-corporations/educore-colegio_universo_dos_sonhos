@@ -157,6 +157,27 @@ Alterações realizadas depois da gravação:
 
 **Próxima verificação obrigatória:** abrir `http://localhost:8080/?motionQA=1` na versão atualizada (porta conforme runtime local) e gravar a passagem por Intro/Hero e Futuro. Inspecionar se o progresso DOM atravessa 0–100%, se `sticky` permanece com topo 0 enquanto fixado, e contrastar com o estado visual. Não continuar a alterar alturas de secções sem este diagnóstico. Remover a query `motionQA` da URL para voltar à landing sem overlay.
 
+## 3.3. Quarta gravação — 2026-10-12, 18:17
+
+Revisão de vídeo em browser: 78,1 s, 1920 × 1080 (viewport da janela inferior).
+
+**O diagnóstico `LandingMotionQA` não está visível.** O browser mostra `localhost:8080/#top` sem a query `?motionQA=1`; portanto os valores de progresso/posição sticky **não foram medidos** nesta gravação. Não inferir valores numéricos de `scrollYProgress` a partir de frames.
+
+Observações confirmadas:
+- Intro apresenta o mark derivado dos 0–12 s, seguido de uma passagem abrupta com o Hero praticamente ilegível; Manifesto assume o viewport cerca dos 16–20 s.
+- Aprender apresenta sobretudo Descobrir; a segunda cena não teve leitura suficiente.
+- Futuro apresenta sobretudo Engenharia e o texto da cena pode ficar cortado pela própria máscara do stage; Ciência/Segurança Digital não tiveram leitura nesta passagem.
+- Vida COLUS, Pertencer, Vozes e convite final mantiveram presença visual; Transformar apresentou maioritariamente Avançar.
+- O header usa o logótipo oficial mas, nas transições claras, o contraste dos links ainda deve ser validado.
+
+**Intervenção de código após esta gravação:**
+- `IntroHeroSection.tsx`: foi introduzido um **Hero final estável**, com vídeo/poster, headline e CTAs reais, apresentado depois da Intro Morph. Mantém o mesmo layout/textos aprovados do Hero. Intro Morph desktop volta a uma duração mais curta (190vh) em vez de 280vh. A implementação evita depender exclusivamente de um frame transitório de scroll para mostrar o conteúdo comercial principal. Em `prefers-reduced-motion`, apresenta diretamente o Hero sem duplicação.
+- `FuturoSection.tsx`: legenda/copy da cena ativa retirada de dentro das máscaras `clip-path` e colocada numa camada estável por cima das cenas, para evitar corte/ghosting durante a revelação.
+
+**Gate pendente:** executar `npm run typecheck` e `npm run build`, depois verificar visualmente a nova Intro→Hero estável→Manifesto e os textos de Futuro.
+
+**Teste com diagnóstico correto:** usar `http://localhost:8080/?motionQA=1` (se Vite estiver na porta 8080), **não** `http://localhost:8080/#top`; para testar ancoragem, usar `http://localhost:8080/?motionQA=1#top`. O painel técnico aparece no canto inferior esquerdo apenas em desenvolvimento.
+
 ## 4. Itens ainda pendentes antes de declarar QA final
 
 ### Visual QA real
