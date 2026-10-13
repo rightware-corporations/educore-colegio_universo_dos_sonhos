@@ -154,6 +154,16 @@ function makeReport(frames: Frame[], errors: string[], mode: string): string {
   ];
 
   const framesOver100 = frames.filter((frame) => frame.delta > 100).length;
+  const recordedY = frames.map((frame) => frame.scrollY);
+  const minY = recordedY.length ? Math.min(...recordedY) : 0;
+  const maxY = recordedY.length ? Math.max(...recordedY) : 0;
+  const totalY = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+  const coverage = Math.round((maxY - minY) / totalY * 100);
+  const traversed = Array.from(new Set(frames.map((frame) => frame.section)));
+  const invalid = mode === "automatico" && (coverage < 70 || traversed.length < 3);
+  lines.push("COBERTURA DO SCROLL: " + coverage + "% (" + minY + "-" + maxY + "px)");
+  lines.push("SECCOES REGISTADAS: " + traversed.join(" → "));
+  lines.push(invalid ? "ESTADO: TESTE INCOMPLETO — os resultados não validam a landing." : "ESTADO: registo efetuado");
   lines.push("FRAMES COM INTERVALO >100ms: " + framesOver100);
   lines.push("ERROS DETETADOS: " + errors.length);
   for (const error of errors.slice(0, 25)) lines.push("ERRO: " + error);
@@ -225,7 +235,7 @@ function makeReport(frames: Frame[], errors: string[], mode: string): string {
   if (framesOver100 > 0) {
     lines.push("- Detetados " + framesOver100 + " intervalos >100ms; verificar travagens, separadores em fundo e carga de CPU.");
   }
-  if (!heroIssues.length && !activeVideoErrors.length && framesOver100 === 0) {
+  if (!invalid && !heroIssues.length && !activeVideoErrors.length && framesOver100 === 0) {
     lines.push("- Sem erros automaticos nesses criterios. Continua necessaria comparacao com o wireframe.");
   }
   return lines.join("\n");
@@ -245,6 +255,13 @@ export function LandingMotionQA() {
   const previousFrame = useRef(0);
   const lastSample = useRef(0);
   const mode = useRef("manual");
+  const scrollStyle = useRef<{ html: string; body: string } | null>(null);
+  const restoreScrollStyle = () => {
+    if (!scrollStyle.current) return;
+    document.documentElement.style.scrollBehavior = scrollStyle.current.html;
+    document.body.style.scrollBehavior = scrollStyle.current.body;
+    scrollStyle.current = null;
+  };
 
   useEffect(() => {
     if (!enabled) return;
@@ -268,6 +285,10 @@ export function LandingMotionQA() {
       active.current = false;
       if (autoRaf.current !== null) window.cancelAnimationFrame(autoRaf.current);
       if (sampleRaf.current !== null) window.cancelAnimationFrame(sampleRaf.current);
+      document.documentElement.style.scrollBehavior = document.documentElement.dataset.colusQaScrollPrevious ?? "";
+      document.body.style.scrollBehavior = document.body.dataset.colusQaScrollPrevious ?? "";
+      delete document.documentElement.dataset.colusQaScrollPrevious;
+      delete document.body.dataset.colusQaScrollPrevious;
       window.removeEventListener("error", onError, true);
       window.removeEventListener("unhandledrejection", onRejection);
     };
@@ -281,8 +302,18 @@ export function LandingMotionQA() {
     if (sampleRaf.current !== null) window.cancelAnimationFrame(sampleRaf.current);
     autoRaf.current = null;
     sampleRaf.current = null;
+    restoreScrollStyle();
+    const minimum = frames.current.length
+      ? Math.min(...frames.current.map((frame) => frame.scrollY))
+      : 0;
+    const maximum = frames.current.length
+      ? Math.max(...frames.current.map((frame) => frame.scrollY))
+      : 0;
+    const coverage = (maximum - minimum) / Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
     setReport(makeReport(frames.current, errors.current, mode.current));
-    setCurrent("Relatório pronto");
+    setCurrent(mode.current === "automatico" && coverage < 0.7
+      ? "Teste incompleto — scroll não percorreu a página"
+      : "Relatório pronto");
     setRunning(false);
   };
 
@@ -298,7 +329,20 @@ export function LandingMotionQA() {
     setCopied(false);
     setRunning(true);
     setCurrent("A recolher os estados da landing…");
-    if (selectedMode === "automatico") window.scrollTo(0, 0);
+    if (selectedMode === "automatico") {
+      scrollStyle.current = {
+        html: document.documentElement.style.scrollBehavior,
+        body: document.body.style.scrollBehavior,
+      };
+      // The production website uses html {scroll-behavior: smooth}.
+      // Repeated scrollTo calls in an animation frame never reach their targets
+      // under smooth scrolling. Override it only while this local QA is running.
+      document.documentElement.dataset.colusQaScrollPrevious = scrollStyle.current.html;
+      document.body.dataset.colusQaScrollPrevious = scrollStyle.current.body;
+      document.documentElement.style.scrollBehavior = "auto";
+      document.body.style.scrollBehavior = "auto";
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    }
     active.current = true;
 
     const tick = (now: number) => {
@@ -328,7 +372,7 @@ export function LandingMotionQA() {
       const advance = (now: number) => {
         if (!active.current) return;
         const fraction = Math.min(1, (now - began) / duration);
-        window.scrollTo(0, Math.round(fraction * total));
+        window.scrollTo({ top: Math.round(fraction * total), left: 0, behavior: "instant" });
         if (fraction < 1) {
           autoRaf.current = window.requestAnimationFrame(advance);
         } else {
