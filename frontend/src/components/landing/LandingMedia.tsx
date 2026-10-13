@@ -17,10 +17,13 @@ type LandingMediaProps =
       kind: "video";
       src: string;
       poster?: string;
+      fallbackSrc?: string;
     });
 
 export function LandingMedia(props: LandingMediaProps) {
   const [failed, setFailed] = useState(false);
+  const [useFallbackVideo, setUseFallbackVideo] = useState(false);
+  const [videoFailed, setVideoFailed] = useState(false);
   const [saveData, setSaveData] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const reduceMotion = useReducedMotion();
@@ -39,6 +42,7 @@ export function LandingMedia(props: LandingMediaProps) {
     if (
       props.kind !== "video" ||
       failed ||
+      videoFailed ||
       reduceMotion ||
       saveData ||
       props.active === false ||
@@ -65,7 +69,7 @@ export function LandingMedia(props: LandingMediaProps) {
       observer.disconnect();
       video.pause();
     };
-  }, [failed, props.active, props.kind, reduceMotion, saveData]);
+  }, [failed, videoFailed, useFallbackVideo, props.active, props.kind, reduceMotion, saveData]);
 
   if (failed) {
     return (
@@ -79,7 +83,8 @@ export function LandingMedia(props: LandingMediaProps) {
   }
 
   if (props.kind === "video") {
-    if ((reduceMotion || saveData) && props.poster) {
+    // A media failure must never replace a valid COLUS poster with an empty graphic.
+    if ((reduceMotion || saveData || videoFailed) && props.poster) {
       return (
         <img
           className={`h-full w-full object-cover ${props.className ?? ""}`}
@@ -92,18 +97,44 @@ export function LandingMedia(props: LandingMediaProps) {
       );
     }
 
+    if (videoFailed) {
+      return (
+        <div
+          className={`h-full w-full bg-colus-ink ${props.className ?? ""}`}
+          role="img"
+          aria-label={props.alt}
+        />
+      );
+    }
+
     return (
       <video
+        key={useFallbackVideo ? "backup" : "primary"}
         ref={videoRef}
         className={`h-full w-full object-cover ${props.className ?? ""}`}
-        src={props.src}
+        src={useFallbackVideo && props.fallbackSrc ? props.fallbackSrc : props.src}
         poster={props.poster}
         muted
         playsInline
         loop
         preload={props.priority ? "metadata" : "none"}
         aria-label={props.alt}
-        onError={() => setFailed(true)}
+        onError={(event) => {
+          if (import.meta.env.DEV) {
+            console.warn(
+              "[COLUS] Erro ao carregar o vídeo:",
+              event.currentTarget.currentSrc,
+              "Código:",
+              event.currentTarget.error?.code,
+            );
+          }
+
+          if (!useFallbackVideo && props.fallbackSrc) {
+            setUseFallbackVideo(true);
+          } else {
+            setVideoFailed(true);
+          }
+        }}
       />
     );
   }
