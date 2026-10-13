@@ -36,11 +36,22 @@ export function FuturoSection() {
     offset: ["start start", "end end"],
   });
 
-  // Revealing the next full media window avoids ghosted texts during crossfades.
-  // The first scene stays visible underneath until the next scene covers it.
-  const revealEngineering = useTransform(scrollYProgress, [0.24, 0.36], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
-  const revealScience = useTransform(scrollYProgress, [0.48, 0.60], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
-  const revealSafety = useTransform(scrollYProgress, [0.73, 0.85], ["inset(0 100% 0 0)", "inset(0 0% 0 0)"]);
+  // All four scenes share exactly the same media window. Older layers fade fully
+  // out as the next one enters, so a device layer cannot remain over a photo.
+  // A scroll-driven crossfade is used here in place of the broken clip-path
+  // layering; assets, editorial copy, timing and layout remain unchanged.
+  const ticOpacity = useTransform(scrollYProgress, [0, 0.24, 0.34, 1], [1, 1, 0, 0]);
+  const engineeringOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.24, 0.34, 0.49, 0.59, 1],
+    [0, 0, 1, 1, 0, 0],
+  );
+  const scienceOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.49, 0.59, 0.74, 0.84, 1],
+    [0, 0, 1, 1, 0, 0],
+  );
+  const safetyOpacity = useTransform(scrollYProgress, [0, 0.74, 0.84, 1], [0, 0, 1, 1]);
   const [activeScene, setActiveScene] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
@@ -97,10 +108,10 @@ export function FuturoSection() {
   ] as const;
 
   const desktopScenes = [
-    { ...scenes[0], clipPath: undefined },
-    { ...scenes[1], clipPath: revealEngineering },
-    { ...scenes[2], clipPath: revealScience },
-    { ...scenes[3], clipPath: revealSafety },
+    { ...scenes[0], opacity: ticOpacity },
+    { ...scenes[1], opacity: engineeringOpacity },
+    { ...scenes[2], opacity: scienceOpacity },
+    { ...scenes[3], opacity: safetyOpacity },
   ];
 
   return (
@@ -196,14 +207,14 @@ export function FuturoSection() {
               {desktopScenes.map((scene) => (
                 <motion.article
                   key={scene.number}
-                  style={reduceMotion ? undefined : { clipPath: scene.clipPath }}
+                  style={{ opacity: scene.opacity }}
                   className="absolute inset-0 grid content-end overflow-hidden rounded-[32px_82px_32px_32px] border border-white/10 bg-colus-ink-soft"
                 >
                   <div className="absolute inset-0">{scene.media}</div>
                   <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/18 to-transparent" />
                 </motion.article>
               ))}
-              {/* Caption stays outside the clipping masks so it remains legible. */}
+              {/* Caption remains outside the media layers, with no clipping. */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 rounded-b-[32px] bg-gradient-to-t from-colus-ink/95 via-colus-ink/60 to-transparent px-10 pb-10 pt-20">
                 <p className="text-xs font-bold tracking-[0.18em] text-colus-orange">
                   {scenes[activeScene].number} / {scenes[activeScene].label}
