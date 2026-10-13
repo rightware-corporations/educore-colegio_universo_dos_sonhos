@@ -52,10 +52,10 @@ export const colusMotionQaContract: MotionQaContract = {
       desktopVh: { min: 210, preferred: 230, max: 240 },
       stickyDesktop: true,
       sceneWindows: [
-        { from: 10, to: 30, scene: "01", title: "TIC" },
+        { from: 10, to: 30, scene: "01", title: "TIC", mediaMustInclude: "COLUS-FUTURO-TIC-001" },
         { from: 30, to: 48, scene: "02", title: "Engenharia" },
-        { from: 48, to: 70, scene: "03", title: "Ciência" },
-        { from: 70, to: 88, scene: "04", title: "Segurança Digital" },
+        { from: 48, to: 70, scene: "03", title: "Ciência", mediaMustInclude: "COLUS-FUTURO-CIENCIA-VID-001" },
+        { from: 70, to: 88, scene: "04", title: "Segurança Digital", mediaMustInclude: "COLUS-FUTURO-TIC-003" },
       ],
       humanReview: [
         "Um único campo/Scene Window; media ocupa a janela completa, sem mock persistente sobre rostos.",
