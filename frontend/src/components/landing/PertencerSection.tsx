@@ -20,8 +20,8 @@ export function PertencerSection() {
 
   const headlineOpacity = useTransform(scrollYProgress, [0, 0.12], [0.92, 1]);
   const headlineY = useTransform(scrollYProgress, [0, 0.12], [8, 0]);
-  const ringLength = useTransform(scrollYProgress, [0.18, 0.52], [0.25, 0.8]);
-  const ringFade = useTransform(scrollYProgress, [0.68, 0.9], [1, 0.42]);
+  const ringLength = useTransform(scrollYProgress, [0.06, 0.56], [0, 1]);
+  const ringFade = useTransform(scrollYProgress, [0.78, 1], [1, 0.7]);
 
   const mediaA = useTransform(scrollYProgress, [0, 0.15], [0.85, 1]);
   const mediaB = useTransform(scrollYProgress, [0.05, 0.2], [0.8, 1]);
@@ -91,6 +91,7 @@ export function PertencerSection() {
                     kind="image"
                     src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-COMUNIDADE-001.webp`}
                     alt="Participação e comunidade na vida escolar"
+                    className="object-top"
                   />
                 </div>
                 <div className="mt-5">
@@ -127,11 +128,11 @@ export function PertencerSection() {
       </div>
 
       <div className={reduceMotion ? "hidden" : "hidden h-[155vh] lg:block"}>
-        <div className="sticky top-0 h-screen overflow-hidden py-20">
-          <div className="mx-auto min-h-[calc(100vh-10rem)] max-w-[1440px] px-16">
+        <div className="sticky top-0 h-screen overflow-hidden py-12 lg:py-14">
+          <div className="mx-auto flex h-full max-w-[1440px] flex-col px-16">
             <motion.div
               style={reduceMotion ? undefined : { opacity: headlineOpacity, y: headlineY }}
-              className="relative z-20 max-w-3xl"
+              className="relative z-20 max-w-3xl shrink-0"
             >
               <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
                 Pertencer
@@ -144,11 +145,12 @@ export function PertencerSection() {
               </p>
             </motion.div>
 
-            <div className="relative mx-auto mt-2 min-h-[66vh] max-w-6xl">
+            <div className="relative mx-auto mt-5 min-h-0 w-full max-w-6xl flex-1">
               <motion.svg
                 viewBox="0 0 1100 690"
-                className="pointer-events-none absolute inset-0 h-full w-full"
+                className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
                 aria-hidden="true"
+                preserveAspectRatio="xMidYMid meet"
                 style={reduceMotion ? undefined : { opacity: ringFade }}
               >
                 <motion.path
@@ -194,13 +196,14 @@ export function PertencerSection() {
 
               <motion.article
                 style={reduceMotion ? undefined : { opacity: mediaB }}
-                className="absolute right-[5%] top-[10%] h-[36%] w-[29%]"
+                className="absolute right-[3%] top-[4%] h-[52%] w-[32%]"
               >
                 <div className="h-full overflow-hidden rounded-[84px_28px_28px_28px]">
                   <LandingMedia
                     kind="image"
                     src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-COMUNIDADE-001.webp`}
                     alt="Participação e comunidade na vida escolar"
+                    className="object-top"
                   />
                 </div>
                 <p className="mt-3 text-sm font-semibold text-colus-text">Participar</p>
