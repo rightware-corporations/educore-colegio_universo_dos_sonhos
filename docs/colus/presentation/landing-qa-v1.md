@@ -4,21 +4,6 @@
 > **Estado:** IMPLEMENTAÇÃO EM QA / POLISH  
 > **Fonte de verdade:** `landing-colus-master.drawio` + specs high-fidelity/motion aprovadas.
 
-## 0. Decisão de fidelidade — 2026-10-13
-
-**Fonte vinculativa:** `docs/colus/design/landing/landing-colus-master.drawio` (Master V0.18, SHA `73bb21915fd8537f461573fdecba7397162ae6fd`) e respetivas specs de Motion/High-Fidelity/Asset Gate. Em conflito com uma tentativa posterior, prevalece o master. O conteúdo dos blocos 2 e 3 abaixo é histórico e não substitui este contrato.
-
-**Correções agora aplicadas à `main`:**
-- Intro Morph e Hero voltam a ocupar **um único stage nativo desktop de 200vh**: eliminado o segundo Hero independente adicionado na iteração anterior. O mesmo contentor de vídeo/poster permanece na Intro→Hero; o estado Hero monta-se antes do final do stage. Em reduced motion, renderizar Hero final diretamente.
-- Aprender **185vh**, Futuro **230vh**, Pertencer **130vh** e Transformar **165vh**. Valores do master/motion spec; não voltar a estender alturas por tentativa e erro.
-- Footer regressa à estrutura **EduCore | PLATFORM | SOLUTIONS | SUPPORT | COMPANY | RIGHTWARE**, variante dark; contact strip continua exclusivamente no Convite Final. Idioma das labels do footer fica como no master até decisão explícita, sem traduções automáticas.
-- Preservada a composição e o recurso de vídeo já selecionado `COLUS-HERO-VID-001-SPORT-DAY.mp4`, o poster associado, e o componente `LandingMedia`: **nenhuma reedição, corte ou substituição de vídeo** nesta correção.
-- O raster oficial do logótipo COLUS continua o único asset oficial para apresentação formal de marca; o mark SVG da Intro é apenas dispositivo gráfico de motion.
-
-**Ainda não comprovado:** build, browser QA real, crops/viewport, bridge Hero→Manifesto com continuidade física do media, ativos oficiais EduCore/RIGHTWARE no footer, depoimentos reais autorizados. Não declarar aprovação visual sem teste.
-
-**Regra de execução:** para cada alteração, identificar o bloco/cell no master + motion contract → mapear ao componente/asset → implementar → executar typecheck/build → verificar desktop/mobile/reduced-motion. Não modificar a direção visual nem o vídeo aprovado sem autorização.
-
 ## 1. Verificações concluídas
 
 ### Estrutura narrativa
