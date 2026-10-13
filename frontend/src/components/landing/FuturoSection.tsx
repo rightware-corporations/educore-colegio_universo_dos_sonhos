@@ -150,7 +150,7 @@ export function FuturoSection() {
         </div>
       </div>
 
-      <div className={reduceMotion ? "hidden" : "hidden h-[280vh] lg:block"}>
+      <div className={reduceMotion ? "hidden" : "hidden h-[230vh] lg:block"}>
         <div className="sticky top-0 h-screen overflow-hidden">
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_64%_40%,rgba(12,88,152,.46),transparent_34%),radial-gradient(circle_at_84%_18%,rgba(40,153,239,.12),transparent_24%)]" />
 
