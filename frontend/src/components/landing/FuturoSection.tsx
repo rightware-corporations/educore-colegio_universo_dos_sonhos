@@ -207,6 +207,7 @@ export function FuturoSection() {
               {desktopScenes.map((scene) => (
                 <motion.article
                   key={scene.number}
+                  data-colus-scene={scene.number}
                   style={{ opacity: scene.opacity }}
                   className="absolute inset-0 grid content-end overflow-hidden rounded-[32px_82px_32px_32px] border border-white/10 bg-colus-ink-soft"
                 >
