@@ -149,21 +149,21 @@ export function AprenderSection() {
 
               <motion.div
                 style={reduceMotion ? undefined : { opacity: discoverOpacity, scale: discoverScale }}
-                className="absolute left-0 top-[8%] h-[68%] w-[78%] overflow-hidden rounded-[28px_90px_34px_34px]"
+                className="absolute left-0 top-[8%] h-[68%] w-[76%] overflow-hidden rounded-[28px_90px_34px_34px]"
               >
                 <LandingMedia
                   kind="image"
                   src={`${MEDIA_ROOT}/03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-001.webp`}
                   alt="Aprendizagem prática e descoberta no COLUS"
                 />
-                <div className="absolute bottom-5 left-5 rounded-full bg-colus-white/90 px-4 py-2 text-xs font-semibold text-colus-ink backdrop-blur">
+                <div className="absolute bottom-5 left-5 z-10 rounded-full bg-colus-white/95 px-4 py-2 text-xs font-semibold text-colus-ink shadow-sm backdrop-blur">
                   Aprender fora da sala
                 </div>
               </motion.div>
 
               <motion.div
                 style={reduceMotion ? undefined : { opacity: detailOpacity }}
-                className="absolute bottom-[2%] left-[10%] z-20 h-[31%] w-[30%] overflow-hidden rounded-[22px_22px_64px_22px] border-[8px] border-colus-white shadow-soft"
+                className="pointer-events-none absolute bottom-[2%] right-[1%] z-20 h-[27%] w-[26%] overflow-hidden rounded-[22px_22px_64px_22px] border-[8px] border-colus-white shadow-soft"
               >
                 <LandingMedia
                   kind="image"
