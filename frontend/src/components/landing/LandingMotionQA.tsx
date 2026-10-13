@@ -54,6 +54,7 @@ type Frame = {
   visibleMotionNodes: number;
   masks: string[];
   sceneLayers: string;
+  visibleMedia: string[];
 };
 
 function visible(element: HTMLElement): boolean {
@@ -148,6 +149,10 @@ function sample(now: number, started: number, lastFrame: number): Frame {
     visibleMotionNodes: motionElements.filter(visible).length,
     masks,
     sceneLayers,
+    visibleMedia: [
+      ...images.filter(visible).map((img) => img.currentSrc || img.src),
+      ...videos.filter(visible).map((video) => video.currentSrc || video.src),
+    ].map((source) => source.split("/").pop()?.split("?")[0] ?? "—"),
   };
 }
 
