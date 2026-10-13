@@ -126,7 +126,7 @@ export function PertencerSection() {
         </div>
       </div>
 
-      <div className={reduceMotion ? "hidden" : "hidden h-[130vh] lg:block"}>
+      <div className={reduceMotion ? "hidden" : "hidden h-[155vh] lg:block"}>
         <div className="sticky top-0 h-screen overflow-hidden py-20">
           <div className="mx-auto min-h-[calc(100vh-10rem)] max-w-[1440px] px-16">
             <motion.div
