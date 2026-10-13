@@ -19,6 +19,8 @@ export function ManifestoSection() {
   const bridgePosterOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.34], [1, 1, 0]);
   const mediaScale = useTransform(scrollYProgress, [0.08, 0.4], [1.04, 1]);
   const nodeX = useTransform(scrollYProgress, [0.3, 0.72], ["0%", "280%"]);
+  const ringNodeX = useTransform(scrollYProgress, [0.3, 0.72], [0, 155]);
+  const ringNodeY = useTransform(scrollYProgress, [0.3, 0.5, 0.72], [0, 28, 0]);
 
   return (
     <section
@@ -106,7 +108,16 @@ export function ManifestoSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-colus-ink/16 via-transparent to-transparent" />
           </motion.div>
 
-          <div className="pointer-events-none absolute -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/15 lg:-bottom-10 lg:-left-8 lg:h-40 lg:w-64" />
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:h-40 lg:w-64"
+          >
+            <motion.span
+              style={reduceMotion ? undefined : { x: ringNodeX, y: ringNodeY }}
+              className="absolute left-[10%] top-[18%] h-3 w-3 rounded-full bg-colus-orange shadow-[0_0_0_5px_rgba(241,129,54,.12)]"
+            />
+            <span className="absolute bottom-[14%] right-[18%] h-2 w-2 rounded-full bg-colus-orange/75" />
+          </div>
           <span
             aria-hidden="true"
             className="pointer-events-none absolute -right-1 top-[18%] h-3 w-3 rounded-full bg-colus-orange lg:right-[2%]"
