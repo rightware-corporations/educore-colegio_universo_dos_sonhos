@@ -6,8 +6,16 @@ const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
 function EngineeringDevice() {
   return (
-    <div className="relative h-full w-full overflow-hidden bg-[radial-gradient(circle_at_72%_22%,rgba(40,153,239,.30),transparent_28%),linear-gradient(145deg,#0B2436,#071A2A)]">
-      <svg viewBox="0 0 720 520" className="absolute inset-0 h-full w-full" aria-hidden="true">
+    <div className="relative h-full w-full overflow-hidden bg-colus-ink">
+      {/* Approved school activity photograph, not a claim of a specific engineering event. */}
+      <LandingMedia
+        kind="image"
+        src={`${MEDIA_ROOT}/03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp`}
+        alt="Alunos em atividade prática de criação e experimentação"
+        className="object-[center_25%]"
+      />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-colus-ink/65 via-colus-ink/20 to-transparent" />
+      <svg viewBox="0 0 720 520" className="pointer-events-none absolute inset-0 h-full w-full opacity-65" aria-hidden="true">
         <g fill="none" stroke="rgba(248,251,253,.38)" strokeWidth="1.5">
           <path d="M90 388 L220 160 L360 388 Z" />
           <path d="M360 388 L500 130 L630 388 Z" />
@@ -71,12 +79,14 @@ export function FuturoSection() {
       label: "CIÊNCIA",
       copy: "Observar, testar, compreender e ligar conhecimento ao mundo real.",
       media: (
+        // The approved science clip currently appears rotated in Edge.
+        // Keep the file in the asset pack; display its upright editorial poster
+        // until a correctly oriented video export is available.
         <LandingMedia
-          kind="video"
-          src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001.mp4`}
-          poster={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`}
+          kind="image"
+          src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`}
           alt="Experiência científica realizada em contexto escolar"
-          active={activeScene === 2}
+          className="object-[center_32%]"
         />
       ),
     },
