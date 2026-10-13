@@ -25,21 +25,36 @@ export function LandingHeader() {
       document.querySelectorAll<HTMLElement>("[data-header-theme]"),
     );
 
-    const themeObserver = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    // Determine the theme at one fixed reading line on every scroll frame.
+    // IntersectionObserver entry batches could retain a stale transparent theme
+    // while the warm Manifesto has already become the visible background.
+    let themeFrame = 0;
+    const updateTheme = () => {
+      const readingLine = Math.min(window.innerHeight * 0.35, 320);
+      let match: HTMLElement | undefined;
 
-        if (visible) {
-          const next = (visible.target as HTMLElement).dataset.headerTheme as HeaderTheme;
-          if (next) setTheme(next);
+      for (const node of themed) {
+        const rect = node.getBoundingClientRect();
+        if (rect.top <= readingLine && rect.bottom > readingLine) {
+          match = node;
         }
-      },
-      { rootMargin: "-24% 0px -56% 0px", threshold: [0, 0.05, 0.15] },
-    );
+      }
 
-    themed.forEach((node) => themeObserver.observe(node));
+      const next = match?.dataset.headerTheme as HeaderTheme | undefined;
+      if (next) setTheme((previous) => previous === next ? previous : next);
+    };
+
+    const requestTheme = () => {
+      if (themeFrame) return;
+      themeFrame = window.requestAnimationFrame(() => {
+        themeFrame = 0;
+        updateTheme();
+      });
+    };
+
+    window.addEventListener("scroll", requestTheme, { passive: true });
+    window.addEventListener("resize", requestTheme);
+    requestTheme();
 
     const anchors = links
       .map(([, id]) => document.getElementById(id))
@@ -56,7 +71,9 @@ export function LandingHeader() {
     anchors.forEach((node) => anchorObserver.observe(node));
 
     return () => {
-      themeObserver.disconnect();
+      window.removeEventListener("scroll", requestTheme);
+      window.removeEventListener("resize", requestTheme);
+      if (themeFrame) window.cancelAnimationFrame(themeFrame);
       anchorObserver.disconnect();
     };
   }, []);
