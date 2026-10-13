@@ -1,4 +1,4 @@
-import { motion, useInView, useReducedMotion } from "framer-motion";
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 
@@ -9,6 +9,9 @@ export function TestimonialsSection() {
   const inView = useInView(ref, { amount: 0.12, once: true });
   const reduceMotion = useReducedMotion();
   const visible = reduceMotion || inView;
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const storyLineLength = useTransform(scrollYProgress, [0.18, 0.76], [0, 1]);
+  const storyNodeX = useTransform(scrollYProgress, [0.18, 0.76], ["0%", "100%"]);
 
   const reveal = (delay: number) => ({
     initial: reduceMotion ? false : { opacity: 0, y: 16 },
@@ -64,11 +67,14 @@ export function TestimonialsSection() {
 
           <div className="mt-14 max-w-xl">
             <div className="relative h-px bg-white/20">
+              <motion.div
+                style={reduceMotion ? undefined : { scaleX: storyLineLength }}
+                className="absolute inset-0 origin-left bg-gradient-to-r from-colus-bright-blue to-colus-orange"
+                aria-hidden="true"
+              />
               <motion.span
-                initial={reduceMotion ? false : { left: "0%" }}
-                animate={visible ? { left: "100%" } : undefined}
-                transition={{ duration: 1.1, delay: reduceMotion ? 0 : 0.25, ease: [0.22, 1, 0.36, 1] }}
-                className="absolute -top-[5px] h-3 w-3 -translate-x-1/2 rounded-full bg-colus-orange"
+                style={reduceMotion ? { left: "100%" } : { left: storyNodeX }}
+                className="absolute -top-[5px] h-3 w-3 -translate-x-1/2 rounded-full bg-colus-orange shadow-[0_0_0_5px_rgba(241,129,54,.12)]"
                 aria-hidden="true"
               />
             </div>
