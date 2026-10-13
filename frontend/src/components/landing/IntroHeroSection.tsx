@@ -115,14 +115,15 @@ export function IntroHeroSection() {
   if (reduceMotion) return <FinalHero />;
 
   return (
-    <section ref={ref} id="top" className="relative h-[150svh] lg:h-[200vh]">
+    <>
+    <section ref={ref} id="top" className="relative h-[180svh] lg:h-[190vh]">
       <div
         data-header-theme="hidden"
-        className="pointer-events-none absolute inset-x-0 top-0 h-[90svh] lg:h-[110vh]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[145svh] lg:h-[150vh]"
       />
       <div
         data-header-theme="transparent"
-        className="pointer-events-none absolute inset-x-0 top-[90svh] h-[60svh] lg:top-[110vh] lg:h-[90vh]"
+        className="pointer-events-none absolute inset-x-0 top-[145svh] h-[35svh] lg:top-[150vh] lg:h-[40vh]"
       />
 
       <motion.div style={{ backgroundColor: background }} className="sticky top-0 h-[100svh] overflow-hidden lg:h-screen">
@@ -287,5 +288,8 @@ export function IntroHeroSection() {
         </motion.div>
       </motion.div>
     </section>
+    {/* Persistent reading state: the narrative Hero is not just a transient scroll frame. */}
+    <FinalHero id="hero" />
+    </>
   );
 }
