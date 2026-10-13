@@ -1,4 +1,4 @@
-import { motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { LandingMedia } from "./LandingMedia";
 
@@ -7,36 +7,24 @@ const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 function EngineeringDevice() {
   return (
     <div className="relative h-full w-full overflow-hidden bg-colus-ink">
-      {/* Approved school activity photograph, not a claim of a specific engineering event. */}
+      {/* Validated COLUS activity photo. The engineering-specific illustration
+          remains in the signal field outside the media window, not over faces. */}
       <LandingMedia
         kind="image"
         src={`${MEDIA_ROOT}/03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp`}
         alt="Alunos em atividade prática de criação e experimentação"
         className="object-[center_25%]"
       />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-colus-ink/65 via-colus-ink/20 to-transparent" />
-      <svg viewBox="0 0 720 520" className="pointer-events-none absolute inset-0 h-full w-full opacity-65" aria-hidden="true">
-        <g fill="none" stroke="rgba(248,251,253,.38)" strokeWidth="1.5">
-          <path d="M90 388 L220 160 L360 388 Z" />
-          <path d="M360 388 L500 130 L630 388 Z" />
-          <circle cx="220" cy="160" r="48" />
-          <circle cx="500" cy="130" r="66" />
-          <path d="M148 286 H570" />
-          <path d="M280 80 V450" />
-        </g>
-        <g fill="#F18136">
-          <circle cx="220" cy="160" r="7" />
-          <circle cx="360" cy="388" r="7" />
-          <circle cx="500" cy="130" r="7" />
-        </g>
-      </svg>
-      <div className="absolute bottom-8 left-8 h-px w-28 bg-gradient-to-r from-colus-orange/70 to-transparent" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/60 via-transparent to-transparent" />
     </div>
   );
 }
 
 export function FuturoSection() {
   const ref = useRef<HTMLElement>(null);
+  const signalPathRef = useRef<SVGPathElement>(null);
+  const pointerX = useMotionValue(-80);
+  const pointerY = useMotionValue(690);
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -52,6 +40,12 @@ export function FuturoSection() {
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
     const next = latest >= 0.70 ? 3 : latest >= 0.48 ? 2 : latest >= 0.30 ? 1 : 0;
     setActiveScene((current) => current === next ? current : next);
+    const path = signalPathRef.current;
+    if (path) {
+      const point = path.getPointAtLength(latest * path.getTotalLength());
+      pointerX.set(point.x);
+      pointerY.set(point.y);
+    }
   });
   const fieldLength = useTransform(scrollYProgress, [0.02, 0.95], [0, 1]);
 
@@ -157,6 +151,7 @@ export function FuturoSection() {
 
           <svg viewBox="0 0 1440 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
+              ref={signalPathRef}
               d="M-80 690 C230 660 340 270 700 340 C1010 400 1040 120 1520 200"
               fill="none"
               stroke="url(#signalGradient)"
@@ -164,6 +159,10 @@ export function FuturoSection() {
               strokeLinecap="round"
               style={{ pathLength: reduceMotion ? 1 : fieldLength }}
             />
+            <motion.g style={{ x: pointerX, y: pointerY }} aria-hidden="true">
+              <circle r="13" fill="#F18136" fillOpacity="0.14" />
+              <circle r="6" fill="#F18136" stroke="#FFF8EF" strokeWidth="1.5" />
+            </motion.g>
             <defs>
               <linearGradient id="signalGradient" x1="0" y1="0" x2="1" y2="0">
                 <stop offset="0%" stopColor="#F18136" />
