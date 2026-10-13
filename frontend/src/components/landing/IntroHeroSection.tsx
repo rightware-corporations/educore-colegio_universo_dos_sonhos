@@ -52,6 +52,7 @@ function FinalHero({ id = "top" }: { id?: string }) {
             <LandingMedia
               kind="video"
               src={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4`}
+              fallbackSrc={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-002-COURTYARD-SPORT.mp4`}
               poster={`${MEDIA_ROOT}/01-hero/poster/COLUS-HERO-POSTER-001.jpg`}
               alt="Vida escolar COLUS em movimento"
               priority
@@ -206,6 +207,7 @@ export function IntroHeroSection() {
             <LandingMedia
               kind="video"
               src={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4`}
+              fallbackSrc={`${MEDIA_ROOT}/01-hero/video/COLUS-HERO-VID-002-COURTYARD-SPORT.mp4`}
               poster={`${MEDIA_ROOT}/01-hero/poster/COLUS-HERO-POSTER-001.jpg`}
               alt="Vida escolar COLUS em movimento"
               active={heroVideoActive}
