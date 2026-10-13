@@ -43,6 +43,7 @@ type Frame = {
   motionNodes: number;
   visibleMotionNodes: number;
   masks: string[];
+  sceneLayers: string;
 };
 
 function visible(element: HTMLElement): boolean {
@@ -102,6 +103,14 @@ function sample(now: number, started: number, lastFrame: number): Frame {
     .filter((mask) => mask && mask !== "none")
     .slice(0, 3)
     .map((mask) => mask.slice(0, 100));
+  const sceneLayers = Array.from(
+    element?.querySelectorAll<HTMLElement>("[data-colus-scene]") ?? [],
+  )
+    .map((node) =>
+      (node.dataset.colusScene ?? "?") + ":" +
+      Number(window.getComputedStyle(node).opacity).toFixed(2),
+    )
+    .join(" | ");
 
   return {
     ms: Math.round(now - started),
@@ -126,6 +135,7 @@ function sample(now: number, started: number, lastFrame: number): Frame {
     motionNodes: motionElements.length,
     visibleMotionNodes: motionElements.filter(visible).length,
     masks,
+    sceneLayers,
   };
 }
 
@@ -189,6 +199,7 @@ function makeReport(frames: Frame[], errors: string[], mode: string): string {
         "; motionVisivel=" + frame.visibleMotionNodes + "/" + frame.motionNodes
       );
       if (frame.masks.length) lines.push("  Clip/mask: " + frame.masks.join(" | "));
+      if (frame.sceneLayers) lines.push("  Opacidade por cena: " + frame.sceneLayers);
       if (frame.heading) lines.push("  Texto: " + frame.heading);
       lines.push("  Media: " + videoText);
     }
