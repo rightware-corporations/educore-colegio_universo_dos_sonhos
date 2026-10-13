@@ -40,6 +40,9 @@ type Frame = {
   headingTop: number | null;
   videos: VideoState[];
   imagesBroken: number;
+  motionNodes: number;
+  visibleMotionNodes: number;
+  masks: string[];
 };
 
 function visible(element: HTMLElement): boolean {
@@ -89,6 +92,16 @@ function sample(now: number, started: number, lastFrame: number): Frame {
   const heading = element?.querySelector<HTMLElement>("h1, h2, h3");
   const videos = Array.from(element?.querySelectorAll<HTMLVideoElement>("video") ?? []);
   const images = Array.from(element?.querySelectorAll<HTMLImageElement>("img") ?? []);
+  const motionElements = Array.from(
+    element?.querySelectorAll<HTMLElement>(
+      '[style*="opacity"], [style*="transform"], [style*="clip-path"]',
+    ) ?? [],
+  );
+  const masks = motionElements
+    .map((node) => window.getComputedStyle(node).clipPath)
+    .filter((mask) => mask && mask !== "none")
+    .slice(0, 3)
+    .map((mask) => mask.slice(0, 100));
 
   return {
     ms: Math.round(now - started),
@@ -110,6 +123,9 @@ function sample(now: number, started: number, lastFrame: number): Frame {
       currentTime: Math.round(video.currentTime * 10) / 10,
     })),
     imagesBroken: images.filter((img) => img.complete && img.naturalWidth === 0).length,
+    motionNodes: motionElements.length,
+    visibleMotionNodes: motionElements.filter(visible).length,
+    masks,
   };
 }
 
@@ -119,6 +135,7 @@ function makeReport(frames: Frame[], errors: string[], mode: string): string {
     "Gerado em: " + new Date().toISOString(),
     "Modo: " + mode,
     "Viewport: " + window.innerWidth + "x" + window.innerHeight,
+    "Reduced motion: " + window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     "Scroll total: " + Math.round(document.documentElement.scrollHeight - window.innerHeight) + "px",
     "Amostras: " + frames.length,
     "Tempo: " + Math.round((frames.at(-1)?.ms ?? 0) / 1000) + "s",
@@ -168,8 +185,10 @@ function makeReport(frames: Frame[], errors: string[], mode: string): string {
         " top=" + (frame.stickyTop ?? "—") +
         "px; tituloVisivel=" + frame.headingVisible +
         "; tituloTop=" + (frame.headingTop ?? "—") +
-        "px; imagensPartidas=" + frame.imagesBroken
+        "px; imagensPartidas=" + frame.imagesBroken +
+        "; motionVisivel=" + frame.visibleMotionNodes + "/" + frame.motionNodes
       );
+      if (frame.masks.length) lines.push("  Clip/mask: " + frame.masks.join(" | "));
       if (frame.heading) lines.push("  Texto: " + frame.heading);
       lines.push("  Media: " + videoText);
     }
