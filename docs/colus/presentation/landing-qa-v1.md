@@ -230,3 +230,31 @@ A landing está em:
 > **IMPLEMENTATION QA / PRESENTATION POLISH**
 
 Não reabrir direção criativa sem decisão explícita.
+
+---
+
+## Intervenção localizada — 2026-10-13 (Futuro / Pertencer / Vozes / Motion QA)
+
+**Origem:** revisão do utilizador por capturas e relatório colado no chat. O último relatório automático tinha 395 amostras em 33s, todas na secção Convite/Contactos com scroll constante, apesar de declarar zero erros. Esse relatório **não validava** as outras secções.
+
+**Preservação obrigatória:** não alterar Hero, vídeo Hero principal, poster Hero, Intro Morph, asset selection ou restante narrativa durante esta intervenção. Backup de segurança: `backup/colus-2026-10-13-before-polish-batch`.
+
+### Correções aplicadas, a validar no Edge
+
+- **Futuro / 02 Engenharia:** imagem real aprovada de atividade prática `03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp` passa a aparecer sob o device gráfico. Não afirmar que a imagem retrata uma atividade de Engenharia verificada.
+- **Futuro / 03 Ciência:** usar temporariamente poster editorial vertical corretamente orientado `04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`; o MP4 rodado permanece no pack, sem eliminação. Necessária futura normalização de orientação para voltar a ter vídeo.
+- **Futuro / 01 e 04:** manter fotografias existentes; transição entre cenas no mesmo campo sem sobreposição das media anteriores.
+- **Pertencer:** fotografia vertical de duas crianças com `object-position: top` nos layouts desktop/mobile, área fotográfica maior no desktop; stage desktop adaptado à altura do viewport sem `min-h` que fazia exceder o sticky, ring `pathLength` completa de 0 a 1 e sem clipping dentro da área própria. Validar que o corpo das pessoas não fique oculto de forma injustificada.
+- **Vozes COLUS:** reforçada composição editorial com fotografia real de comunidade, texto contextual e área claramente reservada a testemunhos autorizados. Não fabricadas citações nem pessoas associadas a afirmações.
+- **Motion QA:** modo automático ignora temporariamente `scroll-behavior: smooth`, percorre o scroll imediato e restaura o estilo ao terminar; inclui Vida e Vozes; reporta cobertura real do scroll e marca teste incompleto se não atravessar as secções. Não interpretar `0 erros` como aprovação visual.
+
+### Gates de aceitação (pendentes)
+
+1. `npm run typecheck` e `npm run build` no Windows.
+2. Futuro — cenas 01 a 04 mostram media visível e orientada corretamente; sem overlays persistentes; Ciência é **poster temporário**, não vídeo.
+3. Pertencer — anel completo visível no stage desktop e rostos enquadrados no desktop/mobile.
+4. Vozes — composição preenchida e indicação honesta de testimonhos reais ainda pendentes.
+5. Motion QA — relatório indica **múltiplas secções visitadas**, cobertura do scroll >=70% e mostra mensagens explícitas em caso de teste inválido.
+6. Hero — confirmar que o vídeo principal e o visual aprovado não regrediram.
+
+**Estado:** alterações efetuadas no código; compilação e validação visual final **não executadas neste ambiente**.
