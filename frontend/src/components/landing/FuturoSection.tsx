@@ -36,26 +36,13 @@ export function FuturoSection() {
     offset: ["start start", "end end"],
   });
 
-  // All four scenes share exactly the same media window. Older layers fade fully
-  // out as the next one enters, so a device layer cannot remain over a photo.
-  // A scroll-driven crossfade is used here in place of the broken clip-path
-  // layering; assets, editorial copy, timing and layout remain unchanged.
-  const ticOpacity = useTransform(scrollYProgress, [0, 0.24, 0.34, 1], [1, 1, 0, 0]);
-  const engineeringOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.24, 0.34, 0.49, 0.59, 1],
-    [0, 0, 1, 1, 0, 0],
-  );
-  const scienceOpacity = useTransform(
-    scrollYProgress,
-    [0, 0.49, 0.59, 0.74, 0.84, 1],
-    [0, 0, 1, 1, 0, 0],
-  );
-  const safetyOpacity = useTransform(scrollYProgress, [0, 0.74, 0.84, 1], [0, 0, 1, 1]);
+  // Only one scene is mounted in the desktop media window at a time.
+  // This prevents a previous Engineering device layer covering the TIC / Science
+  // / Digital Safety photos while the caption already indicates another scene.
   const [activeScene, setActiveScene] = useState(0);
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    const next = latest >= 0.79 ? 3 : latest >= 0.54 ? 2 : latest >= 0.3 ? 1 : 0;
+    const next = latest >= 0.70 ? 3 : latest >= 0.48 ? 2 : latest >= 0.30 ? 1 : 0;
     setActiveScene((current) => current === next ? current : next);
   });
   const fieldLength = useTransform(scrollYProgress, [0.02, 0.95], [0, 1]);
@@ -106,13 +93,6 @@ export function FuturoSection() {
       ),
     },
   ] as const;
-
-  const desktopScenes = [
-    { ...scenes[0], opacity: ticOpacity },
-    { ...scenes[1], opacity: engineeringOpacity },
-    { ...scenes[2], opacity: scienceOpacity },
-    { ...scenes[3], opacity: safetyOpacity },
-  ];
 
   return (
     <section
@@ -204,17 +184,17 @@ export function FuturoSection() {
             </div>
 
             <div className="relative min-h-[64vh] lg:col-span-8">
-              {desktopScenes.map((scene) => (
-                <motion.article
-                  key={scene.number}
-                  data-colus-scene={scene.number}
-                  style={{ opacity: scene.opacity }}
-                  className="absolute inset-0 grid content-end overflow-hidden rounded-[32px_82px_32px_32px] border border-white/10 bg-colus-ink-soft"
-                >
-                  <div className="absolute inset-0">{scene.media}</div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/18 to-transparent" />
-                </motion.article>
-              ))}
+              <motion.article
+                key={scenes[activeScene].number}
+                data-colus-scene={scenes[activeScene].number}
+                initial={{ opacity: 0.15, scale: 1.015 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
+                className="absolute inset-0 grid content-end overflow-hidden rounded-[32px_82px_32px_32px] border border-white/10 bg-colus-ink-soft"
+              >
+                <div className="absolute inset-0">{scenes[activeScene].media}</div>
+                <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/18 to-transparent" />
+              </motion.article>
               {/* Caption remains outside the media layers, with no clipping. */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 rounded-b-[32px] bg-gradient-to-t from-colus-ink/95 via-colus-ink/60 to-transparent px-10 pb-10 pt-20">
                 <p className="text-xs font-bold tracking-[0.18em] text-colus-orange">
