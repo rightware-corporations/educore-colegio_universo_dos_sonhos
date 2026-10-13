@@ -26,6 +26,7 @@ export interface MotionQaSample {
   imagesBroken: number;
   videos: MotionQaVideo[];
   sceneLayers: string; // "01:1.00", "02:0.75 | ..."
+  visibleMedia: string[]; // filenames of visible <img>/<video> elements
 }
 
 export interface MotionQaStage {
@@ -39,6 +40,7 @@ export interface MotionQaStage {
     to: number;
     scene: string;
     title: string;
+    mediaMustInclude?: string;
   }>;
   humanReview?: string[];
 }
@@ -79,6 +81,7 @@ export function evaluateMotionQa(
   viewportWidth: number,
   totalScrollPx: number,
 ): MotionQaEvaluation {
+  const checks: MotionQaCheck[] = [];
   const add = (
     section: string,
     category: MotionQaCheck["category"],
@@ -98,7 +101,6 @@ export function evaluateMotionQa(
     nextStep,
   });
 
-  const checks: MotionQaCheck[] = [];
   const scrollYs = samples.map((sample) => sample.scrollY);
   const delta = scrollYs.length
     ? Math.max(...scrollYs) - Math.min(...scrollYs)
@@ -192,6 +194,21 @@ export function evaluateMotionQa(
           status === "FAIL" ? "Verificar sincronização do scroll, media window e caption." :
           status === "NOT_OBSERVED" ? "Repetir com scroll lento nesta cena." :
           "Confirmar a media e a transformação visual com o master.");
+        if (windowRule.mediaMustInclude) {
+          const matched = points.filter((point) =>
+            point.visibleMedia.some((name) => name.includes(windowRule.mediaMustInclude!))
+          ).length;
+          add(label, "media",
+            points.length < 2 ? "NOT_OBSERVED" : matched / points.length >= 0.75 ? "PASS" : "FAIL",
+            "Media de " + windowRule.title + " contém " + windowRule.mediaMustInclude,
+            points.length + " amostras · asset certo em " + matched +
+              " · visíveis: " + (Array.from(new Set(points.flatMap((point) => point.visibleMedia))).join(", ") || "nenhum"),
+            source,
+            matched / Math.max(1, points.length) >= 0.75
+              ? "Confirmar orientação, conteúdo e crop por revisão humana."
+              : "A media renderizada diverge do Asset/Motion Gate; localizar source ou fallback provisório."
+          );
+        }
       }
     }
 
