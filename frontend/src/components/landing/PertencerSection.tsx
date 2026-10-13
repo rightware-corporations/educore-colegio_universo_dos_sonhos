@@ -1,4 +1,4 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 
@@ -12,6 +12,9 @@ const relations = [
 
 export function PertencerSection() {
   const ref = useRef<HTMLElement>(null);
+  const ringPathRef = useRef<SVGPathElement>(null);
+  const markerX = useMotionValue(112);
+  const markerY = useMotionValue(528);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -20,12 +23,21 @@ export function PertencerSection() {
 
   const headlineOpacity = useTransform(scrollYProgress, [0, 0.12], [0.92, 1]);
   const headlineY = useTransform(scrollYProgress, [0, 0.12], [8, 0]);
-  const ringLength = useTransform(scrollYProgress, [0.06, 0.56], [0, 1]);
+  const ringLength = useTransform(scrollYProgress, [0.06, 0.68], [0, 1]);
+  const ringNodesOpacity = useTransform(scrollYProgress, [0.12, 0.38], [0, 1]);
   const ringFade = useTransform(scrollYProgress, [0.78, 1], [1, 0.7]);
 
   const mediaA = useTransform(scrollYProgress, [0, 0.15], [0.85, 1]);
   const mediaB = useTransform(scrollYProgress, [0.05, 0.2], [0.8, 1]);
   const mediaC = useTransform(scrollYProgress, [0.09, 0.24], [0.72, 1]);
+
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    const path = ringPathRef.current;
+    if (!path) return;
+    const point = path.getPointAtLength(Math.min(progress / 0.72, 1) * path.getTotalLength());
+    markerX.set(point.x);
+    markerY.set(point.y);
+  });
 
   const handoffOpacity = useTransform(scrollYProgress, [0.72, 0.92], [0, 1]);
   const handoffScaleY = useTransform(scrollYProgress, [0.72, 0.96], [0.1, 1]);
@@ -153,31 +165,64 @@ export function PertencerSection() {
                 preserveAspectRatio="xMidYMid meet"
                 style={reduceMotion ? undefined : { opacity: ringFade }}
               >
-                <motion.path
-                  d="M112 528 C150 230 420 112 666 166 C896 216 984 408 850 580"
+                {/* The master calls for a substantial but deliberately open
+                    Community Ring: blue relation, orange continuity, moving nodes. */}
+                <path
+                  d="M112 528 C150 230 420 112 666 166 C896 216 984 408 850 580 C690 675 360 674 205 606"
                   fill="none"
                   stroke="#0C5898"
-                  strokeOpacity=".22"
-                  strokeWidth="2"
+                  strokeOpacity=".10"
+                  strokeWidth="10"
                   strokeLinecap="round"
-                  style={{ pathLength: reduceMotion ? 0.8 : ringLength }}
                 />
                 <motion.path
-                  d="M205 606 C372 685 684 654 908 476"
+                  ref={ringPathRef}
+                  d="M112 528 C150 230 420 112 666 166 C896 216 984 408 850 580 C690 675 360 674 205 606"
                   fill="none"
-                  stroke="#F18136"
-                  strokeOpacity=".56"
+                  stroke="#0C5898"
+                  strokeOpacity=".55"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  style={{ pathLength: reduceMotion ? 1 : ringLength }}
+                />
+                <motion.path
+                  d="M160 554 C205 310 427 177 653 216 C833 250 929 417 804 559"
+                  fill="none"
+                  stroke="#2899EF"
+                  strokeOpacity=".33"
                   strokeWidth="2"
                   strokeLinecap="round"
-                  style={{ pathLength: reduceMotion ? 0.8 : ringLength }}
+                  style={{ pathLength: reduceMotion ? 1 : ringLength }}
                 />
-                <g fill="#F18136">
-                  <circle cx="152" cy="386" r="6" />
-                  <circle cx="360" cy="173" r="5" />
-                  <circle cx="672" cy="168" r="6" />
-                  <circle cx="914" cy="325" r="5" />
-                  <circle cx="824" cy="588" r="6" />
-                </g>
+                <motion.path
+                  d="M205 606 C372 672 684 648 908 476"
+                  fill="none"
+                  stroke="#F18136"
+                  strokeOpacity=".72"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  style={{ pathLength: reduceMotion ? 1 : ringLength }}
+                />
+                <motion.g style={{ opacity: reduceMotion ? 1 : ringNodesOpacity }}>
+                  <g fill="#F18136">
+                    <circle cx="152" cy="386" r="7" />
+                    <circle cx="360" cy="173" r="6" />
+                    <circle cx="672" cy="168" r="7" />
+                    <circle cx="914" cy="325" r="6" />
+                    <circle cx="824" cy="588" r="7" />
+                  </g>
+                  <g fill="none" stroke="#0C5898" strokeOpacity=".28" strokeWidth="2">
+                    <circle cx="360" cy="173" r="18" />
+                    <circle cx="672" cy="168" r="22" />
+                    <circle cx="824" cy="588" r="17" />
+                  </g>
+                </motion.g>
+                {!reduceMotion && (
+                  <motion.g style={{ x: markerX, y: markerY }}>
+                    <circle r="16" fill="#F18136" fillOpacity=".14" />
+                    <circle r="6" fill="#F18136" stroke="#FFF8EF" strokeWidth="2" />
+                  </motion.g>
+                )}
               </motion.svg>
 
               <motion.article
