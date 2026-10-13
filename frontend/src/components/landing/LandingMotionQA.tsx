@@ -13,8 +13,10 @@ const sections = [
   { id: "o-colegio", label: "Manifesto" },
   { id: "experiencia", label: "Aprender" },
   { id: "futuro", label: "Futuro" },
+  { id: "vida-colus", label: "Vida COLUS" },
   { id: "comunidade", label: "Pertencer" },
   { id: "transformar", label: "Transformar" },
+  { id: "vozes-colus", label: "Vozes COLUS" },
   { id: "contactos", label: "Convite / Contactos" },
 ] as const;
 
@@ -285,10 +287,7 @@ export function LandingMotionQA() {
       active.current = false;
       if (autoRaf.current !== null) window.cancelAnimationFrame(autoRaf.current);
       if (sampleRaf.current !== null) window.cancelAnimationFrame(sampleRaf.current);
-      document.documentElement.style.scrollBehavior = document.documentElement.dataset.colusQaScrollPrevious ?? "";
-      document.body.style.scrollBehavior = document.body.dataset.colusQaScrollPrevious ?? "";
-      delete document.documentElement.dataset.colusQaScrollPrevious;
-      delete document.body.dataset.colusQaScrollPrevious;
+      restoreScrollStyle();
       window.removeEventListener("error", onError, true);
       window.removeEventListener("unhandledrejection", onRejection);
     };
@@ -337,8 +336,6 @@ export function LandingMotionQA() {
       // The production website uses html {scroll-behavior: smooth}.
       // Repeated scrollTo calls in an animation frame never reach their targets
       // under smooth scrolling. Override it only while this local QA is running.
-      document.documentElement.dataset.colusQaScrollPrevious = scrollStyle.current.html;
-      document.body.dataset.colusQaScrollPrevious = scrollStyle.current.body;
       document.documentElement.style.scrollBehavior = "auto";
       document.body.style.scrollBehavior = "auto";
       window.scrollTo({ top: 0, left: 0, behavior: "instant" });
