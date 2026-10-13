@@ -26,4 +26,8 @@ Documentação exclusiva da implementação EduCore para o **Colégio Universo d
 - hero;
 - morph/scroll interaction.
 
+### `presentation/`
+- [Motion QA — contrato comparativo v1](presentation/motion-qa-contract-v1.md);
+- QA e âmbito da demonstração.
+
 Nada nesta pasta deve ser tratado automaticamente como framework genérico RIGHTWARE.
