@@ -258,3 +258,19 @@ Não reabrir direção criativa sem decisão explícita.
 6. Hero — confirmar que o vídeo principal e o visual aprovado não regrediram.
 
 **Estado:** alterações efetuadas no código; compilação e validação visual final **não executadas neste ambiente**.
+
+---
+
+## Ajustes finos autorizados — 2026-10-13 (segunda ronda)
+
+**Base visual:** capturas de Futuro/Engenharia com desenho técnico persistente sobre o rosto das crianças; Descobrir com miniatura sobre a etiqueta "Aprender fora da sala"; ring de Pertencer demasiado simples e pouco visível; linha de Vozes COLUS parada apesar do scroll.
+
+**Alterações efetuadas:**
+- `AprenderSection.tsx`: foto principal Descobrir mantém-se, mas ocupa 76% da janela à direita; miniatura secundária passa a `right-[1%]`, `bottom-[2%]`, com largura 26% e altura 27%, fora da área esquerda da etiqueta. Etiqueta reforçada visualmente. Copy e assets intactos.
+- `FuturoSection.tsx`: removido SVG de Engenharia permanentemente colado sobre a fotografia; mantém-se o recurso educativo real aprovado e o Signal Field atrás do media. O node laranja na linha de Signal Field segue agora a geometria efetiva do `SVGPathElement` via `getPointAtLength` e `scrollYProgress`.
+- `PertencerSection.tsx`: Community Ring passa a ter percurso aberto, mas visualmente mais completo (arco azul base, arco azul secundário, arco laranja, 5 nodes, halos discretos) e marker em movimento sobre o arco. O master solicita um ring **intencionalmente incompleto**, que se abre na saída para Transformar; não fechar o arco como um círculo geométrico.
+- `TestimonialsSection.tsx`: a linha editorial e o node de Vozes COLUS respondem a `useScroll`, em vez de animarem uma só vez por tempo e ficarem parados depois.
+
+**Preservação:** Hero / Intro / assets do vídeo principal / Footer / demais cenas de Futuro não foram modificados nesta ronda. Backup: `backup/colus-2026-10-13-before-motion-overlap-fixes`.
+
+**Gate pendente:** `npm run typecheck`, `npm run build`, QA em desktop e mobile, verificar que a miniatura não tapa etiqueta em Descobrir, ver se ring entra/sai com nodes e linha de Vozes avança ao scroll, confirmar que Engenharia não apresenta o desenho por cima da fotografia. Sem build/browser aqui, nenhuma aprovação visual declarada.
