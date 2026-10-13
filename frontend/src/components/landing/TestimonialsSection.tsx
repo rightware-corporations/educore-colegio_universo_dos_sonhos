@@ -19,6 +19,7 @@ export function TestimonialsSection() {
   return (
     <section
       ref={ref}
+      id="vozes-colus"
       data-header-theme="dark"
       className="relative overflow-hidden bg-colus-ink px-5 py-24 text-white md:px-8 lg:px-16 lg:py-28"
     >
