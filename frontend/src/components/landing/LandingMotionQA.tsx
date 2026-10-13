@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import { colusMotionQaContract } from "@/config/colusMotionQaContract";
+import {
+  evaluateMotionQa,
+  toMotionQaComparisonText,
+  type MotionQaEvaluation,
+} from "@/shared/motion-qa/contractEvaluator";
 
 // Dev-only motion trace. No production telemetry, uploads or third-party services.
 // Enabled only at http://localhost:8080/?motionQA=1#top.
@@ -34,7 +40,9 @@ type Frame = {
   delta: number;
   scrollY: number;
   section: string;
+  sectionId: string;
   progress: number;
+  heightVh: number;
   sticky: string;
   stickyTop: number | null;
   heading: string;
@@ -73,7 +81,7 @@ function sample(now: number, started: number, lastFrame: number): Frame {
     const element = document.getElementById(id);
     if (!element) return [];
     const rect = element.getBoundingClientRect();
-    return [{ element, rect, label }];
+    return [{ id, element, rect, label }];
   });
 
   // Prefer the section covering the viewport centre; otherwise choose nearest.
@@ -119,7 +127,9 @@ function sample(now: number, started: number, lastFrame: number): Frame {
     delta: Math.round(now - lastFrame),
     scrollY: Math.round(window.scrollY),
     section: current?.label ?? "Fora das secções medidas",
+    sectionId: current?.id ?? "",
     progress: Math.round(progress * 100),
+    heightVh: rect ? Math.round(rect.height / window.innerHeight * 100) : 0,
     sticky: sticky ? window.getComputedStyle(sticky).position : "—",
     stickyTop: sticky ? Math.round(sticky.getBoundingClientRect().top) : null,
     heading: (heading?.textContent ?? "").replace(/\s+/g, " ").trim().slice(0, 85),
@@ -247,6 +257,7 @@ export function LandingMotionQA() {
   const [running, setRunning] = useState(false);
   const [current, setCurrent] = useState("Aguardando teste");
   const [report, setReport] = useState("");
+  const [comparison, setComparison] = useState<MotionQaEvaluation | null>(null);
   const [copied, setCopied] = useState(false);
   const frames = useRef<Frame[]>([]);
   const errors = useRef<string[]>([]);
@@ -309,7 +320,16 @@ export function LandingMotionQA() {
       ? Math.max(...frames.current.map((frame) => frame.scrollY))
       : 0;
     const coverage = (maximum - minimum) / Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-    setReport(makeReport(frames.current, errors.current, mode.current));
+    const evaluation = evaluateMotionQa(
+      frames.current,
+      colusMotionQaContract,
+      window.innerWidth,
+      Math.max(1, document.documentElement.scrollHeight - window.innerHeight),
+    );
+    setComparison(evaluation);
+    const comparative = toMotionQaComparisonText(evaluation);
+    setReport(comparative + "\n\n--- TRACE TEMPORAL (evidência, não aprovação) ---\n\n" +
+      makeReport(frames.current, errors.current, mode.current));
     setCurrent(mode.current === "automatico" && coverage < 0.7
       ? "Teste incompleto — scroll não percorreu a página"
       : "Relatório pronto");
@@ -325,6 +345,7 @@ export function LandingMotionQA() {
     previousFrame.current = started.current;
     lastSample.current = 0;
     setReport("");
+    setComparison(null);
     setCopied(false);
     setRunning(true);
     setCurrent("A recolher os estados da landing…");
@@ -394,12 +415,27 @@ export function LandingMotionQA() {
     }
   };
 
-  const downloadReport = () => {
-    const blob = new Blob([report], { type: "text/plain;charset=utf-8" });
+  const downloadReport = (format: "txt" | "json") => {
+    const content = format === "json"
+      ? JSON.stringify({
+        contract: colusMotionQaContract,
+        evaluation: comparison,
+        metadata: {
+          generatedAt: new Date().toISOString(),
+          viewport: [window.innerWidth, window.innerHeight],
+          mode: mode.current,
+          samples: frames.current.length,
+          // Raw frames intentionally excluded: keep this JSON digest portable.
+        },
+      }, null, 2)
+      : report;
+    const blob = new Blob([content], {
+      type: format === "json" ? "application/json;charset=utf-8" : "text/plain;charset=utf-8",
+    });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "COLUS-motion-qa-relatorio.txt";
+    link.download = "COLUS-motion-qa-contrato." + format;
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -409,9 +445,12 @@ export function LandingMotionQA() {
   return (
     <aside
       aria-label="Diagnóstico local de motion COLUS"
-      className="fixed bottom-4 left-4 z-[100] w-[min(410px,calc(100vw-2rem))] rounded-xl border border-white/20 bg-colus-ink/95 p-4 font-mono text-xs text-white shadow-2xl"
+      className="fixed bottom-4 left-4 z-[100] max-h-[min(75vh,660px)] w-[min(440px,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-white/20 bg-colus-ink/95 p-4 font-mono text-xs text-white shadow-2xl"
     >
-      <p className="mb-2 font-bold text-colus-orange">MOTION QA — COLUS · apenas desenvolvimento</p>
+      <p className="mb-2 font-bold text-colus-orange">RIGHTWARE MOTION QA · COLUS</p>
+      <p className="mb-2 text-[10px] text-white/55">
+        Contrato {colusMotionQaContract.id} · v{colusMotionQaContract.version}
+      </p>
       <p aria-live="polite" className="mb-3 text-white/75">{current}</p>
       {!running && !report && (
         <div className="flex flex-wrap gap-2">
@@ -430,13 +469,41 @@ export function LandingMotionQA() {
       )}
       {!running && report && (
         <div className="grid gap-2">
-          <p className="text-white/70">Teste concluído. Envie o texto do relatório aqui no chat.</p>
+          {comparison && (
+            <div className="rounded-lg border border-white/20 bg-white/5 p-3">
+              <p className="font-semibold text-white">Comparação com o master e o Motion Spec</p>
+              <p className="mt-1 text-white/75">
+                Cobertura {comparison.coveragePercent}% · PASS {comparison.totals.PASS} ·
+                FAIL {comparison.totals.FAIL} ·
+                REVER {comparison.totals.REVIEW} ·
+                NÃO OBSERVADO {comparison.totals.NOT_OBSERVED}
+              </p>
+              <div className="mt-3 max-h-56 space-y-3 overflow-y-auto">
+                {comparison.checks.filter((check) => check.status !== "PASS").map((check) => (
+                  <div key={check.key} className="border-t border-white/10 pt-2">
+                    <p className="font-bold text-white">{check.status} · {check.section} / {check.category}</p>
+                    <p className="mt-1 text-white/80">Esperado: {check.expected}</p>
+                    <p className="text-white/65">Observado: {check.observed}</p>
+                    <p className="text-white/50">Fonte: {check.source}</p>
+                    <p className="mt-1 text-white/85">Ação: {check.nextStep}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2 text-[10px] text-white/55">
+                PASS apenas para verificações técnicas; REVIEW não é aprovação visual.
+              </p>
+            </div>
+          )}
+          <p className="text-white/70">Envie o relatório comparativo. O trace técnico vem em anexo ao mesmo texto.</p>
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={copyReport} className="rounded-lg bg-colus-orange px-3 py-2 font-bold text-colus-ink">
               {copied ? "Copiado" : "Copiar relatório"}
             </button>
-            <button type="button" onClick={downloadReport} className="rounded-lg border border-white/35 px-3 py-2">
-              Descarregar .txt
+            <button type="button" onClick={() => downloadReport("txt")} className="rounded-lg border border-white/35 px-3 py-2">
+              Relatório .txt
+            </button>
+            <button type="button" onClick={() => downloadReport("json")} className="rounded-lg border border-white/35 px-3 py-2">
+              Contrato + resultados .json
             </button>
             <button type="button" onClick={() => { setReport(""); setCurrent("Aguardando teste"); }} className="rounded-lg border border-white/35 px-3 py-2">
               Novo teste
@@ -448,7 +515,7 @@ export function LandingMotionQA() {
         </div>
       )}
       <p className="mt-3 text-[10px] leading-4 text-white/50">
-        Mede scroll, frames, sticky, títulos, vídeos e erros. Não altera a edição nem os efeitos da landing.
+        Compara cobertura, budgets, sticky, cenas, media e leitura com fontes aprovadas. Crop, ritmo, fluidez e fidelidade visual exigem revisão humana. Não altera as animações.
       </p>
     </aside>
   );
