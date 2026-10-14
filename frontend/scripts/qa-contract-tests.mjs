@@ -29,6 +29,8 @@ function loadPureEngine(relativePath) {
 const { evaluateDesignFidelity } = loadPureEngine("src/shared/design-qa/designFidelity.ts");
 const { mergeDesignEvidence } = loadPureEngine("src/shared/design-qa/domDesignAdapter.ts");
 const { evaluateMotionQa } = loadPureEngine("src/shared/motion-qa/contractEvaluator.ts");
+const { checkpointScrollY, compileVisualCheckpoints } =
+  loadPureEngine("src/shared/design-qa/visualCheckpoints.ts");
 
 const base = {
   stage: "Hero", source: "master.drawio#hero_98",
@@ -141,5 +143,55 @@ assert.equal(mergeDesignEvidence([
   [{ ruleId: "f", matches: 1, texts: ["TIC"], assets: [], foundOrder: [] }],
   [{ ruleId: "f", matches: 1, texts: ["Ciência"], assets: [], foundOrder: [] }],
 ])[0].texts.length, 2, "dynamic scene texts are captured across the scroll");
+
+
+// Scroll Budget V0.1 explicitly defines rhythm guidance, not hard CSS limits.
+// Hero + Manifesto are a single group and must not be counted twice.
+const rhythmContract = {
+  id: "rhythm", version: "1.1", sourceOfTruth: ["budget"],
+  desktopMinWidth: 1024, minimumCoveragePercent: 70,
+  globalBudgetVh: {
+    min: 1300, preferredMin: 1400, preferredMax: 1500, max: 1580, source: "budget §2",
+  },
+  combinedBudgets: [{
+    label: "Hero + Manifesto", stageIds: ["hero", "o-colegio"],
+    min: 150, preferred: 170, max: 180, source: "budget §3",
+  }],
+  stages: [{ id: "hero", label: "Hero", source: "budget" },
+    { id: "o-colegio", label: "Manifesto", source: "budget" },
+    { id: "experiencia", label: "Aprender", source: "budget",
+      desktopVh: { min: 170, preferred: 185, max: 195 } }],
+  extraHumanReview: [],
+};
+const rhythmFrames = [
+  sample(0, "hero", 0, "", []),
+  sample(300, "o-colegio", 35, "", []),
+  { ...sample(650, "experiencia", 50, "", []), heightVh: 225 },
+  sample(1000, "contactos", 90, "", []),
+];
+const rhythm = evaluateMotionQa(rhythmFrames, rhythmContract, 1440, 1000, 1810);
+const budgetResults = rhythm.checks.filter((check) => check.category === "budget");
+assert.equal(budgetResults.length, 3, "global, combined and individual budget must be checked once");
+assert.equal(budgetResults.every((check) => check.status === "REVIEW"), true,
+  "oversized editorial stages require rhythm review, never a false hard FAIL");
+assert.equal(rhythm.totals.FAIL, 0, "out-of-range rhythm must not count as a technical error");
+assert.equal(rhythm.globalMeasuredVh, 1810, "real <main> minus footer is reported");
+
+const checkpointFixture = compileVisualCheckpoints([{
+  stageId: "futuro", title: "Futuro", source: "master#future_21",
+  expected: "4 scenes", review: ["Check media and nodes"],
+  percentages: [100, 50, 0, 50],
+}]);
+assert.equal(checkpointFixture.map((x) => x.progress).join(","), "0,50,100",
+  "checkpoints are sorted and deduplicated");
+assert.equal(checkpointFixture[1].baselineStatus, "PENDING_APPROVED_REFERENCE",
+  "a planned state must not claim a validated visual baseline");
+assert.equal(checkpointScrollY(1000, 2000, 1000, 50, 5000), 1500);
+assert.equal(checkpointScrollY(500, 400, 800, 50, 5000), 300,
+  "natural flow shorter than viewport must target the centre");
+assert.throws(() => compileVisualCheckpoints([{
+  stageId: "bad", title: "bad", source: "master", expected: "none",
+  review: [], percentages: [-1],
+}]), /Invalid checkpoint progress/);
 
 console.log("RIGHTWARE Design & Motion QA: comparadores e observações condicionais verificados.");
