@@ -500,18 +500,30 @@ export function LandingMotionQA() {
       aria-label="Diagnóstico local de motion COLUS"
       className="fixed bottom-4 left-4 z-[100] max-h-[min(75vh,660px)] w-[min(440px,calc(100vw-2rem))] overflow-y-auto rounded-xl border border-white/20 bg-colus-ink/95 p-4 font-mono text-xs text-white shadow-2xl"
     >
-      <p className="mb-2 font-bold text-colus-orange">RIGHTWARE MOTION QA · COLUS</p>
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <p className="font-bold text-colus-orange">RIGHTWARE DESIGN + MOTION QA · COLUS</p>
+        <button
+          type="button"
+          onClick={() => setPanelMinimized((value) => !value)}
+          className="shrink-0 rounded border border-white/35 px-2 py-1 text-[10px]"
+          aria-expanded={!panelMinimized}
+        >
+          {panelMinimized ? "Abrir QA" : "Minimizar"}
+        </button>
+      </div>
+      {!panelMinimized && (<>
       <p className="mb-2 text-[10px] text-white/55">
-        Contrato {colusMotionQaContract.id} · v{colusMotionQaContract.version}
+        Motion {colusMotionQaContract.id} · v{colusMotionQaContract.version}
+        {" | "} Design {colusDesignQaContract.version}
       </p>
       <p aria-live="polite" className="mb-3 text-white/75">{current}</p>
       {!running && !report && (
         <div className="flex flex-wrap gap-2">
           <button type="button" onClick={auditWireframe} className="rounded-lg bg-colus-orange px-3 py-2 font-bold text-colus-ink">
-            Comparar com wireframe
+            Auditar estado atual
           </button>
           <button type="button" onClick={() => start("automatico")} className="rounded-lg border border-white/35 px-3 py-2">
-            Design + Motion (scroll)
+            Auditar página completa (Design + Motion)
           </button>
           <button type="button" onClick={() => start("manual")} className="rounded-lg border border-white/35 px-3 py-2">
             Gravar scroll manual
@@ -533,8 +545,34 @@ export function LandingMotionQA() {
                 PARCIAL {designAudit.totals.PARTIAL} · DIVERGENTE {designAudit.totals.DIVERGENT} ·
                 REVER {designAudit.totals.REVIEW} · NÃO OBSERVADO {designAudit.totals.NOT_OBSERVED}
               </p>
+              <p className="mt-2 text-[10px] text-white/60">
+                {designAudit.results.length} regras catalogadas · {designAudit.totals.MATCH} correspondências instrumentais ·
+                {designAudit.totals.MISSING + designAudit.totals.PARTIAL + designAudit.totals.DIVERGENT} desvios ·
+                {designAudit.totals.REVIEW + designAudit.totals.NOT_OBSERVED} verificações pendentes.
+              </p>
+              <div className="mt-3 flex items-center gap-2">
+                <label htmlFor="colus-qa-stage" className="text-[10px] text-white/65">Filtrar secção:</label>
+                <select
+                  id="colus-qa-stage"
+                  value={auditStage}
+                  onChange={(event) => setAuditStage(event.target.value)}
+                  className="min-w-0 flex-1 rounded border border-white/30 bg-colus-ink px-2 py-2 text-white"
+                >
+                  <option value="Todas">Todas as secções</option>
+                  {Array.from(new Set(designAudit.results.map((item) => item.stage))).map((stage) => (
+                    <option key={stage} value={stage}>{stage}</option>
+                  ))}
+                </select>
+              </div>
               <div className="mt-3 max-h-64 space-y-3 overflow-y-auto">
-                {designAudit.results.filter((item) => item.status !== "MATCH").map((item) => (
+                {designAudit.results
+                  .filter((item) => item.status !== "MATCH" && (auditStage === "Todas" || item.stage === auditStage))
+                  .sort((a, b) => {
+                    const priority = { P0: 0, P1: 1, P2: 2 };
+                    const status = { MISSING: 0, DIVERGENT: 1, PARTIAL: 2, NOT_OBSERVED: 3, REVIEW: 4, MATCH: 5 };
+                    return priority[a.priority] - priority[b.priority] || status[a.status] - status[b.status];
+                  })
+                  .map((item) => (
                   <div key={item.id} className="border-t border-white/10 pt-2">
                     <p className="font-bold text-white">[{item.priority}] {item.status} · {item.stage} / {item.title}</p>
                     <p className="mt-1 text-white/80">Aprovado: {item.expected}</p>
@@ -547,6 +585,8 @@ export function LandingMotionQA() {
               </div>
               <p className="mt-2 text-[10px] text-white/55">
                 A presença no DOM não equivale à aprovação visual. O Hero aprovado é protegido.
+                Auditar apenas o estado atual pode produzir NÃO OBSERVADO para elementos intencionalmente ocultos,
+                como o Header na Intro. Use a auditoria completa para verificar todos os estados.
               </p>
             </div>
           )}
@@ -598,6 +638,7 @@ export function LandingMotionQA() {
       <p className="mt-3 text-[10px] leading-4 text-white/50">
         Compara estrutura e conteúdo com células do Draw.io e comportamento com Motion Spec. Revisão estética e de composição continua humana. Nunca modifica a landing.
       </p>
+      </>)}
     </aside>
   );
 }
