@@ -21,12 +21,14 @@ function sources(node: Element): string[] {
   const elements = [node, ...Array.from(node.querySelectorAll("img, video, source, picture"))];
   const paths: string[] = [];
   for (const element of elements) {
-    const media = element as HTMLImageElement | HTMLVideoElement | HTMLSourceElement;
+    const currentSrc = element instanceof HTMLImageElement || element instanceof HTMLVideoElement
+      ? element.currentSrc
+      : null;
     const values = [
       element.getAttribute("src"),
       element.getAttribute("poster"),
       element.getAttribute("srcset"),
-      media.currentSrc ?? null,
+      currentSrc,
     ];
     values.filter((v): v is string => !!v).forEach((value) => paths.push(value));
   }
