@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit -p tsconfig.app.json",
-    "test:qa": "node scripts/qa-contract-tests.mjs"
+    "test:qa": "node scripts/qa-contract-tests.mjs && node scripts/qa-protected-assets.mjs"
   },
   "dependencies": {
     "clsx": "2.1.1",
