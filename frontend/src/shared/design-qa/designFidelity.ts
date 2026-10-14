@@ -21,6 +21,8 @@ export interface DesignRule {
   expectedAsset?: string;
   ids?: string[];
   viewport?: DesignViewport;
+  /** A feature may only be observable when this context exists (e.g. the Hero header). */
+  observeWhenSelector?: string;
   priority: "P0" | "P1" | "P2";
 }
 
@@ -38,6 +40,7 @@ export interface DesignEvidence {
   assets: string[];
   foundOrder: string[];
   unavailable?: boolean;
+  unavailableReason?: string;
 }
 
 export interface DesignResult {
@@ -85,7 +88,10 @@ export function evaluateDesignFidelity(
       observed = "Regra destinada ao viewport " + rule.viewport;
       nextStep = "Executar o teste no breakpoint apropriado.";
     } else if (found?.unavailable || !found) {
-      nextStep = "Rever seletor/instrumentação e repetir o teste; não declarar aprovação.";
+      observed = found?.unavailableReason ?? "Evidência não recolhida no estado atual do navegador.";
+      nextStep = rule.observeWhenSelector
+        ? "Avaliar a secção que apresenta este elemento; uma ausência temporária não significa que falta no projeto."
+        : "Rever seletor/instrumentação e repetir o teste; não declarar aprovação.";
     } else if (rule.type === "sequence") {
       const expected = rule.ids ?? [];
       const actual = found.foundOrder;
