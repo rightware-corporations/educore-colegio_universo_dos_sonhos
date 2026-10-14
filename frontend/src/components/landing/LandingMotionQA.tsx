@@ -1,5 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { colusMotionQaContract } from "@/config/colusMotionQaContract";
+import { colusDesignQaContract } from "@/config/colusDesignQaContract";
+import {
+  evaluateDesignFidelity,
+  designFidelityAsText,
+  type DesignEvaluation,
+} from "@/shared/design-qa/designFidelity";
+import { collectDesignEvidence } from "@/shared/design-qa/domDesignAdapter";
 import {
   evaluateMotionQa,
   toMotionQaComparisonText,
@@ -263,6 +270,7 @@ export function LandingMotionQA() {
   const [current, setCurrent] = useState("Aguardando teste");
   const [report, setReport] = useState("");
   const [comparison, setComparison] = useState<MotionQaEvaluation | null>(null);
+  const [designAudit, setDesignAudit] = useState<DesignEvaluation | null>(null);
   const [copied, setCopied] = useState(false);
   const frames = useRef<Frame[]>([]);
   const errors = useRef<string[]>([]);
@@ -333,12 +341,36 @@ export function LandingMotionQA() {
     );
     setComparison(evaluation);
     const comparative = toMotionQaComparisonText(evaluation);
-    setReport(comparative + "\n\n--- TRACE TEMPORAL (evidência, não aprovação) ---\n\n" +
-      makeReport(frames.current, errors.current, mode.current));
+    const designResult = evaluateDesignFidelity(
+      colusDesignQaContract,
+      collectDesignEvidence(colusDesignQaContract),
+      window.innerWidth >= 1024 ? "desktop" : "mobile",
+    );
+    setDesignAudit(designResult);
+    setReport(
+      designFidelityAsText(designResult) +
+      "\n\n--- MOTION CONTRA ESPECIFICACAO ---\n\n" + comparative +
+      "\n\n--- TRACE TEMPORAL (evidência, não aprovação) ---\n\n" +
+      makeReport(frames.current, errors.current, mode.current)
+    );
     setCurrent(mode.current === "automatico" && coverage < 0.7
       ? "Teste incompleto — scroll não percorreu a página"
       : "Relatório pronto");
     setRunning(false);
+  };
+
+  const auditWireframe = () => {
+    if (active.current) return;
+    const result = evaluateDesignFidelity(
+      colusDesignQaContract,
+      collectDesignEvidence(colusDesignQaContract),
+      window.innerWidth >= 1024 ? "desktop" : "mobile",
+    );
+    setDesignAudit(result);
+    setComparison(null);
+    setReport(designFidelityAsText(result));
+    setCurrent("Auditoria do wireframe pronta; critérios visuais aguardam revisão.");
+    setCopied(false);
   };
 
   const start = (selectedMode: "automatico" | "manual") => {
@@ -351,6 +383,7 @@ export function LandingMotionQA() {
     lastSample.current = 0;
     setReport("");
     setComparison(null);
+    setDesignAudit(null);
     setCopied(false);
     setRunning(true);
     setCurrent("A recolher os estados da landing…");
@@ -425,6 +458,8 @@ export function LandingMotionQA() {
       ? JSON.stringify({
         contract: colusMotionQaContract,
         evaluation: comparison,
+        designContract: colusDesignQaContract,
+        designEvaluation: designAudit,
         metadata: {
           generatedAt: new Date().toISOString(),
           viewport: [window.innerWidth, window.innerHeight],
@@ -459,8 +494,11 @@ export function LandingMotionQA() {
       <p aria-live="polite" className="mb-3 text-white/75">{current}</p>
       {!running && !report && (
         <div className="flex flex-wrap gap-2">
-          <button type="button" onClick={() => start("automatico")} className="rounded-lg bg-colus-orange px-3 py-2 font-bold text-colus-ink">
-            Executar teste automático
+          <button type="button" onClick={auditWireframe} className="rounded-lg bg-colus-orange px-3 py-2 font-bold text-colus-ink">
+            Comparar com wireframe
+          </button>
+          <button type="button" onClick={() => start("automatico")} className="rounded-lg border border-white/35 px-3 py-2">
+            Design + Motion (scroll)
           </button>
           <button type="button" onClick={() => start("manual")} className="rounded-lg border border-white/35 px-3 py-2">
             Gravar scroll manual
@@ -474,6 +512,31 @@ export function LandingMotionQA() {
       )}
       {!running && report && (
         <div className="grid gap-2">
+          {designAudit && (
+            <div className="rounded-lg border border-white/20 bg-white/5 p-3">
+              <p className="font-semibold text-white">Fidelidade ao wireframe master V0.18</p>
+              <p className="mt-1 text-white/75">
+                CONFORME {designAudit.totals.MATCH} · EM FALTA {designAudit.totals.MISSING} ·
+                PARCIAL {designAudit.totals.PARTIAL} · DIVERGENTE {designAudit.totals.DIVERGENT} ·
+                REVER {designAudit.totals.REVIEW} · NÃO OBSERVADO {designAudit.totals.NOT_OBSERVED}
+              </p>
+              <div className="mt-3 max-h-64 space-y-3 overflow-y-auto">
+                {designAudit.results.filter((item) => item.status !== "MATCH").map((item) => (
+                  <div key={item.id} className="border-t border-white/10 pt-2">
+                    <p className="font-bold text-white">[{item.priority}] {item.status} · {item.stage} / {item.title}</p>
+                    <p className="mt-1 text-white/80">Aprovado: {item.expected}</p>
+                    <p className="text-white/65">Implementado: {item.observed}</p>
+                    <p className="text-white/50">Fonte: {item.source}</p>
+                    <p className="text-white/50">Ficheiro: {item.component}</p>
+                    <p className="mt-1 text-white/85">Ação: {item.nextStep}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-2 text-[10px] text-white/55">
+                A presença no DOM não equivale à aprovação visual. O Hero aprovado é protegido.
+              </p>
+            </div>
+          )}
           {comparison && (
             <div className="rounded-lg border border-white/20 bg-white/5 p-3">
               <p className="font-semibold text-white">Comparação com o master e o Motion Spec</p>
@@ -499,7 +562,7 @@ export function LandingMotionQA() {
               </p>
             </div>
           )}
-          <p className="text-white/70">Envie o relatório comparativo. O trace técnico vem em anexo ao mesmo texto.</p>
+          <p className="text-white/70">O relatório compara o desenho aprovado com o DOM. Os testes de Motion acrescentam o percurso temporal.</p>
           <div className="flex flex-wrap gap-2">
             <button type="button" onClick={copyReport} className="rounded-lg bg-colus-orange px-3 py-2 font-bold text-colus-ink">
               {copied ? "Copiado" : "Copiar relatório"}
@@ -520,7 +583,7 @@ export function LandingMotionQA() {
         </div>
       )}
       <p className="mt-3 text-[10px] leading-4 text-white/50">
-        Compara cobertura, budgets, sticky, cenas, media e leitura com fontes aprovadas. Crop, ritmo, fluidez e fidelidade visual exigem revisão humana. Não altera as animações.
+        Compara estrutura e conteúdo com células do Draw.io e comportamento com Motion Spec. Revisão estética e de composição continua humana. Nunca modifica a landing.
       </p>
     </aside>
   );
