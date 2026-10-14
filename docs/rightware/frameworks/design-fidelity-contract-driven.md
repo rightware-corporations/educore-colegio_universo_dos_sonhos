@@ -40,6 +40,16 @@ Cada requisito contém:
 
 **Nunca autogerar o esperado a partir do DOM atual.** Quando a implementação contradiz o master, o resultado é um gap até existir decisão de design aprovada; não se reescreve o contrato só para passar.
 
+## Contextos condicionais e evidência temporal
+
+A interface pode desmontar intencionalmente uma região em certos estados da experiência (por exemplo, o Header oculto na Intro cinematográfica). Regras com `observeWhenSelector` **não devem gerar MISSING enquanto o contexto não existir**. Devem reportar `NOT_OBSERVED` e, numa auditoria com scroll, recolher evidências de estados posteriores.
+
+Para este cenário, usar `mergeDesignEvidence`: combinar observações de diferentes checkpoints mantendo texto/media presentes em qualquer estado válido. A auditoria instantânea não substitui o sweep completo, pois só observa a fase corrente.
+
+Regras de quantidade podem especificar `minimum` e `maximum`. Exemplo: a janela de Futuro deve existir em exatamente uma cópia ativa. Um teste `minimum:1` isolado validaria incorretamente quatro janelas sobrepostas.
+
+**Critérios abertos nos documentos** também devem ser estados de revisão editorial, não falhas definitivas. Caso COLUS: número de grupos do Footer obrigatório, idioma dos títulos `OPEN-01`.
+
 ## Estados e interpretação
 
 | Estado | Significado |
