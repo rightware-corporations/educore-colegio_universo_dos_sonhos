@@ -68,6 +68,12 @@ Definir `P0` para elementos cuja alteração requer aprovação explícita (marc
 
 O inventário V1 **não transcreve todas as 684 células** do ficheiro mestre. Reúne um primeiro conjunto de requisitos verificáveis e de revisão humana, incluindo preservação do Hero. Outros estados, versões mobile, medidas e checklists por bloco continuam a exigir expansão.
 
+## Baselines de assets protegidos
+
+Em pilotos com media aprovada, manter um manifest específico por projeto e validar integridade do ficheiro com hash Git blob. O test runner pode bloquear edições acidentais do vídeo, poster e logo. O framework geral não deve embutir os hashes de um cliente.
+
+Exemplo COLUS: `docs/colus/presentation/hero-protected-asset-lock.json` e `frontend/scripts/qa-protected-assets.mjs`.
+
 ## Roadmap para um sistema RIGHTWARE completo
 
 1. Extrair o Draw.io para representação semântica com IDs e historial de decisões aprovadas.
