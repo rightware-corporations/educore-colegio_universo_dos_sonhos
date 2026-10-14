@@ -17,6 +17,7 @@ export interface DesignRule {
   type: DesignRuleType;
   selector?: string;
   minimum?: number;
+  maximum?: number;
   expectedText?: string;
   expectedAsset?: string;
   ids?: string[];
@@ -109,9 +110,14 @@ export function evaluateDesignFidelity(
       nextStep = "Presença estrutural conforme; posição e aparência dependem de revisão visual.";
     } else if (rule.type === "count") {
       const minimum = rule.minimum ?? 1;
-      status = found.matches >= minimum ? "MATCH" : "PARTIAL";
-      observed = found.matches + " de pelo menos " + minimum + " elementos";
-      nextStep = status === "MATCH" ? "Quantidade estrutural conforme." : "Completar componentes previstos no master.";
+      const maximum = rule.maximum;
+      status = found.matches < minimum ? "PARTIAL"
+        : maximum !== undefined && found.matches > maximum ? "DIVERGENT" : "MATCH";
+      observed = found.matches + " elemento(s); mínimo " + minimum +
+        (maximum !== undefined ? "; máximo " + maximum : "");
+      nextStep = status === "MATCH" ? "Quantidade estrutural conforme."
+        : status === "PARTIAL" ? "Completar componentes previstos no master."
+        : "Eliminar duplicação/sobreposição indevida de componentes; validar o master.";
     } else if (rule.type === "text") {
       const actual = normalized(found.texts.join(" "));
       const expected = normalized(rule.expectedText ?? "");
