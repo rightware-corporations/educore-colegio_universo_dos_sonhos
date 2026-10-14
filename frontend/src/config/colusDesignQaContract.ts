@@ -26,7 +26,8 @@ export const colusDesignQaContract: DesignContract = {
       id: "BRAND-LOGO", stage: "Hero", title: "Logótipo COLUS oficial",
       expected: "Logo institucional raster, não redesenhado",
       source: source("hero_101–102", consolidated + " §6"), component: "LandingHeader.tsx / ColusOfficialLogo.tsx",
-      type: "asset", selector: "header img", expectedAsset: "COLUS-BRAND-LOGO-RASTER-001.jpg", priority: "P0",
+      type: "asset", selector: "header img", observeWhenSelector: "header",
+      expectedAsset: "COLUS-BRAND-LOGO-RASTER-001.jpg", priority: "P0",
     }),
     rule({
       id: "HERO-HEADLINE", stage: "Hero", title: "Headline aprovada",
