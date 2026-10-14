@@ -50,6 +50,15 @@ O documento `scroll-budget-colus.md` §1 estabelece: **«Scroll budget é um lim
 - `Vozes COLUS`: possui composição editorial, mas testemunhos reais precisam de autorização; não fabricar depoimentos.
 - `Pertencer`: a presença de ring/nodes não comprova geometricamente fidelidade ao master; revisão humana e checkpoints visuais pendentes.
 
+## 5.1 Fase de execução iniciada — refinamento do auditor
+
+- `contractEvaluator.ts` passa a classificar o excesso/defeito de `vh` como `REVIEW` e a apresentar budget global e agrupado, sem tornar a landing mais curta por iniciativa própria.
+- `colusMotionQaContract.ts` V1.1 utiliza `Hero + Manifesto` como bloco conjunto, corrige duplicação do budget e referencia o total narrativo excluindo Footer.
+- `visualCheckpoints.ts` e `colusVisualCheckpoints.ts` criam 45 pontos de inspeção, exportáveis em JSON/TXT e navegáveis através do painel.
+- `qa-contract-tests.mjs` inclui casos de budget editorial, agrupamento e checkpoints.
+- **Ainda pendente:** executar `npm run typecheck`, `npm run test:qa`, `npm run build` e rever visualmente os checkpoints; não há pixel-diff automático nesta fase.
+- **Protegido:** Hero original, vídeo, poster, marca e restantes componentes visuais não foram modificados.
+
 ## 6. Ordem de trabalho e gates
 
 1. **QA auditor** — marcar budget como desvio de ritmo a investigar, distinguir stage/layout e auditar global budget; evitar FAIL binário apenas pela diferença em vh.
