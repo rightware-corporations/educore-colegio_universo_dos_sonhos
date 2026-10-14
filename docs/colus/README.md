@@ -28,6 +28,7 @@ Documentação exclusiva da implementação EduCore para o **Colégio Universo d
 
 ### `presentation/`
 - [Motion QA — contrato comparativo v1](presentation/motion-qa-contract-v1.md);
+- [Design Fidelity — catálogo do master v1](presentation/design-fidelity-contract-v1.md);
 - QA e âmbito da demonstração.
 
 Nada nesta pasta deve ser tratado automaticamente como framework genérico RIGHTWARE.
