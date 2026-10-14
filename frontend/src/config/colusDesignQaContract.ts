@@ -109,7 +109,7 @@ export const colusDesignQaContract: DesignContract = {
       id: "FUTURE-SINGLE-WINDOW", stage: "Futuro", title: "Janela de cena única",
       expected: "Uma janela visual ativa no desktop, não quatro cards sobrepostos",
       source: source("future_21 / future_56", motion + " §8"), component: "FuturoSection.tsx",
-      type: "count", selector: "#futuro [data-colus-scene]", minimum: 1,
+      type: "count", selector: "#futuro [data-colus-scene]", minimum: 1, maximum: 1,
       viewport: "desktop", priority: "P0",
     }),
     rule({
