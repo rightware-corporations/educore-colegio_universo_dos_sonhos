@@ -13,7 +13,7 @@ const hierarchy = "docs/colus/design/landing/motion-hierarchy-colus.md";
 
 export const colusMotionQaContract: MotionQaContract = {
   id: "COLUS/LANDING/MASTER-V0.18",
-  version: "1.0.0",
+  version: "1.1.0",
   sourceOfTruth: [
     master,
     motion,
@@ -23,6 +23,16 @@ export const colusMotionQaContract: MotionQaContract = {
   ],
   desktopMinWidth: 1024,
   minimumCoveragePercent: 70,
+  globalBudgetVh: {
+    min: 1300, preferredMin: 1400, preferredMax: 1500, max: 1580,
+    source: budget + " §2 / §13 / §14 — ritmo editorial, não limite CSS rígido",
+  },
+  combinedBudgets: [{
+    label: "Hero + Manifesto",
+    stageIds: ["hero", "o-colegio"],
+    min: 150, preferred: 170, max: 180,
+    source: budget + " §3 — os dois estados partilham um único budget",
+  }],
   stages: [
     {
       id: "top", label: "Intro / Hero", source: master + " · intro_90 / hero_98 · " + motion + " §5",
@@ -35,7 +45,8 @@ export const colusMotionQaContract: MotionQaContract = {
     },
     {
       id: "o-colegio", label: "Manifesto", source: master + " · hero_131 · " + motion + " §6",
-      desktopVh: { min: 150, preferred: 170, max: 180 },
+      // No separate 170vh budget: master groups Hero + Manifesto.
+      // Combined measurement is declared in combinedBudgets above.
       humanReview: ["Handoff Hero → Manifesto sem salto de media; transição para Warm Paper e node."],
     },
     {
