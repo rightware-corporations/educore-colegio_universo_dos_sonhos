@@ -63,6 +63,14 @@ Exibir **Esperado / Observado / Fonte / Ação** por secção. Mostrar resumo e 
 
 **O V1 do piloto implementa** contrato + recolha desktop + comparação básica + exportações. As modalidades fast/reverse, screenshot diffs com checkpoints fixos e checks de visibilidade de faces **ainda são roadmap**, não funções concluídas.
 
+## Revisão V1.1 — Budget editorial e checkpoints (2026-10-14)
+
+O Scroll Budget COLUS define explicitamente valores de **ritmo editorial**, não alturas CSS mandatórias. No motor genérico, comparações de budget fora da faixa passam a `REVIEW` com valores esperado/observado e documento, **não** a `FAIL`. A falha funcional (asset errado, sticky requerido ausente, cena errada) continua `FAIL`.
+
+O evaluator suporta um budget narrativo global, medido pelo adaptador sem o Footer natural, e budgets combinados para blocos agrupados pela direção do design (ex.: `Hero + Manifesto`). Nunca duplicar o orçamento de um bloco para cada subestado.
+
+A primeira preparação de checkpoints visuais usa `frontend/src/shared/design-qa/visualCheckpoints.ts` e contratos por projeto. O browser permite navegar para estados de inspeção; **sem baseline visual aprovado e screenshot pareado, não declara aprovação estética**. Referência COLUS: `docs/colus/presentation/visual-checkpoints-v1.md`.
+
 ## 4. Métricas e limitações
 
 O teste pode medir presença de media, ordem das cenas, progressos, duração de stage, CSS sticky e erros técnicos. Não pode concluir automaticamente se uma cena é bonita, natural ou fiel ao ritmo aprovado. O evaluator não conhece o conteúdo semântico de uma imagem pelo seu DOM. Falhas de vídeo e de fonte podem exigir inspeção do codec e do asset real.
