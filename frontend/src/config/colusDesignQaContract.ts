@@ -25,20 +25,20 @@ export const colusDesignQaContract: DesignContract = {
     rule({
       id: "BRAND-LOGO", stage: "Hero", title: "Logótipo COLUS oficial",
       expected: "Logo institucional raster, não redesenhado",
-      source: source("intro_90", assets), component: "LandingHeader.tsx / ColusOfficialLogo.tsx",
+      source: source("hero_101–102", consolidated + " §6"), component: "LandingHeader.tsx / ColusOfficialLogo.tsx",
       type: "asset", selector: "header img", expectedAsset: "COLUS-BRAND-LOGO-RASTER-001.jpg", priority: "P0",
     }),
     rule({
       id: "HERO-HEADLINE", stage: "Hero", title: "Headline aprovada",
       expected: "Juntos Tornamos Sonhos Em Realidade",
-      source: source("hero_105", consolidated + " §6"), component: "IntroHeroSection.tsx",
+      source: source("hero_103–104", consolidated + " §6"), component: "IntroHeroSection.tsx",
       type: "text", selector: "#hero h1, #top h1",
       expectedText: "Juntos Tornamos", priority: "P0",
     }),
     rule({
       id: "HERO-PRIMARY-VIDEO", stage: "Hero", title: "Vídeo aprovado do Hero — PROTEGIDO",
       expected: "Vídeo original COLUS-HERO-VID-001-SPORT-DAY.mp4 preservado no Hero",
-      source: source("hero_98", assets), component: "IntroHeroSection.tsx / LandingMedia.tsx",
+      source: source("hero_108", assets), component: "IntroHeroSection.tsx / LandingMedia.tsx",
       type: "asset", selector: "#top video, #hero video",
       expectedAsset: "COLUS-HERO-VID-001-SPORT-DAY.mp4", priority: "P0",
     }),
