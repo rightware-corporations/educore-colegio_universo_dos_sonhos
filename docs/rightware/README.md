@@ -9,7 +9,8 @@ Padrões e metodologias reutilizáveis:
 - Metodologia RIGHTWARE de Inteligência Operacional;
 - RIGHTWARE Distributed SaaS Architecture;
 - Control Plane Contract;
-- [Contract-Driven Motion QA](frameworks/motion-qa-contract-driven.md) — comparação de movimento com contratos aprovados, portátil entre projetos.
+- [Contract-Driven Motion QA](frameworks/motion-qa-contract-driven.md) — comparação de movimento com contratos aprovados, portátil entre projetos;
+- [Contract-Driven Design Fidelity QA](frameworks/design-fidelity-contract-driven.md) — rastreabilidade do wireframe até à implementação e deteção de funcionalidades ausentes, parciais ou divergentes.
 
 ## `referencias/`
 
