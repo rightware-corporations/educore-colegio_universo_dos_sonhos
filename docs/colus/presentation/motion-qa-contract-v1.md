@@ -34,6 +34,18 @@ O dashboard precisa mostrar a referência concreta para cada regra. A versão do
 
 **Limite importante:** como alguns anchors estão em wrappers internos, a comparação mede a altura do elemento com o anchor. Quando não for o contêiner do stage, rever o seletor e não converter discrepância automaticamente em ordem de alteração visual.
 
+## 2.1 Revisão do critério de budget — V1.1 (2026-10-14)
+
+O `scroll-budget-colus.md` §1 determina: **«Scroll budget é um limite de ritmo, não uma altura rígida.»**
+
+- Valores fora do intervalo agora são `REVIEW — DESVIO DE RITMO`, com valor esperado e observado. Não são automaticamente `FAIL`.
+- Budget global desktop: alvo aproximado `1300–1580vh`; zona preferida `1400–1500vh`. O adaptador exclui a altura natural do `footer` contido em `<main>`.
+- `Hero + Manifesto` partilha uma faixa de `150–180vh`; a medição conjunta não é repetida como requisito independente do Manifesto. A Intro Morph mantém budget próprio.
+- Regra funcional de media ausente, cena errada, sticky obrigatório em falta ou scroll não percorrido continua `FAIL`/`NOT_OBSERVED`, conforme a evidência.
+- Ponto de inspeção visual em `docs/colus/presentation/visual-checkpoints-v1.md`: 45 checkpoints planeados, sem screenshot-diff ainda.
+
+**Nota:** a tabela acima conserva os intervalos de referência documental; a sua leitura como limites CSS rígidos foi corrigida nesta versão. A revisão estética dos desvios é obrigatória antes de mexer em alturas.
+
 ## 3. Futuro — oráculo de cenas
 
 | Progresso local | Esperado no mesmo Scene Window | Manual |
