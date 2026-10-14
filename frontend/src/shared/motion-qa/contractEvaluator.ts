@@ -45,12 +45,25 @@ export interface MotionQaStage {
   humanReview?: string[];
 }
 
+export interface MotionQaCombinedBudget {
+  label: string;
+  stageIds: string[];
+  min: number;
+  preferred: number;
+  max: number;
+  source: string;
+}
+
 export interface MotionQaContract {
   id: string;
   version: string;
   sourceOfTruth: string[];
   desktopMinWidth: number;
   minimumCoveragePercent: number;
+  /** Editorial rhythm range, excluding the naturally-sized footer. */
+  globalBudgetVh?: { min: number; preferredMin: number; preferredMax: number; max: number; source: string };
+  /** Example: Hero + Manifesto are one editorial budget, not two independent budgets. */
+  combinedBudgets?: MotionQaCombinedBudget[];
   stages: MotionQaStage[];
   extraHumanReview: Array<{ title: string; source: string }>;
 }
@@ -73,6 +86,7 @@ export interface MotionQaEvaluation {
   visited: string[];
   checks: MotionQaCheck[];
   totals: Record<MotionQaStatus, number>;
+  globalMeasuredVh?: number;
 }
 
 export function evaluateMotionQa(
@@ -80,6 +94,7 @@ export function evaluateMotionQa(
   contract: MotionQaContract,
   viewportWidth: number,
   totalScrollPx: number,
+  mainContentVh?: number,
 ): MotionQaEvaluation {
   const checks: MotionQaCheck[] = [];
   const add = (
@@ -119,6 +134,48 @@ export function evaluateMotionQa(
   );
 
   const desktop = viewportWidth >= contract.desktopMinWidth;
+  if (desktop && contract.globalBudgetVh && mainContentVh !== undefined) {
+    const budget = contract.globalBudgetVh;
+    const within = mainContentVh >= budget.min && mainContentVh <= budget.max;
+    add("Global", "budget", within ? "PASS" : "REVIEW",
+      "Budget narrativo " + budget.min + "–" + budget.max +
+        "vh (zona preferida " + budget.preferredMin + "–" + budget.preferredMax +
+        "vh), sem Footer natural",
+      mainContentVh.toFixed(0) + "vh no elemento <main>",
+      budget.source,
+      within ? "Faixa editorial de referência observada; ainda exige prova de ritmo." :
+        "DESVIO DE RITMO: confrontar leitura, transições, checkpoints e fast-scroll. Não alterar CSS automaticamente.");
+  }
+
+  // Budgets declarados como um único bloco no documento (e.g., Hero + Manifesto)
+  // are measured together; do not count their sub-stages as separate targets.
+  if (desktop) {
+    for (const joint of contract.combinedBudgets ?? []) {
+      const measured: number[] = [];
+      for (const id of joint.stageIds) {
+        const frames = samples.filter((entry) => entry.sectionId === id);
+        if (frames.length === 0) break;
+        const heights = frames.map((entry) => entry.heightVh).sort((a, b) => a - b);
+        measured.push(heights[Math.floor(heights.length / 2)]);
+      }
+      if (measured.length !== joint.stageIds.length) {
+        add(joint.label, "budget", "NOT_OBSERVED",
+          joint.min + "–" + joint.max + "vh: " + joint.stageIds.join(" + "),
+          "Não foram observadas todas as partes do bloco editorial",
+          joint.source, "Reexecutar percurso completo; confirmar âncoras de ambos os blocos.");
+        continue;
+      }
+      const total = measured.reduce((a, b) => a + b, 0);
+      const within = total >= joint.min && total <= joint.max;
+      add(joint.label, "budget", within ? "PASS" : "REVIEW",
+        joint.min + "–" + joint.max + "vh (preferido " + joint.preferred + "vh)",
+        total.toFixed(0) + "vh somados: " + joint.stageIds.join(" + "),
+        joint.source,
+        within ? "Budget conjunto de referência observado." :
+          "DESVIO DE RITMO, não falha automática. Rever handoff e duração sem alterar Hero aprovado.");
+    }
+  }
+
   for (const stage of contract.stages) {
     const group = samples.filter((sample) => sample.sectionId === stage.id);
     const observed = group.length > 0;
@@ -140,11 +197,12 @@ export function evaluateMotionQa(
       const actual = vh[Math.floor(vh.length / 2)];
       const budget = stage.desktopVh;
       const pass = actual >= budget.min && actual <= budget.max;
-      add(label, "budget", pass ? "PASS" : "FAIL",
+      add(label, "budget", pass ? "PASS" : "REVIEW",
         budget.min + "–" + budget.max + "vh (preferido " + budget.preferred + "vh)",
         actual.toFixed(0) + "vh",
         source,
-        pass ? "Dentro do intervalo definido." : "Rever altura do stage face ao Scroll Budget; não alterar sem validar o desenho.");
+        pass ? "Dentro da faixa editorial. Confirmar ritmo visual." :
+          "DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.");
     }
 
     if (desktop && stage.stickyDesktop) {
@@ -229,7 +287,10 @@ export function evaluateMotionQa(
     PASS: 0, FAIL: 0, REVIEW: 0, NOT_OBSERVED: 0,
   };
   checks.forEach((check) => { totals[check.status] += 1; });
-  return { contractId: contract.id, version: contract.version, coveragePercent, visited, checks, totals };
+  return {
+    contractId: contract.id, version: contract.version, coveragePercent, visited, checks, totals,
+    ...(mainContentVh === undefined ? {} : { globalMeasuredVh: mainContentVh }),
+  };
 }
 
 export function toMotionQaComparisonText(evaluation: MotionQaEvaluation): string {
@@ -237,6 +298,8 @@ export function toMotionQaComparisonText(evaluation: MotionQaEvaluation): string
     "RIGHTWARE CONTRACT MOTION QA",
     "Contrato: " + evaluation.contractId + " @ " + evaluation.version,
     "Cobertura: " + evaluation.coveragePercent + "%",
+    ...(evaluation.globalMeasuredVh === undefined ? [] :
+      ["Altura narrativa global (sem footer): " + evaluation.globalMeasuredVh.toFixed(0) + "vh"]),
     "Secções: " + evaluation.visited.join(" → "),
     "TOTAL: PASS " + evaluation.totals.PASS +
       " · FAIL " + evaluation.totals.FAIL +
