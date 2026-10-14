@@ -1,0 +1,23 @@
+{
+  "schema": "RIGHTWARE/PROTECTED-ASSETS/V1",
+  "approvedFor": "COLUS Hero preserved editorial cut and official brand",
+  "date": "2026-10-14",
+  "references": [
+    {
+      "path": "frontend/public/media/colus/landing/colus-assets-final-v03/01-hero/video/COLUS-HERO-VID-001-SPORT-DAY.mp4",
+      "gitBlobSha1": "8f1b0b853fb86581df28d96f1b3c273345cdb53c",
+      "description": "Vídeo Hero — edição recuperada/aprovada, não substituir"
+    },
+    {
+      "path": "frontend/public/media/colus/landing/colus-assets-final-v03/01-hero/poster/COLUS-HERO-POSTER-001.jpg",
+      "gitBlobSha1": "026c80bc8e7d2bb4a7a5454ec4328d79f6b76848",
+      "description": "Poster aprovado / fallback original"
+    },
+    {
+      "path": "frontend/public/media/colus/landing/colus-assets-final-v03/00-brand/COLUS-BRAND-LOGO-RASTER-001.jpg",
+      "gitBlobSha1": "783f0df4f98adf9131f08167bb84aae396de8ca5",
+      "description": "Logotipo oficial raster COLUS"
+    }
+  ],
+  "policy": "Qualquer substituição/alteração exige autorização explícita; auditoria nunca altera assets protegidos."
+}
