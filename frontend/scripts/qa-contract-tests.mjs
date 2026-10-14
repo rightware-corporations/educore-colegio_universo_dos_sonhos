@@ -27,6 +27,7 @@ function loadPureEngine(relativePath) {
 }
 
 const { evaluateDesignFidelity } = loadPureEngine("src/shared/design-qa/designFidelity.ts");
+const { mergeDesignEvidence } = loadPureEngine("src/shared/design-qa/domDesignAdapter.ts");
 const { evaluateMotionQa } = loadPureEngine("src/shared/motion-qa/contractEvaluator.ts");
 
 const base = {
@@ -99,4 +100,36 @@ assert.equal(motion.checks.find((c) => c.category === "media" && c.expected.incl
   "FAIL", "poster-only implementation must not pass a required video contract");
 assert.equal(motion.checks.find((c) => c.category === "editorial")?.status, "REVIEW");
 
-console.log("RIGHTWARE Design & Motion QA: verificações de regressão concluídas.");
+const temporaryHeader = {
+  ruleId: "official-header", matches: 0, texts: [], assets: [],
+  foundOrder: [], unavailable: true,
+  unavailableReason: "Header intentionally unmounted during Intro",
+};
+const activeHeader = {
+  ruleId: "official-header", matches: 1, texts: [],
+  assets: ["/media/COLUS-BRAND-LOGO-RASTER-001.jpg"], foundOrder: [],
+};
+const headerRule = {
+  id: "header-fixture", version: "1", sources: ["master.drawio"],
+  rules: [{ ...base, id: "official-header", type: "asset",
+    selector: "header img", observeWhenSelector: "header",
+    expectedAsset: "COLUS-BRAND-LOGO-RASTER-001.jpg" }],
+};
+assert.equal(evaluateDesignFidelity(headerRule, [temporaryHeader], "desktop").results[0].status,
+  "NOT_OBSERVED", "unmounted header during Intro must never be called missing");
+const merged = mergeDesignEvidence([[temporaryHeader], [activeHeader]]);
+assert.equal(merged[0].unavailable, undefined);
+assert.equal(merged[0].matches, 1);
+assert.equal(evaluateDesignFidelity(headerRule, merged, "desktop").results[0].status,
+  "MATCH", "once the real header appears the logo passes");
+const missingHeaderImage = {
+  ruleId: "official-header", matches: 0, texts: [], assets: [], foundOrder: [],
+};
+assert.equal(evaluateDesignFidelity(headerRule, [missingHeaderImage], "desktop").results[0].status,
+  "MISSING", "a header with no approved logo is a true failure");
+assert.equal(mergeDesignEvidence([
+  [{ ruleId: "f", matches: 1, texts: ["TIC"], assets: [], foundOrder: [] }],
+  [{ ruleId: "f", matches: 1, texts: ["Ciência"], assets: [], foundOrder: [] }],
+])[0].texts.length, 2, "dynamic scene texts are captured across the scroll");
+
+console.log("RIGHTWARE Design & Motion QA: comparadores e observações condicionais verificados.");
