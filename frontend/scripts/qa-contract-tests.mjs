@@ -99,4 +99,4 @@ assert.equal(motion.checks.find((c) => c.category === "media" && c.expected.incl
   "FAIL", "poster-only implementation must not pass a required video contract");
 assert.equal(motion.checks.find((c) => c.category === "editorial")?.status, "REVIEW");
 
-console.log("RIGHTWARE Design & Motion QA: 11 verifications passed.");
+console.log("RIGHTWARE Design & Motion QA: verificações de regressão concluídas.");
