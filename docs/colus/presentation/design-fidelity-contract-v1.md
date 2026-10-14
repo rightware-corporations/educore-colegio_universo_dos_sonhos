@@ -104,3 +104,27 @@ O manifest `docs/colus/presentation/hero-protected-asset-lock.json` fixa os hash
 6. Só após isso utilizar o relatório para priorizar alterações visuais. **Nenhuma correção é executada automaticamente.**
 
 Método genérico: `docs/rightware/frameworks/design-fidelity-contract-driven.md`.
+
+---
+
+## Revisão de precisão V1.1 — 2026-10-14
+
+**Evidência:** captura do navegador durante a Intro Morph com resultado “P0 MISSING — Logótipo COLUS oficial”. A implementação do `LandingHeader` retorna só o skip link quando o tema está em `hidden`; o logo aparece apenas quando a Intro termina. O QA V1 tratava esta ausência temporária como ausência real. **A landing e o Hero não devem ser modificados para satisfazer este falso positivo.**
+
+**Correções no QA:**
+- `BRAND-LOGO` exige presença do contexto `header` antes de poder marcar o logo como `MISSING`. Durante a Intro, o resultado é `NOT_OBSERVED`, não `FAIL`.
+- No modo Design + Motion (scroll), o observador agrega snapshots durante a viagem; elementos condicionais como o header passam a ser avaliados quando efetivamente aparecem. A auditoria instantânea permanece dependente do estado atual e deve dizê-lo claramente.
+- A regra da janela de Futuro exige **exatamente uma** cena ativa (`minimum:1`, `maximum:1`) e rejeita janelas duplicadas.
+- `footer_mobile_15` explicita que o idioma dos títulos do Footer é `OPEN-01`. O QA verifica que existem **quatro grupos de navegação**, sem declarar definitivamente errados os respetivos nomes antes da decisão editorial.
+- O painel apresenta filtro por secção e prioridade, opção de minimizar e distinção entre auditoria instantânea e completa.
+- Fixtures de regressão foram acrescentadas para header oculto, evidência acumulada e duplicação de scene windows.
+
+**Classificação de diferenças:**
+- Header oculto na Intro: `NOT_OBSERVED` neste instante; se o logo faltar depois de montado, então `MISSING`.
+- Footer sem quatro grupos: `PARTIAL` estrutural, pois o master exige quatro grupos.
+- Footer sem lockups oficiais EduCore/RIGHTWARE: `MISSING` se o elemento não existir, independentemente de haver texto da marca.
+- Cópia dos títulos PLATFORM/SOLUTIONS/SUPPORT/COMPANY: `REVIEW` até `OPEN-01` estar resolvido.
+
+**Escopo:** apenas o QA e a documentação foram alterados. Intro/Hero/video, footer visual, outros componentes e assets aprovados não foram modificados.
+
+**Gate pendente:** `npm run typecheck`, `npm run test:qa`, `npm run build` e confirmação no navegador. O catálogo atual tem **38 requisitos**; não confundir número de critérios catalogados com número total de células do Draw.io ou com percentagem de fidelidade aprovada.
