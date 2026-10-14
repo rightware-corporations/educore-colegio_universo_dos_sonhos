@@ -60,6 +60,16 @@ const state = (id) => actual.results.find((item) => item.id === id)?.status;
 assert.equal(state("hero-video"), "MATCH", "approved Hero asset is unchanged");
 assert.equal(state("footer-logo"), "MISSING", "absent brand lockup must fail");
 assert.equal(state("footer-groups"), "PARTIAL", "partially implemented section is not approved");
+const duplicatedWindow = evaluateDesignFidelity({
+  id: "window-fixture", version: "1", sources: ["master"],
+  rules: [{ ...base, id: "scene-windows", type: "count", selector: ".window",
+    minimum: 1, maximum: 1 }],
+}, [
+  { ruleId: "scene-windows", matches: 4, texts: [], assets: [], foundOrder: [] },
+], "desktop");
+assert.equal(duplicatedWindow.results[0].status, "DIVERGENT",
+  "4 overlapping scene windows must not pass an exact-one-window contract");
+
 assert.equal(state("copy"), "MATCH", "approved text is found");
 assert.equal(state("order"), "DIVERGENT", "wrong wireframe order must fail");
 assert.equal(state("ring"), "REVIEW", "ring aesthetics require human judgment");
