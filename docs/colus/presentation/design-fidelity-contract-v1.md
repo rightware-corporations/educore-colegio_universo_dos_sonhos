@@ -84,7 +84,17 @@ Abrir `http://localhost:8080/?motionQA=1#top`.
 
 Os resultados devem mostrar `MATCH`, `MISSING`, `PARTIAL`, `DIVERGENT`, `REVIEW` e `NOT_OBSERVED`, cada um com expectativa, observado, documento/célula, componente e ação.
 
-## 7. Próximo gate
+## 7. Integridade de assets protegidos
+
+O manifest `docs/colus/presentation/hero-protected-asset-lock.json` fixa os hashes Git blob aprovados de:
+
+- `COLUS-HERO-VID-001-SPORT-DAY.mp4` — vídeo e edição do Hero recuperados;
+- `COLUS-HERO-POSTER-001.jpg` — poster original;
+- `COLUS-BRAND-LOGO-RASTER-001.jpg` — raster oficial COLUS.
+
+`npm run test:qa` executa `qa-contract-tests.mjs` e `qa-protected-assets.mjs`. Este segundo teste bloqueia substituição silenciosa dos ficheiros locais protegidos e não altera nenhum asset. Não valida a qualidade cinematográfica; isso continua sujeito à referência visual aprovada.
+
+## 8. Próximo gate
 
 1. Executar `npm run test:qa`, `typecheck` e `build` sem erros.
 2. Confirmar resultados de Design QA num browser real com largura desktop e mobile.
