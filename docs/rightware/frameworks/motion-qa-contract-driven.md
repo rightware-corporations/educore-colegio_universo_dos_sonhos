@@ -5,6 +5,8 @@
 > **Âmbito:** landing pages, interfaces com scroll narrativo, animações Framer Motion, GSAP, CSS/SVG e futuras aplicações RIGHTWARE.
 > **Separação:** o framework é transversal; as regras COLUS são específicas do projeto.
 
+**Extensão aprovada:** para auditar não apenas o movimento mas também a fidelidade à composição e conteúdo do wireframe, usar o [Contract-Driven Design Fidelity QA](design-fidelity-contract-driven.md). Os dois eixos partilham o princípio de comparação, mas mantêm contratos e critérios distintos.
+
 ## 1. Problema que resolve
 
 Um ficheiro de telemetria sem uma base de comparação não demonstra fidelidade ao desenho. A ausência de erro JavaScript, vídeo ou imagem não significa que a animação corresponda ao wireframe aprovado. O teste necessita de **oráculo** (contrato verificável).
