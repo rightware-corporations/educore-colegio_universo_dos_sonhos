@@ -220,15 +220,19 @@ export const colusDesignQaContract: DesignContract = {
       source: source("footer_9904", consolidated + " §8"), component: "ContactFooter.tsx",
       type: "presence", selector: 'footer img[alt*="EduCore"], footer svg[aria-label*="EduCore"]', priority: "P0",
     }),
-    ...(["PLATFORM", "SOLUTIONS", "SUPPORT", "COMPANY"] as const).map((label): DesignRule =>
-      rule({
-        id: "FOOTER-" + label, stage: "Footer", title: "Grupo " + label,
-        expected: label + " com os itens definidos no padrão EduCore",
-        source: source("footer_9907–9914 / footer_9933"),
-        component: "ContactFooter.tsx", type: "text",
-        selector: "footer", expectedText: label, priority: "P0",
-      })
-    ),
+    rule({
+      id: "FOOTER-NAV-ARCHITECTURE", stage: "Footer", title: "Quatro grupos de navegação",
+      expected: "4 grupos de navegação do padrão EduCore (identidade e arquitetura preservadas)",
+      source: source("footer_9907–9914 / footer_9933 / footer_mobile_16"),
+      component: "ContactFooter.tsx", type: "count",
+      selector: "footer nav", minimum: 4, priority: "P0",
+    }),
+    rule({
+      id: "FOOTER-LABEL-LANGUAGE", stage: "Footer", title: "Idioma e nomes dos grupos — decisão aberta",
+      expected: "Manter os quatro grupos; validar os títulos quando a decisão OPEN-01 for fechada",
+      source: source("footer_mobile_15", consolidated + " §8"),
+      component: "ContactFooter.tsx", type: "review", priority: "P1",
+    }),
     rule({
       id: "FOOTER-RIGHTWARE-LOGO", stage: "Footer", title: "Lockup oficial RIGHTWARE",
       expected: "Logo RIGHTWARE e A RIGHTWARE Product",
