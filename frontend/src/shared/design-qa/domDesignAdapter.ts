@@ -48,7 +48,15 @@ export function collectDesignEvidence(
       return { ruleId: rule.id, matches: foundOrder.length, texts: [], assets: [], foundOrder };
     }
     if (!rule.selector) {
-      return { ruleId: rule.id, matches: 0, texts: [], assets: [], foundOrder: [], unavailable: true };
+      return { ruleId: rule.id, matches: 0, texts: [], assets: [], foundOrder: [], unavailable: true,
+        unavailableReason: "Regra sem seletor DOM definido." };
+    }
+    if (rule.observeWhenSelector && !doc.querySelector(rule.observeWhenSelector)) {
+      return {
+        ruleId: rule.id, matches: 0, texts: [], assets: [], foundOrder: [],
+        unavailable: true,
+        unavailableReason: "O contexto '" + rule.observeWhenSelector + "' ainda não está montado nesta fase do scroll.",
+      };
     }
     try {
       const elements = Array.from(doc.querySelectorAll(rule.selector)).filter(renderedByCss);
@@ -62,5 +70,40 @@ export function collectDesignEvidence(
     } catch {
       return { ruleId: rule.id, matches: 0, texts: [], assets: [], foundOrder: [], unavailable: true };
     }
+  });
+}
+
+
+/**
+ * Combines sequential page observations. A temporary unmounted header must not
+ * be classified as "MISSING" if it later appears when the Intro has ended.
+ * For a structural rule, keep the strongest available observed evidence.
+ */
+export function mergeDesignEvidence(snapshots: DesignEvidence[][]): DesignEvidence[] {
+  const grouped = new Map<string, DesignEvidence[]>();
+  for (const snapshot of snapshots) {
+    for (const item of snapshot) {
+      const items = grouped.get(item.ruleId) ?? [];
+      items.push(item);
+      grouped.set(item.ruleId, items);
+    }
+  }
+
+  return Array.from(grouped, ([ruleId, items]) => {
+    const available = items.filter((item) => !item.unavailable);
+    if (available.length === 0) {
+      return { ...items[items.length - 1], ruleId, unavailable: true };
+    }
+    const texts = [...new Set(available.flatMap((item) => item.texts))];
+    const assets = [...new Set(available.flatMap((item) => item.assets))];
+    const maxOrder = available.reduce((best, item) =>
+      item.foundOrder.length > best.length ? item.foundOrder : best, [] as string[]);
+    return {
+      ruleId,
+      matches: Math.max(...available.map((item) => item.matches)),
+      texts,
+      assets,
+      foundOrder: maxOrder,
+    };
   });
 }
