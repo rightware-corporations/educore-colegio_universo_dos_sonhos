@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { colusMotionQaContract } from "@/config/colusMotionQaContract";
 import { colusDesignQaContract } from "@/config/colusDesignQaContract";
+import { colusVisualCheckpoints, colusCheckpointStages } from "@/config/colusVisualCheckpoints";
+import { checkpointScrollY, checkpointsAsText } from "@/shared/design-qa/visualCheckpoints";
 import {
   evaluateDesignFidelity,
   designFidelityAsText,
@@ -274,6 +276,7 @@ export function LandingMotionQA() {
   const [designAudit, setDesignAudit] = useState<DesignEvaluation | null>(null);
   const [auditStage, setAuditStage] = useState("Todas");
   const [panelMinimized, setPanelMinimized] = useState(false);
+  const [checkpointId, setCheckpointId] = useState("futuro@40");
   const [copied, setCopied] = useState(false);
   const frames = useRef<Frame[]>([]);
   const designSnapshots = useRef<DesignEvidence[][]>([]);
@@ -342,6 +345,16 @@ export function LandingMotionQA() {
       colusMotionQaContract,
       window.innerWidth,
       Math.max(1, document.documentElement.scrollHeight - window.innerHeight),
+      (() => {
+        const main = document.querySelector("main");
+        if (!main) return undefined;
+        // The COLUS footer is rendered *inside* <main>. The master budget
+        // explicitly excludes its natural height from the narrative total.
+        const footer = main.querySelector("footer");
+        const height = main.getBoundingClientRect().height -
+          (footer?.getBoundingClientRect().height ?? 0);
+        return Math.round(Math.max(0, height) / Math.max(1, window.innerHeight) * 100);
+      })(),
     );
     setComparison(evaluation);
     setAuditStage("Todas");
@@ -359,7 +372,9 @@ export function LandingMotionQA() {
       designFidelityAsText(designResult) +
       "\n\n--- MOTION CONTRA ESPECIFICACAO ---\n\n" + comparative +
       "\n\n--- TRACE TEMPORAL (evidência, não aprovação) ---\n\n" +
-      makeReport(frames.current, errors.current, mode.current)
+      makeReport(frames.current, errors.current, mode.current) +
+      "\n\n--- CHECKPOINTS VISUAIS PLANEADOS (referências ainda por aprovar) ---\n\n" +
+      checkpointsAsText(colusVisualCheckpoints)
     );
     setCurrent(mode.current === "automatico" && coverage < 0.7
       ? "Teste incompleto — scroll não percorreu a página"
@@ -377,7 +392,11 @@ export function LandingMotionQA() {
     setDesignAudit(result);
     setAuditStage("Todas");
     setComparison(null);
-    setReport(designFidelityAsText(result));
+    setReport(
+      designFidelityAsText(result) +
+      "\n\n--- CHECKPOINTS VISUAIS PLANEADOS (referências ainda por aprovar) ---\n\n" +
+      checkpointsAsText(colusVisualCheckpoints)
+    );
     setCurrent("Auditoria do wireframe pronta; critérios visuais aguardam revisão.");
     setCopied(false);
   };
@@ -456,6 +475,29 @@ export function LandingMotionQA() {
     }
   };
 
+  const goToCheckpoint = () => {
+    if (active.current) return;
+    const point = colusVisualCheckpoints.find((entry) => entry.id === checkpointId);
+    if (!point) return;
+    const section = document.getElementById(point.stageId);
+    if (!section) {
+      setCurrent("Checkpoint indisponível: âncora " + point.stageId + " não encontrada.");
+      return;
+    }
+    const rect = section.getBoundingClientRect();
+    const top = rect.top + window.scrollY;
+    const destination = checkpointScrollY(
+      top,
+      rect.height,
+      window.innerHeight,
+      point.progress,
+      document.documentElement.scrollHeight - window.innerHeight,
+    );
+    // Development-only navigation; no changes to production smooth-scroll.
+    window.scrollTo({ top: destination, behavior: "instant" });
+    setCurrent("Checkpoint " + point.title + " — comparar manualmente com o master.");
+  };
+
   const copyReport = async () => {
     try {
       await navigator.clipboard.writeText(report);
@@ -473,6 +515,7 @@ export function LandingMotionQA() {
         evaluation: comparison,
         designContract: colusDesignQaContract,
         designEvaluation: designAudit,
+        visualCheckpointPlan: colusVisualCheckpoints,
         metadata: {
           generatedAt: new Date().toISOString(),
           viewport: [window.innerWidth, window.innerHeight],
@@ -633,6 +676,52 @@ export function LandingMotionQA() {
           <p className="text-[10px] text-white/50">
             {report.length} caracteres · registo local · nenhum dado enviado automaticamente
           </p>
+        </div>
+      )}
+      {!running && (
+        <div className="mt-4 border-t border-white/20 pt-3">
+          <p className="font-semibold text-white">Checkpoints visuais · preparação</p>
+          <p className="mt-1 text-[10px] text-white/60">
+            Sem imagens de referência aprovadas: navegar não constitui aprovação visual.
+          </p>
+          <label htmlFor="colus-qa-checkpoint" className="mt-2 block text-[10px] text-white/70">
+            Estado para comparar com o master
+          </label>
+          <select
+            id="colus-qa-checkpoint"
+            value={checkpointId}
+            onChange={(event) => setCheckpointId(event.target.value)}
+            className="mt-1 w-full rounded border border-white/30 bg-colus-ink px-2 py-2 text-white"
+          >
+            {colusCheckpointStages.map((stage) => (
+              <optgroup key={stage.stageId} label={stage.title}>
+                {colusVisualCheckpoints
+                  .filter((item) => item.stageId === stage.stageId)
+                  .map((item) => (
+                    <option key={item.id} value={item.id}>{item.title}</option>
+                  ))}
+              </optgroup>
+            ))}
+          </select>
+          {(() => {
+            const selected = colusVisualCheckpoints.find((item) => item.id === checkpointId);
+            if (!selected) return null;
+            return (
+              <div className="mt-2 space-y-1 text-[10px] text-white/70">
+                <p><strong className="text-white">Esperado:</strong> {selected.expected}</p>
+                <p>Fonte: {selected.source}</p>
+                <p>Rever: {selected.review.join("; ")}</p>
+                <p className="text-colus-orange">Estado: referência visual pendente de aprovação</p>
+              </div>
+            );
+          })()}
+          <button
+            type="button"
+            onClick={goToCheckpoint}
+            className="mt-3 rounded-lg border border-colus-orange px-3 py-2 font-bold text-white"
+          >
+            Ir para checkpoint
+          </button>
         </div>
       )}
       <p className="mt-3 text-[10px] leading-4 text-white/50">
