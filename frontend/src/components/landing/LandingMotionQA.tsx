@@ -5,8 +5,9 @@ import {
   evaluateDesignFidelity,
   designFidelityAsText,
   type DesignEvaluation,
+  type DesignEvidence,
 } from "@/shared/design-qa/designFidelity";
-import { collectDesignEvidence } from "@/shared/design-qa/domDesignAdapter";
+import { collectDesignEvidence, mergeDesignEvidence } from "@/shared/design-qa/domDesignAdapter";
 import {
   evaluateMotionQa,
   toMotionQaComparisonText,
@@ -271,8 +272,11 @@ export function LandingMotionQA() {
   const [report, setReport] = useState("");
   const [comparison, setComparison] = useState<MotionQaEvaluation | null>(null);
   const [designAudit, setDesignAudit] = useState<DesignEvaluation | null>(null);
+  const [auditStage, setAuditStage] = useState("Todas");
+  const [panelMinimized, setPanelMinimized] = useState(false);
   const [copied, setCopied] = useState(false);
   const frames = useRef<Frame[]>([]);
+  const designSnapshots = useRef<DesignEvidence[][]>([]);
   const errors = useRef<string[]>([]);
   const active = useRef(false);
   const autoRaf = useRef<number | null>(null);
@@ -340,10 +344,14 @@ export function LandingMotionQA() {
       Math.max(1, document.documentElement.scrollHeight - window.innerHeight),
     );
     setComparison(evaluation);
+    setAuditStage("Todas");
     const comparative = toMotionQaComparisonText(evaluation);
     const designResult = evaluateDesignFidelity(
       colusDesignQaContract,
-      collectDesignEvidence(colusDesignQaContract),
+      mergeDesignEvidence([
+        ...designSnapshots.current,
+        collectDesignEvidence(colusDesignQaContract),
+      ]),
       window.innerWidth >= 1024 ? "desktop" : "mobile",
     );
     setDesignAudit(designResult);
@@ -367,6 +375,7 @@ export function LandingMotionQA() {
       window.innerWidth >= 1024 ? "desktop" : "mobile",
     );
     setDesignAudit(result);
+    setAuditStage("Todas");
     setComparison(null);
     setReport(designFidelityAsText(result));
     setCurrent("Auditoria do wireframe pronta; critérios visuais aguardam revisão.");
@@ -376,6 +385,7 @@ export function LandingMotionQA() {
   const start = (selectedMode: "automatico" | "manual") => {
     if (active.current) return;
     frames.current = [];
+    designSnapshots.current = [collectDesignEvidence(colusDesignQaContract)];
     errors.current = [];
     mode.current = selectedMode;
     started.current = performance.now();
@@ -405,6 +415,9 @@ export function LandingMotionQA() {
       if (!active.current) return;
       if (now - lastSample.current >= 70) {
         frames.current.push(sample(now, started.current, previousFrame.current));
+        if (frames.current.length % 12 === 0) {
+          designSnapshots.current.push(collectDesignEvidence(colusDesignQaContract));
+        }
         previousFrame.current = now;
         lastSample.current = now;
         if (frames.current.length > 4500) {
