@@ -216,4 +216,15 @@ const bounded = compactQaSummary(actual, crowded, 700);
 assert.ok(bounded.length <= 700, "summary hard limit respected");
 assert.ok(bounded.includes("omitida"), "truncation is disclosed");
 
+// Canonical footer architecture: the P0 nav count closes without changing Hero.
+const footerSource = readFileSync(resolve(process.cwd(), "src/components/landing/ContactFooter.tsx"), "utf8");
+for (const label of ["PLATFORM", "SOLUTIONS", "SUPPORT", "COMPANY"]) {
+  assert.ok(footerSource.includes('title: "' + label + '"'), "official footer column present: " + label);
+}
+assert.ok(footerSource.includes("footerGroups.map"), "all 4 footer groups render nav elements");
+assert.ok(footerSource.includes("Integrated school management for stronger institutions."),
+  "official EduCore footer tagline must not be replaced");
+assert.ok(footerSource.includes("A RIGHTWARE Product"),
+  "RIGHTWARE product attribution must remain visible");
+
 console.log("RIGHTWARE Design & Motion QA: comparadores e observações condicionais verificados.");
