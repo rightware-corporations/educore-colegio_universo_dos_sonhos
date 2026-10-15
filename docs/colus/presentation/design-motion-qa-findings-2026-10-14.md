@@ -70,3 +70,11 @@ O documento `scroll-budget-colus.md` §1 estabelece: **«Scroll budget é um lim
 Nenhum ajuste na landing deve ser aplicado automaticamente a partir do resultado do auditor.
 
 **Estado pós-relatório:** análise documentada; não foram modificados `IntroHeroSection.tsx`, `ContactFooter.tsx`, assets nem componentes visuais nesta intervenção.
+
+## 7. Simplificação da recolha de relatórios (2026-10-15)
+
+Como a transferência de anexos grandes entre navegador e conversa se revelou pouco fiável, o painel de desenvolvimento dispõe de **Copiar resumo curto**. O resumo limita-se a 2.200 caracteres, inclui totais de Design e Motion, falhas estruturais, media ausente e desvios de ritmo ainda em revisão; assinala explicitamente quantas pendências foram omitidas pelo limite de tamanho.
+
+A exportação completa TXT/JSON continua disponível para arquivo, mas **não é necessária para diagnóstico inicial**. O resumo é gerado localmente; não existe envio automático de dados. Este fluxo não modifica a landing nem exige que o utilizador execute comandos para extrair os dados.
+
+Implementação reutilizável: `frontend/src/shared/design-qa/compactQaSummary.ts`; botão: `frontend/src/components/landing/LandingMotionQA.tsx`; testes: `frontend/scripts/qa-contract-tests.mjs`.
