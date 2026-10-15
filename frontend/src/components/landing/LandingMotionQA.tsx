@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { colusMotionQaContract } from "@/config/colusMotionQaContract";
 import { colusDesignQaContract } from "@/config/colusDesignQaContract";
+import { compactQaSummary } from "@/shared/design-qa/compactQaSummary";
 import { colusVisualCheckpoints, colusCheckpointStages } from "@/config/colusVisualCheckpoints";
 import { checkpointScrollY, checkpointsAsText } from "@/shared/design-qa/visualCheckpoints";
 import {
@@ -498,6 +499,17 @@ export function LandingMotionQA() {
     setCurrent("Checkpoint " + point.title + " — comparar manualmente com o master.");
   };
 
+  const copyCompactSummary = async () => {
+    try {
+      await navigator.clipboard.writeText(compactQaSummary(designAudit, comparison));
+      setCopied(true);
+      setCurrent("Resumo curto copiado. Cole diretamente na conversa, sem anexar ficheiros.");
+    } catch {
+      setCopied(false);
+      setCurrent("O navegador bloqueou a cópia; verifique a permissão da área de transferência.");
+    }
+  };
+
   const copyReport = async () => {
     try {
       await navigator.clipboard.writeText(report);
@@ -660,8 +672,11 @@ export function LandingMotionQA() {
           )}
           <p className="text-white/70">O relatório compara o desenho aprovado com o DOM. Os testes de Motion acrescentam o percurso temporal.</p>
           <div className="flex flex-wrap gap-2">
-            <button type="button" onClick={copyReport} className="rounded-lg bg-colus-orange px-3 py-2 font-bold text-colus-ink">
-              {copied ? "Copiado" : "Copiar relatório"}
+            <button type="button" onClick={copyCompactSummary} className="rounded-lg bg-colus-orange px-3 py-2 font-bold text-colus-ink">
+              {copied ? "Copiado" : "Copiar resumo curto"}
+            </button>
+            <button type="button" onClick={copyReport} className="rounded-lg border border-white/35 px-3 py-2">
+              Copiar relatório completo
             </button>
             <button type="button" onClick={() => downloadReport("txt")} className="rounded-lg border border-white/35 px-3 py-2">
               Relatório .txt
@@ -674,7 +689,9 @@ export function LandingMotionQA() {
             </button>
           </div>
           <p className="text-[10px] text-white/50">
-            {report.length} caracteres · registo local · nenhum dado enviado automaticamente
+            O resumo curto contém os totais e as pendências principais (máx. 2200 caracteres).
+            Pode ser colado diretamente na conversa sem gerar um anexo.
+            Exportação completa opcional · registo local · nenhum dado enviado automaticamente.
           </p>
         </div>
       )}
