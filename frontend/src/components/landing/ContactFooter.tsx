@@ -3,19 +3,16 @@ import { ArrowRight, Mail, MapPin, Phone } from "lucide-react";
 import { useRef } from "react";
 import { ColusOfficialSymbol } from "./ColusOfficialSymbol";
 
+/**
+ * The canonical EduCore footer architecture is content-first.
+ * Do not invent product or policy URLs while the destinations are unapproved.
+ * Source: docs/educore/design/footer-standard.md §3–5.
+ */
 const footerGroups = [
-  ["O COLÉGIO", [
-    { label: "A experiência COLUS", href: "#o-colegio" },
-    { label: "Aprender em movimento", href: "#experiencia" },
-    { label: "Futuro & Tecnologia", href: "#futuro" },
-    { label: "Comunidade", href: "#comunidade" },
-  ]],
-  ["CONTACTOS", [
-    { label: "Marcar uma visita", href: "#contactos" },
-    { label: "Email", href: "mailto:info@colus.ac.mz" },
-    { label: "Telefone", href: "tel:+258847000242" },
-    { label: "Instagram COLUS", href: "https://www.instagram.com/colus_mz" },
-  ]],
+  { title: "PLATFORM", items: ["Overview", "Features", "Pricing", "Integrations"] },
+  { title: "SOLUTIONS", items: ["Schools", "Multi-Campus", "Administrators", "Educators"] },
+  { title: "SUPPORT", items: ["Help Center", "Documentation", "Training", "Contact"] },
+  { title: "COMPANY", items: ["About", "Blog", "Careers", "News"] },
 ] as const;
 
 export function ContactFooter() {
@@ -157,38 +154,44 @@ export function ContactFooter() {
         className="bg-colus-ink px-5 py-14 text-white md:px-8 lg:px-16 lg:py-16"
       >
         <div className="mx-auto max-w-[1440px]">
-          <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[1.6fr_1fr_1fr_1.2fr] lg:gap-8 lg:pb-14">
-            <div>
+          <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[minmax(190px,1.15fr)_minmax(0,3fr)_minmax(190px,1.1fr)] lg:gap-10 lg:pb-14">
+            <div className="max-w-xs">
+              {/* Official EduCore graphical lockup awaiting approved brand asset. */}
               <p className="text-2xl font-bold tracking-[-.03em]">EduCore</p>
               <p className="mt-4 max-w-[28ch] text-sm leading-6 text-white/55">
-                Plataforma de gestão e acompanhamento escolar.
+                Integrated school management for stronger institutions.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:contents">
-              {footerGroups.map(([title, items]) => (
+            <div className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-4 lg:gap-x-8">
+              {footerGroups.map(({ title, items }) => (
                 <nav key={title} aria-label={title}>
-                  <p className="text-xs font-bold tracking-[0.12em] text-white/45">{title}</p>
-                  <div className="mt-4 grid gap-3 text-sm text-white/65">
-                    {items.map(({ label, href }) => (
-                      <a
-                        key={label}
-                        href={href}
-                        target={href.startsWith("https://") ? "_blank" : undefined}
-                        rel={href.startsWith("https://") ? "noreferrer" : undefined}
-                        className="transition-colors hover:text-white focus-visible:underline"
-                      >
-                        {label}
-                      </a>
+                  <p className="text-xs font-bold tracking-[0.12em] text-white/55">{title}</p>
+                  <ul className="mt-4 grid gap-3 text-sm text-white/65">
+                    {items.map((label) => (
+                      <li key={label}>
+                        {/* Labels are approved; URLs are not. Do not ship fictitious navigation. */}
+                        <span>{label}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
                 </nav>
               ))}
             </div>
 
-            <div className="border-t border-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0 lg:text-right">
-              <p className="text-xl font-bold tracking-[0.08em]">RIGHTWARE</p>
-              <p className="mt-3 text-sm text-white/55">Tecnologia ao serviço da educação.</p>
+            <div className="border-t border-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+              {/* Official RIGHTWARE graphical lockup awaiting approved brand asset. */}
+              <div className="flex flex-wrap items-center gap-3 lg:justify-end">
+                <p className="text-xl font-bold tracking-[0.08em]">RIGHTWARE</p>
+                <span aria-hidden="true" className="h-7 w-px bg-white/30" />
+                <p className="max-w-[12ch] text-xs leading-4 text-white/65">A RIGHTWARE Product</p>
+              </div>
+              <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/45 lg:justify-end"
+                aria-label="Redes institucionais RIGHTWARE; destinos por confirmar">
+                {["LinkedIn", "YouTube", "X", "Instagram"].map((network) => (
+                  <span key={network}>{network}</span>
+                ))}
+              </div>
             </div>
           </div>
 
