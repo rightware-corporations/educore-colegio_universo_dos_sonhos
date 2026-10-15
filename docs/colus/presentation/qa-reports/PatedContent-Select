@@ -1,0 +1,223 @@
+===== COLUS-motion-qa-contrato (2).txt =====
+> MATCH 24 · MISSING 2 · PARTIAL 1 · DIVERGENT 0 · REVIEW 10 · NOT_OBSERVED 1
+  Notas: MATCH refere apenas a regra instrumental; não constitui aprovação visual.
+  
+  [MATCH][P0] Global / Ordem da narrativa
+    Esperado: Intro → Hero → Manifesto → Aprender → Futuro → Vida → Pertencer → Transformar → Vozes → Convite
+    Observado: top → hero → o-colegio → experiencia → futuro → vida-colus → comunidade → transformar → vozes-colus → contactos
+Notas: MATCH refere apenas a regra instrumental; não constitui aprovação visual.
+
+[MATCH][P0] Global / Ordem da narrativa
+  Esperado: Intro → Hero → Manifesto → Aprender → Futuro → Vida → Pertencer → Transformar → Vozes → Convite
+  Observado: top → hero → o-colegio → experiencia → futuro → vida-colus → comunidade → transformar → vozes-colus → contactos
+> [NOT_OBSERVED][P0] Hero / Logótipo COLUS oficial
+    Esperado: Logo institucional raster, não redesenhado
+    Observado: O contexto 'header' ainda não está montado nesta fase do scroll.
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · células hero_101–102 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §6
+    Componente: LandingHeader.tsx / ColusOfficialLogo.tsx
+    Próxima ação: Avaliar a secção que apresenta este elemento; uma ausência temporária não significa que falta no projeto.
+  Esperado: Logo institucional raster, não redesenhado
+  Observado: O contexto 'header' ainda não está montado nesta fase do scroll.
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · células hero_101–102 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §6
+  Componente: LandingHeader.tsx / ColusOfficialLogo.tsx
+  Próxima ação: Avaliar a secção que apresenta este elemento; uma ausência temporária não significa que falta no projeto.
+> [MISSING][P0] Footer / Lockup oficial EduCore
+    Esperado: Logo EduCore oficial, não apenas palavra em texto
+    Observado: Elemento não encontrado no DOM.
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9904 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+    Componente: ContactFooter.tsx
+    Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+  Esperado: Logo EduCore oficial, não apenas palavra em texto
+  Observado: Elemento não encontrado no DOM.
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9904 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+  Componente: ContactFooter.tsx
+  Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+> [PARTIAL][P0] Footer / Quatro grupos de navegação
+    Esperado: 4 grupos de navegação do padrão EduCore (identidade e arquitetura preservadas)
+    Observado: 2 elemento(s); mínimo 4
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9907–9914 / footer_9933 / footer_mobile_16
+    Componente: ContactFooter.tsx
+    Próxima ação: Completar componentes previstos no master.
+  Esperado: 4 grupos de navegação do padrão EduCore (identidade e arquitetura preservadas)
+  Observado: 2 elemento(s); mínimo 4
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9907–9914 / footer_9933 / footer_mobile_16
+  Componente: ContactFooter.tsx
+  Próxima ação: Completar componentes previstos no master.
+> [MISSING][P0] Footer / Lockup oficial RIGHTWARE
+    Esperado: Logo RIGHTWARE e A RIGHTWARE Product
+    Observado: Elemento não encontrado no DOM.
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9916–9918 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+    Componente: ContactFooter.tsx
+    Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+  Esperado: Logo RIGHTWARE e A RIGHTWARE Product
+  Observado: Elemento não encontrado no DOM.
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9916–9918 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+  Componente: ContactFooter.tsx
+  Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+===== COLUS-motion-qa-contrato (3).txt =====
+> MATCH 25 · MISSING 2 · PARTIAL 1 · DIVERGENT 0 · REVIEW 10 · NOT_OBSERVED 0
+  Notas: MATCH refere apenas a regra instrumental; não constitui aprovação visual.
+  
+  [MATCH][P0] Global / Ordem da narrativa
+    Esperado: Intro → Hero → Manifesto → Aprender → Futuro → Vida → Pertencer → Transformar → Vozes → Convite
+    Observado: top → hero → o-colegio → experiencia → futuro → vida-colus → comunidade → transformar → vozes-colus → contactos
+Notas: MATCH refere apenas a regra instrumental; não constitui aprovação visual.
+
+[MATCH][P0] Global / Ordem da narrativa
+  Esperado: Intro → Hero → Manifesto → Aprender → Futuro → Vida → Pertencer → Transformar → Vozes → Convite
+  Observado: top → hero → o-colegio → experiencia → futuro → vida-colus → comunidade → transformar → vozes-colus → contactos
+> [MISSING][P0] Footer / Lockup oficial EduCore
+    Esperado: Logo EduCore oficial, não apenas palavra em texto
+    Observado: Elemento não encontrado no DOM.
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9904 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+    Componente: ContactFooter.tsx
+    Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+  Esperado: Logo EduCore oficial, não apenas palavra em texto
+  Observado: Elemento não encontrado no DOM.
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9904 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+  Componente: ContactFooter.tsx
+  Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+> [PARTIAL][P0] Footer / Quatro grupos de navegação
+    Esperado: 4 grupos de navegação do padrão EduCore (identidade e arquitetura preservadas)
+    Observado: 2 elemento(s); mínimo 4
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9907–9914 / footer_9933 / footer_mobile_16
+    Componente: ContactFooter.tsx
+    Próxima ação: Completar componentes previstos no master.
+  Esperado: 4 grupos de navegação do padrão EduCore (identidade e arquitetura preservadas)
+  Observado: 2 elemento(s); mínimo 4
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9907–9914 / footer_9933 / footer_mobile_16
+  Componente: ContactFooter.tsx
+  Próxima ação: Completar componentes previstos no master.
+> [MISSING][P0] Footer / Lockup oficial RIGHTWARE
+    Esperado: Logo RIGHTWARE e A RIGHTWARE Product
+    Observado: Elemento não encontrado no DOM.
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9916–9918 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+    Componente: ContactFooter.tsx
+    Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+  Esperado: Logo RIGHTWARE e A RIGHTWARE Product
+  Observado: Elemento não encontrado no DOM.
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · células footer_9916–9918 · docs/colus/design/landing/master-high-fidelity-consolidation-colus.md §8
+  Componente: ContactFooter.tsx
+  Próxima ação: Implementar o elemento aprovado ou documentar uma exceção formal.
+> Cobertura: 100%
+Altura narrativa global (sem footer): 1813vh
+Secções: top → hero → o-colegio → experiencia → futuro → vida-colus → comunidade → transformar → vozes-colus → contactos
+TOTAL: PASS 27 · FAIL 1 · REVIEW 31 · NOT_OBSERVED 0
+
+[PASS] Global / coverage
+> Altura narrativa global (sem footer): 1813vh
+  Secções: top → hero → o-colegio → experiencia → futuro → vida-colus → comunidade → transformar → vozes-colus → contactos
+Secções: top → hero → o-colegio → experiencia → futuro → vida-colus → comunidade → transformar → vozes-colus → contactos
+TOTAL: PASS 27 · FAIL 1 · REVIEW 31 · NOT_OBSERVED 0
+
+[PASS] Global / coverage
+  Esperado: Percorrer >= 70% da página e >= 3 secções
+> TOTAL: PASS 27 · FAIL 1 · REVIEW 31 · NOT_OBSERVED 0
+  
+  [PASS] Global / coverage
+    Esperado: Percorrer >= 70% da página e >= 3 secções
+    Observado: 100% de scroll · 10 secções
+    Fonte: RIGHTWARE Motion QA / cobertura e validade da amostra
+
+[PASS] Global / coverage
+  Esperado: Percorrer >= 70% da página e >= 3 secções
+  Observado: 100% de scroll · 10 secções
+  Fonte: RIGHTWARE Motion QA / cobertura e validade da amostra
+> [REVIEW] Global / budget
+    Esperado: Budget narrativo 1300–1580vh (zona preferida 1400–1500vh), sem Footer natural
+    Observado: 1813vh no elemento <main>
+    Fonte: docs/colus/design/landing/scroll-budget-colus.md §2 / §13 / §14 — ritmo editorial, não limite CSS rígido
+    Ação: DESVIO DE RITMO: confrontar leitura, transições, checkpoints e fast-scroll. Não alterar CSS automaticamente.
+  
+  Esperado: Budget narrativo 1300–1580vh (zona preferida 1400–1500vh), sem Footer natural
+  Observado: 1813vh no elemento <main>
+  Fonte: docs/colus/design/landing/scroll-budget-colus.md §2 / §13 / §14 — ritmo editorial, não limite CSS rígido
+  Ação: DESVIO DE RITMO: confrontar leitura, transições, checkpoints e fast-scroll. Não alterar CSS automaticamente.
+
+> [REVIEW] Hero + Manifesto / budget
+    Esperado: 150–180vh (preferido 170vh)
+    Observado: 270vh somados: hero + o-colegio
+    Fonte: docs/colus/design/landing/scroll-budget-colus.md §3 — os dois estados partilham um único budget
+    Ação: DESVIO DE RITMO, não falha automática. Rever handoff e duração sem alterar Hero aprovado.
+  
+  Esperado: 150–180vh (preferido 170vh)
+  Observado: 270vh somados: hero + o-colegio
+  Fonte: docs/colus/design/landing/scroll-budget-colus.md §3 — os dois estados partilham um único budget
+  Ação: DESVIO DE RITMO, não falha automática. Rever handoff e duração sem alterar Hero aprovado.
+
+> [REVIEW] Aprender / budget
+    Esperado: 170–195vh (preferido 185vh)
+    Observado: 225vh
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · learn_168 / learn_198 · docs/colus/design/landing/motion-spec-tecnico-colus.md §7 · docs/colus/design/landing/scroll-budget-colus.md
+    Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+  
+  Esperado: 170–195vh (preferido 185vh)
+  Observado: 225vh
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · learn_168 / learn_198 · docs/colus/design/landing/motion-spec-tecnico-colus.md §7 · docs/colus/design/landing/scroll-budget-colus.md
+  Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+
+> [REVIEW] Futuro & Tecnologia / budget
+    Esperado: 210–240vh (preferido 230vh)
+    Observado: 280vh
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · future_21 / future_56 / future_104 · docs/colus/design/landing/motion-spec-tecnico-colus.md §8
+    Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+  
+  Esperado: 210–240vh (preferido 230vh)
+  Observado: 280vh
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · future_21 / future_56 / future_104 · docs/colus/design/landing/motion-spec-tecnico-colus.md §8
+  Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+
+> [FAIL] Futuro & Tecnologia / media
+    Esperado: Media de Ciência contém COLUS-FUTURO-CIENCIA-VID-001
+    Observado: 7 amostras · asset certo em 0 · visíveis: COLUS-FUTURO-CIENCIA-001.webp
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · future_21 / future_56 / future_104 · docs/colus/design/landing/motion-spec-tecnico-colus.md §8
+    Ação: A media renderizada diverge do Asset/Motion Gate; localizar source ou fallback provisório.
+  
+  Esperado: Media de Ciência contém COLUS-FUTURO-CIENCIA-VID-001
+  Observado: 7 amostras · asset certo em 0 · visíveis: COLUS-FUTURO-CIENCIA-001.webp
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · future_21 / future_56 / future_104 · docs/colus/design/landing/motion-spec-tecnico-colus.md §8
+  Ação: A media renderizada diverge do Asset/Motion Gate; localizar source ou fallback provisório.
+
+> [REVIEW] Vida COLUS / budget
+    Esperado: 140–165vh (preferido 155vh)
+    Observado: 277vh
+    Fonte: docs/colus/design/landing/motion-spec-tecnico-colus.md §9 · docs/colus/design/landing/scroll-budget-colus.md §3
+    Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+  
+  Esperado: 140–165vh (preferido 155vh)
+  Observado: 277vh
+  Fonte: docs/colus/design/landing/motion-spec-tecnico-colus.md §9 · docs/colus/design/landing/scroll-budget-colus.md §3
+  Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+
+> [REVIEW] Pertencer / budget
+    Esperado: 115–140vh (preferido 130vh)
+    Observado: 155vh
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · belong_9127–9136 / belong_9165 · docs/colus/design/landing/motion-spec-tecnico-colus.md §10
+    Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+  
+  Esperado: 115–140vh (preferido 130vh)
+  Observado: 155vh
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · belong_9127–9136 / belong_9165 · docs/colus/design/landing/motion-spec-tecnico-colus.md §10
+  Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+
+> [REVIEW] Transformar / budget
+    Esperado: 150–175vh (preferido 165vh)
+    Observado: 220vh
+    Fonte: docs/colus/design/landing/landing-colus-master.drawio · transform_9376 · docs/colus/design/landing/motion-spec-tecnico-colus.md §11
+    Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+  
+  Esperado: 150–175vh (preferido 165vh)
+  Observado: 220vh
+  Fonte: docs/colus/design/landing/landing-colus-master.drawio · transform_9376 · docs/colus/design/landing/motion-spec-tecnico-colus.md §11
+  Ação: DESVIO DE RITMO: validar duração de leitura, handoffs e elemento medido; não ajustar alturas para fazer passar.
+
+> COBERTURA DO SCROLL: 100% (0-17266px)
+  SECCOES REGISTADAS: Intro Morph → Hero → Manifesto → Aprender → Futuro → Vida COLUS → Pertencer → Transformar → Vozes COLUS → Convite / Contactos
+  ESTADO: registo efetuado
+  FRAMES COM INTERVALO >100ms: 3
+  ERROS DETETADOS: 0
+  
+SECCOES REGISTADAS: Intro Morph → Hero → Manifesto → Aprender → Futuro → Vida COLUS → Pertencer → Transformar → Vozes COLUS → Convite / Contactos
+ESTADO: registo efetuado
+FRAMES COM INTERVALO >100ms: 3
+ERROS DETETADOS: 0
