@@ -217,7 +217,7 @@ assert.ok(bounded.length <= 700, "summary hard limit respected");
 assert.ok(bounded.includes("omitida"), "truncation is disclosed");
 
 // Canonical footer architecture: the P0 nav count closes without changing Hero.
-const footerSource = readFileSync(resolve(process.cwd(), "src/components/landing/ContactFooter.tsx"), "utf8");
+const footerSource = readFileSync(path.resolve(process.cwd(), "src/components/landing/ContactFooter.tsx"), "utf8");
 for (const label of ["PLATFORM", "SOLUTIONS", "SUPPORT", "COMPANY"]) {
   assert.ok(footerSource.includes('title: "' + label + '"'), "official footer column present: " + label);
 }
