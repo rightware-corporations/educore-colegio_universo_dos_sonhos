@@ -29,6 +29,7 @@ function loadPureEngine(relativePath) {
 const { evaluateDesignFidelity } = loadPureEngine("src/shared/design-qa/designFidelity.ts");
 const { mergeDesignEvidence } = loadPureEngine("src/shared/design-qa/domDesignAdapter.ts");
 const { evaluateMotionQa } = loadPureEngine("src/shared/motion-qa/contractEvaluator.ts");
+const { compactQaSummary } = loadPureEngine("src/shared/design-qa/compactQaSummary.ts");
 const { checkpointScrollY, compileVisualCheckpoints } =
   loadPureEngine("src/shared/design-qa/visualCheckpoints.ts");
 
@@ -193,5 +194,26 @@ assert.throws(() => compileVisualCheckpoints([{
   stageId: "bad", title: "bad", source: "master", expected: "none",
   review: [], percentages: [-1],
 }]), /Invalid checkpoint progress/);
+
+
+const summaryFixture = compactQaSummary(actual, motion, 1000);
+assert.ok(summaryFixture.includes("DESIGN:"), "summary includes the design totals");
+assert.ok(summaryFixture.includes("MOTION:"), "summary includes motion totals");
+assert.ok(summaryFixture.includes("FOOTER") || summaryFixture.includes("footer-logo"),
+  "summary includes actionable design deviations");
+assert.ok(summaryFixture.includes("FAIL"), "summary includes technical media failures");
+assert.ok(summaryFixture.length <= 1000, "short summary must be safe to paste inline");
+const crowded = {
+  ...motion,
+  checks: Array.from({ length: 60 }, (_, index) => ({
+    key: "i" + index, section: "Very Long Scroll Chapter " + index,
+    category: "media", status: "FAIL", expected: "Expected video",
+    observed: "No active video, poster present" + "x".repeat(200),
+    source: "master", nextStep: "check",
+  })),
+};
+const bounded = compactQaSummary(actual, crowded, 700);
+assert.ok(bounded.length <= 700, "summary hard limit respected");
+assert.ok(bounded.includes("omitida"), "truncation is disclosed");
 
 console.log("RIGHTWARE Design & Motion QA: comparadores e observações condicionais verificados.");
