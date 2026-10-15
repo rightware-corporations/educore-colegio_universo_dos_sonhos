@@ -78,3 +78,41 @@ Como a transferência de anexos grandes entre navegador e conversa se revelou po
 A exportação completa TXT/JSON continua disponível para arquivo, mas **não é necessária para diagnóstico inicial**. O resumo é gerado localmente; não existe envio automático de dados. Este fluxo não modifica a landing nem exige que o utilizador execute comandos para extrair os dados.
 
 Implementação reutilizável: `frontend/src/shared/design-qa/compactQaSummary.ts`; botão: `frontend/src/components/landing/LandingMotionQA.tsx`; testes: `frontend/scripts/qa-contract-tests.mjs`.
+
+## 8. Comparação efetiva das auditorias (2) e (3) — 2026-10-15
+
+**Evidência diretamente lida no GitHub:** [PatedContent-Select](qa-reports/PatedContent-Select) (extrato `Select-String` dos relatórios locais `COLUS-motion-qa-contrato (2).txt` e `(3).txt`). Não é uma exportação integral de todos os checkpoints ou revisão visual.
+
+| Design | (2) | (3) |
+|---|---:|---:|
+| MATCH | 24 | 25 |
+| MISSING | 2 | 2 |
+| PARTIAL | 1 | 1 |
+| DIVERGENT | 0 | 0 |
+| REVIEW | 10 | 10 |
+| NOT_OBSERVED | 1 | 0 |
+
+A observação condicional do logo COLUS no Header deixou de constar como `NOT_OBSERVED` no percurso (3). As três pendências do Footer persistem: logos oficiais EduCore e RIGHTWARE ausentes e apenas 2/4 grupos de navegação.
+
+**Motion (3):** `PASS 27 / FAIL 1 / REVIEW 31 / NOT_OBSERVED 0`; **100%** cobertura de scroll em dez secções; 0 erros reportados pelo trace e 3 intervalos de amostra acima de 100 ms. A comparação com o relatório anterior `PASS 27 / FAIL 7 / REVIEW 24` confirma que os seis desvios `vh` foram corretamente reclassificados como questões editoriais; não prova por si só melhoria de animação.
+
+| Critério editorial | Esperado | Observado |
+|---|---:|---:|
+| Narrativa total, sem Footer | 1300–1580vh | **1813vh** |
+| Hero + Manifesto, combinados | 150–180vh | **270vh** |
+| Aprender | 170–195vh | **225vh** |
+| Futuro | 210–240vh | **280vh** |
+| Vida COLUS | 140–165vh | **277vh** |
+| Pertencer | 115–140vh | **155vh** |
+| Transformar | 150–175vh | **220vh** |
+
+**Único FAIL reportado em Motion:** `Futuro & Tecnologia / media`: cena Ciência esperava `COLUS-FUTURO-CIENCIA-VID-001` mas o navegador viu `COLUS-FUTURO-CIENCIA-001.webp` em **7** amostras, sem vídeo.
+
+### Implicações de engenharia
+
+1. **Não encurtar o Hero aprovado.** O `Hero + Manifesto` observado (270vh) inclui um Hero estável protegido mais a secção editorial do Manifesto; rever o alinhamento entre o contrato conjunto e a direção visual aprovada antes de alterar alturas.
+2. **O maior desvio individual de ritmo é Vida COLUS (277vh).** Trata-se de fotoensaio em fluxo natural: é preciso rever a duração e legibilidade, não reduzir CSS cegamente.
+3. **Prioridade de implementação:** Footer com dois logos oficiais e quatro grupos de navegação; vídeo Ciência devidamente orientado e com poster fallback. Nenhuma destas correções exige modificar `IntroHeroSection.tsx` ou os assets protegidos do Hero.
+4. **Auditor:** cobertura de 100% indica que os dez anchors foram percorridos; não equivale a auditoria de pixel/crop ou aprovação do wireframe completo.
+
+**Estado:** o ficheiro foi finalmente lido diretamente a partir do GitHub; a comparação acima foi arquivada. Não alterar contratos ou elementos visuais apenas para fazer os indicadores passar.
