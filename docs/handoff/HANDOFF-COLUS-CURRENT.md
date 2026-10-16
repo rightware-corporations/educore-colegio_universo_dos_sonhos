@@ -307,3 +307,22 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Próxima ação exata:** abrir esta branch em browser mobile, executar testes e inspecionar 360/390/430/768px, vídeo Ciência/play-pause/reduced-motion/Save-Data, contraste e crop nas cenas, ritmo editorial completo e regressões desktop. Ajustar apenas desvios observados. Depois solicitar aprovação visual, decidir merge e atualizar este CURRENT no estado efetivamente integrado em `main`.
 
 **Divergências ainda abertas:** Engenharia 02 **desktop** continua com fotografia histórica não device-led; Vozes COLUS decisão C versus secção montada; Footer links/idioma e direitos pré-publicação.
+
+
+## 19. FUTURO MOBILE — REVISÃO COM CAPTURA DO EDGE (2026-10-16)
+
+**Feedback real do proprietário:** screenshot no Edge DevTools, iPhone 16 Pro Max 440×956, mostra Engenharia 02 com demasiada separação entre desenho técnico e título/copy, capítulos com aspeto de cartões independentes, e Ciência 03 parcialmente visível ao final. O painel `?motionQA=1` está presente e sobrepõe-se à parte inferior da visualização; não confundir overlay de QA com conteúdo da landing.
+
+**Correção aplicada apenas na branch `feat/colus-mobile-editorial-storytelling`:**
+- `FuturoSection.tsx`: sequência mobile passa a campos full-bleed consecutivos, sem margens/gaps entre cartões;
+- Engenharia 02: headline editorial «Das ideias às possibilidades.» no topo, schematic maior em zona central e copy no final; Path/Node coerente com a direção device-led, sem inventar fotografia ou evento;
+- Ciência 03 mantém ficheiros de vídeo `upright.mp4` e poster anteriores; apenas composição dos textos/campo mobile mudou;
+- Segurança Digital continua na narrativa visual, sem novos media;
+- JSX desktop comparado integralmente com `main`: idêntico. Hero e `LandingMedia.tsx` intocados.
+
+**Commit de correção:** `68cb5d98f9cd234621a2ceefa87e90e52458ae1e`.
+**Relatório de diagnóstico:** `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md` (atualizado após o fix).
+
+**Validação observada:** revisão estática de referências/tags e comparação textual do JSX desktop. **Não houve screenshot pós-fix, typecheck, test:qa ou build nesta sessão.** A correção deve ser tratada como candidato a aprovação mobile.
+
+**Próximo passo:** atualizar branch no VS Code com `git pull --ff-only origin feat/colus-mobile-editorial-storytelling`; abrir `http://localhost:8080/#futuro` sem parâmetro `?motionQA=1`, recarregar e inspecionar sequência TIC→Engenharia→Ciência→Segurança Digital em 390×844/440×956. Obter evidência pós-fix, executar testes e corrigir apenas desvios observados. PR #2 permanece draft; não integrar na `main` sem validação.
