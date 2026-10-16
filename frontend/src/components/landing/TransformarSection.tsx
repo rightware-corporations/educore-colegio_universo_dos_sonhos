@@ -58,7 +58,7 @@ export function TransformarSection() {
 
       {/* Mobile: one vertical narrative, with each stage inscribed in its image. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
+        <div data-colus-mobile-story="axis" className="relative mx-auto max-w-[680px] bg-colus-ink">
           <MobileNarrativePath kind="axis" />
           <article className="relative isolate min-h-[72svh] overflow-hidden bg-colus-ink-soft sm:rounded-[34px_88px_34px_34px]">
             <MobileSceneWindow>
@@ -87,7 +87,7 @@ export function TransformarSection() {
 
           {moments.slice(1).map((moment, index) => (
             <div key={moment.number}>
-              <div className="h-10" aria-hidden="true" />
+              <div className="h-3" aria-hidden="true" />
               <article
                 className={
                   "relative isolate overflow-hidden bg-colus-ink-soft " +
@@ -116,7 +116,7 @@ export function TransformarSection() {
               </article>
             </div>
           ))}
-          <div className="h-6" aria-hidden="true" />
+          
         </div>
       </div>
 
