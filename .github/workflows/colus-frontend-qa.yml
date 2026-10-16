@@ -1,0 +1,48 @@
+name: COLUS Frontend QA
+
+on:
+  push:
+    branches:
+      - feat/colus-mobile-editorial-storytelling
+    paths:
+      - ".github/workflows/colus-frontend-qa.yml"
+      - "frontend/**"
+      - "docs/colus/presentation/hero-protected-asset-lock.json"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/colus-frontend-qa.yml"
+      - "frontend/**"
+      - "docs/colus/presentation/hero-protected-asset-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: colus-frontend-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Typecheck + QA contract + Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout PR revision
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install exact declared dependencies without modifying tracked files
+        run: npm install --no-audit --no-fund --package-lock=false
+      - name: Typecheck
+        run: npm run typecheck
+      - name: QA contracts and protected assets
+        run: npm run test:qa
+      - name: Production build
+        run: npm run build
