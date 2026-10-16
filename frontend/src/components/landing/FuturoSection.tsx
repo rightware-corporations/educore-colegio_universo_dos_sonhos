@@ -158,7 +158,7 @@ export function FuturoSection() {
             <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-12 pt-16 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">Futuro & Tecnologia</p>
-                <h2 className="mt-5 max-w-[11ch] font-editorial text-[clamp(44px,11.5vw,70px)] font-medium leading-[.96] tracking-[-.045em] text-white">
+                <h2 data-colus-mobile-heading="true" className="mt-5 max-w-[11ch] font-editorial text-[clamp(44px,11.5vw,70px)] font-medium leading-[.96] tracking-[-.045em] text-white">
                   O futuro também se aprende.
                 </h2>
               </div>
@@ -181,7 +181,7 @@ export function FuturoSection() {
             <div className="relative z-10 flex min-h-[76svh] flex-col justify-between px-6 pb-12 pt-20 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">02 / Engenharia</p>
-                <h3 className="mt-5 max-w-[11ch] font-editorial text-[clamp(43px,10.8vw,62px)] font-medium leading-[.98] tracking-[-.04em] text-white">
+                <h3 data-colus-mobile-heading="true" className="mt-5 max-w-[11ch] font-editorial text-[clamp(43px,10.8vw,62px)] font-medium leading-[.98] tracking-[-.04em] text-white">
                   Das ideias às possibilidades.
                 </h3>
               </div>
@@ -192,21 +192,25 @@ export function FuturoSection() {
             <div className="pointer-events-none absolute bottom-0 left-7 z-20 h-12 w-px bg-gradient-to-b from-transparent to-colus-orange" aria-hidden="true" />
           </article>
 
-          {/* Science stays on its validated upright video and preserved poster. */}
-          <article className="relative isolate min-h-[78svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="03">
-            <div className="absolute inset-0">{scenes[2].media}</div>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/10 to-colus-ink/95" />
+
+          {/* Science: a text-safe opening that reveals the upright COLUS footage below.
+              Text never sits directly over the students' faces in the video. */}
+          <article className="relative isolate min-h-[88svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="03">
+            <div className="absolute inset-x-0 bottom-0 top-[32%]">
+              {scenes[2].media}
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#071A2A_0%,#071A2A_24%,rgba(7,26,42,.94)_37%,rgba(7,26,42,.04)_67%,rgba(7,26,42,.12)_100%)]" />
             <div className="pointer-events-none absolute left-7 top-0 h-12 w-px bg-gradient-to-b from-colus-orange to-transparent" aria-hidden="true" />
-            <div className="relative z-10 flex min-h-[78svh] flex-col justify-between px-6 pb-12 pt-14 sm:px-9">
-              <div>
+            <div className="relative z-10 flex min-h-[88svh] flex-col px-6 pb-12 pt-12 sm:px-9">
+              <div className="max-w-[33ch]">
                 <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">03 / Ciência</p>
-                <h3 className="mt-5 max-w-[10ch] font-editorial text-[clamp(44px,11vw,62px)] font-medium leading-[.98] tracking-[-.04em] text-white">
+                <h3 data-colus-mobile-heading="true" className="mt-4 max-w-[12ch] font-editorial text-[clamp(36px,9vw,54px)] font-medium leading-[1.01] tracking-[-.04em] text-white">
                   Observar para compreender.
                 </h3>
+                <p className="mt-4 max-w-[29ch] text-[16px] font-medium leading-6 text-white/95">
+                  Observar, testar, compreender e ligar conhecimento ao mundo real.
+                </p>
               </div>
-              <p className="max-w-[28ch] text-[18px] font-medium leading-7 text-white/95">
-                Observar, testar, compreender e ligar conhecimento ao mundo real.
-              </p>
             </div>
           </article>
 
@@ -217,7 +221,7 @@ export function FuturoSection() {
             <div className="relative z-10 flex min-h-[75svh] flex-col justify-between px-6 pb-12 pt-14 sm:px-9">
               <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">04 / Segurança Digital</p>
               <div>
-                <h3 className="max-w-[12ch] font-editorial text-[clamp(40px,10vw,60px)] font-medium leading-[.98] tracking-[-.04em] text-white">
+                <h3 data-colus-mobile-heading="true" className="max-w-[12ch] font-editorial text-[clamp(40px,10vw,60px)] font-medium leading-[.98] tracking-[-.04em] text-white">
                   Preparar para o mundo digital.
                 </h3>
                 <p className="mt-5 max-w-[32ch] text-[17px] font-medium leading-7 text-white/95">
