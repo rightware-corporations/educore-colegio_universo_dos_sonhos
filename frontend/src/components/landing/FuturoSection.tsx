@@ -43,6 +43,33 @@ function EngineeringDevice() {
   );
 }
 
+
+/** Mobile-only Engineering schematic, intentionally independent of school photography. */
+function EngineeringMobileDevice() {
+  return (
+    <div className="relative h-full w-full overflow-hidden bg-[#071A2A]" aria-hidden="true">
+      <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(40,153,239,.16)_1px,transparent_1px),linear-gradient(90deg,rgba(40,153,239,.16)_1px,transparent_1px)] [background-size:32px_32px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_58%_42%,rgba(40,153,239,.22),transparent_56%)]" />
+      <svg viewBox="0 0 380 560" className="absolute inset-0 h-full w-full" preserveAspectRatio="xMidYMid meet">
+        <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M-20 390 C88 390 74 186 187 186 S310 102 404 102" stroke="#2899EF" strokeWidth="2.5" strokeOpacity=".8" />
+          <path d="M-10 454 C124 454 94 316 194 316 S316 268 402 268" stroke="#F18136" strokeWidth="1.5" strokeOpacity=".6" strokeDasharray="5 9" />
+          <path d="M103 250 L171 204 L257 247 L257 342 L171 390 L103 348 Z" stroke="#FFF8EF" strokeOpacity=".73" strokeWidth="2.2" />
+          <path d="M171 204 V294 L257 342 M171 294 L103 348 M171 294 L257 247" stroke="#2899EF" strokeOpacity=".85" strokeWidth="2" />
+          <path d="M121 256 L171 226 L239 262 L239 331 L171 368 L121 338 Z" stroke="#2899EF" strokeOpacity=".3" strokeWidth="1" />
+          <circle cx="171" cy="204" r="6" fill="#F18136" stroke="#FFF8EF" strokeWidth="1.5" />
+          <circle cx="257" cy="247" r="5" fill="#2899EF" />
+          <circle cx="103" cy="348" r="5" fill="#2899EF" />
+          <circle cx="171" cy="390" r="6" fill="#F18136" />
+          <circle cx="187" cy="186" r="5" fill="#F18136" />
+          <circle cx="194" cy="316" r="5" fill="#2899EF" />
+          <path d="M30 125 H112 M30 137 H84 M290 398 H350 M308 410 H350" stroke="#FFF8EF" strokeOpacity=".35" strokeWidth="1" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 export function FuturoSection() {
   const ref = useRef<HTMLElement>(null);
   const signalPathRef = useRef<SVGPathElement>(null);
@@ -118,43 +145,65 @@ export function FuturoSection() {
       data-header-theme="dark"
       className="relative scroll-mt-24 overflow-hidden bg-colus-ink text-white lg:overflow-visible"
     >
+
+      {/* Mobile: four connected editorial chapters, with text embedded in the media. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="relative mx-auto max-w-[680px] px-5 py-20 sm:px-6">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_70%_8%,rgba(40,153,239,.15),transparent_22%)]" />
-
-          <div className="relative z-10">
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
-              Futuro & Tecnologia
-            </p>
-            <h2 className="mt-5 max-w-[12ch] text-[clamp(40px,10vw,50px)] font-bold leading-[.98] tracking-[-.04em]">
-              O futuro também se aprende.
-            </h2>
-            <p className="mt-6 max-w-[42ch] text-[15px] leading-7 text-white/60">
-              Tecnologia, ciência e engenharia ganham significado quando desenvolvem capacidade, pensamento e responsabilidade.
-            </p>
-
-            <div className="mt-10 space-y-6">
-              {scenes.map((scene) => (
-                <article key={scene.number}>
-                  <div className="relative aspect-[4/3] overflow-hidden rounded-[28px_72px_28px_28px] border border-white/10 bg-colus-ink-soft">
-                    <div className="absolute inset-0">{scene.media}</div>
-                    <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/10 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 z-10 p-5">
-                      <p className="text-[11px] font-bold tracking-[0.18em] text-colus-orange">
-                        {scene.number} / {scene.label}
-                      </p>
-                      <p className="mt-3 text-xl font-semibold leading-7 text-white">
-                        {scene.copy}
-                      </p>
-                    </div>
-                  </div>
-                  {scene.number !== "04" && (
-                    <div className="ml-6 h-7 w-px bg-gradient-to-b from-colus-bright-blue/45 to-colus-orange/55" />
-                  )}
-                </article>
-              ))}
+        <div className="mx-auto max-w-[680px] sm:px-6 sm:py-12">
+          <div className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink-soft sm:rounded-[34px_86px_34px_34px]">
+            <div className="absolute inset-0">
+              {scenes[0].media}
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/90 via-colus-ink/25 to-colus-ink/95" />
+            <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-colus-orange">Futuro & Tecnologia</p>
+                <h2 className="mt-5 max-w-[11ch] font-editorial text-[clamp(44px,11.5vw,70px)] font-medium leading-[.96] tracking-[-.045em] text-white">
+                  O futuro também se aprende.
+                </h2>
+              </div>
+              <div className="max-w-[34ch]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-colus-orange">01 / TIC</p>
+                <p className="mt-3 text-[clamp(20px,5.4vw,26px)] font-semibold leading-[1.24] text-white">
+                  Compreender, criar e usar tecnologia com propósito.
+                </p>
+              </div>
             </div>
           </div>
+
+          {scenes.slice(1).map((scene, index) => (
+            <div key={scene.number}>
+              <div className="relative ml-7 h-16 w-px bg-gradient-to-b from-colus-orange via-colus-bright-blue/60 to-colus-orange/45" aria-hidden="true">
+                <span className="absolute -left-[5px] top-5 h-3 w-3 rounded-full bg-colus-orange" />
+              </div>
+              <article
+                className={
+                  "relative isolate overflow-hidden bg-colus-ink-soft " +
+                  (index === 0
+                    ? "mr-5 min-h-[65svh] rounded-[28px_82px_28px_28px] sm:mr-0"
+                    : index === 1
+                      ? "ml-5 min-h-[72svh] rounded-[82px_28px_28px_28px] sm:ml-0"
+                      : "min-h-[64svh] rounded-[28px_28px_78px_28px]")
+                }
+              >
+                <div className="absolute inset-0">
+                  {scene.number === "02" ? <EngineeringMobileDevice /> : scene.media}
+                </div>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/35 to-transparent" />
+                <div className={"relative z-10 flex flex-col justify-between px-6 pb-10 pt-9 sm:px-9 " + (index === 0 ? "min-h-[65svh]" : index === 1 ? "min-h-[72svh]" : "min-h-[64svh]")}>
+                  <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-white/75">
+                    FUTURO / {scene.number}
+                  </p>
+                  <div className="max-w-[32ch]">
+                    <h3 className="font-editorial text-[clamp(34px,9vw,52px)] font-medium leading-none tracking-[-.035em] text-white">
+                      {scene.label === "SEGURANÇA DIGITAL" ? "Segurança digital" : scene.label === "CIÊNCIA" ? "Ciência" : "Engenharia"}
+                    </h3>
+                    <p className="mt-4 text-[17px] font-medium leading-7 text-white/95">{scene.copy}</p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))}
+          <div className="ml-7 h-16 w-px bg-gradient-to-b from-colus-orange/75 to-transparent" aria-hidden="true" />
         </div>
       </div>
 
