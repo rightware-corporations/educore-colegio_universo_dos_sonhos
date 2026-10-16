@@ -379,3 +379,18 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Verificação observada:** comparação textual desktop idêntica, assets referenciados, tags JSX básicas balanceadas. Não ocorreu typecheck/build/QA real no Edge após este commit: correção é candidato para validação, não aprovação.
 
 **Próxima ação:** `git pull --ff-only origin feat/colus-mobile-editorial-storytelling` com working tree limpa; hard refresh do Edge; no viewport 440×956 percorrer Engenharia → Ciência. Confirmar que o vídeo entra imediatamente, que texto no fundo não cobre rostos nem fica ilegível, e que pause/play/reduced-motion/Save-Data continuam corretos. Executar os testes npm pendentes. PR #2 permanece draft, sem merge. Relatório atualizado em `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md`.
+
+
+## 24. ENGENHARIA 02 MOBILE — IMAGEM CONTEXTUAL INTRODUZIDA (2026-10-16)
+
+**Feedback recorrente e autorização explícita:** proprietário comunicou que Engenharia «continua sem imagem», depois confirmou «sim» à solução proposta de fotografia real `COLUS-APRENDER-CRIAR-001.webp` como base, SVG técnico secundário e texto sobreposto. As capturas anteriores mostram que o painel exclusivamente esquemático não satisfazia a narrativa mobile.
+
+**Intervenção implementada apenas na branch `feat/colus-mobile-editorial-storytelling`**, commit `9c3a3eb0c7aa7f1a84a8a7ceadc7d7d4ad6d8735`:
+- `FuturoSection.tsx`: imagem COLUS da atividade prática/experiência incorporada como base real de Engenharia 02; os SVG Path/Node continuam como metáfora visual, em overlay discreto no terço inferior.
+- Removida a cor de fundo opaca do componente `EngineeringMobileDevice`, que ocultaria a foto mesmo depois de inserida. O overlay tem agora fundo transparente, intensidade reduzida e máscara que privilegia imagem/rostos.
+- Mantida a tipografia e o copy editorial, bem como os media aprovados de Ciência e o Hero.
+- JSX desktop comparado com `main`: idêntico. `LandingMedia.tsx` e `IntroHeroSection.tsx` não alterados.
+
+**Regra editorial importante:** a fotografia foi inspecionada; mostra experiência/criação prática de alunos, **não é evidência confirmada de uma atividade de Engenharia**. O Asset Gate histórico mantinha Engenharia como device-led por falta de media validado. A adaptação foto + device foi agora solicitada e aceite como tentativa no contexto mobile; não apresentar a imagem como prova específica de Engenharia, não declarar direitos aprovados para publicação.
+
+**QA:** referências media e balanceamento JSX verificados estaticamente; nenhum browser/typecheck/build/test:qa pós-correção executado. Sem merge para `main`, PR #2 draft. Próxima ação: atualizar branch no VS Code, abrir Edge mobile 440×956 e 390×844, verificar imagem realmente visível, crop/rostos e texto, engenharia→ciência, redução de movimento e testes antes de solicitar aprovação.
