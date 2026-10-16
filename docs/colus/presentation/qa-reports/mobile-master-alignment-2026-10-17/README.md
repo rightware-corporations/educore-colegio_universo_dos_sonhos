@@ -129,3 +129,21 @@ Check local `git status` before switching/pulling; preserve user's uncommitted c
 **Results:** CI https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38982859788 — **SUCCESS**: TypeScript, test:qa, protected assets checks, production build, filled rings, Manifesto page seam, five PATH/NODE movement checks, and 12 wrapper seam checks. Artifact `colus-mobile-ring-qa` ID `12082295931` contains the screenshot evidence and JSON. Captures were downloaded and visually inspected. The 440×956 images show directly adjacent scenes; no independent gap is visible at the four transitions. Tablet outer gutters still reflect intentional 680px max-width framing, and remain an editorial review item (not an automatic defect).
 
 **Scope and caveat:** this is a chapter-transition structural/motion pass, not proof of complete Master V0.18 pixel fidelity, user-side Edge, video playback, cross-device performance, rights review or permission to merge. The desktop blocks in Aprender/Futuro/Pertencer/Transformar remain byte-identical to `main`; Vida desktop code was preserved unedited during this pass, although its previous branch wrapper differs from `main`. No assets changed. PR #2 draft.
+
+
+## Mobile Open Book — giant heart/petals rejected (2026-10-17)
+
+**Owner evidence:** Microsoft Edge iPhone 16 Pro Max 440×956 screenshot of the Hero→Manifesto scroll bridge shows two enormous Warm Paper petals with a tall solid rectangle between them. The owner explicitly said this is not the book transition designed in the wireframe.
+
+**Source-based diagnosis:** `ManifestoSection.tsx` used two `h-[108%] w-[56%] rounded-t-[52%]` shapes stretched by `scaleY` plus a 9%-width full-height centre spine, visually creating a heart rather than the **subtle Open Book double curve** in Master V0.18: «Warm Paper sobe por curva, sem wipe reto». The protected `IntroHeroSection.tsx` was not the cause.
+
+**Fix on branch `feat/colus-mobile-editorial-storytelling`:**
+- Replaced both giant mobile page silhouettes and the mobile centre stem with **one continuous shallow SVG Warm Paper surface**, `data-colus-manifesto-curve`, rising with the existing `pageScaleY` scroll mapping. Cubic Bézier controls at centre now share a horizontal tangent: no V-shaped angular cusp.
+- Added a short top-paper settling fade to ensure the final Manifesto is fully Warm Paper, no remaining dark wedge.
+- Retained both historic page leaves **desktop-only** with `hidden lg:block`. No Hero, video, poster, image file, desktop copy or asset was changed.
+- Browser regression: `qa-mobile-browser.mjs` captures intermediate Hero→Manifesto frame at 390×844 and 440×956 and validates that the Warm Paper entry remains shallow (centre/side height difference ≤80px); existing final-paper pixel checks and filled ring/motion checks remain.
+- Static regression: `qa-mobile-story-contract.mjs` asserts a single mobile Open Book SVG, no centre stem, desktop isolation.
+
+**Initial real-browser evidence:** run https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38983926935 PASS; original intermediate screenshot showed large heart replaced by one shallow curved paper field. After seeing a slight sharp 'V' at the centre, the control points were refined (commit `b0fc762`) to make the centre smooth. **Final refined screenshot and tests must be confirmed on the latest branch HEAD**; user visual approval still pending.
+
+**Required next check:** compare refined `manifesto-bridge-390.png` and `manifesto-bridge-440.png` (after final CI) against original Edge heart screenshot; no petals, no centre rectangle, no sharp cusp, Hero/CTA intact. Verify mobile natural scroll and reduced-motion and desktop regression. Do NOT declare approved for merge before owner review.
