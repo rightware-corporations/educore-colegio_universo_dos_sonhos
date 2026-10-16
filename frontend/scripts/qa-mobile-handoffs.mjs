@@ -86,6 +86,7 @@ try {
   ];
   const seamViewports = [
     { width: 390, height: 844 },
+    { width: 440, height: 956 },
     { width: 768, height: 1024 },
   ];
   for (const viewport of seamViewports) {
