@@ -325,7 +325,19 @@ export function LandingMotionQA() {
     };
   }, []);
 
-  if (!enabled) return null;
+  if (!enabled) {
+    // Make QA discoverable on localhost without cluttering the public build.
+    // The full inspector remains gated by ?motionQA=1 and DEV mode.
+    return import.meta.env.DEV ? (
+      <a
+        href="/?motionQA=1#top"
+        className="fixed bottom-4 left-4 z-[100] rounded-lg border border-white/25 bg-colus-ink/90 px-3 py-2 font-mono text-[11px] font-semibold text-white/85 shadow-lg transition hover:text-colus-orange focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-colus-orange"
+        aria-label="Abrir RIGHTWARE Design e Motion QA no ambiente de desenvolvimento"
+      >
+        Abrir Design + Motion QA
+      </a>
+    ) : null;
+  }
 
   const finish = () => {
     active.current = false;
