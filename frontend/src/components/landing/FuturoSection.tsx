@@ -44,35 +44,6 @@ function EngineeringDevice() {
 }
 
 
-/** An editorial Engineering diagram: Path, Node and structural geometry, never a school activity claim. */
-function EngineeringMobileDevice() {
-  return (
-    <div className="relative h-full w-full overflow-hidden bg-transparent" aria-hidden="true">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_55%_51%,rgba(12,88,152,.36),transparent_58%)]" />
-      <div className="absolute inset-x-0 top-[25%] bottom-[15%] opacity-35 [background-image:linear-gradient(rgba(40,153,239,.13)_1px,transparent_1px),linear-gradient(90deg,rgba(40,153,239,.13)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_72%,transparent)]" />
-      <svg viewBox="0 0 400 720" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
-        <g fill="none" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M-12 438 C64 438 54 286 136 287 C235 291 255 224 416 214" stroke="#2899EF" strokeWidth="2.3" strokeOpacity=".75" />
-          <path d="M-15 529 C80 525 108 468 176 464 S301 440 414 406" stroke="#F18136" strokeWidth="1.8" strokeDasharray="5 9" strokeOpacity=".7" />
-
-          <path d="M82 378 L193 316 L315 376 L315 504 L203 570 L82 508 Z" stroke="#FFF8EF" strokeOpacity=".87" strokeWidth="2.6" />
-          <path d="M193 316 L203 440 L315 504 M203 440 L82 508 M203 440 L315 376" stroke="#2899EF" strokeOpacity=".92" strokeWidth="2.3" />
-          <path d="M111 387 L194 340 L286 387 L286 489 L202 537 L111 494 Z" stroke="#2899EF" strokeOpacity=".4" strokeWidth="1.2" />
-          <path d="M111 387 L202 438 L286 387 M202 438 L202 537" stroke="#2899EF" strokeOpacity=".4" strokeWidth="1.2" />
-          <path d="M193 316 V280 H280 M82 508 H48 V558 M315 376 H350 V342" stroke="#FFF8EF" strokeOpacity=".34" strokeWidth="1.4" />
-
-          <circle cx="193" cy="316" r="7" fill="#F18136" stroke="#FFF8EF" strokeWidth="1.6" />
-          <circle cx="315" cy="376" r="5.5" fill="#2899EF" />
-          <circle cx="82" cy="508" r="5.5" fill="#2899EF" />
-          <circle cx="203" cy="570" r="7" fill="#F18136" />
-          <circle cx="136" cy="287" r="5.5" fill="#F18136" />
-          <circle cx="176" cy="464" r="4.5" fill="#2899EF" />
-        </g>
-      </svg>
-    </div>
-  );
-}
-
 export function FuturoSection() {
   const ref = useRef<HTMLElement>(null);
   const signalPathRef = useRef<SVGPathElement>(null);
@@ -172,9 +143,8 @@ export function FuturoSection() {
             <div className="pointer-events-none absolute bottom-0 left-7 z-20 h-12 w-px bg-gradient-to-b from-colus-orange/10 to-colus-orange" aria-hidden="true" />
           </article>
 
-          {/* Engineering mobile: the COLUS photo documents practical creation, not a
-              confirmed Engineering class. The schematic is only a visual metaphor,
-              kept away from the students' faces. */}
+          {/* Engineering mobile: this COLUS photo shows practical creation, not a
+              specifically confirmed Engineering class. Keep the scene photo-led. */}
           <article className="relative isolate min-h-[76svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="02">
             <div className="absolute inset-0">
               <LandingMedia
@@ -184,13 +154,8 @@ export function FuturoSection() {
                 className="object-[58%_center]"
               />
             </div>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/90 via-colus-ink/15 via-48% to-colus-ink/90" />
-            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[39%] bg-gradient-to-t from-colus-ink/80 to-transparent" />
-            {/* Only a low-opacity technical trace over the lower part of the media.
-                The activity photo remains the primary image. */}
-            <div className="pointer-events-none absolute inset-0 opacity-30 [mask-image:linear-gradient(to_bottom,transparent_0%,transparent_52%,black_74%,black_86%,transparent_100%)]" aria-hidden="true">
-              <EngineeringMobileDevice />
-            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/5 via-45% to-colus-ink/80" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-colus-ink/70 to-transparent" />
             <div className="pointer-events-none absolute left-7 top-0 h-14 w-px bg-gradient-to-b from-colus-orange to-colus-bright-blue/20" aria-hidden="true" />
             <span className="pointer-events-none absolute left-[22px] top-12 z-10 h-3 w-3 rounded-full bg-colus-orange" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[76svh] flex-col justify-between px-6 pb-12 pt-20 sm:px-9">
