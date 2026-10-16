@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { MobileNarrativePath } from "./MobileNarrativePath";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -123,6 +124,7 @@ export function FuturoSection() {
       {/* Mobile Futuro is a continuous editorial field: no detached cards or caption strips. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] bg-colus-ink sm:my-12 sm:overflow-hidden sm:rounded-[36px]">
+          <MobileNarrativePath kind="signal" />
           <article className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink">
             <div className="absolute inset-0">{scenes[0].media}</div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/90 via-colus-ink/20 to-colus-ink/95" />
@@ -140,7 +142,7 @@ export function FuturoSection() {
                 </p>
               </div>
             </div>
-            <div className="pointer-events-none absolute bottom-0 left-7 z-20 h-12 w-px bg-gradient-to-b from-colus-orange/10 to-colus-orange" aria-hidden="true" />
+            
           </article>
 
           {/* Engineering mobile: this different COLUS photo shows a practical electrical-circuit
@@ -156,8 +158,8 @@ export function FuturoSection() {
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/5 via-45% to-colus-ink/80" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-colus-ink/70 to-transparent" />
-            <div className="pointer-events-none absolute left-7 top-0 h-14 w-px bg-gradient-to-b from-colus-orange to-colus-bright-blue/20" aria-hidden="true" />
-            <span className="pointer-events-none absolute left-[22px] top-12 z-10 h-3 w-3 rounded-full bg-colus-orange" aria-hidden="true" />
+            
+            
             <div className="relative z-10 flex min-h-[76svh] flex-col justify-between px-6 pb-12 pt-20 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">02 / Engenharia</p>
@@ -169,7 +171,7 @@ export function FuturoSection() {
                 Transformar ideias em soluções, experiências e construção.
               </p>
             </div>
-            <div className="pointer-events-none absolute bottom-0 left-7 z-20 h-12 w-px bg-gradient-to-b from-transparent to-colus-orange" aria-hidden="true" />
+            
           </article>
 
 
@@ -181,7 +183,7 @@ export function FuturoSection() {
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/65 via-transparent via-40% to-colus-ink/95" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-colus-ink via-colus-ink/80 to-transparent" />
-            <div className="pointer-events-none absolute left-7 top-0 h-12 w-px bg-gradient-to-b from-colus-orange to-transparent" aria-hidden="true" />
+            
             <div className="relative z-10 flex min-h-[78svh] flex-col justify-between px-6 pb-12 pt-12 sm:px-9">
               <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">03 / Ciência</p>
               <div className="max-w-[32ch]">
@@ -198,7 +200,7 @@ export function FuturoSection() {
           <article className="relative isolate min-h-[75svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="04">
             <div className="absolute inset-0">{scenes[3].media}</div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/10 to-colus-ink/95" />
-            <div className="pointer-events-none absolute left-7 top-0 h-14 w-px bg-gradient-to-b from-colus-orange to-transparent" aria-hidden="true" />
+            
             <div className="relative z-10 flex min-h-[75svh] flex-col justify-between px-6 pb-12 pt-14 sm:px-9">
               <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">04 / Segurança Digital</p>
               <div>
