@@ -41,6 +41,8 @@ export interface MotionQaStage {
     scene: string;
     title: string;
     mediaMustInclude?: string;
+    /** When true, verify frames and timeline progression, not only a visible src. */
+    playbackRequired?: boolean;
   }>;
   humanReview?: string[];
 }
@@ -71,7 +73,7 @@ export interface MotionQaContract {
 export interface MotionQaCheck {
   key: string;
   section: string;
-  category: "coverage" | "budget" | "sticky" | "media" | "scene" | "readability" | "editorial";
+  category: "coverage" | "budget" | "sticky" | "media" | "playback" | "scene" | "readability" | "editorial";
   status: MotionQaStatus;
   expected: string;
   observed: string;
@@ -266,6 +268,25 @@ export function evaluateMotionQa(
               ? "Confirmar orientação, conteúdo e crop por revisão humana."
               : "A media renderizada diverge do Asset/Motion Gate; localizar source ou fallback provisório."
           );
+        }
+        if (windowRule.playbackRequired && windowRule.mediaMustInclude) {
+          const observedVideos = points.flatMap((point) => point.videos).filter((video) =>
+            video.source.includes(windowRule.mediaMustInclude!) && video.visible
+          );
+          const playingVideos = observedVideos.filter((video) =>
+            !video.paused && video.ready >= 2 && video.error === null
+          );
+          const times = playingVideos.map((video) => video.currentTime);
+          const advance = times.length > 0 ? Math.max(...times) - Math.min(...times) : 0;
+          const started = playingVideos.length >= 2 && advance >= 0.1;
+          add(label, "playback",
+            observedVideos.length === 0 ? "NOT_OBSERVED" : started ? "PASS" : "REVIEW",
+            "Vídeo " + windowRule.title + " efetivamente a reproduzir durante a cena ativa",
+            observedVideos.length + " observações do vídeo · " +
+              playingVideos.length + " amostras em reprodução · avanço " + advance.toFixed(1) + "s",
+            source,
+            started ? "Playback detetado; confirmar orientação e enquadramento no Edge." :
+              "Apenas src/elemento não prova movimento. Repetir com scroll lento na cena e confirmar autoplay ou fallback.");
         }
       }
     }
