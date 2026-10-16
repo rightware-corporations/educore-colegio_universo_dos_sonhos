@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -19,6 +20,8 @@ export function ManifestoSection() {
   const bridgePosterOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.34], [1, 1, 0]);
   const mediaScale = useTransform(scrollYProgress, [0.08, 0.4], [1.04, 1]);
   const nodeX = useTransform(scrollYProgress, [0.3, 0.72], ["0%", "280%"]);
+  const mobileRailX = useTransform(scrollYProgress, [0.3, 0.72], ["5%", "95%"]);
+  const mobileRailDraw = useTransform(scrollYProgress, [0.3, 0.72], [0, 1]);
   const ringNodeX = useTransform(scrollYProgress, [0.3, 0.72], [0, 155]);
   const ringNodeY = useTransform(scrollYProgress, [0.3, 0.5, 0.72], [0, 28, 0]);
 
@@ -70,7 +73,20 @@ export function ManifestoSection() {
             Conhecimento, curiosidade e experiências que ajudam cada aluno a descobrir possibilidades e crescer com confiança.
           </p>
 
-          <div className="mt-10 h-px max-w-md bg-black/10">
+          {/* Mobile: a filled ring is the moving node on the actual rail. */}
+          <div className="relative mt-12 mb-6 h-[2px] max-w-md bg-colus-deep-blue/20 lg:hidden" aria-hidden="true">
+            <motion.div
+              className="absolute inset-0 origin-left bg-colus-orange"
+              style={reduceMotion ? { scaleX: 1 } : { scaleX: mobileRailDraw }}
+            />
+            <motion.div
+              className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{ left: reduceMotion ? "95%" : mobileRailX }}
+            >
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </motion.div>
+          </div>
+          <div className="mt-10 hidden h-px max-w-md bg-black/10 lg:block">
             <motion.span
               style={reduceMotion ? undefined : { x: nodeX }}
               className="block h-3 w-3 -translate-y-[5px] rounded-full bg-colus-orange"
@@ -108,9 +124,13 @@ export function ManifestoSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-colus-ink/16 via-transparent to-transparent" />
           </motion.div>
 
+          {/* Filled photo-ring on mobile; preserve the established desktop ellipse. */}
+          <div className="pointer-events-none absolute bottom-3 left-3 z-20 lg:hidden" aria-hidden="true">
+            <EditorialOrbitNode progress={scrollYProgress} />
+          </div>
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:h-40 lg:w-64"
+            className="pointer-events-none absolute hidden -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:block lg:h-40 lg:w-64"
           >
             <motion.span
               style={reduceMotion ? undefined : { x: ringNodeX, y: ringNodeY }}
@@ -120,7 +140,7 @@ export function ManifestoSection() {
           </div>
           <span
             aria-hidden="true"
-            className="pointer-events-none absolute -right-1 top-[18%] h-3 w-3 rounded-full bg-colus-orange lg:right-[2%]"
+            className="pointer-events-none absolute hidden -right-1 top-[18%] h-3 w-3 rounded-full bg-colus-orange lg:right-[2%] lg:block"
           />
         </div>
       </div>
