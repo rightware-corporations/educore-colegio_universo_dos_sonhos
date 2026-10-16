@@ -288,7 +288,8 @@ const qaSource = readFileSync(path.resolve(process.cwd(), "src/components/landin
 assert.ok(futureSource.includes('kind="video"') &&
   futureSource.includes("COLUS-FUTURO-CIENCIA-VID-001.mp4"), "Science must render the actual approved MP4");
 assert.ok(futureSource.includes("COLUS-FUTURO-CIENCIA-001.webp"), "Science retains the approved fallback poster");
-assert.ok(futureSource.includes("[&_video]:rotate-90"), "rotation applies only to the Science video and not its poster");
+assert.ok(futureSource.includes("[&_video]:rotate-180"), "Science video orientation uses corrected 180deg rotation, excluding poster");
+assert.ok(!futureSource.includes("[&_video]:scale-[1.4]"), "do not overzoom Science video after 180deg correction");
 assert.ok(qaSource.includes('href="/?motionQA=1#top"'), "QA is discoverable without a query on localhost");
 assert.ok(qaSource.includes("import.meta.env.DEV"), "QA launcher must not be exposed publicly");
 
