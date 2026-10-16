@@ -366,3 +366,16 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Validação:** inspeção do GitHub e comparação estática; não houve `typecheck`, `test:qa`, `build`, screenshot pós-fix ou QA do vídeo mobile. O runtime do agente não resolve github.com para clone nem tem acesso ao localhost do utilizador.
 
 **Próxima ação:** atualizar branch no VS Code; executar os três comandos npm; inspecionar em Edge 390×844 / 440×956 a transição Engenharia→Ciência, scroll reverso sobre os headings, vídeo Ciência e legibilidade; depois confirmar ou refutar o risco do ritmo excessivo antes de alterar alturas. Preservar Hero, desktop e os assets protegidos. PR continua draft.
+
+
+## 23. FUTURO MOBILE — CIÊNCIA PRECISA COMEÇAR COM VÍDEO (2026-10-16)
+
+**Nova evidência:** screenshot Edge 440×956 do proprietário mostra que, após Engenharia, Ciência ainda começava com texto em fundo escuro e sem imagem visível no momento de entrada. O banner de tradução é chrome do Edge, não componente COLUS.
+
+**Causa técnica:** `FuturoSection.tsx` colocava o vídeo mobile Ciência na região que começava em `top-[32%]`, criando entrada text-first sem o media. Contradiz o pedido aprovado de **texto imerso nas imagens** e continuidade de storytelling.
+
+**Implementado na branch**, commit `0a33ea34044b3574f7d78ccf9d1fde88bb4cc5f5`: vídeo Ciência ocupa a cena desde o topo (`absolute inset-0`); headline e supporting copy ancorados ao fundo com scrim para legibilidade; altura mobile reduzida de `88svh` para `78svh` apenas pela eliminação da abertura sem media. O vídeo upright e o poster não foram trocados, `LandingMedia.tsx` não foi alterado, bloco desktop do Futuro continua idêntico à `main`, Hero protegido não tocado.
+
+**Verificação observada:** comparação textual desktop idêntica, assets referenciados, tags JSX básicas balanceadas. Não ocorreu typecheck/build/QA real no Edge após este commit: correção é candidato para validação, não aprovação.
+
+**Próxima ação:** `git pull --ff-only origin feat/colus-mobile-editorial-storytelling` com working tree limpa; hard refresh do Edge; no viewport 440×956 percorrer Engenharia → Ciência. Confirmar que o vídeo entra imediatamente, que texto no fundo não cobre rostos nem fica ilegível, e que pause/play/reduced-motion/Save-Data continuam corretos. Executar os testes npm pendentes. PR #2 permanece draft, sem merge. Relatório atualizado em `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md`.
