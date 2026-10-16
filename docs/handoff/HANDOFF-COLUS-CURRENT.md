@@ -438,3 +438,18 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Gates restantes:** validar 360/390/440/768px, Path/Node a percorrer a ligação real sem saltos, contexto de fotografia e legibilidade, curvas/ramificações, fast-scroll/reverso, âncoras, Header e Ciência upright/poster; executar `npm run typecheck`, `npm run test:qa`, `npm run build`. **Ainda existe a divergência de media secundário em Aprender/Criar** do Master (asset não escolhido neste pass) e a calibração global da duração. Preservar todos os assets e Hero até decisão explícita de revisão editorial.
 
 **Próxima ação exata:** pull da mesma branch no VS Code; capturar scroll contínuo mobile Aprender→Futuro→Vida e Pertencer→Transformar para validação da cadeia visual; corrigir problemas observados antes de pensar em merge. Sem nova branch.
+
+
+## 28. MOBILE MOTION — TESTE DE CONTRATO AUTOMATIZADO (2026-10-17)
+
+**Continuação autorizada:** depois de implementar a cadeia do Master V0.18, a intervenção seguinte concentrou-se na integridade técnica, sem novos efeitos ou alterações gráficas.
+
+**Implementado na branch `feat/colus-mobile-editorial-storytelling` / PR #2:**
+- Criado `frontend/scripts/qa-mobile-story-contract.mjs` com verificações estáticas usando a dependência TypeScript existente. Comprova que Aprender/Trail, Futuro/Signal, Vida/Marker, Pertencer/Ring e Transformar/Axis estão montados nas secções corretas e que existem ao menos 14 `MobileSceneWindow`, controlo por scroll, `getPointAtLength`, fallback reduced-motion e nenhum pulse infinito ou scroll-jacking introduzido.
+- Contrato confirma referências do vídeo Ciência upright/poster preservadas e proíbe reintroduzir o componente mobile de pentágono rejeitado.
+- `frontend/package.json`: `npm run test:qa` passa a executar testes anteriores + `qa-mobile-story-contract.mjs` + proteção de assets.
+- Assets, Hero, fotografias, cenas desktop e branch `main` não foram alterados neste pass.
+
+**Verificação realizada aqui:** reconsulta de todos os cinco componentes e dos dois auxiliares diretamente no GitHub, conferência da presença de 5 devices + 14 janelas, imports e guardrails do contrato. Todas as verificações estáticas feitas pelo conector deram resultado esperado. **Não foram executados localmente** `npm run typecheck`, `npm run test:qa`, `npm run build` ou browser QA; o runtime do agente não tem acesso DNS a GitHub nem ao localhost do utilizador.
+
+**Próximo gate:** utilizador faz pull da branch, executa o trio npm em `frontend` e recolhe captura/vídeo do scroll mobile real entre Aprender→Futuro e Pertencer→Transformar; só depois corrigir desvios visuais efetivamente observados. PR #2 deve continuar draft, sem merge nem claim de aprovação final.
