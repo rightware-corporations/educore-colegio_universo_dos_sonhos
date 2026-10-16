@@ -77,6 +77,16 @@ assert.ok(!mediaComponent.includes("scrollIntoView") && !mediaComponent.includes
 assert.ok(mediaComponent.includes("[1.028, 1, 1.028]"),
   "Media transform must stay within the approved subtle range");
 
+// Mobile Open Book belongs to Manifesto as a shallow, continuous surface,
+// never the two enormous page-petals or a centre rectangle seen in Edge.
+const manifesto = read("ManifestoSection.tsx");
+assert.ok(manifesto.includes("data-colus-manifesto-curve"),
+  "Manifesto must render the single mobile Open Book curve");
+assert.ok(!manifesto.includes("data-colus-manifesto-spine"),
+  "Mobile Manifesto must not reintroduce the tall centre stem");
+assert.ok(manifesto.includes('className="absolute inset-0 h-full w-full origin-bottom lg:hidden"'),
+  "Book transition must be mobile-only and must not alter the desktop pages");
+
 const future = read("FuturoSection.tsx");
 assert.ok(future.includes("COLUS-FUTURO-CIENCIA-VID-001-upright.mp4"),
   "Approved upright Science video must remain referenced");
