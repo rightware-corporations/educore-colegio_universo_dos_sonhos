@@ -60,6 +60,8 @@ export function MobileNarrativePath({ kind }: { kind: NarrativeDevice }) {
   const exitOpacity = useTransform(progress, [0, 0.8, 1], [1, 1, kind === "signal" ? 0.16 : 1]);
   const activeX = useMotionValue(14);
   const activeY = useMotionValue(0);
+  const left = useTransform(activeX, (x) => `${(x / 360) * 100}%`);
+  const top = useTransform(activeY, (y) => `${(y / 1000) * 100}%`);
   const device = devices[kind];
 
   useMotionValueEvent(progress, "change", (value) => {
@@ -107,15 +109,26 @@ export function MobileNarrativePath({ kind }: { kind: NarrativeDevice }) {
           vectorEffect="non-scaling-stroke"
           style={reducedMotion ? { pathLength: 1 } : { pathLength: drawn, opacity: exitOpacity }}
         />
-        {reducedMotion ? (
-          <circle cx="14" cy="995" r="4.5" fill="#F18136" />
-        ) : (
-          <>
-            <motion.circle cx={activeX} cy={activeY} r="10" fill="#F18136" fillOpacity="0.16" style={{ opacity: exitOpacity }} />
-            <motion.circle cx={activeX} cy={activeY} r="4.5" fill="#F18136" stroke="#FFF8EF" strokeWidth="1" style={{ opacity: exitOpacity }} />
-          </>
-        )}
       </svg>
+      {/* HTML nodes stay perfectly circular even while the SVG stretches across
+          several viewport heights. Coordinates still follow the real path. */}
+      {reducedMotion ? (
+        <span
+          className="absolute h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-colus-orange"
+          style={{ left: kind === "axis" ? "100%" : "3.89%", top: "99.5%" }}
+        />
+      ) : (
+        <>
+          <motion.span
+            className="absolute h-5 w-5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-colus-orange/15"
+            style={{ left, top, opacity: exitOpacity }}
+          />
+          <motion.span
+            className="absolute h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/75 bg-colus-orange"
+            style={{ left, top, opacity: exitOpacity }}
+          />
+        </>
+      )}
     </div>
   );
 }
