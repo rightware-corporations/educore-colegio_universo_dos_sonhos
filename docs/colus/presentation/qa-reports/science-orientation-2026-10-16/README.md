@@ -35,3 +35,15 @@ A validação foi feita no browser sandbox; a captura disponível corresponde ao
 - `before-raw/`: frames do MP4 original, lateralizados.
 - `after-normalized/`: frames do novo MP4, já corrigidos.
 - `desktop/`: três capturas do browser durante a reprodução, em momentos distintos.
+
+## Aprovação COLUS — 2026-10-16
+
+**Estado: APROVADO visualmente pelo responsável do projeto para desktop/Edge — Cena 03 / Ciência.**
+
+Após a correção implementada pelo Manus e revista no Edge, o responsável do projeto confirmou na conversa, com captura da cena, que a orientação e a composição estão corretas: «já está validado a cena 3 [...] tem o formato correto, aprovado».
+
+Verificações documentais adicionais: o original `COLUS-FUTURO-CIENCIA-VID-001.mp4` permanece no GitHub, o novo `COLUS-FUTURO-CIENCIA-VID-001-upright.mp4` está presente e o lock do vídeo Hero original permanece intacto.
+
+**Limites desta aprovação:** cobre orientação e enquadramento desktop da Cena 03, em conjunto com os testes de playback documentados acima. Emulação mobile, comparação automática com screenshots baseline e validação integral de Motion QA para toda a landing **continuam pendentes**.
+
+A branch `fix/colus-science-video-orientation` encontra-se idêntica à `main` no commit `087eccd272a74ae40ecb2028fedb34eb8a8f7de3` (já integrado). Não efetuar novo merge.
