@@ -9,22 +9,17 @@ const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
  * editorial still. The source plays only when the media is visible; LandingMedia
  * pauses on exit and uses the still for reduced motion, save-data or failures.
  *
- * Edge screenshot of 2026-10-16 showed people still sideways with the
- * prior -90deg rotation: heads were pointing to the right. Apply one more
- * -90deg of correction to the video ONLY (-180deg in total).
- *
- * A 180deg rotation preserves the media bounding box; remove the previous
- * 1.4x zoom to avoid clipping faces. The upright poster is NOT rotated.
- *
- * Validate this new orientation during actual Edge playback before
- * approving visual fidelity. Hero and approved originals are untouched.
+ * The source MP4 stores sideways pixels without a rotation/display-matrix
+ * flag. The playback asset is a normalized, upright copy so browsers do not
+ * need a CSS transform (and the approved poster remains untransformed).
+ * Hero and approved originals are untouched.
  */
 function ScienceSceneMedia() {
   return (
-    <div className="relative h-full w-full overflow-hidden [&_video]:rotate-180">
+    <div className="relative h-full w-full overflow-hidden">
       <LandingMedia
         kind="video"
-        src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001.mp4`}
+        src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001-upright.mp4`}
         poster={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`}
         alt="Experiência científica realizada em contexto escolar"
       />
