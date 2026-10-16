@@ -75,3 +75,23 @@ Pontos intencionalmente fora do âmbito: Intro/Hero, vídeo e poster protegidos,
 **Verificação estática:** pares de tags `div`, `article`, `h3` equilibrados; cenas 02/03/04 presentes com `data-colus-mobile-scene`; vídeo upright e poster presentes. **Não é uma validação visual pós-fix nem um build.**
 
 **A rever no Edge:** abrir `http://localhost:8080/#futuro` **sem `?motionQA=1`**, para ver a composição sem a barra de QA. Capturar novamente 440×956 e 390×844, avaliar enquadramento/legibilidade, espaçamento da nova ilustração e transição para Ciência, com testes reais de vídeo. Manter o modo QA separado para a auditoria técnica, não para julgar a estética final.
+
+
+## Terceira captura Edge — Header e Ciência (2026-10-16)
+
+**Evidência:** terceira captura disponibilizada pelo proprietário, emulação iPhone 16 Pro Max 440×956 no Edge, sem `?motionQA=1`. O botão de QA já não aparece (fix anterior observado). A imagem revela o Header fixo sobre o texto «Das ideias às possibilidades.» de Engenharia durante o scroll, e o heading «Observar para compreender.» de Ciência à frente de rostos no vídeo.
+
+**Diagnóstico no código:**
+- `LandingHeader.tsx` voltava a mostrar o Header após apenas 8 px de movimento reverso, mesmo se a headline de Futuro ainda estava no retângulo superior ocupado pelo Header.
+- Na cena Ciência o vídeo preenchia 100% da secção em mobile, enquanto headline e copy estavam por cima. O gradiente anterior ajudava no contraste, mas não reservava um campo de leitura separado das pessoas.
+
+**Fix na branch:**
+- `LandingHeader.tsx`: em mobile/tablet (`window.innerWidth < 1024`), verificar os títulos marcados dentro de `#futuro`. Enquanto uma headline cruzar os primeiros 96 px do viewport, ocultar temporariamente o Header fixo; fora desses momentos mantém-se a lógica existente de auto-hide. A navegação/menu e o desktop mantêm-se.
+- `FuturoSection.tsx`: marcar os quatro títulos editoriais mobile, para que apenas eles participem na proteção do Header; Ciência 03 recebe título e copy numa zona editorial escura no topo, enquanto o vídeo upright começa mais abaixo com gradiente de passagem, evitando texto sobre os rostos.
+- Não modificar `LandingMedia.tsx`, o vídeo/poster de Ciência, o Hero, nem a renderização desktop de Futuro.
+
+**Commits:** `1a3bc81` (Futuro) e `d1f6aae` (Header).
+
+**Validação estática observada:** secção desktop de `FuturoSection.tsx` textual e integralmente idêntica à `main`; fontes upright e poster conservados; quatro títulos marcados; tags JSX `div/article/h2/h3/section` balanceadas num contador estático. **Não executados:** `npm run typecheck`, `npm run test:qa`, `npm run build`, QA browser pós-fix. Manter PR em draft.
+
+**Critério visual para nova captura:** em 440×956, num scroll reverso lento sobre o headline de Engenharia, o Header não deve cortar o texto. Em Ciência, o título e copy não devem cobrir as caras e o vídeo deve reproduzir, pausar ao sair e preservar crop aceitável. Adicionalmente validar scroll para a âncora `#futuro`, menu mobile, 390×844, 768×1024 e desktop. O problema editorial amplo de Engenharia device-led **continua sujeito a aprovação visual**.
