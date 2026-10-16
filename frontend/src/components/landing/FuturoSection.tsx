@@ -193,18 +193,19 @@ export function FuturoSection() {
           </article>
 
 
-          {/* Science: a text-safe opening that reveals the upright COLUS footage below.
-              Text never sits directly over the students' faces in the video. */}
-          <article className="relative isolate min-h-[88svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="03">
-            <div className="absolute inset-x-0 bottom-0 top-[32%]">
+          {/* Science enters with real COLUS footage, not a second empty dark panel.
+              The editorial copy sits on a strong lower scrim, away from faces. */}
+          <article className="relative isolate min-h-[78svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="03">
+            <div className="absolute inset-0">
               {scenes[2].media}
             </div>
-            <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,#071A2A_0%,#071A2A_24%,rgba(7,26,42,.94)_37%,rgba(7,26,42,.04)_67%,rgba(7,26,42,.12)_100%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/65 via-transparent via-40% to-colus-ink/95" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-colus-ink via-colus-ink/80 to-transparent" />
             <div className="pointer-events-none absolute left-7 top-0 h-12 w-px bg-gradient-to-b from-colus-orange to-transparent" aria-hidden="true" />
-            <div className="relative z-10 flex min-h-[88svh] flex-col px-6 pb-12 pt-12 sm:px-9">
-              <div className="max-w-[33ch]">
-                <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">03 / Ciência</p>
-                <h3 data-colus-mobile-heading="true" className="mt-4 max-w-[12ch] font-editorial text-[clamp(36px,9vw,54px)] font-medium leading-[1.01] tracking-[-.04em] text-white">
+            <div className="relative z-10 flex min-h-[78svh] flex-col justify-between px-6 pb-12 pt-12 sm:px-9">
+              <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">03 / Ciência</p>
+              <div className="max-w-[32ch]">
+                <h3 data-colus-mobile-heading="true" className="max-w-[12ch] font-editorial text-[clamp(36px,9vw,54px)] font-medium leading-[1.01] tracking-[-.04em] text-white">
                   Observar para compreender.
                 </h3>
                 <p className="mt-4 max-w-[29ch] text-[16px] font-medium leading-6 text-white/95">
