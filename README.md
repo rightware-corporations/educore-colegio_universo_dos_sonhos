@@ -12,3 +12,5 @@ A documentação está organizada em `docs/` por nível de reutilização:
 - `docs/rightware/referencias/` — estudos e casos de referência reutilizáveis.
 
 Ver: [docs/README.md](docs/README.md).
+
+**Novo chat / continuidade:** [handoffs cronológicos e CURRENT](docs/handoff/README.md).
