@@ -237,4 +237,15 @@ assert.ok(footerSource.includes("Powered by EduCore · A RIGHTWARE Product"),
 assert.ok(!footerSource.includes("© 2026 RIGHTWARE"),
   "never replace the institutional copyright with the provider");
 
+// Browser branding must use the protected official COLUS symbol, never a generic icon.
+const indexHtml = readFileSync(path.resolve(process.cwd(), "index.html"), "utf8");
+const colusFavicon = readFileSync(path.resolve(process.cwd(), "public/favicon-colus.svg"), "utf8");
+assert.ok(indexHtml.includes('href="/favicon-colus.svg?v=1"'), "COLUS favicon linked in HTML head");
+assert.ok(indexHtml.includes('type="image/svg+xml"'), "favicon has explicit SVG MIME type");
+assert.ok(colusFavicon.includes("COLUS — Colégio Universo dos Sonhos"), "official COLUS identity label");
+assert.ok(colusFavicon.includes('viewBox="186 64 434 482"'),
+  "favicon uses the same official symbol crop as ColusOfficialSymbol");
+assert.ok(colusFavicon.includes("data:image/jpeg;base64,/9j/"),
+  "favicon embeds the original approved JPG, with no network dependency or redrawn icon");
+
 console.log("RIGHTWARE Design & Motion QA: comparadores e observações condicionais verificados.");

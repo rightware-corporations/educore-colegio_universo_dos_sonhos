@@ -33,3 +33,8 @@ Documentação exclusiva da implementação EduCore para o **Colégio Universo d
 - QA e âmbito da demonstração.
 
 Nada nesta pasta deve ser tratado automaticamente como framework genérico RIGHTWARE.
+
+### Favicon institucional (2026-10-16)
+- `frontend/public/favicon-colus.svg`: recorte autocontido do símbolo do logótipo **COLUS oficial**, derivado do ficheiro raster aprovado sem o modificar;
+- `frontend/index.html`: registo `rel="icon"` para o navegador;
+- o favicon **não modifica** o Hero nem representa conclusão da programação da landing; a fidelidade visual e Motion QA continuam em desenvolvimento.
