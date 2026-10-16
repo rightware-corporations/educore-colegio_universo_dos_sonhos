@@ -16,6 +16,10 @@ docs/
     └── referencias/
 ```
 
+## Handoffs — leitura cronológica
+
+**[Ler 03/10 → 04/10 → 16/10 → CURRENT](handoff/README.md)**. `docs/handoff/` é a pasta canónica de continuidade entre conversas e agentes. Guardar novos handoffs datados ali, atualizar `CURRENT` após os ciclos substanciais; relatórios técnicos e evidências de QA continuam em `docs/colus/presentation/qa-reports/`.
+
 ## Regra de organização
 
 ### `docs/colus/`
