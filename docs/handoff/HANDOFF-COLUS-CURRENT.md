@@ -480,3 +480,16 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 - Screenshot review confirmed filled rings are visually present and caption/headline regions unblocked in captured frames. Found a narrow dark triangular artefact at the top of the Manifesto during its book/page transition; **separate REVIEW**, do not change protected Hero without continuous visual evidence/approval.
 
 **Not approved:** entire landing mobile and motion choreography, CTA/final footer, editorial status of Vozes, or merge. `main` unchanged and PR #2 draft. Next: review ring alignment in owner's Edge during continuous scroll, review Manifesto triangle as an independent motion QA issue, then revisit wider PATH/NODE section handoffs before merging.
+
+
+## 31. MANIFESTO SEAM + 5-DEVICE MOBILE BROWSER QA (2026-10-17)
+
+**Authorised continuation:** examine the dark triangle at Hero→Manifesto and verify scroll handoffs from the mobile Master, while preserving protected assets and avoiding merge.
+
+**Actual fix:** dark triangular wedge in Manifesto came from a gap between two rounded `bg-colus-paper` leaves. `ManifestoSection.tsx` gained a narrow matching animated centre spine. The Hero and assets were not modified. The exact screenshots before/after and pixel assertions at x=center, y=15/30/45, on widths 390 and 440, confirmed the dark `#071A2A` slit is replaced by paper `#FFF8EF`. QA result: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38981030829 PASS.
+
+**New browser contract:** `MobileNarrativePath.tsx` has stable data markers only; `frontend/scripts/qa-mobile-handoffs.mjs` captures ten screenshots at 390×844 and checks active node movement through Trail, Signal, Marker, Ring and Axis, page width containment, static reduced-motion paths, and absence of page errors. Hooked into existing CI alongside filled-ring tests. Result: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38981335443 SUCCESS; TypeScript, QA scripts and build PASS; artifact `12081750112` with screenshots/results.
+
+**Interpretation:** internal device motion works in the actual Chromium production preview, **not yet proof of pixel-perfect continuous handoffs between sections**. In screenshots certain scene windows still have inset margins/rounded edges and blank gaps, which is an editorial REVIEW against Master V0.18, not yet approved for further change. Keep PR #2 draft and `main` intact; no Hero/asset file changed.
+
+**Next work:** focused visual review of boundary placement with owner-provided Edge continuous scroll; check Science playback/Save-Data and reduced-motion and desktop regression before any merge. Do not assert full mobile design approval.
