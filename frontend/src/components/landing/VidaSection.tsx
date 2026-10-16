@@ -2,6 +2,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
+import { MobileSceneWindow } from "./MobileSceneWindow";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -47,13 +48,13 @@ export function VidaSection() {
         <div className="relative mx-auto max-w-[680px]">
           <MobileNarrativePath kind="marker" />
           <article className="relative isolate min-h-[80svh] overflow-hidden bg-colus-ink">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-SPORT-001.webp"}
                 alt="Momento de desporto e movimento na vida escolar COLUS"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/75 via-colus-ink/15 to-colus-ink/95" />
             <div className="relative z-10 flex min-h-[80svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
               <p className="text-[11px] font-bold uppercase tracking-[0.19em] text-colus-orange">Vida COLUS</p>
@@ -71,13 +72,13 @@ export function VidaSection() {
           <div className="h-10" aria-hidden="true" />
 
           <article className="relative isolate ml-5 min-h-[62svh] overflow-hidden rounded-[68px_22px_22px_22px] bg-colus-ink sm:ml-0">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-EXPRESSAO-001.webp"}
                 alt="Momento de expressão e participação estudantil"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
             <div className="relative z-10 flex min-h-[62svh] flex-col justify-end px-6 pb-9">
               <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">01 / Expressão</p>
@@ -89,13 +90,13 @@ export function VidaSection() {
 
           <div className="h-10" aria-hidden="true" />
           <article className="relative isolate mr-9 min-h-[58svh] overflow-hidden rounded-[24px_72px_24px_24px] bg-colus-ink sm:mr-0">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-CULTURA-001.jpg"}
                 alt="Momento cultural da comunidade escolar"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/20 to-transparent" />
             <div className="relative z-10 flex min-h-[58svh] flex-col justify-end px-6 pb-9">
               <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">02 / Cultura</p>
@@ -107,13 +108,13 @@ export function VidaSection() {
 
           <div className="h-6" aria-hidden="true" />
           <article className="relative isolate ml-5 min-h-[62svh] overflow-hidden rounded-[24px_24px_78px_24px] bg-colus-ink sm:ml-0">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-SPORT-002.webp"}
                 alt="Momento humano e coletivo na vida escolar"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/20 to-transparent" />
             <div className="relative z-10 flex min-h-[62svh] flex-col justify-end px-6 pb-9">
               <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">03 / Encontro</p>
