@@ -88,9 +88,32 @@ try {
   assert.equal(reducedBefore, reducedAfter,
     "reduced-motion orbit must remain static while scrolling");
   results.push({ case: "reduced-motion", pointerStatic: true });
+  // Smaller mobile viewport: verify both filled photo-rings also retain
+  // their size and position without relying solely on the 440px emulation.
+  const narrowPage = await browser.newPage({
+    viewport: { width: 390, height: 844 },
+    deviceScaleFactor: 1,
+    isMobile: true,
+    hasTouch: true,
+    reducedMotion: "no-preference",
+  });
+  narrowPage.on("pageerror", (error) => errors.push(String(error.message)));
+  await narrowPage.goto(base, { waitUntil: "networkidle", timeout: 45000 });
+  for (const item of cases) {
+    const photo = narrowPage.locator(item.scope + ' [data-colus-orbit-node="photo"]');
+    await photo.scrollIntoViewIfNeeded();
+    await wait(400);
+    const rect = await photo.boundingBox();
+    assert.ok(rect && rect.width >= 68 && rect.height >= 68,
+      item.id + " filled ring must remain full-size at 390x844");
+    await narrowPage.screenshot({
+      path: path.join(output, item.id + "-390.png"),
+    });
+    results.push({ case: item.id + "-narrow", photoSize: Math.round(rect.width) });
+  }
   assert.equal(errors.length, 0, "Uncaught browser page errors: " + errors.join(" | "));
   writeFileSync(path.join(output, "results.json"),
-    JSON.stringify({ viewport: "440x956", checks: results, errors }, null, 2));
+    JSON.stringify({ viewports: ["440x956", "390x844"], checks: results, errors }, null, 2));
   console.log("COLUS mobile browser QA passed:", JSON.stringify(results));
 } catch (error) {
   writeFileSync(path.join(output, "results.json"),
