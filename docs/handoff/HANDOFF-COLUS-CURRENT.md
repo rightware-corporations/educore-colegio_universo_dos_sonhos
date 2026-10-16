@@ -493,3 +493,8 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Interpretation:** internal device motion works in the actual Chromium production preview, **not yet proof of pixel-perfect continuous handoffs between sections**. In screenshots certain scene windows still have inset margins/rounded edges and blank gaps, which is an editorial REVIEW against Master V0.18, not yet approved for further change. Keep PR #2 draft and `main` intact; no Hero/asset file changed.
 
 **Next work:** focused visual review of boundary placement with owner-provided Edge continuous scroll; check Science playback/Save-Data and reduced-motion and desktop regression before any merge. Do not assert full mobile design approval.
+
+
+### 31.1 — Proteção desktop e revalidação final
+
+A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar **apenas abaixo de 1024px**, sem alterar a composição desktop previamente aprovada. Commit `eb1a013f28150acdd25068f5d851e57622821cec`. GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38981869303 concluiu **SUCCESS**, incluindo TypeScript, `test:qa`, build, pixel-check do Manifesto, filled rings e 5-device PATH/NODE smoke em Chromium. Os assets e a `main` mantêm-se intactos. PR #2 segue DRAFT por faltar aprovação editorial e QA manual contínuo no Edge.
