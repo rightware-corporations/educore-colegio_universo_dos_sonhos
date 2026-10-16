@@ -7,10 +7,11 @@
  * Screenshots are QA evidence, not automatically approved design baselines.
  */
 import assert from "node:assert/strict";
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { PNG } from "pngjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const output = path.join(root, "qa-artifacts", "mobile-rings");
@@ -20,6 +21,25 @@ const browser = await chromium.launch({ headless: true, args: ["--no-sandbox"] }
 const errors = [];
 const results = [];
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+// The previous Manifesto screenshot showed dark ink at the centre of its
+// otherwise paper-coloured top edge: a seam between two rounded page leaves.
+// Sample the same screenshot framing to prevent that specific regression.
+// Test only after bringing the Manifesto photo ring into view and only in
+// non-reduced-motion mode. Screenshot positions are intentionally fixed.
+function assertManifestoSpineSealed(filePath, width) {
+  const png = PNG.sync.read(readFileSync(filePath));
+  assert.equal(png.width, width, "Unexpected mobile capture width");
+  for (const y of [15, 30, 45]) {
+    const x = Math.floor(width / 2);
+    const index = (y * png.width + x) * 4;
+    const pixel = [...png.data.subarray(index, index + 3)];
+    const paper = [255, 248, 239];
+    assert.ok(pixel.every((channel, i) => Math.abs(channel - paper[i]) <= 18),
+      "Manifesto top-centre page seam must be paper, got " + pixel.join(",") +
+      " at " + width + "x" + png.height + ", y=" + y);
+  }
+}
+
 
 try {
   const page = await browser.newPage({
@@ -56,6 +76,10 @@ try {
     }));
     assert.notEqual(computed.background, "rgba(0, 0, 0, 0)", "ring must have a solid face");
     await page.screenshot({ path: path.join(output, item.id + "-440-before.png") });
+    if (item.id === "manifesto") {
+      assertManifestoSpineSealed(path.join(output, item.id + "-440-before.png"), 440);
+      results.push({ case: "manifesto-spine-440", sealed: true });
+    }
 
     await page.evaluate(() => window.scrollBy({ top: 270, behavior: "instant" }));
     await wait(900);
@@ -109,6 +133,10 @@ try {
     await narrowPage.screenshot({
       path: path.join(output, item.id + "-390.png"),
     });
+    if (item.id === "manifesto") {
+      assertManifestoSpineSealed(path.join(output, item.id + "-390.png"), 390);
+      results.push({ case: "manifesto-spine-390", sealed: true });
+    }
     results.push({ case: item.id + "-narrow", photoSize: Math.round(rect.width) });
   }
   assert.equal(errors.length, 0, "Uncaught browser page errors: " + errors.join(" | "));
