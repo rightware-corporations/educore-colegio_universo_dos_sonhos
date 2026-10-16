@@ -129,3 +129,15 @@ A captura do proprietário no Microsoft Edge, iPhone 16 Pro Max 440×956, `/#fut
 **Verificação executada:** revisão estática das referências, máscara, transparência do SVG e balanceamento de tags básicas JSX; fonte do vídeo e poster conferidos. **Não executados:** browser Edge pós-correção, typecheck, build, test:qa e validação de direitos de imagem para publicação. Não declarar aprovado.
 
 **Próxima revisão:** atualizar branch, abrir o Edge a 440×956 e 390×844, confirmar que se vê efetivamente a fotografia de alunos durante a cena Engenharia, com rostos, mãos, material e conteúdo legíveis, sem linhas SVG sobre a cara; avaliar contraste e continuidade para Ciência. Se o crop não servir, corrigir só crop/gradiente com captura e validação, mantendo o asset como contextual.
+
+## Engenharia 02 — remoção da marca geométrica (2026-10-16)
+
+**Evidência do responsável:** captura Edge mobile 440×956 mostrou a fotografia de alunos já integrada, mas uma marca grande em forma de pentágono continuava visível sobre a atividade. Pedido direto: retirar a marca.
+
+**Diagnóstico:** a marca não estava na fotografia, mas no `EngineeringMobileDevice`, ainda montado como overlay com 30% de opacidade e máscara na cena Engenharia.
+
+**Alteração:** `FuturoSection.tsx` deixou de renderizar o `EngineeringMobileDevice` no mobile e a função exclusiva desse SVG foi removida. Fotografia `COLUS-APRENDER-CRIAR-001.webp`, copy, número de cena e elementos discretos de continuidade permanecem; o gradiente central ficou mais leve para melhorar a presença da imagem. O bloco desktop foi mantido byte a byte.
+
+**Commit:** `a023884f3a6e64b43e26a0cae86858695ff9fbae`.
+
+**Estado:** alteração aplicada à branch `feat/colus-mobile-editorial-storytelling`, pendente de visualização pós-correção e execução de `typecheck`, `test:qa` e `build`. Não declarar publicável, não fazer merge. O uso desta imagem continua como **contexto de criação/experimentação**, não prova de atividade específica de Engenharia.
