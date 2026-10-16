@@ -394,3 +394,11 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Regra editorial importante:** a fotografia foi inspecionada; mostra experiência/criação prática de alunos, **não é evidência confirmada de uma atividade de Engenharia**. O Asset Gate histórico mantinha Engenharia como device-led por falta de media validado. A adaptação foto + device foi agora solicitada e aceite como tentativa no contexto mobile; não apresentar a imagem como prova específica de Engenharia, não declarar direitos aprovados para publicação.
 
 **QA:** referências media e balanceamento JSX verificados estaticamente; nenhum browser/typecheck/build/test:qa pós-correção executado. Sem merge para `main`, PR #2 draft. Próxima ação: atualizar branch no VS Code, abrir Edge mobile 440×956 e 390×844, verificar imagem realmente visível, crop/rostos e texto, engenharia→ciência, redução de movimento e testes antes de solicitar aprovação.
+
+## 25. ENGENHARIA MOBILE — REMOÇÃO DO PENTÁGONO (2026-10-16)
+
+**Feedback com screenshot Edge 440×956:** a fotografia contextual de Engenharia já aparece, mas o grande pentágono técnico permanece sobre alunos e materiais. Pedido do responsável: eliminar a marca.
+
+**Fix na branch de revisão:** `FuturoSection.tsx` commit `a023884f3a6e64b43e26a0cae86858695ff9fbae`. Foram retirados a montagem de `EngineeringMobileDevice` e o componente SVG exclusivo do mobile. O gradiente foi moderadamente aliviado, preservando a foto real `COLUS-APRENDER-CRIAR-001.webp`, title/copy, continuidade editorial, vídeo Ciência e poster; desktop/Hero protegidos mantidos.
+
+**Status:** implementação feita, sem build/testes npm ou screenshot pós-correção nesta sessão. PR #2 mantém-se draft, `main` intacta. Verificar visualmente que o pentágono desapareceu e que texto e foto continuam legíveis. A fotografia retrata criação/experiência prática e não confirma um programa de Engenharia.
