@@ -218,7 +218,8 @@ export const colusDesignQaContract: DesignContract = {
       id: "FOOTER-EDUCORE-LOGO", stage: "Footer", title: "Lockup oficial EduCore",
       expected: "Logo EduCore oficial, não apenas palavra em texto",
       source: source("footer_9904", consolidated + " §8"), component: "ContactFooter.tsx",
-      type: "presence", selector: 'footer img[alt*="EduCore"], footer svg[aria-label*="EduCore"]', priority: "P0",
+      type: "asset", selector: 'footer img[alt*="EduCore"]',
+      expectedAsset: "educore-logo-dark.svg", priority: "P0",
     }),
     rule({
       id: "FOOTER-NAV-ARCHITECTURE", stage: "Footer", title: "Quatro grupos de navegação",
@@ -237,8 +238,8 @@ export const colusDesignQaContract: DesignContract = {
       id: "FOOTER-RIGHTWARE-LOGO", stage: "Footer", title: "Lockup oficial RIGHTWARE",
       expected: "Logo RIGHTWARE e A RIGHTWARE Product",
       source: source("footer_9916–9918", consolidated + " §8"), component: "ContactFooter.tsx",
-      type: "presence", selector: 'footer img[alt*="RIGHTWARE"], footer svg[aria-label*="RIGHTWARE"]',
-      priority: "P0",
+      type: "asset", selector: 'footer img[alt*="RIGHTWARE"]',
+      expectedAsset: "rightware-product-dark.svg", priority: "P0",
     }),
     rule({
       id: "FOOTER-COPYRIGHT", stage: "Footer", title: "Copyright COLUS",
