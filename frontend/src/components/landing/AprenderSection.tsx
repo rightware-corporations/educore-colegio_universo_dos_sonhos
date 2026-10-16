@@ -33,7 +33,7 @@ export function AprenderSection() {
 
       {/* Mobile learning trail: editorial text lives with the moment it describes. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
+        <div data-colus-mobile-story="trail" className="relative mx-auto max-w-[680px] bg-colus-ink">
           <MobileNarrativePath kind="trail" />
           <article className="relative isolate min-h-[76svh] overflow-hidden bg-colus-ink sm:rounded-[34px_86px_34px_34px]">
             <MobileSceneWindow>
@@ -59,7 +59,7 @@ export function AprenderSection() {
               </div>
             </div>
           </article>
-          <div className="h-10" aria-hidden="true" />
+          <div className="h-3" aria-hidden="true" />
           <article className="relative isolate ml-5 min-h-[68svh] overflow-hidden rounded-[80px_28px_28px_28px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
               <LandingMedia
@@ -81,7 +81,7 @@ export function AprenderSection() {
               </div>
             </div>
           </article>
-          <div className="h-6" aria-hidden="true" />
+          
         </div>
       </div>
 
