@@ -2,6 +2,7 @@ import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScrol
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
+import { MobileSceneWindow } from "./MobileSceneWindow";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -56,13 +57,13 @@ export function PertencerSection() {
         <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
           <MobileNarrativePath kind="ring" />
           <article className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink sm:rounded-[32px_84px_32px_32px]">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/06-pertencer/COLUS-PERTENCER-INTERACAO-001.webp"}
                 alt="Interação humana na comunidade escolar COLUS"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/85 via-colus-ink/20 to-colus-ink/95" />
             <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
               <div>
@@ -83,14 +84,14 @@ export function PertencerSection() {
           <div className="h-10" aria-hidden="true" />
 
           <article className="relative isolate ml-6 min-h-[65svh] overflow-hidden rounded-[80px_25px_25px_25px] bg-colus-ink sm:ml-0">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/06-pertencer/COLUS-PERTENCER-COMUNIDADE-001.webp"}
                 alt="Participação e comunidade na vida escolar"
                 className="object-top"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
             <div className="relative z-10 flex min-h-[65svh] flex-col justify-end px-6 pb-10">
               <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Participar</p>
@@ -105,13 +106,13 @@ export function PertencerSection() {
 
           <div className="h-10" aria-hidden="true" />
           <article className="relative isolate mr-8 min-h-[66svh] overflow-hidden rounded-[26px_26px_84px_26px] bg-colus-ink sm:mr-0">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/06-pertencer/COLUS-PERTENCER-COMUNIDADE-002.webp"}
                 alt="Momento coletivo de comunidade escolar"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
             <div className="relative z-10 flex min-h-[66svh] flex-col justify-end px-6 pb-10">
               <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">03 / Crescer juntos</p>
