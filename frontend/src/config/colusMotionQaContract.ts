@@ -13,7 +13,7 @@ const hierarchy = "docs/colus/design/landing/motion-hierarchy-colus.md";
 
 export const colusMotionQaContract: MotionQaContract = {
   id: "COLUS/LANDING/MASTER-V0.18",
-  version: "1.1.0",
+  version: "1.2.0",
   sourceOfTruth: [
     master,
     motion,
@@ -65,13 +65,13 @@ export const colusMotionQaContract: MotionQaContract = {
       sceneWindows: [
         { from: 10, to: 30, scene: "01", title: "TIC", mediaMustInclude: "COLUS-FUTURO-TIC-001" },
         { from: 30, to: 48, scene: "02", title: "Engenharia" },
-        { from: 48, to: 70, scene: "03", title: "Ciência", mediaMustInclude: "COLUS-FUTURO-CIENCIA-VID-001" },
+        { from: 48, to: 70, scene: "03", title: "Ciência", mediaMustInclude: "COLUS-FUTURO-CIENCIA-VID-001", playbackRequired: true },
         { from: 70, to: 88, scene: "04", title: "Segurança Digital", mediaMustInclude: "COLUS-FUTURO-TIC-003" },
       ],
       humanReview: [
         "Um único campo/Scene Window; media ocupa a janela completa, sem mock persistente sobre rostos.",
         "Engenharia é device-led no Motion Spec; qualquer adaptação fotográfica requer decisão de design explícita.",
-        "Ciência deve ter vídeo ativo com poster fallback: poster estático temporário é desvio conhecido e não aprovação final.",
+        "Ciência deve reproduzir o vídeo com poster fallback; confirmar orientação/crop em Edge e que o tempo do vídeo avança.",
         "Signal Field + nodes devem progredir; a janela entrega Story Marker à Vida COLUS.",
       ],
     },
