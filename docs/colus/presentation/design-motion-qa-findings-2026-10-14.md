@@ -126,3 +126,9 @@ A observação condicional do logo COLUS no Header deixou de constar como `NOT_O
 - `qa-contract-tests.mjs` passou a testar fonte MP4, poster fallback, orientação restrita à Ciência, acesso QA em DEV e comportamento de tempo da media.
 
 **Pendente neste gate:** executar `npm run typecheck`, `npm run test:qa`, `npm run build` e obter confirmação visual de orientação/reprodução no Edge antes de marcar Ciência `PASS`. Continua pendente Engenharia device-led, fidelidade visual de outras secções e validação global de motion. Copyright COLUS, Footer, favicon e Hero protegido inalterados.
+
+### Revisão de orientação em Edge — 2026-10-16
+
+A validação visual subsequente confirmou que `rotate-90` deixava o vídeo de Ciência **ainda de lado** (cabeças apontavam para a direita) e `scale-[1.4]` provocava zoom/crop excessivo. Em `FuturoSection.tsx`, a rotação exclusiva do `<video>` da cena 03 foi ajustada para `rotate-180`, sem a escala adicional. O poster continua sem transformação, e o MP4 original permanece intacto.
+
+**Gate aberto:** confirmar com nova reprodução no Edge que os rostos estão verticais, sem crop indevido, antes de classificar a correção como validada. A auditoria de presença/playback não substitui o controlo de orientação.
