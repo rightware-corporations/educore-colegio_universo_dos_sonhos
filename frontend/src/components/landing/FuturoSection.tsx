@@ -143,15 +143,15 @@ export function FuturoSection() {
             <div className="pointer-events-none absolute bottom-0 left-7 z-20 h-12 w-px bg-gradient-to-b from-colus-orange/10 to-colus-orange" aria-hidden="true" />
           </article>
 
-          {/* Engineering mobile: this COLUS photo shows practical creation, not a
-              specifically confirmed Engineering class. Keep the scene photo-led. */}
+          {/* Engineering mobile: this different COLUS photo shows a practical electrical-circuit
+              demonstration, not a confirmed Engineering curriculum. Keep it contextual. */}
           <article className="relative isolate min-h-[76svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="02">
             <div className="absolute inset-0">
               <LandingMedia
                 kind="image"
-                src={`${MEDIA_ROOT}/03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp`}
-                alt="Alunos COLUS a participar numa atividade prática de criação e experimentação"
-                className="object-[58%_center]"
+                src={`${MEDIA_ROOT}/03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-002.webp`}
+                alt="Alunos e orientador observam montagem de circuitos elétricos com lâmpadas acesas"
+                className="object-[67%_center]"
               />
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/5 via-45% to-colus-ink/80" />
@@ -161,7 +161,7 @@ export function FuturoSection() {
             <div className="relative z-10 flex min-h-[76svh] flex-col justify-between px-6 pb-12 pt-20 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">02 / Engenharia</p>
-                <h3 data-colus-mobile-heading="true" className="mt-5 max-w-[11ch] font-editorial text-[clamp(43px,10.8vw,62px)] font-medium leading-[.98] tracking-[-.04em] text-white">
+                <h3 data-colus-mobile-heading="true" className="mt-5 max-w-[13ch] font-editorial text-[clamp(37px,9.4vw,54px)] font-medium leading-[.98] tracking-[-.04em] text-white">
                   Das ideias às possibilidades.
                 </h3>
               </div>
