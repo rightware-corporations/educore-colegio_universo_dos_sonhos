@@ -54,7 +54,7 @@ export function PertencerSection() {
 
       {/* Mobile: community is a visual journey, not three captioned image cards. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
+        <div data-colus-mobile-story="ring" className="relative mx-auto max-w-[680px] bg-colus-ink">
           <MobileNarrativePath kind="ring" />
           <article className="relative isolate min-h-[67svh] overflow-hidden bg-colus-ink sm:rounded-[32px_84px_32px_32px]">
             <MobileSceneWindow>
@@ -81,7 +81,7 @@ export function PertencerSection() {
             </div>
           </article>
 
-          <div className="h-10" aria-hidden="true" />
+          <div className="h-3" aria-hidden="true" />
 
           <article className="relative isolate ml-6 min-h-[52svh] overflow-hidden rounded-[80px_25px_25px_25px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
@@ -104,7 +104,7 @@ export function PertencerSection() {
             </div>
           </article>
 
-          <div className="h-10" aria-hidden="true" />
+          <div className="h-3" aria-hidden="true" />
           <article className="relative isolate mr-8 min-h-[54svh] overflow-hidden rounded-[26px_26px_84px_26px] bg-colus-ink sm:mr-0">
             <MobileSceneWindow>
               <LandingMedia
@@ -124,7 +124,7 @@ export function PertencerSection() {
               </p>
             </div>
           </article>
-          <div className="h-6" aria-hidden="true" />
+          
         </div>
       </div>
 
