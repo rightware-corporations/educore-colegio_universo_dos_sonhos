@@ -56,7 +56,7 @@ export function PertencerSection() {
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
           <MobileNarrativePath kind="ring" />
-          <article className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink sm:rounded-[32px_84px_32px_32px]">
+          <article className="relative isolate min-h-[67svh] overflow-hidden bg-colus-ink sm:rounded-[32px_84px_32px_32px]">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -65,7 +65,7 @@ export function PertencerSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/85 via-colus-ink/20 to-colus-ink/95" />
-            <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
+            <div className="relative z-10 flex min-h-[67svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">Pertencer</p>
                 <h2 className="mt-5 max-w-[12ch] font-editorial text-[clamp(43px,10.8vw,66px)] font-medium leading-[.98] tracking-[-.04em] text-white">
@@ -83,7 +83,7 @@ export function PertencerSection() {
 
           <div className="h-10" aria-hidden="true" />
 
-          <article className="relative isolate ml-6 min-h-[65svh] overflow-hidden rounded-[80px_25px_25px_25px] bg-colus-ink sm:ml-0">
+          <article className="relative isolate ml-6 min-h-[52svh] overflow-hidden rounded-[80px_25px_25px_25px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -93,7 +93,7 @@ export function PertencerSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
-            <div className="relative z-10 flex min-h-[65svh] flex-col justify-end px-6 pb-10">
+            <div className="relative z-10 flex min-h-[52svh] flex-col justify-end px-6 pb-10">
               <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Participar</p>
               <h3 className="mt-3 max-w-[12ch] font-editorial text-[clamp(38px,9vw,54px)] font-medium leading-[1.02] tracking-[-.035em] text-white">
                 Fazer parte da vida escolar.
@@ -105,7 +105,7 @@ export function PertencerSection() {
           </article>
 
           <div className="h-10" aria-hidden="true" />
-          <article className="relative isolate mr-8 min-h-[66svh] overflow-hidden rounded-[26px_26px_84px_26px] bg-colus-ink sm:mr-0">
+          <article className="relative isolate mr-8 min-h-[54svh] overflow-hidden rounded-[26px_26px_84px_26px] bg-colus-ink sm:mr-0">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -114,7 +114,7 @@ export function PertencerSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
-            <div className="relative z-10 flex min-h-[66svh] flex-col justify-end px-6 pb-10">
+            <div className="relative z-10 flex min-h-[54svh] flex-col justify-end px-6 pb-10">
               <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">03 / Crescer juntos</p>
               <h3 className="mt-3 max-w-[13ch] font-editorial text-[clamp(37px,9vw,53px)] font-medium leading-[1.02] tracking-[-.035em] text-white">
                 A confiança constrói-se em conjunto.
