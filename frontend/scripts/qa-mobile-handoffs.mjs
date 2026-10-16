@@ -75,6 +75,65 @@ try {
     checks.push({ device: scene.device, before: a, after: b, nodeAdvanced: true, horizontalOverflow: false });
   }
 
+  // Section-to-section alignment: the media masks may be asymmetric,
+  // but the underlying narrative wrapper and PATH must meet with no
+  // tablet-only outer margin or white gap. Do not compare image corners.
+  const pairs = [
+    ["experiencia", "futuro"],
+    ["futuro", "vida-colus"],
+    ["vida-colus", "comunidade"],
+    ["comunidade", "transformar"],
+  ];
+  const seamViewports = [
+    { width: 390, height: 844 },
+    { width: 768, height: 1024 },
+  ];
+  for (const viewport of seamViewports) {
+    const seamPage = await browser.newPage({
+      viewport,
+      deviceScaleFactor: 1,
+      isMobile: true,
+      hasTouch: true,
+      reducedMotion: "no-preference",
+    });
+    seamPage.on("pageerror", (error) => errors.push(String(error.message)));
+    await seamPage.goto(base, { waitUntil: "networkidle", timeout: 45000 });
+    for (const [from, to] of pairs) {
+      const seam = await seamPage.evaluate(([fromId, toId]) => {
+        const fromEl = document.querySelector("#" + fromId + " [data-colus-mobile-story]");
+        const toEl = document.querySelector("#" + toId + " [data-colus-mobile-story]");
+        if (!fromEl || !toEl) return null;
+        const a = fromEl.getBoundingClientRect();
+        const b = toEl.getBoundingClientRect();
+        const fromPath = fromEl.querySelector("[data-colus-mobile-path]");
+        const toPath = toEl.querySelector("[data-colus-mobile-path]");
+        if (!fromPath || !toPath) return null;
+        const aPath = fromPath.getBoundingClientRect();
+        const bPath = toPath.getBoundingClientRect();
+        return {
+          gap: b.top - a.bottom,
+          leftShift: Math.abs(a.left - b.left),
+          widthShift: Math.abs(a.width - b.width),
+          pathShift: Math.abs(aPath.left - bPath.left),
+          boundaryY: (a.bottom + b.top) / 2 + window.scrollY,
+        };
+      }, [from, to]);
+      assert.ok(seam, from + " → " + to + " must have two mounted narrative wrappers");
+      assert.ok(Math.abs(seam.gap) <= 2,
+        from + " → " + to + " has disconnected outer margins: " + JSON.stringify(seam));
+      assert.ok(seam.leftShift <= 2 && seam.widthShift <= 2 && seam.pathShift <= 2,
+        from + " → " + to + " breaks the continuous mobile PATH axis: " + JSON.stringify(seam));
+      await seamPage.evaluate((top) => window.scrollTo({ top, behavior: "instant" }),
+        seam.boundaryY - viewport.height / 2);
+      await pause(350);
+      await seamPage.screenshot({
+        path: path.join(output, from + "-to-" + to + "-" + viewport.width + ".png"),
+      });
+      checks.push({ boundary: from + "->" + to, viewport: viewport.width, connected: true });
+    }
+    await seamPage.close();
+  }
+
   const staticPage = await browser.newPage({
     viewport: { width: 390, height: 844 },
     deviceScaleFactor: 1,
