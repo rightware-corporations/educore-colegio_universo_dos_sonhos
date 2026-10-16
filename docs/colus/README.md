@@ -27,6 +27,7 @@ Documentação exclusiva da implementação EduCore para o **Colégio Universo d
 - morph/scroll interaction.
 
 ### `presentation/`
+- **[HANDOFF OPERACIONAL — COLUS / RIGHTWARE (2026-10-16)](presentation/HANDOFF-COLUS-2026-10-16.md)** — retomar novo chat, situação verificada da main, proteção Hero, estado Ciência, QA e backlog;
 - [Motion QA — contrato comparativo v1](presentation/motion-qa-contract-v1.md);
 - [Design Fidelity — catálogo do master v1](presentation/design-fidelity-contract-v1.md);
 - [Checkpoints visuais — plano de inspeção v1](presentation/visual-checkpoints-v1.md);
