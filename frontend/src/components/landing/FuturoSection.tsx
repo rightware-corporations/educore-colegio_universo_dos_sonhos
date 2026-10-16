@@ -126,10 +126,10 @@ export function FuturoSection() {
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] bg-colus-ink sm:my-12 sm:overflow-hidden sm:rounded-[36px]">
           <MobileNarrativePath kind="signal" />
-          <article className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink">
+          <article className="relative isolate min-h-[70svh] overflow-hidden bg-colus-ink">
             <MobileSceneWindow>{scenes[0].media}</MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/90 via-colus-ink/20 to-colus-ink/95" />
-            <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-12 pt-16 sm:px-9">
+            <div className="relative z-10 flex min-h-[70svh] flex-col justify-between px-6 pb-12 pt-16 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">Futuro & Tecnologia</p>
                 <h2 data-colus-mobile-heading="true" className="mt-5 max-w-[11ch] font-editorial text-[clamp(44px,11.5vw,70px)] font-medium leading-[.96] tracking-[-.045em] text-white">
@@ -148,7 +148,7 @@ export function FuturoSection() {
 
           {/* Engineering mobile: this different COLUS photo shows a practical electrical-circuit
               demonstration, not a confirmed Engineering curriculum. Keep it contextual. */}
-          <article className="relative isolate min-h-[76svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="02">
+          <article className="relative isolate min-h-[60svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="02">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -161,7 +161,7 @@ export function FuturoSection() {
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-colus-ink/70 to-transparent" />
             
             
-            <div className="relative z-10 flex min-h-[76svh] flex-col justify-between px-6 pb-12 pt-20 sm:px-9">
+            <div className="relative z-10 flex min-h-[60svh] flex-col justify-between px-6 pb-12 pt-20 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">02 / Engenharia</p>
                 <h3 data-colus-mobile-heading="true" className="mt-5 max-w-[13ch] font-editorial text-[clamp(37px,9.4vw,54px)] font-medium leading-[.98] tracking-[-.04em] text-white">
@@ -178,14 +178,14 @@ export function FuturoSection() {
 
           {/* Science enters with real COLUS footage, not a second empty dark panel.
               The editorial copy sits on a strong lower scrim, away from faces. */}
-          <article className="relative isolate min-h-[78svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="03">
+          <article className="relative isolate min-h-[65svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="03">
             <div className="absolute inset-0">
               {scenes[2].media}
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/65 via-transparent via-40% to-colus-ink/95" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[62%] bg-gradient-to-t from-colus-ink via-colus-ink/80 to-transparent" />
             
-            <div className="relative z-10 flex min-h-[78svh] flex-col justify-between px-6 pb-12 pt-12 sm:px-9">
+            <div className="relative z-10 flex min-h-[65svh] flex-col justify-between px-6 pb-12 pt-12 sm:px-9">
               <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">03 / Ciência</p>
               <div className="max-w-[32ch]">
                 <h3 data-colus-mobile-heading="true" className="max-w-[12ch] font-editorial text-[clamp(36px,9vw,54px)] font-medium leading-[1.01] tracking-[-.04em] text-white">
@@ -198,11 +198,11 @@ export function FuturoSection() {
             </div>
           </article>
 
-          <article className="relative isolate min-h-[75svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="04">
+          <article className="relative isolate min-h-[60svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="04">
             <MobileSceneWindow>{scenes[3].media}</MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/10 to-colus-ink/95" />
             
-            <div className="relative z-10 flex min-h-[75svh] flex-col justify-between px-6 pb-12 pt-14 sm:px-9">
+            <div className="relative z-10 flex min-h-[60svh] flex-col justify-between px-6 pb-12 pt-14 sm:px-9">
               <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">04 / Segurança Digital</p>
               <div>
                 <h3 data-colus-mobile-heading="true" className="max-w-[12ch] font-editorial text-[clamp(40px,10vw,60px)] font-medium leading-[.98] tracking-[-.04em] text-white">
