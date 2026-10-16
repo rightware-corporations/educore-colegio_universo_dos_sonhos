@@ -4,6 +4,31 @@ import { LandingMedia } from "./LandingMedia";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
+/**
+ * Science restores the approved video clip instead of substituting the
+ * editorial still. The source plays only when the media is visible; LandingMedia
+ * pauses on exit and uses the still for reduced motion, save-data or failures.
+ *
+ * The original MP4 appeared sideways in Edge. Rotate ONLY the video layer;
+ * the approved upright poster remains unrotated. The 1.4 scale prevents
+ * gaps after rotating a square clip inside the landscape scene window.
+ *
+ * Verify rotation direction/crop on the actual Edge playback before calling
+ * visual fidelity approved. No protected Hero component or media is touched.
+ */
+function ScienceSceneMedia() {
+  return (
+    <div className="relative h-full w-full overflow-hidden [&_video]:rotate-90 [&_video]:scale-[1.4]">
+      <LandingMedia
+        kind="video"
+        src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001.mp4`}
+        poster={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`}
+        alt="Experiência científica realizada em contexto escolar"
+      />
+    </div>
+  );
+}
+
 function EngineeringDevice() {
   return (
     <div className="relative h-full w-full overflow-hidden bg-colus-ink">
@@ -72,17 +97,7 @@ export function FuturoSection() {
       number: "03",
       label: "CIÊNCIA",
       copy: "Observar, testar, compreender e ligar conhecimento ao mundo real.",
-      media: (
-        // The approved science clip currently appears rotated in Edge.
-        // Keep the file in the asset pack; display its upright editorial poster
-        // until a correctly oriented video export is available.
-        <LandingMedia
-          kind="image"
-          src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-001.webp`}
-          alt="Experiência científica realizada em contexto escolar"
-          className="object-[center_32%]"
-        />
-      ),
+      media: <ScienceSceneMedia />,
     },
     {
       number: "04",
