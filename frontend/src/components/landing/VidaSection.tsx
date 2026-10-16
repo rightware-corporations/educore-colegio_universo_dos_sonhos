@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { MobileNarrativePath } from "./MobileNarrativePath";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -43,7 +44,8 @@ export function VidaSection() {
 
       {/* Mobile editorial sequence: typography belongs to each image, not a card below it. */}
       <div className="lg:hidden">
-        <div className="mx-auto max-w-[680px]">
+        <div className="relative mx-auto max-w-[680px]">
+          <MobileNarrativePath kind="marker" />
           <article className="relative isolate min-h-[80svh] overflow-hidden bg-colus-ink">
             <div className="absolute inset-0">
               <LandingMedia
@@ -66,9 +68,7 @@ export function VidaSection() {
             </div>
           </article>
 
-          <div className="relative ml-8 h-16 w-px bg-gradient-to-b from-colus-orange to-colus-deep-blue/30" aria-hidden="true">
-            <span className="absolute left-[-5px] top-5 h-3 w-3 rounded-full bg-colus-orange" />
-          </div>
+          <div className="h-10" aria-hidden="true" />
 
           <article className="relative isolate ml-5 min-h-[62svh] overflow-hidden rounded-[68px_22px_22px_22px] bg-colus-ink sm:ml-0">
             <div className="absolute inset-0">
@@ -87,7 +87,7 @@ export function VidaSection() {
             </div>
           </article>
 
-          <div className="relative ml-auto mr-9 h-16 w-px bg-gradient-to-b from-colus-deep-blue/30 to-colus-orange" aria-hidden="true" />
+          <div className="h-10" aria-hidden="true" />
           <article className="relative isolate mr-9 min-h-[58svh] overflow-hidden rounded-[24px_72px_24px_24px] bg-colus-ink sm:mr-0">
             <div className="absolute inset-0">
               <LandingMedia
@@ -105,7 +105,7 @@ export function VidaSection() {
             </div>
           </article>
 
-          <div className="ml-8 h-16 w-px bg-gradient-to-b from-colus-orange/70 to-colus-orange/20" aria-hidden="true" />
+          <div className="h-6" aria-hidden="true" />
           <article className="relative isolate ml-5 min-h-[62svh] overflow-hidden rounded-[24px_24px_78px_24px] bg-colus-ink sm:ml-0">
             <div className="absolute inset-0">
               <LandingMedia
