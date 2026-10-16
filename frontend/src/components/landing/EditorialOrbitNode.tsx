@@ -21,6 +21,7 @@ export function EditorialOrbitNode({
   return (
     <span
       aria-hidden="true"
+      data-colus-orbit-node={size}
       className={
         "pointer-events-none relative isolate block shrink-0 rounded-full border-[3px] border-colus-orange/85 " +
         "bg-colus-deep-blue shadow-[0_5px_20px_rgba(7,26,42,.3),inset_0_0_0_2px_rgba(255,248,239,.18)] " +
@@ -33,6 +34,7 @@ export function EditorialOrbitNode({
       <span className="absolute inset-[26%] rounded-full border border-white/45 bg-colus-orange/35" />
       <span className={"absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-colus-orange " + (compact ? "h-2 w-2" : "h-3 w-3")} />
       <motion.span
+        data-colus-orbit-pointer
         className="absolute inset-0 rounded-full"
         style={reduceMotion ? undefined : { rotate: rotation }}
       >
