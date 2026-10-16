@@ -416,3 +416,25 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Nota:** a nova fotografia de Engenharia foi inspecionada no repositório, distinta do asset Criar; está presente também como detalhe na versão desktop Aprender (já existente). A duplicação apontada nas screenshots refere-se especificamente ao **mobile** e foi eliminada no código. A imagem não prova aula de Engenharia. Preservar o Asset Gate histórico e usar a nova cena apenas como contextual até aprovação.
 
 **Estado:** implementação na branch, sem screenshot pós-correção, `typecheck`, `test:qa` ou `build` observados. PR #2 continua rascunho e `main` intacta. Próxima ação: atualizar branch e inspecionar Edge 440×956/390×844 o contraste, o corte no topo dos rostos, a visualização dos circuitos, a legibilidade dos títulos e a continuidade para Ciência antes de decidir merge.
+
+
+## 27. MOBILE MASTER V0.18 — PATH/NODE MOTION + RITMO (2026-10-17)
+
+**Pedido do proprietário:** depois da auditoria do `landing-colus-master (10).drawio`, autorizou «vamos então aplicar o que falta». O objetivo é alinhar os dispositivos mobile e a continuidade narrativa, sem alteração dos assets nem do Hero/desktop. Não equivale a aprovação para publicar ou integrar em `main`.
+
+**Branch e PR:** `feat/colus-mobile-editorial-storytelling`, PR #2 permanece draft, `main` não modificada.
+
+**Implementação na branch:**
+- Novo `frontend/src/components/landing/MobileNarrativePath.tsx` com PATH/NODE ligados a scroll nativo. Variantes distintas: Aprender/Trail, Futuro/Signal Field, Vida/Story Marker, Pertencer/Community Ring, Transformar/Rise Axis que abre em Horizon. Um único nó ativo percorre cada path; não há pulsação infinita ou scroll-jacking. Nó mantém geometria circular em mobile mesmo com SVG vertical alongado.
+- Novo `MobileSceneWindow.tsx` com media motion suave (scale 1.028→1→1.028, y +6→−6 px), montado em 14 janelas de fotografia, sem alteração de assets, vídeo ou dados. `LandingMedia` de Ciência fica intocado, sem parallax adicionado.
+- Removidas linhas/pontos isolados estáticos no markup mobile das cinco secções e substituídos por narrativa PATH/NODE.
+- Pertencer agora explicita os três estados do Master: `01 / Acompanhar`, `02 / Participar`, `03 / Crescer juntos`.
+- Alturas mobile-only moderadas: Aprender ~144svh, Futuro ~255svh, Vida ~199svh, Pertencer ~173svh, Transformar ~188svh em mínimos nominais, total ~959svh versus ~1190svh antes. Ainda não equivale ao orçamento-alvo da landing completa nem garante crop legível.
+
+**Verificação estática nesta sessão:** sem elementos JSX básicos desequilibrados nos sete ficheiros envolvidos; variantes e janelas presentes; regiões desktop comparadas durante as edições e preservadas. Hero e pasta de media não alterados. Não houve testes npm, screenshot novo ou validação runtime; não declarar QA aprovado.
+
+**Fonte auditável e plano:** `docs/colus/presentation/qa-reports/mobile-master-alignment-2026-10-17/README.md`.
+
+**Gates restantes:** validar 360/390/440/768px, Path/Node a percorrer a ligação real sem saltos, contexto de fotografia e legibilidade, curvas/ramificações, fast-scroll/reverso, âncoras, Header e Ciência upright/poster; executar `npm run typecheck`, `npm run test:qa`, `npm run build`. **Ainda existe a divergência de media secundário em Aprender/Criar** do Master (asset não escolhido neste pass) e a calibração global da duração. Preservar todos os assets e Hero até decisão explícita de revisão editorial.
+
+**Próxima ação exata:** pull da mesma branch no VS Code; capturar scroll contínuo mobile Aprender→Futuro→Vida e Pertencer→Transformar para validação da cadeia visual; corrigir problemas observados antes de pensar em merge. Sem nova branch.
