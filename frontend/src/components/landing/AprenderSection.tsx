@@ -2,6 +2,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
+import { MobileSceneWindow } from "./MobileSceneWindow";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -35,13 +36,13 @@ export function AprenderSection() {
         <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
           <MobileNarrativePath kind="trail" />
           <article className="relative isolate min-h-[90svh] overflow-hidden bg-colus-ink sm:rounded-[34px_86px_34px_34px]">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-001.webp"}
                 alt="Aprendizagem prática e descoberta no COLUS"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/95 via-colus-ink/40 to-colus-ink/85" />
             <div className="relative z-10 flex min-h-[90svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
               <div>
@@ -60,13 +61,13 @@ export function AprenderSection() {
           </article>
           <div className="h-10" aria-hidden="true" />
           <article className="relative isolate ml-5 min-h-[82svh] overflow-hidden rounded-[80px_28px_28px_28px] bg-colus-ink sm:ml-0">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp"}
                 alt="Experiência prática de criação e aprendizagem no COLUS"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/55 via-colus-ink/5 to-colus-ink/90" />
             <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-10 pt-10">
               <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Criar</p>
