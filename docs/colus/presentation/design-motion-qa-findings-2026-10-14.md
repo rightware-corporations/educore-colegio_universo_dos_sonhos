@@ -132,3 +132,17 @@ A observação condicional do logo COLUS no Header deixou de constar como `NOT_O
 A validação visual subsequente confirmou que `rotate-90` deixava o vídeo de Ciência **ainda de lado** (cabeças apontavam para a direita) e `scale-[1.4]` provocava zoom/crop excessivo. Em `FuturoSection.tsx`, a rotação exclusiva do `<video>` da cena 03 foi ajustada para `rotate-180`, sem a escala adicional. O poster continua sem transformação, e o MP4 original permanece intacto.
 
 **Gate aberto:** confirmar com nova reprodução no Edge que os rostos estão verticais, sem crop indevido, antes de classificar a correção como validada. A auditoria de presença/playback não substitui o controlo de orientação.
+
+## 10. Decisão aprovada — Cena Ciência (2026-10-16)
+
+**Cena 03 / Ciência: APROVADA visualmente em desktop/Edge pelo responsável do COLUS.** O vídeo normalizado está vertical, sem rotação CSS. Fonte: captura e confirmação expressa do responsável do projeto após a intervenção Manus.
+
+Implementação presente em `main` (commit `087eccd`) e documentada em [science-orientation-2026-10-16/README.md](qa-reports/science-orientation-2026-10-16/README.md).
+
+- Recurso de reprodução: `COLUS-FUTURO-CIENCIA-VID-001-upright.mp4`.
+- Source original e poster de fallback preservados.
+- `LandingMedia.tsx`, `IntroHeroSection.tsx`, vídeo Hero e restante composição protegida não modificados.
+- QA funcional de playback comunicado como aprovado pelo Manus; aprovação visual adicional confirmada pelo utilizador.
+- **Pendente:** viewport mobile dedicado e regressão visual de todas as outras secções, incluindo Engenharia, rhythm e transições. Landing **não está concluída**.
+
+Esta decisão substitui o estado de «aguarda validação» das notas históricas anteriores apenas para a **orientação desktop da Ciência**. O registo de tentativas CSS anteriores é mantido para rastreabilidade.
