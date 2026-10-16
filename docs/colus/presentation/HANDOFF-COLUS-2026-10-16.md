@@ -191,6 +191,7 @@ Abrir PowerShell **na raiz** do repositório e executar, sequencialmente:
 ~~~powershell
 git status
 git branch --show-current
+git switch main
 git pull --ff-only origin main
 cd frontend
 npm run typecheck
