@@ -56,6 +56,15 @@ export function ManifestoSection() {
           }
           className="absolute bottom-0 right-[-4%] h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper"
         />
+        {/* The rounded page leaves part at the centre near the top. Keep the
+            book-opening curve but close the dark triangular seam with a
+            matching paper spine following the same scroll scale. */}
+        <motion.div
+          aria-hidden="true"
+          data-colus-manifesto-spine
+          style={reduceMotion ? undefined : { scaleY: pageScaleY }}
+          className="absolute bottom-0 left-1/2 h-[108%] w-[9%] -translate-x-1/2 origin-bottom bg-colus-paper"
+        />
       </div>
 
       <div
