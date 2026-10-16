@@ -54,11 +54,15 @@ jobs:
           exit 1
       - name: Real-browser mobile ring QA and screenshots
         run: node scripts/qa-mobile-browser.mjs
+      - name: Native-scroll mobile PATH/NODE handoff QA
+        run: node scripts/qa-mobile-handoffs.mjs
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: colus-mobile-ring-qa
-          path: frontend/qa-artifacts/mobile-rings/
+          path: |
+            frontend/qa-artifacts/mobile-rings/
+            frontend/qa-artifacts/mobile-handoffs/
           if-no-files-found: warn
           retention-days: 14
