@@ -63,7 +63,7 @@ export function ManifestoSection() {
           aria-hidden="true"
           data-colus-manifesto-spine
           style={reduceMotion ? undefined : { scaleY: pageScaleY }}
-          className="absolute bottom-0 left-[45.5%] h-[108%] w-[9%] origin-bottom bg-colus-paper"
+          className="absolute bottom-0 left-[45.5%] h-[108%] w-[9%] origin-bottom bg-colus-paper lg:hidden"
         />
       </div>
 
