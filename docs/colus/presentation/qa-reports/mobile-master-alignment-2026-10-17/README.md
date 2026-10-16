@@ -66,3 +66,15 @@ npm run dev
 ```
 
 Check local `git status` before switching/pulling; preserve user's uncommitted changes.
+
+## Editorial rings — Manifesto and Vozes (2026-10-17)
+
+**Source:** Edge 440×956 screenshots supplied by the owner. Two distinct empty elliptical ornaments were circled: one below the Manifesto photograph plus a thin disconnected timeline node, another at the bottom-left of the image in Vozes COLUS. These are implemented in `ManifestoSection.tsx` and `TestimonialsSection.tsx`, NOT in `MobileNarrativePath.tsx`. Earlier advice identifying only the latter was incorrect.
+
+**Fix (branch only):** created `EditorialOrbitNode.tsx` — solid deep-blue/orange disc with centre and two pointer dots orbiting according to **section-native scroll progress**, no automatic perpetual loop, `pointer-events-none`, reduced-motion static. In mobile Manifesto replaced the pale image ellipse with a photo-corner filled ring and the isolated horizontal dot with a compact moving filled ring on a drawn rail. In mobile Vozes replaced the photo ellipse and the timeline's solitary point with the same two variants. The original desktop graphics are retained with `hidden lg:block` while mobile replacements use `lg:hidden`. The image, editorial text and official assets are unchanged.
+
+**Regression protection:** `frontend/scripts/qa-mobile-story-contract.mjs` now statically checks the new component, both consuming sections, scroll-driven pointers and no infinite loop. It remains included in `npm run test:qa`.
+
+**Commits:** component `f6d6825`, Manifesto `2647081`, Vozes `b66ff55`, QA contract `716318e`.
+
+**Approval gate:** verify on Microsoft Edge mobile 440×956 and 390×844 the two filled nodes and their pointer progression, particularly that neither covers text, significant faces, navigation or captions, and that reduced-motion has no spinning elements. **No typecheck / build / QA runtime was executed in this session.** PR #2 remains draft, no merge.
