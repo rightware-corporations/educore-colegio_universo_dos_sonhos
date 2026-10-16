@@ -78,7 +78,7 @@ try {
   });
   reducedPage.on("pageerror", (error) => errors.push(String(error.message)));
   await reducedPage.goto(base, { waitUntil: "networkidle", timeout: 45000 });
-  const reduced = reducedPage.locator('#o-colegio [data-colus-orbit-pointer]');
+  const reduced = reducedPage.locator('#o-colegio [data-colus-orbit-node="photo"] [data-colus-orbit-pointer]');
   await reduced.scrollIntoViewIfNeeded();
   await wait(400);
   const reducedBefore = await reduced.evaluate((el) => window.getComputedStyle(el).transform);
