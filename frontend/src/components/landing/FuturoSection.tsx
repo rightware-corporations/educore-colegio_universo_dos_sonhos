@@ -124,7 +124,7 @@ export function FuturoSection() {
 
       {/* Mobile Futuro is a continuous editorial field: no detached cards or caption strips. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="relative mx-auto max-w-[680px] bg-colus-ink sm:my-12 sm:overflow-hidden sm:rounded-[36px]">
+        <div data-colus-mobile-story="signal" className="relative mx-auto max-w-[680px] bg-colus-ink">
           <MobileNarrativePath kind="signal" />
           <article className="relative isolate min-h-[70svh] overflow-hidden bg-colus-ink">
             <MobileSceneWindow>{scenes[0].media}</MobileSceneWindow>
