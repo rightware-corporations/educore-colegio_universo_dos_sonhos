@@ -47,7 +47,7 @@ function EngineeringDevice() {
 /** An editorial Engineering diagram: Path, Node and structural geometry, never a school activity claim. */
 function EngineeringMobileDevice() {
   return (
-    <div className="relative h-full w-full overflow-hidden bg-colus-ink" aria-hidden="true">
+    <div className="relative h-full w-full overflow-hidden bg-transparent" aria-hidden="true">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_55%_51%,rgba(12,88,152,.36),transparent_58%)]" />
       <div className="absolute inset-x-0 top-[25%] bottom-[15%] opacity-35 [background-image:linear-gradient(rgba(40,153,239,.13)_1px,transparent_1px),linear-gradient(90deg,rgba(40,153,239,.13)_1px,transparent_1px)] [background-size:32px_32px] [mask-image:linear-gradient(to_bottom,transparent,black_22%,black_72%,transparent)]" />
       <svg viewBox="0 0 400 720" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
@@ -172,10 +172,25 @@ export function FuturoSection() {
             <div className="pointer-events-none absolute bottom-0 left-7 z-20 h-12 w-px bg-gradient-to-b from-colus-orange/10 to-colus-orange" aria-hidden="true" />
           </article>
 
-          {/* Chapter 02: title and schematic share one composition; copy closes the story. */}
+          {/* Engineering mobile: the COLUS photo documents practical creation, not a
+              confirmed Engineering class. The schematic is only a visual metaphor,
+              kept away from the students' faces. */}
           <article className="relative isolate min-h-[76svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="02">
-            <div className="absolute inset-0"><EngineeringMobileDevice /></div>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/90 via-transparent via-55% to-colus-ink/90" />
+            <div className="absolute inset-0">
+              <LandingMedia
+                kind="image"
+                src={`${MEDIA_ROOT}/03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp`}
+                alt="Alunos COLUS a participar numa atividade prática de criação e experimentação"
+                className="object-[58%_center]"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/90 via-colus-ink/15 via-48% to-colus-ink/90" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[39%] bg-gradient-to-t from-colus-ink/80 to-transparent" />
+            {/* Only a low-opacity technical trace over the lower part of the media.
+                The activity photo remains the primary image. */}
+            <div className="pointer-events-none absolute inset-0 opacity-30 [mask-image:linear-gradient(to_bottom,transparent_0%,transparent_52%,black_74%,black_86%,transparent_100%)]" aria-hidden="true">
+              <EngineeringMobileDevice />
+            </div>
             <div className="pointer-events-none absolute left-7 top-0 h-14 w-px bg-gradient-to-b from-colus-orange to-colus-bright-blue/20" aria-hidden="true" />
             <span className="pointer-events-none absolute left-[22px] top-12 z-10 h-3 w-3 rounded-full bg-colus-orange" aria-hidden="true" />
             <div className="relative z-10 flex min-h-[76svh] flex-col justify-between px-6 pb-12 pt-20 sm:px-9">
