@@ -509,3 +509,14 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **Browser validation:** `frontend/scripts/qa-mobile-handoffs.mjs` now checks wrapper and path continuity for four major chapter boundaries at widths 390, **440**, and 768px. GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38982859788 succeeded, including typecheck, test:qa, build, asset lock, filled rings, Manifesto pixel check, five scroll devices and 12 boundary geometry checks. Artifact ID `12082295931` includes screenshots/results. Captures inspected, visual chapter gaps reduced at 440px. PR #2 remains DRAFT; `main` unchanged.
 
 **Remaining gate:** review real Edge mobile continuous scroll (not just captured frames), text/crop/contrast and actual Science video behavior; outer gutters at tablet/maxwidth680 are an editorial decision pending owner review. No approval to merge. QA report: `docs/colus/presentation/qa-reports/mobile-master-alignment-2026-10-17/README.md`.
+
+
+## 33. HERO → MANIFESTO MOBILE — OPEN BOOK GEOMETRY (2026-10-17)
+
+**Feedback:** screenshot do proprietário Edge 440×956 mostra duas pétalas Warm Paper gigantes com uma barra central («coração»), contrário ao Master V0.18. Não era um problema de media do Hero: origem em `ManifestoSection.tsx`.
+
+**Alterações na branch atual:** a geometria mobile anterior (`rounded-t-[52%]` nas duas folhas e `data-colus-manifesto-spine` de 9% de largura) foi substituída por **uma única superfície de papel com curva dupla suave**, SVG `data-colus-manifesto-curve`, ligada ao progresso nativo de scroll. Curvas Bézier retificadas para centro com tangente horizontal (commit `b0fc762`). Uma faixa superior recebe o mesmo papel progressivamente no final do scroll, eliminando wedge escuro. As duas folhas antigas foram preservadas **apenas no desktop** (`hidden lg:block`). Hero, media e assets oficiais não foram alterados.
+
+**QA introduzido:** `qa-mobile-browser.mjs` captura o momento de transição em 390×844 e 440×956 e rejeita curvas com diferença centro/lateral >80px, além do teste anterior de paper pleno; `qa-mobile-story-contract.mjs` protege a composição contra regressão para pétalas/stem. Primeiro screenshot de produção antes do último ajuste dos control points: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38983926935 PASS, demonstrando que as formas gigantes desapareceram. **Falta confirmar o último ajuste na execução CI mais recente** e obter validação visual do proprietário.
+
+**Estado:** PR #2 draft; `main` intacta. Não fazer merge sem QA final do scroll contínuo e aprovação visual.
