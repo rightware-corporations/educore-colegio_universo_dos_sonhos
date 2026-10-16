@@ -97,6 +97,26 @@ export function LandingHeader() {
       const currentY = window.scrollY;
       const delta = currentY - lastScrollY.current;
 
+      // Futuro uses in-image headlines. On mobile, a tiny reverse scroll
+      // must not bring the fixed Header back on top of a reading headline.
+      // This only affects the Header while one of those headings crosses
+      // its screen-space footprint; all other sections keep normal behavior.
+      if (window.innerWidth < 1024) {
+        const headings = document.querySelectorAll<HTMLElement>(
+          '#futuro [data-colus-mobile-heading="true"]',
+        );
+        const readingCollision = Array.from(headings).some((heading) => {
+          const rect = heading.getBoundingClientRect();
+          return rect.width > 0 && rect.height > 0 && rect.top < 96 && rect.bottom > 0;
+        });
+        if (readingCollision) {
+          setAutoHidden(true);
+          directionDistance.current = 0;
+          lastScrollY.current = currentY;
+          return;
+        }
+      }
+
       if (currentY < window.innerHeight * 0.85) {
         setAutoHidden(false);
         directionDistance.current = 0;
