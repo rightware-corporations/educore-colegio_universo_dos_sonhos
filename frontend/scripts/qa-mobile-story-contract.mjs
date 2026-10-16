@@ -25,8 +25,9 @@ const components = [
 
 const pathComponent = read("MobileNarrativePath.tsx");
 const mediaComponent = read("MobileSceneWindow.tsx");
+const orbitComponent = read("EditorialOrbitNode.tsx");
 
-for (const component of [...components.map(({ file }) => file), "MobileNarrativePath.tsx", "MobileSceneWindow.tsx"]) {
+for (const component of [...components.map(({ file }) => file), "MobileNarrativePath.tsx", "MobileSceneWindow.tsx", "EditorialOrbitNode.tsx", "ManifestoSection.tsx", "TestimonialsSection.tsx"]) {
   const src = read(component);
   const { diagnostics = [] } = ts.transpileModule(src, {
     fileName: component,
@@ -88,5 +89,25 @@ const transform = read("TransformarSection.tsx");
 assert.ok(transform.includes('<MobileNarrativePath kind="axis" />'),
   "Rise Axis/Horizon handoff must remain present");
 
+// Regression: the two outlines circled in Edge were NOT produced by
+// MobileNarrativePath. Guard the actual Manifesto and Vozes components.
+for (const file of ["ManifestoSection.tsx", "TestimonialsSection.tsx"]) {
+  const source = read(file);
+  assert.ok(source.includes('import { EditorialOrbitNode }'),
+    file + " must import the solid editorial node");
+  assert.equal((source.match(/<EditorialOrbitNode progress=\{scrollYProgress\}/g) ?? []).length, 2,
+    file + " must render a photo ring and a rail ring on mobile");
+  assert.ok(source.includes("lg:hidden") && source.includes("lg:block"),
+    file + " must preserve the desktop composition and scope the new rings to mobile");
+}
+assert.ok(orbitComponent.includes("bg-colus-deep-blue") && orbitComponent.includes("bg-colus-orange"),
+  "Editorial ring must have a solid filled face and contrasting centre");
+assert.ok(orbitComponent.includes("useTransform(progress") && orbitComponent.includes("rotate: rotation"),
+  "Two orbit pointers must follow actual scroll progress");
+assert.ok(orbitComponent.includes("useReducedMotion") && orbitComponent.includes("pointer-events-none"),
+  "Decorative nodes must preserve reduced motion and native scroll");
+assert.ok(!orbitComponent.includes("repeat: Infinity"),
+  "Orbit pointers must never pulse in an infinite timer");
 console.log("COLUS mobile Master contract: 5 devices, node/path, 14+ media windows and video safeguards OK");
+console.log("COLUS filled editorial rings: Manifesto and Vozes photo/rail nodes present (static contract)");
 console.log("NOT VALIDATED: runtime animation, device crop, scroll pacing, video playback, visual fidelity");
