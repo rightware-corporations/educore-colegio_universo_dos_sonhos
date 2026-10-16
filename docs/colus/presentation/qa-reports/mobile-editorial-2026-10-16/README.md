@@ -50,3 +50,28 @@ Pontos intencionalmente fora do âmbito: Intro/Hero, vídeo e poster protegidos,
 - **Engenharia desktop** continua por reconciliar com a decisão device-led do Asset Gate.
 - **Vozes COLUS** permanece sob divergência decisão C versus secção montada; não foi alterada.
 - **Footer** e QA completo da landing continuam pendentes.
+
+
+## Revisão visual Futuro — captura Edge iPhone 16 Pro Max (2026-10-16)
+
+**Origem:** captura fornecida pelo proprietário em emulação Edge DevTools, 440×956, URL `localhost:8080/?motionQA=1#top`. A captura mostrou a transição Engenharia 02 → Ciência 03 e levou à observação do proprietário: «o futuro está mal, falta algo».
+
+**Desvios observados na captura anterior ao fix:**
+- título «Engenharia» afastado do esquema técnico e colocado demasiado abaixo; falta de hierarquia editorial da cena;
+- o esquema ocupa o meio do espaço e deixa a narrativa repartida entre início vazio, figura técnica e copy final;
+- cenas com margens/cantos repetidos e uma linha curta entre cartões, em vez de continuidade entre capítulos;
+- o painel fixo **RIGHTWARE DESIGN + MOTION QA** tapa uma faixa da Ciência na captura; este é um overlay de desenvolvimento ativado por `?motionQA=1`, não conteúdo editorial da landing.
+
+**Ajuste implementado em `FuturoSection.tsx`:**
+- mobile Futuro é um campo visual contínuo, sem margens entre as quatro cenas; fundos escuros e gradientes conectam as sequências;
+- Engenharia 02 apresenta label, novo headline editorial («Das ideias às possibilidades.»), schematic Path/Node maior e o copy aprovado distribuído no final;
+- desenho SVG técnico ampliado, sem criar atividades/eventos escolares falsos nem sobreposições nas fotografias;
+- Ciência 03 mantém o `COLUS-FUTURO-CIENCIA-VID-001-upright.mp4` e poster, com título integrado e copy real; Segurança Digital integra-se no mesmo ritmo;
+- o JSX desktop, a partir de `hidden h-[280vh] lg:block`, foi comparado textual e integralmente com a `main` — **idêntico**;
+- não se alterou `LandingMedia.tsx`, Hero nem o vídeo Ciência.
+
+**Fix:** `68cb5d98f9cd234621a2ceefa87e90e52458ae1e`.
+
+**Verificação estática:** pares de tags `div`, `article`, `h3` equilibrados; cenas 02/03/04 presentes com `data-colus-mobile-scene`; vídeo upright e poster presentes. **Não é uma validação visual pós-fix nem um build.**
+
+**A rever no Edge:** abrir `http://localhost:8080/#futuro` **sem `?motionQA=1`**, para ver a composição sem a barra de QA. Capturar novamente 440×956 e 390×844, avaliar enquadramento/legibilidade, espaçamento da nova ilustração e transição para Ciência, com testes reais de vídeo. Manter o modo QA separado para a auditoria técnica, não para julgar a estética final.
