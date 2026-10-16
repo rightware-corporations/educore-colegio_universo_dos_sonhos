@@ -453,3 +453,19 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Verificação realizada aqui:** reconsulta de todos os cinco componentes e dos dois auxiliares diretamente no GitHub, conferência da presença de 5 devices + 14 janelas, imports e guardrails do contrato. Todas as verificações estáticas feitas pelo conector deram resultado esperado. **Não foram executados localmente** `npm run typecheck`, `npm run test:qa`, `npm run build` ou browser QA; o runtime do agente não tem acesso DNS a GitHub nem ao localhost do utilizador.
 
 **Próximo gate:** utilizador faz pull da branch, executa o trio npm em `frontend` e recolhe captura/vídeo do scroll mobile real entre Aprender→Futuro e Pertencer→Transformar; só depois corrigir desvios visuais efetivamente observados. PR #2 deve continuar draft, sem merge nem claim de aprovação final.
+
+## 29. FILLED RINGS — MANIFESTO / VOZES MOBILE (2026-10-17)
+
+**Owner feedback:** Edge screenshots explicitly circled empty/decorative ring outlines and disconnected orange dots in the Manifesto and Vozes COLUS areas. Owner instructed that engineering should edit GitHub directly, not give manual paste instructions.
+
+**Precise diagnosis:** these elements come from `ManifestoSection.tsx` (photo ellipse + horizontal timeline node) and `TestimonialsSection.tsx` (photo ellipse + horizontal line node), not the shared `MobileNarrativePath.tsx`. This corrects the preceding assumed diagnosis.
+
+**Implemented only on `feat/colus-mobile-editorial-storytelling`:**
+- Added `frontend/src/components/landing/EditorialOrbitNode.tsx` (commit `f6d6825`), a compact or photo-size **filled** deep-blue/orange ring with centre and two pointer dots rotating in response to the section's `scrollYProgress`; reduced-motion static; inert to touch and navigation.
+- Updated `ManifestoSection.tsx` (commit `2647081`): mobile photo corner and mobile timeline now use filled ring/node; prior ellipse/rail visuals retained desktop-only.
+- Updated `TestimonialsSection.tsx` (commit `b66ff55`): same two mobile-only replacements in Vozes; positioned photo ring clear of the caption; original desktop graphics retained.
+- Updated `frontend/scripts/qa-mobile-story-contract.mjs` (commit `716318e`) with static regression checks for the **actual sections** and motion semantics. Existing `npm run test:qa` script already executes this file.
+
+**Protected:** photographs, media, Hero, Science, official assets, desktop rendering and `main` unchanged. This is a UI correction, **not** an editorial decision about whether to retain Vozes COLUS as an official public section.
+
+**Verification still pending:** Edge mobile screenshot/video 440×956 + 390×844, reduced-motion, scroll forward/reverse, crop and heading/caption clearance; run `npm run typecheck`, `npm run test:qa`, `npm run build`. No npm or browser run was performed by the agent. Keep PR #2 DRAFT until visually approved; do not merge.
