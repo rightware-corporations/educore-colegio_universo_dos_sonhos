@@ -67,11 +67,11 @@ export function AprenderSection() {
                 alt="Experiência prática de criação e aprendizagem no COLUS"
               />
             </div>
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/85 via-colus-ink/25 to-colus-ink/95" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/55 via-colus-ink/5 to-colus-ink/90" />
             <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-10 pt-10">
               <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Criar</p>
               <div>
-                <h3 className="max-w-[14ch] font-editorial text-[clamp(37px,9vw,55px)] font-medium leading-[1.02] tracking-[-.04em] text-white">
+                <h3 className="max-w-[18ch] font-editorial text-[clamp(31px,7.5vw,43px)] font-medium leading-[1.07] tracking-[-.04em] text-white">
                   Conhecimento, expressão e tecnologia encontram novas formas de ganhar vida.
                 </h3>
                 <p className="mt-4 max-w-[32ch] text-[16px] font-medium leading-7 text-white/95">
