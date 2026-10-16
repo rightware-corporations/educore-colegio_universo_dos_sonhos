@@ -67,12 +67,22 @@ try {
     results.push({ case: item.id, photoSize: Math.round(dimensions.width), pointerMoved: true });
   }
 
-  await page.emulateMedia({ reducedMotion: "reduce" });
-  await wait(400);
-  const reduced = page.locator('#o-colegio [data-colus-orbit-pointer]');
+  // Load with reduced motion already enabled: do not depend on a runtime
+  // matchMedia toggle being observed by every animation library.
+  const reducedPage = await browser.newPage({
+    viewport: { width: 440, height: 956 },
+    deviceScaleFactor: 1,
+    isMobile: true,
+    hasTouch: true,
+    reducedMotion: "reduce",
+  });
+  reducedPage.on("pageerror", (error) => errors.push(String(error.message)));
+  await reducedPage.goto(base, { waitUntil: "networkidle", timeout: 45000 });
+  const reduced = reducedPage.locator('#o-colegio [data-colus-orbit-pointer]');
   await reduced.scrollIntoViewIfNeeded();
+  await wait(400);
   const reducedBefore = await reduced.evaluate((el) => window.getComputedStyle(el).transform);
-  await page.evaluate(() => window.scrollBy({ top: 270, behavior: "instant" }));
+  await reducedPage.evaluate(() => window.scrollBy({ top: 270, behavior: "instant" }));
   await wait(500);
   const reducedAfter = await reduced.evaluate((el) => window.getComputedStyle(el).transform);
   assert.equal(reducedBefore, reducedAfter,
