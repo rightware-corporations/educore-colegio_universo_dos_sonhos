@@ -109,3 +109,23 @@ Check local `git status` before switching/pulling; preserve user's uncommitted c
 **Visual inspection:** a contact sheet of the ten PATH captures was reviewed. Paths and nodes appear as thin, left-aligned connective elements and the photographs remain present. Some section boundaries still use spaced inset media/card-like masks; true pixel-contiguous PATH handoff across two separate sections has **not** been proven, even though each path animates internally. This is a separate High Fidelity REVIEW, not a regression/failure of the native-scroll tests.
 
 **Remaining:** user approval of High Fidelity composition, real Microsoft Edge mobile continuous-scroll review, interaction/accessibility beyond covered smoke, Science video viewport behavior, unsupported testimonial-publication decision C conflict, and merge. `main` unchanged; PR #2 DRAFT. Do not alter Hero, protected assets or desktop to address aesthetic differences without evidence/authorization.
+
+
+## Mobile chapter seam refinement — 2026-10-17
+
+**Owner approval in conversation:** proceed to refine visual connections between chapters after functional PATH/NODE QA, without changing photos/media or approved Hero/desktop. Branch `feat/colus-mobile-editorial-storytelling`, PR #2 remains draft.
+
+**Issue:** in Aprender, Vida, Pertencer, Transformar repeated mobile-only 40–48px empty spacers made image windows look like detached cards. On tablet (`sm` breakpoint), the wrappers of Aprender/Pertencer/Transformar used vertical 48px padding and Futuro used 48px outer margins, breaking the alignment of the editorial axis. Source JSX was examined before changes.
+
+**Correction implemented on five existing mobile components:**
+- Set the five `max-w-[680px]` mobile narrative wrappers to the same `bg-colus-ink` visual field and added `data-colus-mobile-story="trail|signal|marker|ring|axis"` for browser QA.
+- Removed wrapper vertical tablet padding/margin; retained naturally centred maximum width at larger mobile/tablet viewports.
+- Reduced intra-chapter decorative breaks from `h-10` (40px) or `h-6` (24px) to `h-3` (12px), and removed trailing decorative gaps.
+- Kept intentional off-axis photo masks and insets in Vida and Pertencer as photo-essay features; these are not converted into generic equal cards.
+- No words, video/image paths, image files, Hero or desktop JSX blocks were changed in this pass.
+
+**New browser QA:** `frontend/scripts/qa-mobile-handoffs.mjs` now checks **4 section seams** (Aprender→Futuro, Futuro→Vida, Vida→Pertencer, Pertencer→Transformar) at **390×844, 440×956 and 768×1024**. It asserts contiguous wrapper Y edges (≤2px), aligned wrapper X/width and narrative-path X (≤2px), retains PATH active-node scroll, reduced-motion, horizontal-overflow checks, and stores 12 seam PNG screenshots. It does NOT claim that every photographed crop is editorially approved.
+
+**Results:** CI https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38982859788 — **SUCCESS**: TypeScript, test:qa, protected assets checks, production build, filled rings, Manifesto page seam, five PATH/NODE movement checks, and 12 wrapper seam checks. Artifact `colus-mobile-ring-qa` ID `12082295931` contains the screenshot evidence and JSON. Captures were downloaded and visually inspected. The 440×956 images show directly adjacent scenes; no independent gap is visible at the four transitions. Tablet outer gutters still reflect intentional 680px max-width framing, and remain an editorial review item (not an automatic defect).
+
+**Scope and caveat:** this is a chapter-transition structural/motion pass, not proof of complete Master V0.18 pixel fidelity, user-side Edge, video playback, cross-device performance, rights review or permission to merge. The desktop blocks in Aprender/Futuro/Pertencer/Transformar remain byte-identical to `main`; Vida desktop code was preserved unedited during this pass, although its previous branch wrapper differs from `main`. No assets changed. PR #2 draft.
