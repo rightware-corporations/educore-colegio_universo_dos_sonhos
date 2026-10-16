@@ -156,9 +156,16 @@ export function ContactFooter() {
         <div className="mx-auto max-w-[1440px]">
           <div className="grid gap-10 border-b border-white/10 pb-12 lg:grid-cols-[minmax(190px,1.15fr)_minmax(0,3fr)_minmax(190px,1.1fr)] lg:gap-10 lg:pb-14">
             <div className="max-w-xs">
-              {/* Official EduCore graphical lockup awaiting approved brand asset. */}
-              <p className="text-2xl font-bold tracking-[-.03em]">EduCore</p>
-              <p className="mt-4 max-w-[28ch] text-sm leading-6 text-white/55">
+              <img
+                src="/media/educore/footer/educore-logo-dark.svg"
+                alt="EduCore"
+                width={1025}
+                height={298}
+                loading="lazy"
+                decoding="async"
+                className="block h-auto w-full max-w-[238px]"
+              />
+              <p className="mt-2 max-w-[28ch] text-sm leading-6 text-white/70">
                 Integrated school management for stronger institutions.
               </p>
             </div>
@@ -180,11 +187,16 @@ export function ContactFooter() {
             </div>
 
             <div className="border-t border-white/10 pt-8 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-              {/* Official RIGHTWARE graphical lockup awaiting approved brand asset. */}
-              <div className="flex flex-wrap items-center gap-3 lg:justify-end">
-                <p className="text-xl font-bold tracking-[0.08em]">RIGHTWARE</p>
-                <span aria-hidden="true" className="h-7 w-px bg-white/30" />
-                <p className="max-w-[12ch] text-xs leading-4 text-white/65">A RIGHTWARE Product</p>
+              <div className="flex items-center lg:justify-end">
+                <img
+                  src="/media/educore/footer/rightware-product-dark.svg"
+                  alt="RIGHTWARE — A RIGHTWARE Product"
+                  width={952}
+                  height={294}
+                  loading="lazy"
+                  decoding="async"
+                  className="block h-auto w-full max-w-[248px]"
+                />
               </div>
               <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-white/45 lg:justify-end"
                 aria-label="Redes institucionais RIGHTWARE; destinos por confirmar">
@@ -200,7 +212,14 @@ export function ContactFooter() {
               <p>© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.</p>
               <p className="mt-2">Powered by EduCore · A RIGHTWARE Product</p>
             </div>
-            <p className="max-w-xl md:text-right">Matola-Rio · KM 16 · Moçambique</p>
+            <div
+              className="flex flex-wrap gap-x-3 gap-y-2 md:justify-end"
+              aria-label="Informação legal global — destinos a confirmar"
+            >
+              {["Privacy Policy", "Terms of Service", "Cookie Policy", "System Status"].map((label) => (
+                <span key={label}>{label}</span>
+              ))}
+            </div>
           </div>
         </div>
       </footer>

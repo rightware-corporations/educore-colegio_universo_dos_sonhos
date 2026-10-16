@@ -29,3 +29,21 @@ Os dois originais estão em [03 — Referências Light e Dark](https://drive.goo
 5. Preservar `IntroHeroSection.tsx`, o vídeo, a máscara e demais assets protegidos do Hero COLUS.
 
 **Não considerar os dois critérios MISSING do Footer resolvidos só porque as imagens foram arquivadas no Drive.**
+
+## Execução gráfica — 2026-10-16
+
+Foram preparados dois ficheiros SVG autocontidos e versionados a partir da **composição PNG original fornecida pelo utilizador**, sem redesenhar os símbolos:
+
+- `frontend/public/media/educore/footer/educore-logo-dark.svg`
+- `frontend/public/media/educore/footer/rightware-product-dark.svg`
+
+Cada SVG preserva a geometria raster do recorte da imagem original; um filtro de cor aumenta o contraste para a variante Dark do Footer e mantém os detalhes laranja identificáveis. **São recortes da composição original, não ficheiros vetoriais institucionais fornecidos à parte.** Aprovação visual em Edge/desktop e mobile ainda necessária.
+
+O `ContactFooter.tsx` passou a utilizar os dois `img` acessíveis, mantendo:
+- o copyright **© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.** como titular principal;
+- **Powered by EduCore · A RIGHTWARE Product** exclusivamente como assinatura de tecnologia;
+- quatro grupos de navegação do standard, arquitetura legal no rodapé e variante Dark.
+
+Os destinos ainda não confirmados (quatro grupos globais, redes, políticas e system status) continuam como texto não clicável; não foram inventados links.
+
+**Não confundir este marco com conclusão da landing:** continuam pendentes revisão visual do Footer, vídeo Ciência, fidelidade de Engenharia, transições e restantes critérios `REVIEW`; Hero e vídeo originais intocáveis.

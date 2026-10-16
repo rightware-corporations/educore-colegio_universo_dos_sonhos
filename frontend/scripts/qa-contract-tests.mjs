@@ -226,5 +226,15 @@ assert.ok(footerSource.includes("Integrated school management for stronger insti
   "official EduCore footer tagline must not be replaced");
 assert.ok(footerSource.includes("A RIGHTWARE Product"),
   "RIGHTWARE product attribution must remain visible");
+assert.ok(footerSource.includes('src="/media/educore/footer/educore-logo-dark.svg"'),
+  "the EduCore graphical lockup must be rendered from the archived original");
+assert.ok(footerSource.includes('src="/media/educore/footer/rightware-product-dark.svg"'),
+  "the RIGHTWARE graphical lockup must be rendered from the archived original");
+assert.ok(footerSource.includes("© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados."),
+  "the copyright belongs to the school, not the technology supplier");
+assert.ok(footerSource.includes("Powered by EduCore · A RIGHTWARE Product"),
+  "EduCore and RIGHTWARE must only receive the approved technology attribution");
+assert.ok(!footerSource.includes("© 2026 RIGHTWARE"),
+  "never replace the institutional copyright with the provider");
 
 console.log("RIGHTWARE Design & Motion QA: comparadores e observações condicionais verificados.");
