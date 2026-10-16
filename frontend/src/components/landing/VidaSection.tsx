@@ -45,7 +45,7 @@ export function VidaSection() {
 
       {/* Mobile editorial sequence: typography belongs to each image, not a card below it. */}
       <div className="lg:hidden">
-        <div className="relative mx-auto max-w-[680px]">
+        <div data-colus-mobile-story="marker" className="relative mx-auto max-w-[680px] bg-colus-ink">
           <MobileNarrativePath kind="marker" />
           <article className="relative isolate min-h-[68svh] overflow-hidden bg-colus-ink">
             <MobileSceneWindow>
@@ -69,7 +69,7 @@ export function VidaSection() {
             </div>
           </article>
 
-          <div className="h-10" aria-hidden="true" />
+          <div className="h-3" aria-hidden="true" />
 
           <article className="relative isolate ml-5 min-h-[48svh] overflow-hidden rounded-[68px_22px_22px_22px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
@@ -88,7 +88,7 @@ export function VidaSection() {
             </div>
           </article>
 
-          <div className="h-10" aria-hidden="true" />
+          <div className="h-3" aria-hidden="true" />
           <article className="relative isolate mr-9 min-h-[35svh] overflow-hidden rounded-[24px_72px_24px_24px] bg-colus-ink sm:mr-0">
             <MobileSceneWindow>
               <LandingMedia
@@ -106,7 +106,7 @@ export function VidaSection() {
             </div>
           </article>
 
-          <div className="h-6" aria-hidden="true" />
+          <div className="h-3" aria-hidden="true" />
           <article className="relative isolate ml-5 min-h-[48svh] overflow-hidden rounded-[24px_24px_78px_24px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
               <LandingMedia
@@ -123,7 +123,7 @@ export function VidaSection() {
               </h3>
             </div>
           </article>
-          <div className="h-12" aria-hidden="true" />
+          
         </div>
       </div>
 
