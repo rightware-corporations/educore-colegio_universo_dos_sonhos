@@ -1,13 +1,6 @@
 name: COLUS Frontend QA
 
 on:
-  push:
-    branches:
-      - feat/colus-mobile-editorial-storytelling
-    paths:
-      - ".github/workflows/colus-frontend-qa.yml"
-      - "frontend/**"
-      - "docs/colus/presentation/hero-protected-asset-lock.json"
   pull_request:
     branches:
       - main
@@ -46,3 +39,26 @@ jobs:
         run: npm run test:qa
       - name: Production build
         run: npm run build
+      - name: Install browser QA runtime
+        run: npm install --no-save --package-lock=false playwright@1.56.1
+      - name: Install Chromium for mobile QA
+        run: npx playwright install --with-deps chromium
+      - name: Start production preview
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 --strictPort &
+          for i in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          echo "Vite preview did not start" >&2
+          exit 1
+      - name: Real-browser mobile ring QA and screenshots
+        run: node scripts/qa-mobile-browser.mjs
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: colus-mobile-ring-qa
+          path: frontend/qa-artifacts/mobile-rings/
+          if-no-files-found: warn
+          retention-days: 14
