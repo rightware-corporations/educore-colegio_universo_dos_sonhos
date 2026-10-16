@@ -1,6 +1,7 @@
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -66,7 +67,20 @@ export function TestimonialsSection() {
           </motion.div>
 
           <div className="mt-14 max-w-xl">
-            <div className="relative h-px bg-white/20">
+            {/* Filled, scroll-linked rail node on mobile; desktop keeps its approved line. */}
+            <div className="relative h-[2px] bg-white/20 lg:hidden" aria-hidden="true">
+              <motion.div
+                style={reduceMotion ? { scaleX: 1 } : { scaleX: storyLineLength }}
+                className="absolute inset-0 origin-left bg-gradient-to-r from-colus-bright-blue to-colus-orange"
+              />
+              <motion.div
+                style={{ left: reduceMotion ? "100%" : storyNodeX }}
+                className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
+              >
+                <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+              </motion.div>
+            </div>
+            <div className="relative hidden h-px bg-white/20 lg:block">
               <motion.div
                 style={reduceMotion ? undefined : { scaleX: storyLineLength }}
                 className="absolute inset-0 origin-left bg-gradient-to-r from-colus-bright-blue to-colus-orange"
@@ -98,9 +112,13 @@ export function TestimonialsSection() {
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/60 via-transparent to-transparent" />
           </div>
+          {/* Filled mobile orbit inside the photo edge; caption remains readable. */}
+          <div className="pointer-events-none absolute bottom-16 left-2 z-10 lg:hidden" aria-hidden="true">
+            <EditorialOrbitNode progress={scrollYProgress} />
+          </div>
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-6 -left-5 h-24 w-32 rounded-[50%] border border-colus-bright-blue/35"
+            className="pointer-events-none absolute hidden -bottom-6 -left-5 h-24 w-32 rounded-[50%] border border-colus-bright-blue/35 lg:block"
           >
             <span className="absolute left-[16%] top-[20%] h-3 w-3 rounded-full bg-colus-orange" />
           </div>
