@@ -353,3 +353,16 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Verificação:** referências do vídeo/poster preservadas, comparação textual do bloco desktop sem diferenças, quatro títulos marcados e contagem de tags JSX balanceada; nenhum browser/build/teste npm executado após estas alterações. Não declarar aprovação visual ou técnica; PR #2 permanece draft, `main` intacta.
 
 **Próxima ação:** atualizar a branch no VS Code; inspeção Edge mobile em 440×956/390×844, scroll lento reverso e direto no Header sobre Engenharia, cena Ciência sem texto sobre rostos, playback/pausa, responsive/tablet e testes `typecheck`, `test:qa`, `build`. Se continuar problema de composição, solicitar localização exata na captura antes de novo redesenho device-led; não modificar Hero, mídia original ou backend.
+
+
+## 22. AUDITORIA ESTÁTICA DE RITMO MOBILE — 2026-10-16
+
+**Motivo:** continuar o PR #2 sem repetir ajustes visuais especulativos antes de validar as últimas correções no Edge.
+
+**Estado GitHub:** `main@b5b493386377cc54d4f8850e294557abe4a90bd5`; PR #2 draft, branch `feat/colus-mobile-editorial-storytelling` antes desta auditoria em `2b5729d5152eb61e56bf600369b636061746d66a`. Sem GitHub Actions configuradas/execuções observadas. Nenhum merge.
+
+**Resultado do código:** mínimos nominais de palcos mobile são Aprender ~172svh, Futuro ~321svh, Vida ~262svh, Pertencer ~213svh, Transformar ~232svh, total ~1200svh, antes de espaçamentos e conteúdo excedente. O Scroll Budget prevê 675–735svh como referência conjunta para esses cinco blocos. Isto é **REVIEW editorial**, não `FAIL`; não encurtar mecanicamente porque a documentação define ritmo, não CSS obrigatório. Ver [relatório de ritmo](../colus/presentation/qa-reports/mobile-editorial-2026-10-16/RHYTHM-REVIEW.md).
+
+**Validação:** inspeção do GitHub e comparação estática; não houve `typecheck`, `test:qa`, `build`, screenshot pós-fix ou QA do vídeo mobile. O runtime do agente não resolve github.com para clone nem tem acesso ao localhost do utilizador.
+
+**Próxima ação:** atualizar branch no VS Code; executar os três comandos npm; inspecionar em Edge 390×844 / 440×956 a transição Engenharia→Ciência, scroll reverso sobre os headings, vídeo Ciência e legibilidade; depois confirmar ou refutar o risco do ritmo excessivo antes de alterar alturas. Preservar Hero, desktop e os assets protegidos. PR continua draft.
