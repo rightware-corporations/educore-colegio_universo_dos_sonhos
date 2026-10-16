@@ -76,6 +76,7 @@ export function MobileNarrativePath({ kind }: { kind: NarrativeDevice }) {
   return (
     <div
       ref={hostRef}
+      data-colus-mobile-path={kind}
       className="pointer-events-none absolute inset-0 z-20 overflow-hidden"
       aria-hidden="true"
     >
@@ -124,6 +125,7 @@ export function MobileNarrativePath({ kind }: { kind: NarrativeDevice }) {
             style={{ left, top, opacity: exitOpacity }}
           />
           <motion.span
+            data-colus-mobile-active-node
             className="absolute h-[9px] w-[9px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/75 bg-colus-orange"
             style={{ left, top, opacity: exitOpacity }}
           />
