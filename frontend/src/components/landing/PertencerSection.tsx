@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { MobileNarrativePath } from "./MobileNarrativePath";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -52,7 +53,8 @@ export function PertencerSection() {
 
       {/* Mobile: community is a visual journey, not three captioned image cards. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="mx-auto max-w-[680px] sm:px-6 sm:py-12">
+        <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
+          <MobileNarrativePath kind="ring" />
           <article className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink sm:rounded-[32px_84px_32px_32px]">
             <div className="absolute inset-0">
               <LandingMedia
@@ -69,15 +71,16 @@ export function PertencerSection() {
                   Crescer é uma jornada partilhada.
                 </h2>
               </div>
-              <p className="max-w-[34ch] text-[16px] font-medium leading-7 text-white/95">
+              <div className="max-w-[34ch]">
+                <p className="mb-3 text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">01 / Acompanhar</p>
+                <p className="text-[16px] font-medium leading-7 text-white/95">
                 Escola, alunos e famílias constroem experiências mais fortes quando participam, acompanham e crescem em conjunto.
-              </p>
+                </p>
+              </div>
             </div>
           </article>
 
-          <div className="relative ml-8 h-20 w-px bg-gradient-to-b from-colus-orange via-colus-deep-blue/50 to-colus-deep-blue/20" aria-hidden="true">
-            <span className="absolute -left-[5px] top-6 h-3 w-3 rounded-full bg-colus-orange" />
-          </div>
+          <div className="h-10" aria-hidden="true" />
 
           <article className="relative isolate ml-6 min-h-[65svh] overflow-hidden rounded-[80px_25px_25px_25px] bg-colus-ink sm:ml-0">
             <div className="absolute inset-0">
@@ -90,7 +93,7 @@ export function PertencerSection() {
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
             <div className="relative z-10 flex min-h-[65svh] flex-col justify-end px-6 pb-10">
-              <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">01 / Participar</p>
+              <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Participar</p>
               <h3 className="mt-3 max-w-[12ch] font-editorial text-[clamp(38px,9vw,54px)] font-medium leading-[1.02] tracking-[-.035em] text-white">
                 Fazer parte da vida escolar.
               </h3>
@@ -100,9 +103,7 @@ export function PertencerSection() {
             </div>
           </article>
 
-          <div className="relative ml-auto mr-10 h-20 w-px bg-gradient-to-b from-colus-deep-blue/30 to-colus-orange" aria-hidden="true">
-            <span className="absolute -left-[5px] bottom-4 h-3 w-3 rounded-full bg-colus-orange" />
-          </div>
+          <div className="h-10" aria-hidden="true" />
           <article className="relative isolate mr-8 min-h-[66svh] overflow-hidden rounded-[26px_26px_84px_26px] bg-colus-ink sm:mr-0">
             <div className="absolute inset-0">
               <LandingMedia
@@ -113,7 +114,7 @@ export function PertencerSection() {
             </div>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
             <div className="relative z-10 flex min-h-[66svh] flex-col justify-end px-6 pb-10">
-              <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Crescer juntos</p>
+              <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">03 / Crescer juntos</p>
               <h3 className="mt-3 max-w-[13ch] font-editorial text-[clamp(37px,9vw,53px)] font-medium leading-[1.02] tracking-[-.035em] text-white">
                 A confiança constrói-se em conjunto.
               </h3>
@@ -122,7 +123,7 @@ export function PertencerSection() {
               </p>
             </div>
           </article>
-          <div className="ml-8 h-16 w-px bg-gradient-to-b from-colus-orange to-transparent" aria-hidden="true" />
+          <div className="h-6" aria-hidden="true" />
         </div>
       </div>
 
