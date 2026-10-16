@@ -141,3 +141,19 @@ A captura do proprietário no Microsoft Edge, iPhone 16 Pro Max 440×956, `/#fut
 **Commit:** `a023884f3a6e64b43e26a0cae86858695ff9fbae`.
 
 **Estado:** alteração aplicada à branch `feat/colus-mobile-editorial-storytelling`, pendente de visualização pós-correção e execução de `typecheck`, `test:qa` e `build`. Não declarar publicável, não fazer merge. O uso desta imagem continua como **contexto de criação/experimentação**, não prova de atividade específica de Engenharia.
+
+
+## Diagnóstico de repetição entre Aprender / Criar e Futuro / Engenharia (2026-10-16)
+
+**Evidência:** duas capturas no Microsoft Edge, iPhone 16 Pro Max (440×956) mostram `02 / CRIAR` e `02 / ENGENHARIA` com a **mesma fotografia** de alunos na experiência de montagem, `COLUS-APRENDER-CRIAR-001.webp`. Em `Aprender / Criar` a headline longa ocupa grande parte da zona inferior do media, encobrindo ação e materiais. Em `Futuro / Engenharia` a headline no topo sobrepõe-se parcialmente às pessoas. A repetição destrói a distinção entre os dois capítulos, embora cada um tenha copy diferente. O aviso de tradução visto no Edge é do browser, não parte do site.
+
+**Verificação de assets:** foi feita consulta visual aos media reais disponíveis em `frontend/public/media/colus/landing/colus-assets-final-v03/`. A alternativa `03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-002.webp` mostra uma **fotografia diferente**, com demonstração de circuito elétrico e lâmpadas acesas, sem reaproveitar a imagem principal de Aprender/Criar e sem ser utilizada em outra cena mobile atual. A pessoa e o ambiente escolar podem continuar relacionados à mesma experiência, portanto não alegar evento, disciplina ou programa distinto com base na fotografia.
+
+**Correções implementadas exclusivamente na branch `feat/colus-mobile-editorial-storytelling`:**
+1. `FuturoSection.tsx` (commit `d9710eb4bf1e37a2f97e3fd570b2884579aa6577`): Engenharia **mobile** passa a utilizar `COLUS-APRENDER-DESCOBRIR-002.webp` como contextual visual, `object-[67%_center]`; alt factual sobre observação de circuitos e lâmpadas; ligeira redução da headline para tentar libertar as caras. **Engenharia desktop permanece como estava.**
+2. `AprenderSection.tsx` (commit `c43306fe69ac80cbafde358bca38d0d2b6440d90`): tamanho e largura tipográficos ajustados em Criar **mobile** sem alterar as palavras aprovadas; gradiente médio suavizado para tornar a experiência visível e manter contraste no rodapé. **Aprender desktop permanece como estava.**
+3. Nenhum dos media do Hero nem `LandingMedia.tsx` foi alterado; Ciência mantém vídeo upright/poster aprovados.
+
+**Atenção editorial:** o Asset Gate histórico não valida fotografia de uma atividade especificamente denominada Engenharia. A fotografia de circuitos é contexto de experimentação e construção prática, não comprovação de aula curricular. O novo uso é sujeito a revisão visual, direitos e aprovação editorial antes de publicar.
+
+**QA:** screenshots de origem foram observadas; o código novo foi aplicado, mas **não existe screenshot pós-alteração nem teste npm executado nesta sessão**. Validar em 440×956 e 390×844 a duplicação visual eliminada, cortes de rostos, título de Engenharia sem sobreposição relevante, criação e materiais visíveis no primeiro capítulo, transições, reduced motion, e ausência de regressões desktop. PR #2 continua draft, sem merge.
