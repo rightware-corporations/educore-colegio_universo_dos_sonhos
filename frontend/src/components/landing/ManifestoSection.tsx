@@ -15,6 +15,8 @@ export function ManifestoSection() {
   });
 
   const pageScaleY = useTransform(scrollYProgress, [0.02, 0.2], [0.08, 1]);
+  // When the short book curve has opened, the Manifesto settles into full paper.
+  const paperSettledOpacity = useTransform(scrollYProgress, [0.18, 0.22], [0, 1]);
   const leftPageX = useTransform(scrollYProgress, [0.02, 0.2], ["-8%", "0%"]);
   const rightPageX = useTransform(scrollYProgress, [0.02, 0.2], ["8%", "0%"]);
   const bridgePosterOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.34], [1, 1, 0]);
@@ -40,13 +42,35 @@ export function ManifestoSection() {
       />
 
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Mobile Master V0.18: one connected, shallow Open Book curve.
+            Warm Paper rises from below; there are no tall petals or centre stem. */}
+        <motion.svg
+          aria-hidden="true"
+          data-colus-manifesto-curve
+          viewBox="0 0 360 1000"
+          preserveAspectRatio="none"
+          style={reduceMotion ? undefined : { scaleY: pageScaleY }}
+          className="absolute inset-0 h-full w-full origin-bottom lg:hidden"
+        >
+          <path
+            d="M0 6 C54 0 112 1 180 30 C248 1 306 0 360 6 L360 1000 L0 1000 Z"
+            fill="#FFF8EF"
+          />
+        </motion.svg>
+        <motion.div
+          aria-hidden="true"
+          style={reduceMotion ? undefined : { opacity: paperSettledOpacity }}
+          className="absolute inset-x-0 top-0 h-[5%] bg-colus-paper lg:hidden"
+        />
+
+        {/* Retain the historical two-page composition at desktop breakpoints. */}
         <motion.div
           style={
             reduceMotion
               ? undefined
               : { scaleY: pageScaleY, x: leftPageX }
           }
-          className="absolute bottom-0 left-[-4%] h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper"
+          className="absolute bottom-0 left-[-4%] hidden h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper lg:block"
         />
         <motion.div
           style={
@@ -54,16 +78,7 @@ export function ManifestoSection() {
               ? undefined
               : { scaleY: pageScaleY, x: rightPageX }
           }
-          className="absolute bottom-0 right-[-4%] h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper"
-        />
-        {/* The rounded page leaves part at the centre near the top. Keep the
-            book-opening curve but close the dark triangular seam with a
-            matching paper spine following the same scroll scale. */}
-        <motion.div
-          aria-hidden="true"
-          data-colus-manifesto-spine
-          style={reduceMotion ? undefined : { scaleY: pageScaleY }}
-          className="absolute bottom-0 left-[45.5%] h-[108%] w-[9%] origin-bottom bg-colus-paper lg:hidden"
+          className="absolute bottom-0 right-[-4%] hidden h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper lg:block"
         />
       </div>
 
