@@ -402,3 +402,17 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Fix na branch de revisão:** `FuturoSection.tsx` commit `a023884f3a6e64b43e26a0cae86858695ff9fbae`. Foram retirados a montagem de `EngineeringMobileDevice` e o componente SVG exclusivo do mobile. O gradiente foi moderadamente aliviado, preservando a foto real `COLUS-APRENDER-CRIAR-001.webp`, title/copy, continuidade editorial, vídeo Ciência e poster; desktop/Hero protegidos mantidos.
 
 **Status:** implementação feita, sem build/testes npm ou screenshot pós-correção nesta sessão. PR #2 mantém-se draft, `main` intacta. Verificar visualmente que o pentágono desapareceu e que texto e foto continuam legíveis. A fotografia retrata criação/experiência prática e não confirma um programa de Engenharia.
+
+
+## 26. MOBILE STORYTELLING — ASSET DUPLICADO ENTRE CRIAR E ENGENHARIA (2026-10-16)
+
+**Feedback:** duas screenshots Edge mobile 440×956 (Aprender/02 Criar e Futuro/02 Engenharia) mostraram a mesma fotografia `COLUS-APRENDER-CRIAR-001.webp` em ambas as cenas, juntamente com copy muito volumosa sobre ação/pessoas. A questão não era mais pentágono nem falta de media: era repetição visual e colisão da hierarquia editorial.
+
+**Correção aplicada à branch `feat/colus-mobile-editorial-storytelling`:**
+- `frontend/src/components/landing/FuturoSection.tsx`, commit `d9710eb`: substituiu apenas a imagem de **Engenharia mobile** por `03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-002.webp`, fotografia diferente com demonstração de circuito e lâmpadas; crop mobile `object-[67%_center]`; headline mais contida e alt factual. A imagem continua **contextual**, sem comprovar programa Engenharia.
+- `frontend/src/components/landing/AprenderSection.tsx`, commit `c43306f`: tipografia de Criar mobile reduzida e gradiente suavizado. Texto original mantido.
+- Nenhum componente desktop, Hero, Science upright/poster nem `LandingMedia.tsx` foi deliberadamente alterado.
+
+**Nota:** a nova fotografia de Engenharia foi inspecionada no repositório, distinta do asset Criar; está presente também como detalhe na versão desktop Aprender (já existente). A duplicação apontada nas screenshots refere-se especificamente ao **mobile** e foi eliminada no código. A imagem não prova aula de Engenharia. Preservar o Asset Gate histórico e usar a nova cena apenas como contextual até aprovação.
+
+**Estado:** implementação na branch, sem screenshot pós-correção, `typecheck`, `test:qa` ou `build` observados. PR #2 continua rascunho e `main` intacta. Próxima ação: atualizar branch e inspecionar Edge 440×956/390×844 o contraste, o corte no topo dos rostos, a visualização dos circuitos, a legibilidade dos títulos e a continuidade para Ciência antes de decidir merge.
