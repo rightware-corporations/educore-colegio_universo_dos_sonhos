@@ -277,3 +277,33 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 ## 17. LAST UPDATED
 
 **2026-10-16.** Reconciliado o estado vivo com o handoff operacional de 16/10, o código da `main` e a cronologia documental. As secções históricas 6–14 continuam úteis para o percurso até 05/10, não para provar o estado atual. Atualizar este documento em cada ciclo substancial e manter os handoffs datados imutáveis.
+
+
+## 18. MOBILE EDITORIAL PASS — 2026-10-16 (BRANCH, NÃO MERGED)
+
+**Estado:** implementação realizada em branch de trabalho; requer testes técnicos, QA em browser mobile e aprovação visual do proprietário. Não declarar a landing concluída.
+
+**Branch:** `feat/colus-mobile-editorial-storytelling` (criada a partir de `main@b5b493386377cc54d4f8850e294557abe4a90bd5`).
+
+**Pedido autorizado nesta sessão:** transformar os layouts mobile que pareciam «card + texto» em composições imersivas com tipografia, títulos e narrativa dentro das imagens, melhores transições editoriais e continuidade entre secções. Aprovação para implementar NÃO equivale à aprovação visual final nem autorização para merge/publicação.
+
+**Alterado na branch:**
+- `frontend/src/components/landing/AprenderSection.tsx` — Descobrir/Criar como capítulos com headline sobre as imagens;
+- `frontend/src/components/landing/FuturoSection.tsx` — TIC/Engenharia/Ciência/Segurança Digital como cenas integradas; Engenharia **mobile** agora device-led SVG em vez de foto genérica, Ciência conserva vídeo upright e poster;
+- `frontend/src/components/landing/VidaSection.tsx` — imagens e texto compõem uma sequência editorial contínua;
+- `frontend/src/components/landing/PertencerSection.tsx` — storytelling humano/familiar sem legendas falsas;
+- `frontend/src/components/landing/TransformarSection.tsx` — Expressar/Construir/Avançar em sequência vertical sem captions soltas.
+
+**Não alterado:** Hero/Intro protegido, `LandingMedia.tsx`, layout desktop das secções, dados/backend, deps, Footer e testemunhos.
+
+**Commits de código:** `c8abc96`, `56d679a`, `cb53bd0`, `fda26c5`, `c141b85`; documentação QA: `9f7b37a`.
+
+**Verificação na sessão:** diff do GitHub limitado aos cinco componentes antes da documentação; comparação de estrutura de tags JSX sem anomalias no contador; Ciência mantém fonte normalizada; GitHub sem statuses CI para a branch consultada. O ambiente de agente não conseguiu fazer `git clone` por DNS.
+
+**NÃO VERIFICADO:** `npm run typecheck`, `npm run test:qa`, `npm run build`, screenshots e reprodução mobile, pixel diff e aprovação visual. A correção de Ciência desktop/Edge conserva o seu estado histórico aprovado, mas QA mobile ainda não foi realizado.
+
+**Evidência e plano QA:** `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md`.
+
+**Próxima ação exata:** abrir esta branch em browser mobile, executar testes e inspecionar 360/390/430/768px, vídeo Ciência/play-pause/reduced-motion/Save-Data, contraste e crop nas cenas, ritmo editorial completo e regressões desktop. Ajustar apenas desvios observados. Depois solicitar aprovação visual, decidir merge e atualizar este CURRENT no estado efetivamente integrado em `main`.
+
+**Divergências ainda abertas:** Engenharia 02 **desktop** continua com fotografia histórica não device-led; Vozes COLUS decisão C versus secção montada; Footer links/idioma e direitos pré-publicação.
