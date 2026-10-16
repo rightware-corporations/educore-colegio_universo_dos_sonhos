@@ -339,3 +339,17 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Pendente:** confirmar no browser que o botão desaparece em mobile após `git pull`/refresh. A questão editorial de Engenharia permanece aberta e deve ser especificada com o proprietário antes de nova tentativa de redesenho. Preservar decisão device-led enquanto não houver autorização diferente; não inventar imagem de Engenharia nem alterar Ciência/Hero.
 
 **Testes:** sem execução real de typecheck/build/browser nesta sessão; não declarar QA validado.
+
+
+## 21. MOBILE FUTURO — HEADER / CIÊNCIA CONTRAST QA (2026-10-16)
+
+**Nova evidência do proprietário:** terceira screenshot Edge mobile 440×956, sem `?motionQA=1`. Botão QA ausente (fix de launcher aparentemente eficaz). Persistem duas falhas específicas: Header fixo corta título de Engenharia durante scroll; o título de Ciência sobrepõe-se a estudantes no vídeo.
+
+**Fix somente na branch `feat/colus-mobile-editorial-storytelling`:**
+- `frontend/src/components/landing/LandingHeader.tsx` (commit `d1f6aae`): proteção mobile exclusiva para headlines de Futuro que entram na faixa superior do viewport. A lógica normal do Header mantém-se fora desse encontro e no desktop.
+- `frontend/src/components/landing/FuturoSection.tsx` (commit `1a3bc81`): scene Ciência com campo de leitura escuro no início e vídeo progressivamente visível abaixo; marcas nos quatro títulos mobile para proteção do Header. Vídeo upright/poster inalterados; secção desktop comparada com `main` e idêntica.
+- Relatório: `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md`.
+
+**Verificação:** referências do vídeo/poster preservadas, comparação textual do bloco desktop sem diferenças, quatro títulos marcados e contagem de tags JSX balanceada; nenhum browser/build/teste npm executado após estas alterações. Não declarar aprovação visual ou técnica; PR #2 permanece draft, `main` intacta.
+
+**Próxima ação:** atualizar a branch no VS Code; inspeção Edge mobile em 440×956/390×844, scroll lento reverso e direto no Header sobre Engenharia, cena Ciência sem texto sobre rostos, playback/pausa, responsive/tablet e testes `typecheck`, `test:qa`, `build`. Se continuar problema de composição, solicitar localização exata na captura antes de novo redesenho device-led; não modificar Hero, mídia original ou backend.
