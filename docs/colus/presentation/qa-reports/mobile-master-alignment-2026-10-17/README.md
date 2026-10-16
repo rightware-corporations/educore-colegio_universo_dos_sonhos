@@ -78,3 +78,19 @@ Check local `git status` before switching/pulling; preserve user's uncommitted c
 **Commits:** component `f6d6825`, Manifesto `2647081`, Vozes `b66ff55`, QA contract `716318e`.
 
 **Approval gate:** verify on Microsoft Edge mobile 440×956 and 390×844 the two filled nodes and their pointer progression, particularly that neither covers text, significant faces, navigation or captions, and that reduced-motion has no spinning elements. **No typecheck / build / QA runtime was executed in this session.** PR #2 remains draft, no merge.
+
+
+## Real-browser QA for filled rings — GitHub Actions (2026-10-17)
+
+**Evidence (production build / Playwright Chromium):**
+- GitHub Actions final successful run: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38980178093
+- Artifact: `colus-mobile-ring-qa` (ID `12081260195`), 6 PNG screenshots and `results.json`.
+- Viewports: **440×956** and **390×844**, mobile+touch.
+- Manifesto and Vozes photo-ring measured at **72px**; visibly filled, contrast and pointer details present in captured output. Both rings rotated with actual scroll, while reduced-motion remained static. **Zero uncaught JS page errors** in this QA script.
+- `npm run typecheck`, `npm run test:qa`, `npm run build` also passed in the same run.
+- Prior browser run failed only due to a strict-selector error in the smoke test (two expected pointer nodes matched); test selector was corrected in commit `b552a892`. Final run passed.
+- Browser QA scripts live in `frontend/scripts/qa-mobile-browser.mjs` and GitHub Actions workflow `.github/workflows/colus-frontend-qa.yml`.
+
+**Visual inspection:** screenshots were retrieved and examined. Rings are **solid** and no headline/caption collisions were evident near them in the evaluated frames. **Additional observation:** screenshots of Manifesto at the scrolled position expose a narrow dark triangular shape from the page/book transition at the top edge. This appears separate from the filled-ring implementation and must be reviewed against the approved Hero→Manifesto transition in a continuous scroll video before changing any protected component. Do not classify the full mobile landing as approved from the ring-only screenshots.
+
+**Approval gate:** filled ring rendering/function has real-browser smoke evidence; full storytelling, scroll handoffs, assets rights, image crops beyond these scenes and owner visual approval remain open. PR #2 still draft; main unchanged.
