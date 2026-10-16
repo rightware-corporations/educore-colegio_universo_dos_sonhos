@@ -469,3 +469,14 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Protected:** photographs, media, Hero, Science, official assets, desktop rendering and `main` unchanged. This is a UI correction, **not** an editorial decision about whether to retain Vozes COLUS as an official public section.
 
 **Verification still pending:** Edge mobile screenshot/video 440×956 + 390×844, reduced-motion, scroll forward/reverse, crop and heading/caption clearance; run `npm run typecheck`, `npm run test:qa`, `npm run build`. No npm or browser run was performed by the agent. Keep PR #2 DRAFT until visually approved; do not merge.
+
+
+## 30. FILLED RINGS — AUTOMATED BROWSER QA PASSED (2026-10-17)
+
+**Implementation and validation, branch `feat/colus-mobile-editorial-storytelling`:**
+- New `EditorialOrbitNode.tsx`, consumed twice each by mobile Manifesto and Vozes COLUS, with solid blue/orange face, active centre, two pointers driven by native-scroll progress. Static fallback for reduced motion.
+- Added stable data attributes; new Playwright browser smoke `frontend/scripts/qa-mobile-browser.mjs`. GitHub Actions workflow `.github/workflows/colus-frontend-qa.yml` executes frontend typecheck/QA contract/build, installs Chromium, previews production output, checks motion and screenshots; trigger limited to pull requests to main to avoid duplicated runs.
+- Final browser QA run **PASS**: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38980178093; artifact `colus-mobile-ring-qa` ID `12081260195`, 6 PNG screenshots and JSON evidence, at 440×956 and 390×844. Both photo rings rendered at 72px; pointer rotation changed when scrolling, remained static with reduced-motion; zero uncaught page errors; typecheck, test:qa, build succeeded.
+- Screenshot review confirmed filled rings are visually present and caption/headline regions unblocked in captured frames. Found a narrow dark triangular artefact at the top of the Manifesto during its book/page transition; **separate REVIEW**, do not change protected Hero without continuous visual evidence/approval.
+
+**Not approved:** entire landing mobile and motion choreography, CTA/final footer, editorial status of Vozes, or merge. `main` unchanged and PR #2 draft. Next: review ring alignment in owner's Edge during continuous scroll, review Manifesto triangle as an independent motion QA issue, then revisit wider PATH/NODE section handoffs before merging.
