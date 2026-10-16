@@ -326,3 +326,16 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 **Validação observada:** revisão estática de referências/tags e comparação textual do JSX desktop. **Não houve screenshot pós-fix, typecheck, test:qa ou build nesta sessão.** A correção deve ser tratada como candidato a aprovação mobile.
 
 **Próximo passo:** atualizar branch no VS Code com `git pull --ff-only origin feat/colus-mobile-editorial-storytelling`; abrir `http://localhost:8080/#futuro` sem parâmetro `?motionQA=1`, recarregar e inspecionar sequência TIC→Engenharia→Ciência→Segurança Digital em 390×844/440×956. Obter evidência pós-fix, executar testes e corrigir apenas desvios observados. PR #2 permanece draft; não integrar na `main` sem validação.
+
+
+## 20. MOBILE FUTURO — FEEDBACK REITERADO E QA LAUNCHER (2026-10-16)
+
+**Feedback do proprietário:** segunda captura do Edge DevTools, 440×956, URL `localhost:8080/#futuro`: «continua o mesmo erro». A screenshot confirma que a reorganização anterior de Engenharia não resolveu a dificuldade de narrativa visual e de continuidade com as cenas adjacentes. **Não considerar a cena Engenharia aprovada.**
+
+**Diagnóstico de UI confirmado no código:** o botão flutuante `Abrir Design + Motion QA` continuava visível em DEV mesmo sem `?motionQA=1`, pois `LandingMotionQA.tsx` devolvia um launcher `fixed bottom-4 left-4` quando QA não estava ativo. A instrução anterior de retirar o parâmetro de URL não ocultava esse botão.
+
+**Correção aplicada na branch:** `LandingMotionQA.tsx` passa a ocultar o *launcher inativo* abaixo de `md` (Tailwind `hidden md:inline-flex`). Em desktop continua descobrível; o painel QA explícito com `?motionQA=1` não foi alterado. Commit `f4212eb`.
+
+**Pendente:** confirmar no browser que o botão desaparece em mobile após `git pull`/refresh. A questão editorial de Engenharia permanece aberta e deve ser especificada com o proprietário antes de nova tentativa de redesenho. Preservar decisão device-led enquanto não houver autorização diferente; não inventar imagem de Engenharia nem alterar Ciência/Hero.
+
+**Testes:** sem execução real de typecheck/build/browser nesta sessão; não declarar QA validado.
