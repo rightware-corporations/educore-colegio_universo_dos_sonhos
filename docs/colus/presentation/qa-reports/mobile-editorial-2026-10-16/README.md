@@ -95,3 +95,14 @@ Pontos intencionalmente fora do âmbito: Intro/Hero, vídeo e poster protegidos,
 **Validação estática observada:** secção desktop de `FuturoSection.tsx` textual e integralmente idêntica à `main`; fontes upright e poster conservados; quatro títulos marcados; tags JSX `div/article/h2/h3/section` balanceadas num contador estático. **Não executados:** `npm run typecheck`, `npm run test:qa`, `npm run build`, QA browser pós-fix. Manter PR em draft.
 
 **Critério visual para nova captura:** em 440×956, num scroll reverso lento sobre o headline de Engenharia, o Header não deve cortar o texto. Em Ciência, o título e copy não devem cobrir as caras e o vídeo deve reproduzir, pausar ao sair e preservar crop aceitável. Adicionalmente validar scroll para a âncora `#futuro`, menu mobile, 390×844, 768×1024 e desktop. O problema editorial amplo de Engenharia device-led **continua sujeito a aprovação visual**.
+
+
+## Quarta captura Edge — início de Ciência sem imagem (2026-10-16)
+
+A captura do proprietário no Microsoft Edge, iPhone 16 Pro Max 440×956, `/#futuro`, mostra Engenharia 02 e, logo abaixo, Ciência 03 como texto em fundo escuro, sem o vídeo visível no primeiro momento da secção. A caixa «Translate page from Portuguese?» pertence à interface do Edge, não à landing.
+
+**Causa comprovada no código anterior:** `FuturoSection.tsx` colocava o vídeo em `absolute ... top-[32%]`, com gradiente superior opaco e copy no topo. Assim, antes de atingir aproximadamente 32% da altura da Ciência, o utilizador via apenas outro painel de texto, contradizendo o objetivo mobile image-led.
+
+**Correção implementada na mesma branch:** a Ciência 03 tem agora o vídeo upright em `absolute inset-0` desde o primeiro pixel da cena; uma película superior subtil liga o fundo escuro de Engenharia à imagem real, e um gradiente inferior forte suporta título e descrição na parte inferior, afastados da região superior dos rostos. Altura declarada de Ciência reduzida de `88svh` para `78svh`, porque se eliminou a abertura sem imagem. Commit `0a33ea34044b3574f7d78ccf9d1fde88bb4cc5f5`.
+
+**Verificação estática:** comparado o bloco desktop `h-[280vh] lg:block` com `main`, byte a byte idêntico; vídeo `COLUS-FUTURO-CIENCIA-VID-001-upright.mp4` e poster oficial preservados; pares JSX básicos equilibrados. **Não foram executados** npm typecheck, test:qa, build nem browser após a correção. É necessário screenshot mobile pós-correção em scroll lento e frames de Ciência para garantir que o título no rodapé não recobre pessoas importantes ou falha em algum frame. Se houver colisão real, ajustar o enquadramento/scrim com evidência, sem tocar no asset.
