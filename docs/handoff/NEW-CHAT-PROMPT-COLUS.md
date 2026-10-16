@@ -1,83 +1,24 @@
-# Prompt para novo chat — EduCore COLUS
-
-Usa este prompt no início de uma nova conversa:
-
----
+# Prompt de continuidade — EduCore / COLUS
 
 Estamos a continuar o projeto EduCore / COLUS no repositório:
+`rightware-corporations/educore-colegio_universo_dos_sonhos`, branch de integração `main`.
 
-`rightware-corporations/educore-colegio_universo_dos_sonhos`
+**Antes de responder ou modificar código, lê integralmente os handoffs pela ordem cronológica indicada em:**
+https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/blob/main/docs/handoff/README.md
 
-branch:
+1. `docs/handoff/HANDOFF-COLUS-2026-10-03.md` — base de produto e arquitetura;
+2. `docs/handoff/HANDOFF-COLUS-2026-10-04-CONTINUATION.md` — histórico da implementação;
+3. `docs/handoff/HANDOFF-COLUS-2026-10-16.md` — contexto recente completo, Ciência/Footer/QA;
+4. `docs/handoff/HANDOFF-COLUS-CURRENT.md` — estado operacional vivo; **ler por último**.
 
-`main`
+Não executar a secção `NEXT TASK` de handoffs antigos se for ultrapassada pelo estado mais recente. Verifica sempre a HEAD real da `main`, código atual, commits e specs antes de propor alterações. Se um documento divergir do código, assinala a discrepância.
 
-Antes de responder ou propor arquitetura, lê integralmente:
+**Estado de continuidade em 2026-10-16:** a landing COLUS **não está concluída**. Hero original e vídeo aprovados são intocáveis sem autorização. Copyright institucional **© 2026 Colégio Universo dos Sonhos. Todos os direitos reservados.** EduCore/RIGHTWARE são assinatura tecnológica, não titulares da escola. Footer Dark, lockups, favicon e Design/Motion QA implementados, mas mobile/global e links legais ainda pendentes. Ciência 03 usa vídeo corrigido **já integrado na main** e aprovado para desktop/Edge; **não repetir merge nem recomeçar a correção**. Ciência mobile e Engenharia device-led permanecem pendentes, além dos 45 checkpoints e Motion QA transversal.
 
-`docs/handoff/HANDOFF-COLUS-2026-10-03.md`
+**Divergência para confirmar:** decisão histórica C (05/10) retirara Vozes/Testemunhos; a `main` atual monta a secção editorial Vozes sem depoimentos inventados. Não inverter decisões nem publicar citações fictícias sem autorização.
 
-Depois lê os documentos obrigatórios indicados nesse handoff, especialmente os de arquitetura e o estado final da landing.
+Preservar a arquitetura geral antiga (1 escola = 1 repositório, RIGHTWARE Control Plane e Data Plane isolado, Java, PostgreSQL, Redis e segurança forte), sem tomar o antigo `STACK AGORA` como prioridade da landing atual.
 
-Não reconstruas decisões por memória e não comeces a programar.
+**Regras de execução:** não modificar Hero, copyright, assets aprovados nem áreas fora de escopo; nunca afirmar build/testes/QA concluídos sem evidência; não inventar links/claims/autorização de imagens. Antes de editar ficheiros GitHub, fazer fetch do SHA atual. Correções de media e grandes mudanças em branch separada, com QA antes do merge.
 
-O ponto exato onde paramos é:
-
-```text
-LANDING DESIGN               ✓
-ASSETS                       ✓
-MOTION SPEC                  ✓
-
-STACK                        ← AGORA
-BACKEND ARCHITECTURE         depois
-DATABASE ARCHITECTURE        depois
-SECURITY ARCHITECTURE        depois
-FULL REPOSITORY TREE         depois
-BOOTSTRAP / IMPLEMENTATION   só no fim
-```
-
-Restrições já dadas:
-
-- frontend React + TypeScript + Vite;
-- backend deve ser Java;
-- PostgreSQL;
-- Redis para cache;
-- segurança deve ir muito além de JWT + password hashing;
-- database deve ser tratada como arquitetura de primeira classe;
-- preservar o modelo RIGHTWARE Distributed SaaS:
-  - Control Plane central;
-  - Data Plane isolado por escola;
-  - Experience Plane personalizado;
-  - 1 escola = 1 repo = 1 deployment;
-  - Super Admin pertence à RIGHTWARE;
-- não misturar dados operacionais das escolas no Control Plane;
-- não meter frameworks reutilizáveis RIGHTWARE dentro da pasta específica COLUS;
-- não definir a árvore final do repo antes de fechar stack/backend/database/security.
-
-O chat anterior também recebeu um ficheiro `database_learn.zip` com referências sobre:
-
-- sharding;
-- partitioning;
-- primary/foreign keys;
-- indexes;
-- relationships;
-- SQL;
-- normalization;
-- transactions;
-- ACID;
-- scaling.
-
-Os conceitos relevantes foram capturados no handoff. Usa-os como input, não como arquitetura literal.
-
-Primeiro responde apenas com:
-
-1. confirmação de que leste o handoff;
-2. resumo curto do estado;
-3. proposta de como vamos fechar **STACK V1** passo a passo.
-
-Depois trabalhamos uma decisão de cada vez.
-
-Quando fores alterar qualquer ficheiro existente no GitHub:
-
-> faz fetch do SHA atual antes do update.
-
-Não começar código até eu aprovar o gate técnico.
+Na primeira resposta do novo chat: indicar os handoffs lidos, a HEAD verificada, o que está concluído vs pendente e o próximo passo recomendado. No fim de cada ciclo substancial: atualizar o `CURRENT` e, para marcos importantes, criar um novo handoff datado na pasta `docs/handoff/`.
