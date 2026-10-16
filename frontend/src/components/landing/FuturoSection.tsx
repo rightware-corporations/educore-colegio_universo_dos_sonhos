@@ -9,16 +9,19 @@ const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
  * editorial still. The source plays only when the media is visible; LandingMedia
  * pauses on exit and uses the still for reduced motion, save-data or failures.
  *
- * The original MP4 appeared sideways in Edge. Rotate ONLY the video layer;
- * the approved upright poster remains unrotated. The 1.4 scale prevents
- * gaps after rotating a square clip inside the landscape scene window.
+ * Edge screenshot of 2026-10-16 showed people still sideways with the
+ * prior -90deg rotation: heads were pointing to the right. Apply one more
+ * -90deg of correction to the video ONLY (-180deg in total).
  *
- * Verify rotation direction/crop on the actual Edge playback before calling
- * visual fidelity approved. No protected Hero component or media is touched.
+ * A 180deg rotation preserves the media bounding box; remove the previous
+ * 1.4x zoom to avoid clipping faces. The upright poster is NOT rotated.
+ *
+ * Validate this new orientation during actual Edge playback before
+ * approving visual fidelity. Hero and approved originals are untouched.
  */
 function ScienceSceneMedia() {
   return (
-    <div className="relative h-full w-full overflow-hidden [&_video]:rotate-90 [&_video]:scale-[1.4]">
+    <div className="relative h-full w-full overflow-hidden [&_video]:rotate-180">
       <LandingMedia
         kind="video"
         src={`${MEDIA_ROOT}/04-futuro/ciencia/COLUS-FUTURO-CIENCIA-VID-001.mp4`}
