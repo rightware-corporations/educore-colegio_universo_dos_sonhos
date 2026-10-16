@@ -2,6 +2,7 @@ import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScrol
 import { useRef, useState } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
+import { MobileSceneWindow } from "./MobileSceneWindow";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -126,7 +127,7 @@ export function FuturoSection() {
         <div className="relative mx-auto max-w-[680px] bg-colus-ink sm:my-12 sm:overflow-hidden sm:rounded-[36px]">
           <MobileNarrativePath kind="signal" />
           <article className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink">
-            <div className="absolute inset-0">{scenes[0].media}</div>
+            <MobileSceneWindow>{scenes[0].media}</MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/90 via-colus-ink/20 to-colus-ink/95" />
             <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-12 pt-16 sm:px-9">
               <div>
@@ -148,14 +149,14 @@ export function FuturoSection() {
           {/* Engineering mobile: this different COLUS photo shows a practical electrical-circuit
               demonstration, not a confirmed Engineering curriculum. Keep it contextual. */}
           <article className="relative isolate min-h-[76svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="02">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={`${MEDIA_ROOT}/03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-002.webp`}
                 alt="Alunos e orientador observam montagem de circuitos elétricos com lâmpadas acesas"
                 className="object-[67%_center]"
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/5 via-45% to-colus-ink/80" />
             <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-colus-ink/70 to-transparent" />
             
@@ -198,7 +199,7 @@ export function FuturoSection() {
           </article>
 
           <article className="relative isolate min-h-[75svh] overflow-hidden bg-colus-ink" data-colus-mobile-scene="04">
-            <div className="absolute inset-0">{scenes[3].media}</div>
+            <MobileSceneWindow>{scenes[3].media}</MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/80 via-colus-ink/10 to-colus-ink/95" />
             
             <div className="relative z-10 flex min-h-[75svh] flex-col justify-between px-6 pb-12 pt-14 sm:px-9">
