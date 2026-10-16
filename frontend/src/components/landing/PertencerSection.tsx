@@ -49,93 +49,80 @@ export function PertencerSection() {
       data-header-theme="light"
       className="relative scroll-mt-24 overflow-hidden bg-colus-white lg:overflow-visible"
     >
+
+      {/* Mobile: community is a visual journey, not three captioned image cards. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="mx-auto max-w-[680px] px-5 py-20 sm:px-6">
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
-              Pertencer
-            </p>
-            <h2 className="mt-5 max-w-[14ch] font-editorial text-[clamp(38px,9vw,46px)] font-medium leading-[1.03] tracking-[-.03em] text-colus-ink">
-              Crescer é uma jornada partilhada.
-            </h2>
-            <p className="mt-6 max-w-[56ch] text-[15px] leading-7 text-colus-muted">
-              Escola, alunos e famílias constroem experiências mais fortes quando participam, acompanham e crescem em conjunto.
-            </p>
-          </div>
-
-          <div className="relative mt-12 pl-9">
-            <svg
-              viewBox="0 0 80 760"
-              className="pointer-events-none absolute bottom-0 left-0 top-0 h-full w-16 overflow-visible"
-              aria-hidden="true"
-            >
-              <path
-                d="M44 8 C12 120 62 190 31 300 C7 388 62 458 34 566 C20 622 38 682 50 752"
-                fill="none"
-                stroke="#0C5898"
-                strokeOpacity=".24"
-                strokeWidth="2"
-                strokeLinecap="round"
+        <div className="mx-auto max-w-[680px] sm:px-6 sm:py-12">
+          <article className="relative isolate min-h-[82svh] overflow-hidden bg-colus-ink sm:rounded-[32px_84px_32px_32px]">
+            <div className="absolute inset-0">
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/06-pertencer/COLUS-PERTENCER-INTERACAO-001.webp"}
+                alt="Interação humana na comunidade escolar COLUS"
               />
-              <circle cx="43" cy="84" r="6" fill="#F18136" />
-              <circle cx="29" cy="318" r="5" fill="#F18136" />
-              <circle cx="39" cy="584" r="6" fill="#F18136" />
-            </svg>
-
-            <div className="space-y-8">
-              <article>
-                <div className="aspect-[4/3] overflow-hidden rounded-[30px_78px_30px_30px]">
-                  <LandingMedia
-                    kind="image"
-                    src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-INTERACAO-001.webp`}
-                    alt="Interação humana na comunidade escolar COLUS"
-                  />
-                </div>
-                <div className="mt-5">
-                  <p className="text-sm font-bold text-colus-ink">Acompanhar</p>
-                  <p className="mt-1 text-sm leading-6 text-colus-muted">proximidade e presença.</p>
-                </div>
-              </article>
-
-              <article>
-                <div className="aspect-[3/2] overflow-hidden rounded-[74px_28px_28px_28px]">
-                  <LandingMedia
-                    kind="image"
-                    src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-COMUNIDADE-001.webp`}
-                    alt="Participação e comunidade na vida escolar"
-                    className="object-top"
-                  />
-                </div>
-                <div className="mt-5">
-                  <p className="text-sm font-bold text-colus-ink">Participar</p>
-                  <p className="mt-1 text-sm leading-6 text-colus-muted">
-                    escola vivida também em comunidade.
-                  </p>
-                </div>
-              </article>
-
-              <article>
-                <div className="ml-auto aspect-[4/3] w-[82%] overflow-hidden rounded-[28px_28px_74px_28px]">
-                  <LandingMedia
-                    kind="image"
-                    src={`${MEDIA_ROOT}/06-pertencer/COLUS-PERTENCER-COMUNIDADE-002.webp`}
-                    alt="Momento coletivo de comunidade escolar"
-                  />
-                </div>
-                <div className="mt-5">
-                  <p className="text-sm font-bold text-colus-ink">Crescer juntos</p>
-                  <p className="mt-1 text-sm leading-6 text-colus-muted">
-                    confiança, pertença e desenvolvimento.
-                  </p>
-                </div>
-              </article>
             </div>
-
-            <div className="ml-3 mt-8 flex h-16 items-start gap-3" aria-hidden="true">
-              <span className="mt-1 h-3 w-3 rounded-full bg-colus-orange" />
-              <span className="h-full w-px bg-gradient-to-b from-colus-orange to-colus-orange/0" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/85 via-colus-ink/20 to-colus-ink/95" />
+            <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">Pertencer</p>
+                <h2 className="mt-5 max-w-[12ch] font-editorial text-[clamp(43px,10.8vw,66px)] font-medium leading-[.98] tracking-[-.04em] text-white">
+                  Crescer é uma jornada partilhada.
+                </h2>
+              </div>
+              <p className="max-w-[34ch] text-[16px] font-medium leading-7 text-white/95">
+                Escola, alunos e famílias constroem experiências mais fortes quando participam, acompanham e crescem em conjunto.
+              </p>
             </div>
+          </article>
+
+          <div className="relative ml-8 h-20 w-px bg-gradient-to-b from-colus-orange via-colus-deep-blue/50 to-colus-deep-blue/20" aria-hidden="true">
+            <span className="absolute -left-[5px] top-6 h-3 w-3 rounded-full bg-colus-orange" />
           </div>
+
+          <article className="relative isolate ml-6 min-h-[65svh] overflow-hidden rounded-[80px_25px_25px_25px] bg-colus-ink sm:ml-0">
+            <div className="absolute inset-0">
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/06-pertencer/COLUS-PERTENCER-COMUNIDADE-001.webp"}
+                alt="Participação e comunidade na vida escolar"
+                className="object-top"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
+            <div className="relative z-10 flex min-h-[65svh] flex-col justify-end px-6 pb-10">
+              <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">01 / Participar</p>
+              <h3 className="mt-3 max-w-[12ch] font-editorial text-[clamp(38px,9vw,54px)] font-medium leading-[1.02] tracking-[-.035em] text-white">
+                Fazer parte da vida escolar.
+              </h3>
+              <p className="mt-3 max-w-[30ch] text-[16px] leading-6 text-white/90">
+                Escola vivida também em comunidade.
+              </p>
+            </div>
+          </article>
+
+          <div className="relative ml-auto mr-10 h-20 w-px bg-gradient-to-b from-colus-deep-blue/30 to-colus-orange" aria-hidden="true">
+            <span className="absolute -left-[5px] bottom-4 h-3 w-3 rounded-full bg-colus-orange" />
+          </div>
+          <article className="relative isolate mr-8 min-h-[66svh] overflow-hidden rounded-[26px_26px_84px_26px] bg-colus-ink sm:mr-0">
+            <div className="absolute inset-0">
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/06-pertencer/COLUS-PERTENCER-COMUNIDADE-002.webp"}
+                alt="Momento coletivo de comunidade escolar"
+              />
+            </div>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
+            <div className="relative z-10 flex min-h-[66svh] flex-col justify-end px-6 pb-10">
+              <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Crescer juntos</p>
+              <h3 className="mt-3 max-w-[13ch] font-editorial text-[clamp(37px,9vw,53px)] font-medium leading-[1.02] tracking-[-.035em] text-white">
+                A confiança constrói-se em conjunto.
+              </h3>
+              <p className="mt-3 max-w-[30ch] text-[16px] leading-6 text-white/90">
+                Proximidade, participação e desenvolvimento.
+              </p>
+            </div>
+          </article>
+          <div className="ml-8 h-16 w-px bg-gradient-to-b from-colus-orange to-transparent" aria-hidden="true" />
         </div>
       </div>
 
