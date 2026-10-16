@@ -26,6 +26,43 @@ const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // Sample the same screenshot framing to prevent that specific regression.
 // Test only after bringing the Manifesto photo ring into view and only in
 // non-reduced-motion mode. Screenshot positions are intentionally fixed.
+// The approved mobile bridge is a shallow DOUBLE CURVE of Warm Paper, not
+// two giant tall petal silhouettes. Capture an intermediate scroll state and
+// compare the paper entry height at the left edge and at the centre.
+async function captureManifestoBridge(page, width) {
+  const curve = page.locator("[data-colus-manifesto-curve]");
+  assert.equal(await curve.count(), 1, "Manifesto mobile must use a single connected book curve");
+  await page.evaluate(() => {
+    const section = document.querySelector("#o-colegio")?.closest("section");
+    if (!section) throw new Error("Manifesto section not found");
+    const rect = section.getBoundingClientRect();
+    const start = rect.top + window.scrollY;
+    const progress = 0.18;
+    const target = start + (window.innerHeight + rect.height) * progress - window.innerHeight;
+    window.scrollTo({ top: target, behavior: "instant" });
+  });
+  await wait(600);
+  const screenshot = path.join(output, "manifesto-bridge-" + width + ".png");
+  await page.screenshot({ path: screenshot });
+  const png = PNG.sync.read(readFileSync(screenshot));
+  const paper = [255, 248, 239];
+  function firstPaperRow(x) {
+    for (let y = Math.round(png.height * 0.47); y < png.height - 65; y++) {
+      const i = (y * png.width + x) * 4;
+      if (paper.every((v, j) => Math.abs(v - png.data[i + j]) <= 18)) return y;
+    }
+    return -1;
+  }
+  const outer = firstPaperRow(7);
+  const centre = firstPaperRow(Math.floor(width / 2));
+  assert.ok(outer > 0 && centre > 0,
+    "Mobile paper curve must visibly enter from below during Hero handoff");
+  assert.ok(centre >= outer - 7 && centre - outer <= 80,
+    "Open Book curve must be shallow and connected, not a giant heart/petal gap: " +
+    JSON.stringify({ outer, centre, width }));
+  return { width, outer, centre, shallowCurve: true };
+}
+
 function assertManifestoSpineSealed(filePath, width) {
   const png = PNG.sync.read(readFileSync(filePath));
   assert.equal(png.width, width, "Unexpected mobile capture width");
@@ -52,6 +89,7 @@ try {
   page.on("pageerror", (error) => errors.push(String(error.message)));
   await page.goto(base, { waitUntil: "networkidle", timeout: 45000 });
   await page.locator("#o-colegio").waitFor({ state: "attached" });
+  results.push({ case: "manifesto-book-curve-440", ...await captureManifestoBridge(page, 440) });
   const cases = [
     { id: "manifesto", scope: "#o-colegio" },
     { id: "vozes", scope: "#vozes-colus" },
@@ -123,6 +161,7 @@ try {
   });
   narrowPage.on("pageerror", (error) => errors.push(String(error.message)));
   await narrowPage.goto(base, { waitUntil: "networkidle", timeout: 45000 });
+  results.push({ case: "manifesto-book-curve-390", ...await captureManifestoBridge(narrowPage, 390) });
   for (const item of cases) {
     const photo = narrowPage.locator(item.scope + ' [data-colus-orbit-node="photo"]');
     await photo.scrollIntoViewIfNeeded();
