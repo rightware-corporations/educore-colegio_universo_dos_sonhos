@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { MobileNarrativePath } from "./MobileNarrativePath";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -31,7 +32,8 @@ export function AprenderSection() {
 
       {/* Mobile learning trail: editorial text lives with the moment it describes. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="mx-auto max-w-[680px] sm:px-6 sm:py-12">
+        <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
+          <MobileNarrativePath kind="trail" />
           <article className="relative isolate min-h-[90svh] overflow-hidden bg-colus-ink sm:rounded-[34px_86px_34px_34px]">
             <div className="absolute inset-0">
               <LandingMedia
@@ -56,9 +58,7 @@ export function AprenderSection() {
               </div>
             </div>
           </article>
-          <div className="relative ml-8 h-20 w-px bg-gradient-to-b from-colus-deep-blue via-colus-orange to-colus-orange/80" aria-hidden="true">
-            <span className="absolute -left-[5px] top-7 h-3 w-3 rounded-full bg-colus-orange" />
-          </div>
+          <div className="h-10" aria-hidden="true" />
           <article className="relative isolate ml-5 min-h-[82svh] overflow-hidden rounded-[80px_28px_28px_28px] bg-colus-ink sm:ml-0">
             <div className="absolute inset-0">
               <LandingMedia
@@ -80,7 +80,7 @@ export function AprenderSection() {
               </div>
             </div>
           </article>
-          <div className="ml-8 h-16 w-px bg-gradient-to-b from-colus-orange to-transparent" aria-hidden="true" />
+          <div className="h-6" aria-hidden="true" />
         </div>
       </div>
 
