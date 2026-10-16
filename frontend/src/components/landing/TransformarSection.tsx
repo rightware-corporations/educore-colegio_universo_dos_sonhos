@@ -2,6 +2,7 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
+import { MobileSceneWindow } from "./MobileSceneWindow";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -60,13 +61,13 @@ export function TransformarSection() {
         <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
           <MobileNarrativePath kind="axis" />
           <article className="relative isolate min-h-[90svh] overflow-hidden bg-colus-ink-soft sm:rounded-[34px_88px_34px_34px]">
-            <div className="absolute inset-0">
+            <MobileSceneWindow>
               <LandingMedia
                 kind="image"
                 src={MEDIA_ROOT + "/" + moments[0].src}
                 alt={moments[0].alt}
               />
-            </div>
+            </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/95 via-colus-ink/40 to-colus-ink/95" />
             <div className="relative z-10 flex min-h-[90svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
               <div>
@@ -95,9 +96,9 @@ export function TransformarSection() {
                     : "mr-7 min-h-[73svh] rounded-[26px_26px_84px_26px] sm:mr-0")
                 }
               >
-                <div className="absolute inset-0">
+                <MobileSceneWindow>
                   <LandingMedia kind="image" src={MEDIA_ROOT + "/" + moment.src} alt={moment.alt} />
-                </div>
+                </MobileSceneWindow>
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/30 to-colus-ink/10" />
                 <div className={"relative z-10 flex flex-col justify-between px-6 pb-10 pt-8 " + (index === 0 ? "min-h-[69svh]" : "min-h-[73svh]")}>
                   <p className="text-[11px] font-bold uppercase tracking-[.2em] text-white/75">
