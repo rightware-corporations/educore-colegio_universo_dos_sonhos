@@ -53,7 +53,7 @@ export function ManifestoSection() {
           className="absolute inset-0 h-full w-full origin-bottom lg:hidden"
         >
           <path
-            d="M0 6 C54 0 112 1 180 30 C248 1 306 0 360 6 L360 1000 L0 1000 Z"
+            d="M0 8 C66 0 120 31 180 31 C240 31 294 0 360 8 L360 1000 L0 1000 Z"
             fill="#FFF8EF"
           />
         </motion.svg>
