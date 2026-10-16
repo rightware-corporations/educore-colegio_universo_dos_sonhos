@@ -498,3 +498,14 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 ### 31.1 — Proteção desktop e revalidação final
 
 A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar **apenas abaixo de 1024px**, sem alterar a composição desktop previamente aprovada. Commit `eb1a013f28150acdd25068f5d851e57622821cec`. GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38981869303 concluiu **SUCCESS**, incluindo TypeScript, `test:qa`, build, pixel-check do Manifesto, filled rings e 5-device PATH/NODE smoke em Chromium. Os assets e a `main` mantêm-se intactos. PR #2 segue DRAFT por faltar aprovação editorial e QA manual contínuo no Edge.
+
+
+## 32. MOBILE CHAPTER SEAMS / VISUAL CONTINUITY — 2026-10-17
+
+**Authorization:** user said «vamos» to previous action plan to refine mobile composition and continuity between Aprender→Futuro→Vida→Pertencer→Transformar, not permission to publish/merge.
+
+**Implemented in the existing branch `feat/colus-mobile-editorial-storytelling`:** the five mobile `max-w-[680px]` wrappers now have a connected dark narrative field and stable `data-colus-mobile-story` markers; tablet-specific wrapper top/bottom margins/padding were removed; artificial 40px/24px spacer blocks between/after scenes were compressed to 12px or removed. The special staggered crops and margins inside Vida/Pertencer remain intentional. No media or text content replacements, no Hero changes, no changes to desktop JSX during these edits.
+
+**Browser validation:** `frontend/scripts/qa-mobile-handoffs.mjs` now checks wrapper and path continuity for four major chapter boundaries at widths 390, **440**, and 768px. GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38982859788 succeeded, including typecheck, test:qa, build, asset lock, filled rings, Manifesto pixel check, five scroll devices and 12 boundary geometry checks. Artifact ID `12082295931` includes screenshots/results. Captures inspected, visual chapter gaps reduced at 440px. PR #2 remains DRAFT; `main` unchanged.
+
+**Remaining gate:** review real Edge mobile continuous scroll (not just captured frames), text/crop/contrast and actual Science video behavior; outer gutters at tablet/maxwidth680 are an editorial decision pending owner review. No approval to merge. QA report: `docs/colus/presentation/qa-reports/mobile-master-alignment-2026-10-17/README.md`.
