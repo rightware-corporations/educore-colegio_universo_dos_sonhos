@@ -116,3 +116,13 @@ A observação condicional do logo COLUS no Header deixou de constar como `NOT_O
 4. **Auditor:** cobertura de 100% indica que os dez anchors foram percorridos; não equivale a auditoria de pixel/crop ou aprovação do wireframe completo.
 
 **Estado:** o ficheiro foi finalmente lido diretamente a partir do GitHub; a comparação acima foi arquivada. Não alterar contratos ou elementos visuais apenas para fazer os indicadores passar.
+
+## 9. Recuperação do vídeo Ciência e acesso QA — 2026-10-16
+
+- O componente `FuturoSection.tsx` montava a cena 03 apenas com `COLUS-FUTURO-CIENCIA-001.webp` devido à orientação incorreta do vídeo original no Edge. A cena passou a montar `COLUS-FUTURO-CIENCIA-VID-001.mp4` com o poster estático como fallback. O original MP4 não foi alterado.
+- A compensação de orientação `rotate-90` + `scale-[1.4]` atua apenas sobre o elemento `<video>` da Ciência, não sobre o poster nem sobre os assets do Hero. **A direção da rotação, o enquadramento e a qualidade ainda precisam de validação no Edge, desktop e mobile.** Não declarar vídeo/motion aprovado antes de ver a reprodução.
+- O Motion QA V1.2 exige evidência adicional de **playback efetivo** (vídeo visível, amostras com estado ready/playing e avanço de `currentTime`). Se a amostragem não conseguir provar reprodução, devolve `REVIEW`, não um `PASS` apenas por encontrar o nome do MP4.
+- `LandingMotionQA.tsx`: quando a landing é aberta em `http://localhost:8080/`, aparece um acesso discreto **Abrir Design + Motion QA**. O painel integral continua a exigir `/?motionQA=1#top` e `import.meta.env.DEV`. Nenhum destes instrumentos é visível numa build de produção.
+- `qa-contract-tests.mjs` passou a testar fonte MP4, poster fallback, orientação restrita à Ciência, acesso QA em DEV e comportamento de tempo da media.
+
+**Pendente neste gate:** executar `npm run typecheck`, `npm run test:qa`, `npm run build` e obter confirmação visual de orientação/reprodução no Edge antes de marcar Ciência `PASS`. Continua pendente Engenharia device-led, fidelidade visual de outras secções e validação global de motion. Copyright COLUS, Footer, favicon e Hero protegido inalterados.
