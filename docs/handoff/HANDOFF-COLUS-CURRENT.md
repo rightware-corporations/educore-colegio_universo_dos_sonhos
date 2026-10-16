@@ -1,5 +1,12 @@
 # COLUS — CURRENT LIVING HANDOFF
 
+> **ATUALIZADO EM 2026-10-16.** Ler primeiro o [índice cronológico](README.md): 03/10 → 04/10 → [handoff de 16/10](HANDOFF-COLUS-2026-10-16.md) → **este CURRENT por último**.  
+> As secções 6–14 abaixo preservam o registo até **2026-10-05**, mesmo quando ficaram historicamente ultrapassadas. Não seguir os antigos próximos passos sem consultar a secção 15 atualizada.
+>
+> **Estado recente:** Ciência usa vídeo `COLUS-FUTURO-CIENCIA-VID-001-upright.mp4` já integrado na `main`, aprovado visualmente **apenas para desktop/Edge**; mobile pendente. Footer Dark desktop observado e aceite pelo utilizador; logótipos e favicon implementados; © 2026 Colégio Universo dos Sonhos continua a ser o copyright institucional. O QA Design/Motion tem 45 checkpoints planeados, ainda sem pixel-diff automático aprovado. **Landing em desenvolvimento**, não concluída.
+>
+> **Divergência histórica:** a decisão C de 05/10 retirara `TestimonialsSection`, mas `LandingFoundationPage.tsx` atualmente volta a montá-la. O conteúdo de Vozes é editorial, sem depoimentos fabricados. A decisão sobre manter/remover a secção requer confirmação explícita antes de alterar o código.
+
 **Project:** COLUS / Colégio Universo dos Sonhos  
 **Repository:** rightware-corporations/educore-colegio_universo_dos_sonhos  
 **Branch:** main  
@@ -237,16 +244,19 @@ Not decided (do not treat as approved): fixing the sticky-stage `overflow-hidden
 - `frontend/src/components/landing/TransformarSection.tsx` (sticky issue, tail)
 - `docs/colus/design/landing/convite-final-colus.md`, `docs/colus/presentation/landing-qa-v1.md` (brand-mark rule)
 
-## 15. IMMEDIATE NEXT ACTION
+## 15. IMMEDIATE NEXT ACTION — RECONCILIADO EM 2026-10-16
 
-Do not assume the landing is final.
+A referência operacional integral é [HANDOFF-COLUS-2026-10-16.md](HANDOFF-COLUS-2026-10-16.md), especialmente §§7–10. O resumo histórico de 05/10 não substitui o estado atual.
 
-1. **Real-browser desktop QA** (`npm run dev` in `frontend/`, real fonts): confirm the Convite Final symbol is clean; if it is not, fall back to option 4.
-2. **Decision needed:** approve or reject fixing the sticky-stage `overflow-hidden` problem in Aprender/Futuro/Pertencer/Transformar (e.g. `overflow-clip`), with full re-QA of all four sections. This likely also resolves the Transformar desktop tail. Alternatives: a Transformar-only adjustment.
-3. After that decision: finish desktop QA of the whole landing, then full mobile QA, then re-verify the complete landing and update this file.
+1. Verificar a `main` real e ler os handoffs pela ordem do [índice](README.md). **Não voltar a fazer merge** de `fix/colus-science-video-orientation`: o vídeo vertical da Ciência já está integrado.
+2. Validar **Ciência 03 em mobile**, reduced-motion, poster/fallback e pause/play. Desktop/Edge já foi aprovado visualmente.
+3. Trabalhar a fidelidade de **Engenharia 02 device-led** contra o master e Motion Spec §8, sem fotografia genérica usada como prova de Engenharia nem overlays sobre rostos.
+4. Comparar as secções com os **45 checkpoints**; testar desktop/mobile/tablet, scroll inverso/rápido, sticky e ritmo editorial. As diferenças em vh são `REVIEW`, não justificam reduzir o Hero aprovado.
+5. Confirmar com o responsável a **decisão C vs Vozes COLUS atualmente montada**, links sem URLs, idioma do Footer e direitos antes de declarar publicação.
 
-Separate approvals still pending: lockfile; recording decision C in the design docs; retiring/updating `NEW-CHAT-PROMPT-COLUS.md`; deleting `ColusMark.tsx`.
+**Limites:** preservar `IntroHeroSection.tsx`, vídeo/poster/máscara Hero e marca oficiais; copyright **© 2026 Colégio Universo dos Sonhos**; `Powered by EduCore · A RIGHTWARE Product` apenas como assinatura tecnológica. **A landing continua incompleta.**
 
+**Referência inicial desta atualização:** `main` verificada em `c3a37be0af5c4f598ae137b2228476ea9fb472a8`; os commits desta organização atualizam a HEAD. Verificar a HEAD real em cada sessão.
 
 ## 16. HANDOFF UPDATE RULE
 
@@ -266,9 +276,4 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 
 ## 17. LAST UPDATED
 
-2026-10-05
-
-Updated after: removal of the testimonial section from the public landing (decision C) and the Convite Final official-symbol crop (decision 3, conditional). Verification was partial and headless (see section 11). Nothing in section 12 marked "Open" has been resolved. Commits were pushed to `origin/main` (up to `ac73497`).
-
-Important: This file is intended to be updated continuously. It should remain in the repository and should not be treated as a one-time snapshot.
-
+**2026-10-16.** Reconciliado o estado vivo com o handoff operacional de 16/10, o código da `main` e a cronologia documental. As secções históricas 6–14 continuam úteis para o percurso até 05/10, não para provar o estado atual. Atualizar este documento em cada ciclo substancial e manter os handoffs datados imutáveis.
