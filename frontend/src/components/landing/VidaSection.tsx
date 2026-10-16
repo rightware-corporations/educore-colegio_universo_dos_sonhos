@@ -47,7 +47,7 @@ export function VidaSection() {
       <div className="lg:hidden">
         <div className="relative mx-auto max-w-[680px]">
           <MobileNarrativePath kind="marker" />
-          <article className="relative isolate min-h-[80svh] overflow-hidden bg-colus-ink">
+          <article className="relative isolate min-h-[68svh] overflow-hidden bg-colus-ink">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -56,7 +56,7 @@ export function VidaSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/75 via-colus-ink/15 to-colus-ink/95" />
-            <div className="relative z-10 flex min-h-[80svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
+            <div className="relative z-10 flex min-h-[68svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
               <p className="text-[11px] font-bold uppercase tracking-[0.19em] text-colus-orange">Vida COLUS</p>
               <div>
                 <h2 className="max-w-[12ch] font-editorial text-[clamp(43px,10.8vw,66px)] font-medium leading-[.98] tracking-[-.04em] text-white">
@@ -71,7 +71,7 @@ export function VidaSection() {
 
           <div className="h-10" aria-hidden="true" />
 
-          <article className="relative isolate ml-5 min-h-[62svh] overflow-hidden rounded-[68px_22px_22px_22px] bg-colus-ink sm:ml-0">
+          <article className="relative isolate ml-5 min-h-[48svh] overflow-hidden rounded-[68px_22px_22px_22px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -80,7 +80,7 @@ export function VidaSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
-            <div className="relative z-10 flex min-h-[62svh] flex-col justify-end px-6 pb-9">
+            <div className="relative z-10 flex min-h-[48svh] flex-col justify-end px-6 pb-9">
               <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">01 / Expressão</p>
               <h3 className="mt-3 max-w-[12ch] font-editorial text-[clamp(36px,9vw,53px)] font-medium leading-none tracking-[-.035em] text-white">
                 Encontrar a própria voz.
@@ -89,7 +89,7 @@ export function VidaSection() {
           </article>
 
           <div className="h-10" aria-hidden="true" />
-          <article className="relative isolate mr-9 min-h-[58svh] overflow-hidden rounded-[24px_72px_24px_24px] bg-colus-ink sm:mr-0">
+          <article className="relative isolate mr-9 min-h-[35svh] overflow-hidden rounded-[24px_72px_24px_24px] bg-colus-ink sm:mr-0">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -98,7 +98,7 @@ export function VidaSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/20 to-transparent" />
-            <div className="relative z-10 flex min-h-[58svh] flex-col justify-end px-6 pb-9">
+            <div className="relative z-10 flex min-h-[35svh] flex-col justify-end px-6 pb-9">
               <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">02 / Cultura</p>
               <h3 className="mt-3 max-w-[13ch] font-editorial text-[clamp(35px,8.5vw,50px)] font-medium leading-none tracking-[-.035em] text-white">
                 Partilhar o que nos liga.
@@ -107,7 +107,7 @@ export function VidaSection() {
           </article>
 
           <div className="h-6" aria-hidden="true" />
-          <article className="relative isolate ml-5 min-h-[62svh] overflow-hidden rounded-[24px_24px_78px_24px] bg-colus-ink sm:ml-0">
+          <article className="relative isolate ml-5 min-h-[48svh] overflow-hidden rounded-[24px_24px_78px_24px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -116,7 +116,7 @@ export function VidaSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/20 to-transparent" />
-            <div className="relative z-10 flex min-h-[62svh] flex-col justify-end px-6 pb-9">
+            <div className="relative z-10 flex min-h-[48svh] flex-col justify-end px-6 pb-9">
               <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">03 / Encontro</p>
               <h3 className="mt-3 max-w-[12ch] font-editorial text-[clamp(36px,9vw,52px)] font-medium leading-none tracking-[-.035em] text-white">
                 Crescer em conjunto.
