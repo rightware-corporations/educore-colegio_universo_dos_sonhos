@@ -106,3 +106,26 @@ A captura do proprietário no Microsoft Edge, iPhone 16 Pro Max 440×956, `/#fut
 **Correção implementada na mesma branch:** a Ciência 03 tem agora o vídeo upright em `absolute inset-0` desde o primeiro pixel da cena; uma película superior subtil liga o fundo escuro de Engenharia à imagem real, e um gradiente inferior forte suporta título e descrição na parte inferior, afastados da região superior dos rostos. Altura declarada de Ciência reduzida de `88svh` para `78svh`, porque se eliminou a abertura sem imagem. Commit `0a33ea34044b3574f7d78ccf9d1fde88bb4cc5f5`.
 
 **Verificação estática:** comparado o bloco desktop `h-[280vh] lg:block` com `main`, byte a byte idêntico; vídeo `COLUS-FUTURO-CIENCIA-VID-001-upright.mp4` e poster oficial preservados; pares JSX básicos equilibrados. **Não foram executados** npm typecheck, test:qa, build nem browser após a correção. É necessário screenshot mobile pós-correção em scroll lento e frames de Ciência para garantir que o título no rodapé não recobre pessoas importantes ou falha em algum frame. Se houver colisão real, ajustar o enquadramento/scrim com evidência, sem tocar no asset.
+
+
+## Engenharia 02 — fotografia contextual + device secundário (2026-10-16)
+
+**Feedback e autorização:** após novas capturas mobile o responsável salientou que «Engenharia continua sem imagem». Foi proposta explicitamente a utilização da fotografia existente `COLUS-APRENDER-CRIAR-001.webp` por trás do esquema técnico, com imagem real / gradiente / device / texto, e o responsável confirmou «sim». A mudança é **proposta implementada para revisão visual**, não uma aprovação final ou da publicação.
+
+**Limite editorial:** a fotografia foi inspecionada e mostra estudantes do COLUS a montar/experimentar materiais numa atividade prática; **não há confirmação de que seja uma aula, programa ou atividade específica de Engenharia**. O uso como contexto de criação prática é distinto de afirmar que a imagem prova atividade de Engenharia. Isto representa uma adaptação provisória, sujeita a avaliação, da regra anterior do Asset Gate que priorizava device-led precisamente pela ausência de fotografia de Engenharia validada. Não reescrever retroativamente o Asset Gate.
+
+**Diagnóstico do bug de composição:** `EngineeringMobileDevice` tinha `bg-colus-ink` opaco. Mesmo adicionando uma imagem atrás, o SVG opaco teria escondido a fotografia. A correção torna o contêiner de `EngineeringMobileDevice` transparente (o elemento só é usado como device da cena mobile).
+
+**Implementação em `FuturoSection.tsx`:**
+- imagem real `/03-aprender/criar/COLUS-APRENDER-CRIAR-001.webp` ocupa a cena Engenharia 02 em `absolute inset-0`, mantendo identidade e nomes dos assets existentes;
+- crop inicial `object-[58%_center]` e texto alternativo factual sobre criação e experimentação, sem alegar Engenharia;
+- gradiente escuro para apoiar legibilidade do título/copy; **foto não está obscurecida por fundo SVG**;
+- `EngineeringMobileDevice` transparente, com opacidade geral 30% e máscara de desenho restrita essencialmente à parte inferior da cena, para não competir com as caras;
+- título editorial e descrição existentes mantidos, sequência TIC→Engenharia→Ciência mantida;
+- JSX desktop de Futuro comparado byte a byte com a `main`: idêntico; vídeo Ciência upright e poster preservados; Intro/Hero e `LandingMedia.tsx` intactos.
+
+**Commit de código:** `9c3a3eb0c7aa7f1a84a8a7ceadc7d7d4ad6d8735`.
+
+**Verificação executada:** revisão estática das referências, máscara, transparência do SVG e balanceamento de tags básicas JSX; fonte do vídeo e poster conferidos. **Não executados:** browser Edge pós-correção, typecheck, build, test:qa e validação de direitos de imagem para publicação. Não declarar aprovado.
+
+**Próxima revisão:** atualizar branch, abrir o Edge a 440×956 e 390×844, confirmar que se vê efetivamente a fotografia de alunos durante a cena Engenharia, com rostos, mãos, material e conteúdo legíveis, sem linhas SVG sobre a cara; avaliar contraste e continuidade para Ciência. Se o crop não servir, corrigir só crop/gradiente com captura e validação, mantendo o asset como contextual.
