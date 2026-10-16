@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { MobileNarrativePath } from "./MobileNarrativePath";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -56,7 +57,8 @@ export function TransformarSection() {
 
       {/* Mobile: one vertical narrative, with each stage inscribed in its image. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="mx-auto max-w-[680px] sm:px-6 sm:py-12">
+        <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
+          <MobileNarrativePath kind="axis" />
           <article className="relative isolate min-h-[90svh] overflow-hidden bg-colus-ink-soft sm:rounded-[34px_88px_34px_34px]">
             <div className="absolute inset-0">
               <LandingMedia
@@ -84,9 +86,7 @@ export function TransformarSection() {
 
           {moments.slice(1).map((moment, index) => (
             <div key={moment.number}>
-              <div className="relative ml-8 h-20 w-px bg-gradient-to-b from-colus-orange via-colus-bright-blue/55 to-colus-orange/60" aria-hidden="true">
-                <span className="absolute -left-[5px] top-7 h-3 w-3 rounded-full bg-colus-orange" />
-              </div>
+              <div className="h-10" aria-hidden="true" />
               <article
                 className={
                   "relative isolate overflow-hidden bg-colus-ink-soft " +
@@ -115,7 +115,7 @@ export function TransformarSection() {
               </article>
             </div>
           ))}
-          <div className="ml-8 h-16 w-px bg-gradient-to-b from-colus-orange/70 to-transparent" aria-hidden="true" />
+          <div className="h-6" aria-hidden="true" />
         </div>
       </div>
 
