@@ -35,7 +35,7 @@ export function AprenderSection() {
       <div className={reduceMotion ? "block" : "lg:hidden"}>
         <div className="relative mx-auto max-w-[680px] sm:px-6 sm:py-12">
           <MobileNarrativePath kind="trail" />
-          <article className="relative isolate min-h-[90svh] overflow-hidden bg-colus-ink sm:rounded-[34px_86px_34px_34px]">
+          <article className="relative isolate min-h-[76svh] overflow-hidden bg-colus-ink sm:rounded-[34px_86px_34px_34px]">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -44,7 +44,7 @@ export function AprenderSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/95 via-colus-ink/40 to-colus-ink/85" />
-            <div className="relative z-10 flex min-h-[90svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
+            <div className="relative z-10 flex min-h-[76svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
               <div>
                 <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">Aprender em movimento</p>
                 <h2 className="mt-5 max-w-[13ch] font-editorial text-[clamp(38px,9.5vw,60px)] font-medium leading-[1.02] tracking-[-.04em] text-white">
@@ -60,7 +60,7 @@ export function AprenderSection() {
             </div>
           </article>
           <div className="h-10" aria-hidden="true" />
-          <article className="relative isolate ml-5 min-h-[82svh] overflow-hidden rounded-[80px_28px_28px_28px] bg-colus-ink sm:ml-0">
+          <article className="relative isolate ml-5 min-h-[68svh] overflow-hidden rounded-[80px_28px_28px_28px] bg-colus-ink sm:ml-0">
             <MobileSceneWindow>
               <LandingMedia
                 kind="image"
@@ -69,7 +69,7 @@ export function AprenderSection() {
               />
             </MobileSceneWindow>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/55 via-colus-ink/5 to-colus-ink/90" />
-            <div className="relative z-10 flex min-h-[82svh] flex-col justify-between px-6 pb-10 pt-10">
+            <div className="relative z-10 flex min-h-[68svh] flex-col justify-between px-6 pb-10 pt-10">
               <p className="text-[11px] font-bold uppercase tracking-[.19em] text-colus-orange">02 / Criar</p>
               <div>
                 <h3 className="max-w-[18ch] font-editorial text-[clamp(31px,7.5vw,43px)] font-medium leading-[1.07] tracking-[-.04em] text-white">
