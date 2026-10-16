@@ -56,6 +56,8 @@ export function MobileNarrativePath({ kind }: { kind: NarrativeDevice }) {
     mass: 0.42,
   });
   const drawn = useTransform(progress, [0, 0.96], [0, 1]);
+  // Signal hands visual attention to human photography in Vida COLUS.
+  const exitOpacity = useTransform(progress, [0, 0.8, 1], [1, 1, kind === "signal" ? 0.16 : 1]);
   const activeX = useMotionValue(14);
   const activeY = useMotionValue(0);
   const device = devices[kind];
@@ -103,14 +105,14 @@ export function MobileNarrativePath({ kind }: { kind: NarrativeDevice }) {
           strokeWidth={device.weight + 0.5}
           strokeLinecap="round"
           vectorEffect="non-scaling-stroke"
-          style={reducedMotion ? { pathLength: 1 } : { pathLength: drawn }}
+          style={reducedMotion ? { pathLength: 1 } : { pathLength: drawn, opacity: exitOpacity }}
         />
         {reducedMotion ? (
           <circle cx="14" cy="995" r="4.5" fill="#F18136" />
         ) : (
           <>
-            <motion.circle cx={activeX} cy={activeY} r="10" fill="#F18136" fillOpacity="0.16" />
-            <motion.circle cx={activeX} cy={activeY} r="4.5" fill="#F18136" stroke="#FFF8EF" strokeWidth="1" />
+            <motion.circle cx={activeX} cy={activeY} r="10" fill="#F18136" fillOpacity="0.16" style={{ opacity: exitOpacity }} />
+            <motion.circle cx={activeX} cy={activeY} r="4.5" fill="#F18136" stroke="#FFF8EF" strokeWidth="1" style={{ opacity: exitOpacity }} />
           </>
         )}
       </svg>
