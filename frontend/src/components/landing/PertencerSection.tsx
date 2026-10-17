@@ -4,6 +4,7 @@ import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
 import { DesktopOrbitNode } from "./DesktopOrbitNode";
+import { useScrollOpacity } from "./useScrollOpacity";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -41,17 +42,17 @@ export function PertencerSection() {
     if (ref.current) ref.current.dataset.colusScrollProgress = progress.toFixed(4);
   });
 
-  const headlineOpacity = useTransform(scrollYProgress, [0.36, 0.55], [0.35, 1]);
+  const headlineOpacity = useScrollOpacity(scrollYProgress, [0.36, 0.55], [0.35, 1]);
   const headlineY = useTransform(scrollYProgress, [0.36, 0.55], [15, 0]);
   const ringLength = useTransform(scrollYProgress, [0.12, 0.34, 0.55], [0, 0.76, 1]);
-  const ringNodesOpacity = useTransform(scrollYProgress, [0.18, 0.4], [0, 1]);
-  const ringFade = useTransform(scrollYProgress, [0.8, 1], [1, 0.55]);
-  const entryLineOpacity = useTransform(scrollYProgress, [0, 0.14, 0.2], [1, 1, 0]);
+  const ringNodesOpacity = useScrollOpacity(scrollYProgress, [0.18, 0.4], [0, 1]);
+  const ringFade = useScrollOpacity(scrollYProgress, [0.8, 1], [1, 0.55]);
+  const entryLineOpacity = useScrollOpacity(scrollYProgress, [0, 0.14, 0.2], [1, 1, 0]);
   const entryLineLength = useTransform(scrollYProgress, [0, 0.14], [0, 1]);
 
-  const mediaA = useTransform(scrollYProgress, [0.04, 0.24], [0.6, 1]);
-  const mediaB = useTransform(scrollYProgress, [0.25, 0.43], [0, 1]);
-  const mediaC = useTransform(scrollYProgress, [0.38, 0.56], [0, 1]);
+  const mediaA = useScrollOpacity(scrollYProgress, [0.04, 0.24], [0.6, 1]);
+  const mediaB = useScrollOpacity(scrollYProgress, [0.25, 0.43], [0, 1]);
+  const mediaC = useScrollOpacity(scrollYProgress, [0.38, 0.56], [0, 1]);
 
   useMotionValueEvent(mediaA, "change", v => {
     if (ref.current) ref.current.dataset.colusMediaAOpacity = v.toFixed(4);
@@ -77,7 +78,7 @@ export function PertencerSection() {
     markerY.set(`${(point.y / 760) * 100}%`);
   });
 
-  const handoffOpacity = useTransform(scrollYProgress, [0.78, 0.94], [0, 1]);
+  const handoffOpacity = useScrollOpacity(scrollYProgress, [0.78, 0.94], [0, 1]);
   const handoffLength = useTransform(scrollYProgress, [0.78, 0.98], [0, 1]);
 
   return (
