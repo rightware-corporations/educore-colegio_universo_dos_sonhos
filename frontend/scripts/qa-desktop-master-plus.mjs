@@ -140,6 +140,59 @@ try {
       JSON.stringify(handoffs));
     results.push({ viewport: viewport.width, chapter: "Chapter handoffs", ...handoffs });
 
+    // Master-stage alignment: compositions must inhabit the sticky viewport,
+    // not float at the top above hundreds of empty pixels.
+    await scrollToProgress(page, "#comunidade", 0.67);
+    const verticalBalance = await stage.evaluate(el => {
+      const r = el.getBoundingClientRect();
+      return (r.top + r.height * 0.5) / window.innerHeight;
+    });
+    assert.ok(verticalBalance > 0.43 && verticalBalance < 0.64,
+      "Community Ring must be vertically balanced in viewport: "+verticalBalance);
+
+    // Phase 5 handoff must start on the SAME ellipse perimeter and avoid
+    // painting through the three relationship captions. This is a screen-
+    // coordinate collision test, not a simple test of SVG path presence.
+    await scrollToProgress(page, "#comunidade", 0.91);
+    const outgoing = await stage.evaluate(el => {
+      const ellipse = el.querySelector("[data-colus-community-ring-path]");
+      const handoff = el.querySelector("[data-colus-community-rise-handoff]");
+      const moving = el.querySelector("[data-colus-community-active-node]");
+      const relations = [...el.querySelectorAll("[data-colus-community-relation]")];
+      if (!ellipse || !handoff || !moving || relations.length !== 3) return null;
+      const lengths = ellipse.getTotalLength(), handoffLength = handoff.getTotalLength();
+      const near = ellipse.getPointAtLength(lengths * .72);
+      const entrance = handoff.getPointAtLength(0);
+      const point = handoff.getPointAtLength(handoffLength * .55);
+      const matrix = handoff.getScreenCTM();
+      if (!matrix) return null;
+      const project = p => ({
+        x: matrix.a*p.x + matrix.c*p.y + matrix.e,
+        y: matrix.b*p.x + matrix.d*p.y + matrix.f
+      });
+      const ringPoint = project(point);
+      const rect = moving.getBoundingClientRect();
+      const nodePoint = {x:rect.left+rect.width/2,y:rect.top+rect.height/2};
+      let collisions=0;
+      for(let i=0;i<=100;i++){
+        const p=project(handoff.getPointAtLength(handoffLength*i/100));
+        if(relations.some(rel=>{
+          const r=rel.getBoundingClientRect();
+          return p.x>r.left+2 && p.x<r.right-2 && p.y>r.top+2 && p.y<r.bottom-2;
+        })) collisions++;
+      }
+      return {connection:Math.hypot(near.x-entrance.x, near.y-entrance.y),
+        nodeDrift:Math.hypot(ringPoint.x-nodePoint.x,ringPoint.y-nodePoint.y),
+        collisions};
+    });
+    assert.ok(outgoing && outgoing.connection < 7,
+      "The active ellipse pointer must join the outgoing Rise Axis branch: "+JSON.stringify(outgoing));
+    assert.ok(outgoing.collisions === 0,
+      "Rise Axis handoff must not obscure Acompanhar/Participar/Crescer juntos: "+JSON.stringify(outgoing));
+    assert.ok(outgoing.nodeDrift < 32,
+      "The phase-5 filled node should travel WITH the handoff: "+JSON.stringify(outgoing));
+    results.push({viewport:viewport.width,chapter:"Community Rise",...outgoing,verticalBalance});
+
     const phases = [
       { fraction: 0.07, phase: 1, name: "relacao" },
       { fraction: 0.25, phase: 2, name: "arco-nasce" },
