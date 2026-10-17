@@ -139,6 +139,7 @@ export function AprenderSection() {
               >
                 <motion.path
                   ref={trailPathRef}
+                  data-colus-desktop-trail-path
                   d="M40 520 C180 525 340 544 540 516 C580 510 618 460 624 404 C642 296 710 172 760 60"
                   fill="none"
                   strokeWidth="2"
