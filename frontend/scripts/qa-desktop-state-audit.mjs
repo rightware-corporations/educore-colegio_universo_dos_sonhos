@@ -44,6 +44,5 @@ try {
   await page.close();
  }
  writeFileSync(`${dir}/states.json`,JSON.stringify(rows,null,2));
- console.log("COLUS DESKTOP STATE AUDIT",JSON.stringify(rows.map(({width,id,f,headings,momentArticles,media,phase})=>
- ({width,id,f,phase,heads:headings.map(h=>({text:h.text.slice(0,26),opacity:h.wrap?.opacity})),moments:momentArticles.map(m=>({label:m.label,opacity:m.style?.opacity})),media:media.map(m=>({name:m.name,opacity:m.style?.opacity}))})))));
+ console.log("COLUS DESKTOP STATE AUDIT collected", rows.length, "samples");
 } finally { await browser.close(); }
