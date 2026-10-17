@@ -57,6 +57,24 @@ try {
     assert.equal(await stage.locator("[data-colus-community-rise-handoff]").count(), 1,
       "The open arc must yield into Rise Axis via its own connecting path");
 
+    const typography = await stage.evaluate(el => {
+      const rect=el.getBoundingClientRect();
+      const heading=el.querySelector("[data-colus-community-central-copy] h2");
+      const hs=heading && getComputedStyle(heading);
+      const lineHeight=hs?parseFloat(hs.lineHeight):0;
+      return {
+        ratio:rect.width/rect.height,
+        titleLines:heading && lineHeight ? heading.getBoundingClientRect().height/lineHeight : 0,
+        captionsHidden:[...el.querySelectorAll("[data-colus-community-media] > p")].every(
+          label => label.classList.contains("sr-only")),
+      };
+    });
+    assert.ok(Math.abs(typography.ratio-1720/760)<.065,
+      "Desktop Community Ring stage must preserve Master panel aspect: "+JSON.stringify(typography));
+    assert.ok(typography.titleLines>1.7 && typography.titleLines<2.45,
+      "Master Plus central headline should render in TWO lines: "+JSON.stringify(typography));
+    assert.ok(typography.captionsHidden,
+      "The three relation titles must be visible ONCE (beside their description), not duplicated under photos");
     const layout = await stage.evaluate(el => {
       const bounds = el.getBoundingClientRect();
       const rect = selector => {
