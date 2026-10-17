@@ -225,6 +225,7 @@ export function FuturoSection() {
           <svg viewBox="0 0 1440 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
               ref={signalPathRef}
+              data-colus-desktop-signal-path
               d="M-60 780 C165 780 365 800 560 795 C780 790 850 180 1150 180 C1200 180 1232 185 1270 180"
               fill="none"
               stroke="url(#signalGradient)"
