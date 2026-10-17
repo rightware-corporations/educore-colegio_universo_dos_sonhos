@@ -337,7 +337,7 @@ export function PertencerSection() {
                   key={title}
                   className={["absolute left-[5%] top-[58%] z-20 w-[19%] rounded-2xl border border-colus-ink/10 bg-colus-paper/95 px-3 py-2",
                     "absolute left-[24%] top-[78%] z-20 w-[19%] rounded-2xl border border-colus-ink/10 bg-colus-paper/95 px-3 py-2",
-                    "absolute left-[45%] top-[81%] z-20 w-[20%] rounded-2xl border border-colus-ink/10 bg-colus-paper/95 px-3 py-2"][index]}
+                    "absolute left-[48%] top-[81%] z-20 w-[20%] rounded-2xl border border-colus-ink/10 bg-colus-paper/95 px-3 py-2"][index]}
                 >
                   <p className="text-sm font-bold text-colus-ink">{title}</p>
                   <p className="mt-1 text-xs leading-5 text-colus-muted">{copy}</p>
