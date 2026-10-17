@@ -168,6 +168,7 @@ export function ManifestoSection() {
           </div>
           <div
             aria-hidden="true"
+            data-colus-desktop-photo-orbit
             className="pointer-events-none absolute hidden -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:block lg:h-40 lg:w-64"
           >
             <motion.div
