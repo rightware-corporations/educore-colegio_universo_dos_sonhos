@@ -520,3 +520,17 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **QA introduzido:** `qa-mobile-browser.mjs` captura o momento de transição em 390×844 e 440×956 e rejeita curvas com diferença centro/lateral >80px, além do teste anterior de paper pleno; `qa-mobile-story-contract.mjs` protege a composição contra regressão para pétalas/stem. Primeiro screenshot de produção antes do último ajuste dos control points: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38983926935 PASS, demonstrando que as formas gigantes desapareceram. **Falta confirmar o último ajuste na execução CI mais recente** e obter validação visual do proprietário.
 
 **Estado:** PR #2 draft; `main` intacta. Não fazer merge sem QA final do scroll contínuo e aprovação visual.
+
+
+## 34. CORREÇÃO DE DIREÇÃO DE ARTE — CORAÇÃO, NÃO LIVRO (2026-10-17)
+
+**ÚLTIMA DECISÃO EXPLÍCITA DO RESPONSÁVEL — PREVALECE SOBRE §33:** «o coração era a ideia, só que não devia ter aquela barra no meio»; a transição deve comunicar o coração, **não** passar a uma curva rasa que parece livro. A fotografia imediatamente a seguir mostra **duas pessoas a segurar dois corações verdes reais**, o que confirma a ligação psicológica intencional. O diagnóstico anterior de que o coração inteiro era um erro estava incorreto. **Não retirar novamente as duas pétalas arredondadas.**
+
+**Implementação na branch `feat/colus-mobile-editorial-storytelling` (sem merge):**
+- `ManifestoSection.tsx`: duas metades arredondadas Warm Paper restauradas em mobile com `pageScaleY` + separação lateral vinculados ao scroll; eliminada completamente a barra retangular central; preenchimento de fundo apenas na fase seguinte para tornar a fotografia e a copy legíveis. Identificadores `data-colus-manifesto-heart-left/right` e `data-colus-manifesto-paper-settle`.
+- Fotografia aprovada `COLUS-MANIFESTO-HUMANO-001.webp` foi inspecionada no GitHub e **preservada**; Hero/desktop/media/texto/rings intactos.
+- `qa-mobile-browser.mjs` e `qa-mobile-story-contract.mjs` corrigidos para proteger a intenção de coração com ausência de barra, e não proibir a silhueta. Teste de scroll intermédio a 390px e 440px e papel estabilizado junto ao retrato.
+
+**Evidência browser:** GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38985381293 SUCCESS; artifact ID `12082474833` contém capturas `manifesto-heart-390.png`, `manifesto-heart-440.png`, estados seguintes, QA ring/path e JSON. Verificação visual efetuada nesta sessão: lobos presentes, espaço negativo central livre, sem barra; retrato posterior apresenta os dois corações verdes e texto legível.
+
+**Estado:** conceito de coração explícito/confirmado pelo responsável; qualidade visual final do scroll contínuo ainda por aprovar no Edge; PR #2 draft, main intacta. **A referência artística válida é agora CORAÇÃO → CORAÇÕES REAIS NA FOTOGRAFIA**, não a anterior substituição por uma Open Book curve.
