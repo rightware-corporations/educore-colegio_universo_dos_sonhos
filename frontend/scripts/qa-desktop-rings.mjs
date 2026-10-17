@@ -72,6 +72,55 @@ try {
       results.push({ viewport: viewport.width, stage: stage.kind, filled: true, round: true, scrollLinked: true });
     }
 
+    // Regression from the owner's desktop Edge captures: the Signal Field
+    // crossed BOTH Futuro heading and copy. Sample actual SVG path geometry
+    // in viewport coordinates; media frames/copy/assets must be untouched.
+    const futureMetrics = await page.evaluate(() => {
+      const section = document.querySelector("#futuro");
+      const path = section?.querySelector("[data-colus-desktop-signal-path]");
+      if (!section || !path) return null;
+      const title = [...section.querySelectorAll("h2")].find(el => el.getBoundingClientRect().width > 0);
+      const description = title?.nextElementSibling;
+      const ctm = path.getScreenCTM();
+      if (!title || !description || !ctm) return null;
+      const forbidden = [title.getBoundingClientRect(), description.getBoundingClientRect()];
+      let intersectsText = 0;
+      const n = 150;
+      for (let i = 0; i <= n; i++) {
+        const point = path.getPointAtLength(path.getTotalLength() * i / n);
+        const px = ctm.a * point.x + ctm.c * point.y + ctm.e;
+        const py = ctm.b * point.x + ctm.d * point.y + ctm.f;
+        if (forbidden.some(r => px >= r.left - 10 && px <= r.right + 10 &&
+          py >= r.top - 10 && py <= r.bottom + 10)) intersectsText++;
+      }
+      return { intersectsText, pointSamples: n + 1 };
+    });
+    assert.ok(futureMetrics && futureMetrics.intersectsText === 0,
+      "Desktop Signal Field must not cross Futuro title/copy: " + JSON.stringify(futureMetrics));
+    results.push({ viewport: viewport.width, signalAvoidsCopy: true });
+
+    // Learning Trail runs behind photo windows so active SVG nodes do not
+    // stamp faces. The existing image dimensions and masks are protected.
+    const trail = page.locator("#experiencia [data-colus-desktop-learning-trail]");
+    assert.equal(await trail.count(), 1, "Learning Trail must exist for desktop");
+    assert.equal(await trail.evaluate(el => getComputedStyle(el).zIndex), "0",
+      "Learning Trail must be behind photo media, not painted over faces");
+
+    // In Manifesto the active photo orbit belongs ON the ellipse boundary,
+    // not over the people in the photograph.
+    const orbitMetrics = await page.evaluate(() => {
+      const ellipse = document.querySelector("[data-colus-desktop-photo-orbit]");
+      const node = ellipse?.querySelector('[data-colus-orbit-node="compact"]');
+      if (!ellipse || !node) return null;
+      const e = ellipse.getBoundingClientRect(), n = node.getBoundingClientRect();
+      const dx = (n.left + n.width / 2 - e.left - e.width / 2) / (e.width / 2);
+      const dy = (n.top + n.height / 2 - e.top - e.height / 2) / (e.height / 2);
+      return { radius: Math.hypot(dx, dy) };
+    });
+    assert.ok(orbitMetrics && orbitMetrics.radius >= .68 && orbitMetrics.radius <= 1.18,
+      "Manifesto active node must follow photo ellipse: " + JSON.stringify(orbitMetrics));
+    results.push({ viewport: viewport.width, manifestoOrbitOnEllipse: true, trailBehindMedia: true });
+
     // Master demands a COMMUNITY RING which remains incomplete, rather than
     // turning the entire blue SVG into a disk. The active pointer is filled.
     const community = page.locator("#comunidade");
