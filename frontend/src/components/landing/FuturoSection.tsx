@@ -50,8 +50,8 @@ function EngineeringDevice() {
 export function FuturoSection() {
   const ref = useRef<HTMLElement>(null);
   const signalPathRef = useRef<SVGPathElement>(null);
-  const pointerX = useMotionValue(-70);
-  const pointerY = useMotionValue(795);
+  const pointerX = useMotionValue(1280);
+  const pointerY = useMotionValue(115);
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -226,7 +226,7 @@ export function FuturoSection() {
             <motion.path
               ref={signalPathRef}
               data-colus-desktop-signal-path
-              d="M-70 795 C150 798 350 815 530 790 C600 764 636 676 650 545 C660 412 635 210 668 112 C860 88 1100 102 1280 115"
+              d="M1280 115 C1100 102 860 88 668 112 C635 210 660 412 650 545 C636 676 600 764 530 790 C350 815 150 798 -70 795"
               fill="none"
               stroke="url(#signalGradient)"
               strokeWidth="3"
@@ -234,14 +234,14 @@ export function FuturoSection() {
               style={{ pathLength: reduceMotion ? 1 : fieldLength }}
             />
             {/* Filled active node belongs to Signal Field, not the scene media. */}
-            <motion.g style={reduceMotion ? { x: 1280, y: 115 } : { x: pointerX, y: pointerY }} aria-hidden="true">
+            <motion.g style={reduceMotion ? { x: -70, y: 795 } : { x: pointerX, y: pointerY }} aria-hidden="true">
               <DesktopOrbitNode progress={scrollYProgress} tone="blue" size={15} />
             </motion.g>
             <defs>
               <linearGradient id="signalGradient" x1="0" y1="0" x2="1" y2="0">
-                <stop offset="0%" stopColor="#F18136" />
+                <stop offset="0%" stopColor="#0C5898" />
                 <stop offset="48%" stopColor="#2899EF" />
-                <stop offset="100%" stopColor="#0C5898" />
+                <stop offset="100%" stopColor="#F18136" />
               </linearGradient>
             </defs>
           </svg>
