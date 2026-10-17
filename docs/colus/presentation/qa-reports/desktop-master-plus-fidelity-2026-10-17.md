@@ -50,3 +50,18 @@ On this isolated branch, the desktop Community Ring stage has the central copy, 
 6. Manual Edge continuous-scroll forward/reverse and owner visual signoff, particularly faces, text and crop framing.
 
 **NO automatic merge**. After approval: merge PR #3 to `feat/colus-mobile-editorial-storytelling`; rerun complete tests on PR #2; only then consider merging PR #2 into `main`.
+
+## Desktop Master Plus — corrective browser acceptance pass (2026-10-17, latest)
+
+**Context:** An initial CI PASS was rejected after a deeper Chrome/Chromium visual audit found frozen scene opacities and gaps between independent motion devices. The new *computed-style* browser test exposed that `scrollYProgress` and derived MotionValues advanced but Chromium's accelerated native opacity effects did not. Tests that only checked SVG node movement were insufficient.
+
+**Corrective implementation on PR #3, no asset/copy edits:**
+- `frontend/src/components/landing/useScrollOpacity.ts`: dedicated scroll-driven MotionValue interpolation, avoiding the native WAAPI opacity timeline conflict. No timers, RAF loops or React re-rendering on each frame. Applied ONLY to desktop opacity layers in `AprenderSection.tsx`, `TransformarSection.tsx`, `PertencerSection.tsx`. CSS/Framer transforms and approved mobile markup remain unchanged.
+- `qa-desktop-state-audit.mjs`: asserts actual **computed** opacity of the displayed desktop scenes, not merely source scroll progress, at 12%, 50%, 88%, for 1440×900 and 1024×768. Discover→Create, Expressar→Construir→Avançar and Community media full stability all PASS.
+- Community Ring stage fixed to Master panel `1720×760` aspect, centred within the desktop sticky viewport; central headline in two lines. Relationship titles retained exactly but displayed once in three existing editorial beats (redundant photo captions are visually hidden, still accessible).
+- Six context dots stay physically circular, ellipse dotted and open. Main blue/orange node is connected to the open ring at fraction ~0.72 and follows the actual outgoing rise path during phase 5; no teleport back to the first node.
+- Outgoing `M765 590 ... 860 940` routes through the gap between relation labels and approaches the Rise Axis **below** the stage, instead of cutting through `Crescer juntos`. Text and images are not repositioned outside the earlier Master-related scope.
+
+**Latest actual Chromium acceptance:** https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39077107986 **SUCCESS** on commit `b7ec8b322cb720ecf8e7aad277e0f27afefaf2ff` including typecheck, production build, protected-asset checks, mobile browser tests, desktop ring tests, Master Plus structure and 30 measured scene opacity states. New geometric test samples outgoing path against ALL relationship cards: **zero collisions**; node follows outgoing path within 32px; arc joins outgoing branch within 7 SVG units; stage vertical centre occupies an intentional band of the viewport. Browser screenshots at 1440/1024 in artifact `colus-mobile-ring-qa` ID `12116579447`.
+
+**Editorial assessment:** inspected contact sheets for 1440/1024 states 2 (Arco Nasce), 4 (Estabilidade), 5 (Abertura), confirming visible composition-centering and node following the descending handoff. This is validated **technical/visual smoke**, not formal signoff for every aspect of source Draw.io fidelity. The transitions must still be assessed by the owner in Microsoft Edge during continuous normal/reverse scroll. No PR merge authorized; keep PR #3 in draft.
