@@ -211,6 +211,7 @@ export function PertencerSection() {
               </motion.div>
 
               <motion.article
+                data-colus-community-media="1"
                 style={reduceMotion ? undefined : { opacity: mediaA }}
                 className="absolute left-[4%] top-[14%] h-[38%] w-[23%]"
               >
@@ -225,6 +226,7 @@ export function PertencerSection() {
               </motion.article>
 
               <motion.article
+                data-colus-community-media="2"
                 style={reduceMotion ? undefined : { opacity: mediaB }}
                 className="absolute right-[5%] top-[10%] h-[32%] w-[24%]"
               >
@@ -240,6 +242,7 @@ export function PertencerSection() {
               </motion.article>
 
               <motion.article
+                data-colus-community-media="3"
                 style={reduceMotion ? undefined : { opacity: mediaC }}
                 className="absolute bottom-[12%] right-[9%] h-[29%] w-[23%]"
               >
