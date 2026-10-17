@@ -124,8 +124,10 @@ try {
     // Master demands a COMMUNITY RING which remains incomplete, rather than
     // turning the entire blue SVG into a disk. The active pointer is filled.
     const community = page.locator("#comunidade");
-    assert.equal(await community.locator("svg path[fill='none']").count() >= 4, true,
-      "Desktop Community Ring must retain multiple open paths");
+    assert.equal(await community.locator("svg path[fill='none']").count() >= 3, true,
+      "Desktop Community Ring must retain an open dotted path and Rise Axis handoff");
+    assert.equal(await community.locator("[data-colus-community-context-nodes] circle").count(), 6,
+      "Master Plus has six contextual nodes, separate from one active pointer");
 
     // Non-signature scenes use the compact orbit instead of extra active
     // competing devices; they preserve editorial copy and original media.
