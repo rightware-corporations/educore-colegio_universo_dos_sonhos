@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - main
+      - feat/colus-mobile-editorial-storytelling
     paths:
       - ".github/workflows/colus-frontend-qa.yml"
       - "frontend/**"
@@ -58,6 +59,8 @@ jobs:
         run: node scripts/qa-mobile-handoffs.mjs
       - name: Desktop Master orbit and path QA
         run: node scripts/qa-desktop-rings.mjs
+      - name: Desktop Master Plus composition and five-phase QA
+        run: node scripts/qa-desktop-master-plus.mjs
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
@@ -67,5 +70,6 @@ jobs:
             frontend/qa-artifacts/mobile-rings/
             frontend/qa-artifacts/mobile-handoffs/
             frontend/qa-artifacts/desktop-rings/
+            frontend/qa-artifacts/desktop-master-plus/
           if-no-files-found: warn
           retention-days: 14
