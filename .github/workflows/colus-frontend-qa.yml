@@ -56,6 +56,8 @@ jobs:
         run: node scripts/qa-mobile-browser.mjs
       - name: Native-scroll mobile PATH/NODE handoff QA
         run: node scripts/qa-mobile-handoffs.mjs
+      - name: Desktop Master orbit and path QA
+        run: node scripts/qa-desktop-rings.mjs
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
@@ -64,5 +66,6 @@ jobs:
           path: |
             frontend/qa-artifacts/mobile-rings/
             frontend/qa-artifacts/mobile-handoffs/
+            frontend/qa-artifacts/desktop-rings/
           if-no-files-found: warn
           retention-days: 14
