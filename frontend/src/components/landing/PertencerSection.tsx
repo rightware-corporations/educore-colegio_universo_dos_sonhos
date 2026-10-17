@@ -52,7 +52,7 @@ export function PertencerSection() {
   });
 
   const handoffOpacity = useTransform(scrollYProgress, [0.78, 0.94], [0, 1]);
-  const handoffScaleY = useTransform(scrollYProgress, [0.78, 0.97], [0.05, 1]);
+  const handoffLength = useTransform(scrollYProgress, [0.78, 0.98], [0, 1]);
 
   return (
     <section
@@ -184,6 +184,15 @@ export function PertencerSection() {
                 >
                   <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={14} />
                 </motion.g>
+                {/* During ABERTURA the last ring segment flows towards the
+                    Rise Axis at the same 50% horizontal locus used by Transformar. */}
+                <motion.path
+                  data-colus-community-rise-handoff
+                  d="M765 590 C775 670 844 695 860 760"
+                  fill="none" stroke="#F18136" strokeWidth="3" strokeLinecap="round"
+                  style={{ pathLength: reduceMotion ? 1 : handoffLength,
+                    opacity: reduceMotion ? 1 : handoffOpacity }}
+                />
               </motion.svg>
 
               {/* Master Plus: headline + description INSIDE the open ellipse,
@@ -258,18 +267,7 @@ export function PertencerSection() {
                 </div>
               ))}
 
-              <motion.div
-                style={
-                  reduceMotion
-                    ? undefined
-                    : { opacity: handoffOpacity, scaleY: handoffScaleY }
-                }
-                data-colus-community-rise-handoff
-                className="absolute -bottom-[18vh] left-1/2 z-10 h-[34vh] w-px origin-top bg-gradient-to-b from-colus-orange via-colus-orange to-transparent"
-                aria-hidden="true"
-              >
-                <span className="absolute -left-[5px] top-0 h-3 w-3 rounded-full bg-colus-orange" />
-              </motion.div>
+
             </div>
           </div>
         </div>
