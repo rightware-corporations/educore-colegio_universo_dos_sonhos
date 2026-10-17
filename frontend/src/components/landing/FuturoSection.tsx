@@ -50,8 +50,8 @@ function EngineeringDevice() {
 export function FuturoSection() {
   const ref = useRef<HTMLElement>(null);
   const signalPathRef = useRef<SVGPathElement>(null);
-  const pointerX = useMotionValue(-80);
-  const pointerY = useMotionValue(690);
+  const pointerX = useMotionValue(-70);
+  const pointerY = useMotionValue(795);
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -226,7 +226,7 @@ export function FuturoSection() {
             <motion.path
               ref={signalPathRef}
               data-colus-desktop-signal-path
-              d="M-60 780 C165 780 365 800 560 795 C780 790 850 180 1150 180 C1200 180 1232 185 1270 180"
+              d="M-70 795 C150 798 350 815 530 790 C600 764 636 676 650 545 C660 412 635 265 668 175 C860 149 1100 162 1280 175"
               fill="none"
               stroke="url(#signalGradient)"
               strokeWidth="3"
@@ -234,7 +234,7 @@ export function FuturoSection() {
               style={{ pathLength: reduceMotion ? 1 : fieldLength }}
             />
             {/* Filled active node belongs to Signal Field, not the scene media. */}
-            <motion.g style={reduceMotion ? { x: 1270, y: 180 } : { x: pointerX, y: pointerY }} aria-hidden="true">
+            <motion.g style={reduceMotion ? { x: 1280, y: 175 } : { x: pointerX, y: pointerY }} aria-hidden="true">
               <DesktopOrbitNode progress={scrollYProgress} tone="blue" size={15} />
             </motion.g>
             <defs>
