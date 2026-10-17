@@ -122,7 +122,7 @@ export function AprenderSection() {
                 Aprender em movimento
               </p>
 
-              <motion.div style={reduceMotion ? undefined : { opacity: discoverOpacity }}>
+              <motion.div data-colus-desktop-discover style={reduceMotion ? undefined : { opacity: discoverOpacity }}>
                 <p className="mt-10 text-xs font-bold tracking-[0.18em] text-colus-orange">
                   01 / DESCOBRIR
                 </p>
@@ -132,6 +132,7 @@ export function AprenderSection() {
               </motion.div>
 
               <motion.div
+                data-colus-desktop-create
                 style={reduceMotion ? undefined : { opacity: createOpacity, y: createY }}
                 className="absolute left-0 top-24"
               >
