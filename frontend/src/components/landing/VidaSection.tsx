@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
+import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -229,7 +230,7 @@ export function VidaSection() {
                 className="absolute -bottom-5 left-[8%] flex items-center gap-3"
                 aria-hidden="true"
               >
-                <span className="h-3 w-3 rounded-full bg-colus-orange" />
+                <EditorialOrbitNode progress={scrollYProgress} size="compact" />
                 <span className="h-px w-16 bg-colus-orange/55" />
               </motion.div>
             </motion.div>
