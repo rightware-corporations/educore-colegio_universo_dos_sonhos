@@ -134,7 +134,7 @@ export function AprenderSection() {
               <svg
                 viewBox="0 0 800 620"
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible"
+                className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible"
               >
                 <motion.path
                   ref={trailPathRef}
@@ -148,7 +148,7 @@ export function AprenderSection() {
                   }}
                 />
                 <circle cx="48" cy="470" r="4" fill="#0C5898" opacity=".6" />
-                <circle cx="754" cy="330" r="4" fill="#F18136" opacity=".6" />
+
                 <motion.g style={reduceMotion ? { x: 754, y: 330 } : { x: trailX, y: trailY }}>
                   <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={13} />
                 </motion.g>
