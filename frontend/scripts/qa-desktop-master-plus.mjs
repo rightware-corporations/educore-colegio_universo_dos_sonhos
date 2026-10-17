@@ -81,6 +81,41 @@ try {
       layout.relationX[1] < layout.relationX[2],
       "Acompanhar -> Participar -> Crescer juntos must progress across the stage");
 
+    // Master chapter handoffs. Their endpoints should agree spatially,
+    // not merely exist as independent scroll effects.
+    const handoffs = await page.evaluate(() => {
+      const trail = document.querySelector("#experiencia [data-colus-desktop-trail-path]");
+      const signal = document.querySelector("#futuro [data-colus-desktop-signal-path]");
+      const entry = document.querySelector("#comunidade [data-colus-community-entry-bridge]");
+      const ring = document.querySelector("#comunidade [data-colus-community-ring-path]");
+      const exit = document.querySelector("#comunidade [data-colus-community-rise-handoff]");
+      const rise = document.querySelector("#transformar [data-colus-desktop-rise-axis]");
+      const vida = document.querySelector("#vida-colus [data-colus-vida-exit-marker]");
+      const stage = document.querySelector("#comunidade [data-colus-community-stage]");
+      if (!trail || !signal || !entry || !ring || !exit || !rise || !vida || !stage) return null;
+      const end = p => p.getPointAtLength(p.getTotalLength());
+      const begin = p => p.getPointAtLength(0);
+      const a = end(trail), b = begin(signal), c = end(entry), d = begin(ring),
+        e = end(exit), f = begin(rise);
+      const stageX = stage.getBoundingClientRect().left +
+        stage.getBoundingClientRect().width * 570 / 1720;
+      const vidaX = vida.getBoundingClientRect().left;
+      return {
+        trailToSignal: Math.hypot(a.x / 800 - b.x / 1440, a.y / 620 - b.y / 900),
+        entryJoinsRing: Math.hypot(c.x - d.x, c.y - d.y),
+        communityToRise: Math.abs(e.x / 1720 - f.x / 1400),
+        vidaMarkerToEntry: Math.abs(vidaX - stageX) / window.innerWidth,
+      };
+    });
+    assert.ok(handoffs &&
+      handoffs.trailToSignal < 0.11 &&
+      handoffs.entryJoinsRing < 2 &&
+      handoffs.communityToRise < 0.03 &&
+      handoffs.vidaMarkerToEntry < 0.10,
+      "PATH and Story Markers must connect across chapter boundaries: " +
+      JSON.stringify(handoffs));
+    results.push({ viewport: viewport.width, chapter: "Chapter handoffs", ...handoffs });
+
     const phases = [
       { fraction: 0.07, phase: 1, name: "relacao" },
       { fraction: 0.25, phase: 2, name: "arco-nasce" },
