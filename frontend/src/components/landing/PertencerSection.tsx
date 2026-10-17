@@ -25,6 +25,7 @@ const masterContextNodes = [
 export function PertencerSection() {
   const ref = useRef<HTMLElement>(null);
   const ringPathRef = useRef<SVGPathElement>(null);
+  const riseHandoffRef = useRef<SVGPathElement>(null);
   const markerX = useMotionValue("33.14%");
   const markerY = useMotionValue("17.76%");
   const [communityPhase, setCommunityPhase] = useState(1);
@@ -72,8 +73,15 @@ export function PertencerSection() {
     setCommunityPhase((previous) => previous === nextPhase ? previous : nextPhase);
     const path = ringPathRef.current;
     if (!path || reduceMotion) return;
-    const portion = Math.max(0, Math.min(1, (progress - 0.1) / 0.73));
-    const point = path.getPointAtLength(portion * path.getTotalLength());
+    // Stay on the relational ellipse until phase 5, then continue along
+    // its actual outgoing branch. The handoff starts where the two paths meet
+    // (roughly 72% of the perimeter), avoiding a jump back to the arc start.
+    const leaving = progress >= 0.8 && riseHandoffRef.current;
+    const activePath = leaving ? riseHandoffRef.current! : path;
+    const portion = leaving
+      ? Math.max(0, Math.min(1, (progress - 0.8) / 0.2))
+      : Math.max(0, Math.min(0.72, ((progress - 0.1) / 0.7) * 0.72));
+    const point = activePath.getPointAtLength(portion * activePath.getTotalLength());
     markerX.set(`${(point.x / 1720) * 100}%`);
     markerY.set(`${(point.y / 760) * 100}%`);
   });
@@ -167,7 +175,7 @@ export function PertencerSection() {
 
       <div className={reduceMotion ? "hidden" : "hidden h-[155vh] lg:block"}>
         <div className="sticky top-0 h-screen overflow-hidden py-12 lg:py-14">
-          <div className="mx-auto flex h-full max-w-[1440px] flex-col px-16">
+          <div className="mx-auto flex h-full max-w-[1440px] flex-col justify-center px-16">
             <p className="relative z-20 shrink-0 text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
               Pertencer
             </p>
@@ -224,8 +232,9 @@ export function PertencerSection() {
                 {/* During ABERTURA the last ring segment flows towards the
                     Rise Axis at the same 50% horizontal locus used by Transformar. */}
                 <motion.path
+                  ref={riseHandoffRef}
                   data-colus-community-rise-handoff
-                  d="M765 590 C775 670 844 695 860 760"
+                  d="M765 590 C758 660 760 702 769 724 C783 749 838 754 860 760"
                   fill="none" stroke="#F18136" strokeWidth="3" strokeLinecap="round"
                   style={{ pathLength: reduceMotion ? 1 : handoffLength,
                     opacity: reduceMotion ? 1 : handoffOpacity }}
