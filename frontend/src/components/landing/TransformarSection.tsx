@@ -1,11 +1,18 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { MobileNarrativePath } from "./MobileNarrativePath";
+import { MobileSceneWindow } from "./MobileSceneWindow";
+import { DesktopOrbitNode } from "./DesktopOrbitNode";
+import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
 export function TransformarSection() {
   const ref = useRef<HTMLElement>(null);
+  const risePathRef = useRef<SVGPathElement>(null);
+  const riseX = useMotionValue(690);
+  const riseY = useMotionValue(980);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
@@ -15,6 +22,16 @@ export function TransformarSection() {
   const third = useTransform(scrollYProgress, [0.64, 0.72, 1], [0, 1, 1]);
   const horizonOpacity = useTransform(scrollYProgress, [0.86, 0.96], [0, 1]);
   const horizonScaleX = useTransform(scrollYProgress, [0.86, 1], [0.08, 1]);
+  const horizonNodePosition = useTransform(scrollYProgress, [0.86, 1], ["50%", "100%"]);
+  const riseNodeOpacity = useTransform(scrollYProgress, [0.78, 0.91], [1, 0]);
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (reduceMotion || !risePathRef.current) return;
+    const path = risePathRef.current;
+    const distance = Math.max(0, Math.min(1, (progress - 0.04) / 0.88));
+    const point = path.getPointAtLength(distance * path.getTotalLength());
+    riseX.set(point.x);
+    riseY.set(point.y);
+  });
 
   const moments = [
     {
@@ -53,46 +70,68 @@ export function TransformarSection() {
       data-header-theme="dark"
       className="relative overflow-hidden bg-colus-ink text-white lg:overflow-visible"
     >
+
+      {/* Mobile: one vertical narrative, with each stage inscribed in its image. */}
       <div className={reduceMotion ? "block" : "lg:hidden"}>
-        <div className="relative mx-auto max-w-[680px] px-5 py-20 sm:px-6">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_10%,rgba(241,129,54,.16),transparent_25%)]" />
-
-          <div className="relative z-10">
-            <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
-              Transformar
-            </p>
-            <h2 className="mt-5 max-w-[13ch] text-[clamp(40px,10vw,50px)] font-bold leading-[.98] tracking-[-.04em]">
-              Quando a confiança cresce, novos caminhos tornam-se possíveis.
-            </h2>
-
-            <div className="relative mt-12">
-              <div className="absolute bottom-6 left-[19px] top-6 w-px bg-gradient-to-b from-colus-orange via-colus-bright-blue/55 to-colus-orange/35" />
-
-              <div className="space-y-8">
-                {moments.map((moment) => (
-                  <article key={moment.number} className="relative pl-12">
-                    <span className="absolute left-[13px] top-5 z-20 h-3.5 w-3.5 rounded-full bg-colus-orange shadow-[0_0_0_6px_rgba(241,129,54,.09)]" />
-                    <div className="relative aspect-[4/3] overflow-hidden rounded-[28px_72px_28px_28px]">
-                      <LandingMedia
-                        kind="image"
-                        src={`${MEDIA_ROOT}/${moment.src}`}
-                        alt={moment.alt}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/8 to-transparent" />
-                      <div className="absolute inset-x-0 bottom-0 p-5">
-                        <p className="text-[11px] font-bold tracking-[0.18em] text-colus-orange">
-                          {moment.number} / {moment.label}
-                        </p>
-                        <p className="mt-3 text-xl font-semibold leading-7 text-white">
-                          {moment.copy}
-                        </p>
-                      </div>
-                    </div>
-                  </article>
-                ))}
+        <div data-colus-mobile-story="axis" className="relative mx-auto max-w-[680px] bg-colus-ink">
+          <MobileNarrativePath kind="axis" />
+          <article className="relative isolate min-h-[72svh] overflow-hidden bg-colus-ink-soft sm:rounded-[34px_88px_34px_34px]">
+            <MobileSceneWindow>
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/" + moments[0].src}
+                alt={moments[0].alt}
+              />
+            </MobileSceneWindow>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/95 via-colus-ink/40 to-colus-ink/95" />
+            <div className="relative z-10 flex min-h-[72svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">Transformar</p>
+                <h2 className="mt-5 max-w-[13ch] font-editorial text-[clamp(38px,9vw,60px)] font-medium leading-[1] tracking-[-.04em] text-white">
+                  Quando a confiança cresce, novos caminhos tornam-se possíveis.
+                </h2>
+              </div>
+              <div>
+                <p className="text-[11px] font-bold uppercase tracking-[.2em] text-colus-orange">01 / Expressar</p>
+                <p className="mt-3 max-w-[27ch] text-[clamp(19px,5vw,25px)] font-semibold leading-[1.3] text-white">
+                  Voz, criatividade e presença.
+                </p>
               </div>
             </div>
-          </div>
+          </article>
+
+          {moments.slice(1).map((moment, index) => (
+            <div key={moment.number}>
+              <div className="h-3" aria-hidden="true" />
+              <article
+                className={
+                  "relative isolate overflow-hidden bg-colus-ink-soft " +
+                  (index === 0
+                    ? "ml-5 min-h-[58svh] rounded-[82px_26px_26px_26px] sm:ml-0"
+                    : "mr-7 min-h-[58svh] rounded-[26px_26px_84px_26px] sm:mr-0")
+                }
+              >
+                <MobileSceneWindow>
+                  <LandingMedia kind="image" src={MEDIA_ROOT + "/" + moment.src} alt={moment.alt} />
+                </MobileSceneWindow>
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/30 to-colus-ink/10" />
+                <div className={"relative z-10 flex flex-col justify-between px-6 pb-10 pt-8 " + (index === 0 ? "min-h-[58svh]" : "min-h-[58svh]")}>
+                  <p className="text-[11px] font-bold uppercase tracking-[.2em] text-white/75">
+                    TRANSFORMAR / {moment.number}
+                  </p>
+                  <div>
+                    <h3 className="font-editorial text-[clamp(40px,10vw,59px)] font-medium leading-none tracking-[-.035em] text-white">
+                      {index === 0 ? "Construir" : "Avançar"}
+                    </h3>
+                    <p className="mt-4 max-w-[28ch] text-[18px] font-medium leading-7 text-white/95">
+                      {moment.copy}
+                    </p>
+                  </div>
+                </div>
+              </article>
+            </div>
+          ))}
+          
         </div>
       </div>
 
@@ -101,6 +140,7 @@ export function TransformarSection() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_48%_22%,rgba(241,129,54,.18),transparent_28%),linear-gradient(180deg,#FFF8EF_0%,#071A2A_34%,#071A2A_100%)] opacity-95" />
           <svg viewBox="0 0 1400 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
+              ref={risePathRef}
               d="M690 980 C684 710 720 570 704 390 C692 248 732 146 780 -80"
               fill="none"
               stroke="#F18136"
@@ -108,15 +148,26 @@ export function TransformarSection() {
               strokeLinecap="round"
               style={{ pathLength: reduceMotion ? 1 : axisLength }}
             />
+            {/* One filled node rises along the real path, then yields to Horizon. */}
+            <motion.g style={reduceMotion ? { x: 780, y: -40 } : { x: riseX, y: riseY, opacity: riseNodeOpacity }}>
+              <DesktopOrbitNode progress={scrollYProgress} size={15} />
+            </motion.g>
           </svg>
 
-          <motion.div
-            style={reduceMotion ? undefined : { opacity: horizonOpacity, scaleX: horizonScaleX }}
-            className="pointer-events-none absolute bottom-[12vh] left-1/2 z-10 h-px w-[72vw] max-w-[1040px] -translate-x-1/2 origin-center bg-white/18"
-            aria-hidden="true"
-          >
-            <span className="absolute -right-1 -top-[5px] h-3 w-3 rounded-full bg-colus-orange" />
-          </motion.div>
+          {/* The line grows into Horizon; the node stays ROUND and travels
+              independently (never inherits the line's scaleX distortion). */}
+          <div className="pointer-events-none absolute bottom-[12vh] left-1/2 z-10 w-[72vw] max-w-[1040px] -translate-x-1/2" aria-hidden="true">
+            <motion.div
+              style={reduceMotion ? undefined : { opacity: horizonOpacity, scaleX: horizonScaleX }}
+              className="absolute inset-x-0 bottom-0 h-px origin-center bg-white/25"
+            />
+            <motion.div
+              style={reduceMotion ? { left: "100%" } : { left: horizonNodePosition, opacity: horizonOpacity }}
+              className="absolute -top-4 -translate-x-1/2"
+            >
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </motion.div>
+          </div>
 
           <div className="relative z-10 mx-auto grid min-h-screen max-w-[1440px] items-center gap-8 px-16 py-24 lg:grid-cols-12">
             <div className="lg:col-span-5">

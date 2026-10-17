@@ -1,6 +1,9 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { MobileNarrativePath } from "./MobileNarrativePath";
+import { MobileSceneWindow } from "./MobileSceneWindow";
+import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -38,8 +41,94 @@ export function VidaSection() {
       ref={ref}
       id="vida-colus"
       data-header-theme="light"
-      className={`relative overflow-hidden bg-colus-paper py-20 lg:py-24 ${reduceMotion ? "" : "lg:min-h-[155vh]"}`}
+      className={`relative overflow-hidden bg-colus-paper lg:py-24 ${reduceMotion ? "" : "lg:min-h-[155vh]"}`}
     >
+
+      {/* Mobile editorial sequence: typography belongs to each image, not a card below it. */}
+      <div className="lg:hidden">
+        <div data-colus-mobile-story="marker" className="relative mx-auto max-w-[680px] bg-colus-ink">
+          <MobileNarrativePath kind="marker" />
+          <article className="relative isolate min-h-[68svh] overflow-hidden bg-colus-ink">
+            <MobileSceneWindow>
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-SPORT-001.webp"}
+                alt="Momento de desporto e movimento na vida escolar COLUS"
+              />
+            </MobileSceneWindow>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-colus-ink/75 via-colus-ink/15 to-colus-ink/95" />
+            <div className="relative z-10 flex min-h-[68svh] flex-col justify-between px-6 pb-11 pt-16 sm:px-9">
+              <p className="text-[11px] font-bold uppercase tracking-[0.19em] text-colus-orange">Vida COLUS</p>
+              <div>
+                <h2 className="max-w-[12ch] font-editorial text-[clamp(43px,10.8vw,66px)] font-medium leading-[.98] tracking-[-.04em] text-white">
+                  A escola acontece em movimento.
+                </h2>
+                <p className="mt-5 max-w-[33ch] text-[16px] font-medium leading-7 text-white/95">
+                  Há aprendizagens, encontros e descobertas que só acontecem quando a escola ganha vida.
+                </p>
+              </div>
+            </div>
+          </article>
+
+          <div className="h-3" aria-hidden="true" />
+
+          <article className="relative isolate ml-5 min-h-[48svh] overflow-hidden rounded-[68px_22px_22px_22px] bg-colus-ink sm:ml-0">
+            <MobileSceneWindow>
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-EXPRESSAO-001.webp"}
+                alt="Momento de expressão e participação estudantil"
+              />
+            </MobileSceneWindow>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/25 to-transparent" />
+            <div className="relative z-10 flex min-h-[48svh] flex-col justify-end px-6 pb-9">
+              <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">01 / Expressão</p>
+              <h3 className="mt-3 max-w-[12ch] font-editorial text-[clamp(36px,9vw,53px)] font-medium leading-none tracking-[-.035em] text-white">
+                Encontrar a própria voz.
+              </h3>
+            </div>
+          </article>
+
+          <div className="h-3" aria-hidden="true" />
+          <article className="relative isolate mr-9 min-h-[35svh] overflow-hidden rounded-[24px_72px_24px_24px] bg-colus-ink sm:mr-0">
+            <MobileSceneWindow>
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-CULTURA-001.jpg"}
+                alt="Momento cultural da comunidade escolar"
+              />
+            </MobileSceneWindow>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/20 to-transparent" />
+            <div className="relative z-10 flex min-h-[35svh] flex-col justify-end px-6 pb-9">
+              <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">02 / Cultura</p>
+              <h3 className="mt-3 max-w-[13ch] font-editorial text-[clamp(35px,8.5vw,50px)] font-medium leading-none tracking-[-.035em] text-white">
+                Partilhar o que nos liga.
+              </h3>
+            </div>
+          </article>
+
+          <div className="h-3" aria-hidden="true" />
+          <article className="relative isolate ml-5 min-h-[48svh] overflow-hidden rounded-[24px_24px_78px_24px] bg-colus-ink sm:ml-0">
+            <MobileSceneWindow>
+              <LandingMedia
+                kind="image"
+                src={MEDIA_ROOT + "/05-vida-colus/COLUS-VIDA-SPORT-002.webp"}
+                alt="Momento humano e coletivo na vida escolar"
+              />
+            </MobileSceneWindow>
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-colus-ink/95 via-colus-ink/20 to-transparent" />
+            <div className="relative z-10 flex min-h-[48svh] flex-col justify-end px-6 pb-9">
+              <p className="text-[11px] font-bold uppercase tracking-[.18em] text-colus-orange">03 / Encontro</p>
+              <h3 className="mt-3 max-w-[12ch] font-editorial text-[clamp(36px,9vw,52px)] font-medium leading-none tracking-[-.035em] text-white">
+                Crescer em conjunto.
+              </h3>
+            </div>
+          </article>
+          
+        </div>
+      </div>
+
+      <div className="hidden lg:block">
       <div className="mx-auto max-w-[1440px] px-5 md:px-8 lg:px-16">
         <div className="max-w-3xl">
           <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-deep-blue">
@@ -141,12 +230,13 @@ export function VidaSection() {
                 className="absolute -bottom-5 left-[8%] flex items-center gap-3"
                 aria-hidden="true"
               >
-                <span className="h-3 w-3 rounded-full bg-colus-orange" />
+                <EditorialOrbitNode progress={scrollYProgress} size="compact" />
                 <span className="h-px w-16 bg-colus-orange/55" />
               </motion.div>
             </motion.div>
           </div>
         </article>
+      </div>
       </div>
     </section>
   );

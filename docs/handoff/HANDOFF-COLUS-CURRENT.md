@@ -277,3 +277,305 @@ If any of these answers are missing after a meaningful work cycle, the handoff i
 ## 17. LAST UPDATED
 
 **2026-10-16.** Reconciliado o estado vivo com o handoff operacional de 16/10, o código da `main` e a cronologia documental. As secções históricas 6–14 continuam úteis para o percurso até 05/10, não para provar o estado atual. Atualizar este documento em cada ciclo substancial e manter os handoffs datados imutáveis.
+
+
+## 18. MOBILE EDITORIAL PASS — 2026-10-16 (BRANCH, NÃO MERGED)
+
+**Estado:** implementação realizada em branch de trabalho; requer testes técnicos, QA em browser mobile e aprovação visual do proprietário. Não declarar a landing concluída.
+
+**Branch:** `feat/colus-mobile-editorial-storytelling` (criada a partir de `main@b5b493386377cc54d4f8850e294557abe4a90bd5`).
+
+**Pedido autorizado nesta sessão:** transformar os layouts mobile que pareciam «card + texto» em composições imersivas com tipografia, títulos e narrativa dentro das imagens, melhores transições editoriais e continuidade entre secções. Aprovação para implementar NÃO equivale à aprovação visual final nem autorização para merge/publicação.
+
+**Alterado na branch:**
+- `frontend/src/components/landing/AprenderSection.tsx` — Descobrir/Criar como capítulos com headline sobre as imagens;
+- `frontend/src/components/landing/FuturoSection.tsx` — TIC/Engenharia/Ciência/Segurança Digital como cenas integradas; Engenharia **mobile** agora device-led SVG em vez de foto genérica, Ciência conserva vídeo upright e poster;
+- `frontend/src/components/landing/VidaSection.tsx` — imagens e texto compõem uma sequência editorial contínua;
+- `frontend/src/components/landing/PertencerSection.tsx` — storytelling humano/familiar sem legendas falsas;
+- `frontend/src/components/landing/TransformarSection.tsx` — Expressar/Construir/Avançar em sequência vertical sem captions soltas.
+
+**Não alterado:** Hero/Intro protegido, `LandingMedia.tsx`, layout desktop das secções, dados/backend, deps, Footer e testemunhos.
+
+**Commits de código:** `c8abc96`, `56d679a`, `cb53bd0`, `fda26c5`, `c141b85`; documentação QA: `9f7b37a`.
+
+**Verificação na sessão:** diff do GitHub limitado aos cinco componentes antes da documentação; comparação de estrutura de tags JSX sem anomalias no contador; Ciência mantém fonte normalizada; GitHub sem statuses CI para a branch consultada. O ambiente de agente não conseguiu fazer `git clone` por DNS.
+
+**NÃO VERIFICADO:** `npm run typecheck`, `npm run test:qa`, `npm run build`, screenshots e reprodução mobile, pixel diff e aprovação visual. A correção de Ciência desktop/Edge conserva o seu estado histórico aprovado, mas QA mobile ainda não foi realizado.
+
+**Evidência e plano QA:** `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md`.
+
+**Próxima ação exata:** abrir esta branch em browser mobile, executar testes e inspecionar 360/390/430/768px, vídeo Ciência/play-pause/reduced-motion/Save-Data, contraste e crop nas cenas, ritmo editorial completo e regressões desktop. Ajustar apenas desvios observados. Depois solicitar aprovação visual, decidir merge e atualizar este CURRENT no estado efetivamente integrado em `main`.
+
+**Divergências ainda abertas:** Engenharia 02 **desktop** continua com fotografia histórica não device-led; Vozes COLUS decisão C versus secção montada; Footer links/idioma e direitos pré-publicação.
+
+
+## 19. FUTURO MOBILE — REVISÃO COM CAPTURA DO EDGE (2026-10-16)
+
+**Feedback real do proprietário:** screenshot no Edge DevTools, iPhone 16 Pro Max 440×956, mostra Engenharia 02 com demasiada separação entre desenho técnico e título/copy, capítulos com aspeto de cartões independentes, e Ciência 03 parcialmente visível ao final. O painel `?motionQA=1` está presente e sobrepõe-se à parte inferior da visualização; não confundir overlay de QA com conteúdo da landing.
+
+**Correção aplicada apenas na branch `feat/colus-mobile-editorial-storytelling`:**
+- `FuturoSection.tsx`: sequência mobile passa a campos full-bleed consecutivos, sem margens/gaps entre cartões;
+- Engenharia 02: headline editorial «Das ideias às possibilidades.» no topo, schematic maior em zona central e copy no final; Path/Node coerente com a direção device-led, sem inventar fotografia ou evento;
+- Ciência 03 mantém ficheiros de vídeo `upright.mp4` e poster anteriores; apenas composição dos textos/campo mobile mudou;
+- Segurança Digital continua na narrativa visual, sem novos media;
+- JSX desktop comparado integralmente com `main`: idêntico. Hero e `LandingMedia.tsx` intocados.
+
+**Commit de correção:** `68cb5d98f9cd234621a2ceefa87e90e52458ae1e`.
+**Relatório de diagnóstico:** `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md` (atualizado após o fix).
+
+**Validação observada:** revisão estática de referências/tags e comparação textual do JSX desktop. **Não houve screenshot pós-fix, typecheck, test:qa ou build nesta sessão.** A correção deve ser tratada como candidato a aprovação mobile.
+
+**Próximo passo:** atualizar branch no VS Code com `git pull --ff-only origin feat/colus-mobile-editorial-storytelling`; abrir `http://localhost:8080/#futuro` sem parâmetro `?motionQA=1`, recarregar e inspecionar sequência TIC→Engenharia→Ciência→Segurança Digital em 390×844/440×956. Obter evidência pós-fix, executar testes e corrigir apenas desvios observados. PR #2 permanece draft; não integrar na `main` sem validação.
+
+
+## 20. MOBILE FUTURO — FEEDBACK REITERADO E QA LAUNCHER (2026-10-16)
+
+**Feedback do proprietário:** segunda captura do Edge DevTools, 440×956, URL `localhost:8080/#futuro`: «continua o mesmo erro». A screenshot confirma que a reorganização anterior de Engenharia não resolveu a dificuldade de narrativa visual e de continuidade com as cenas adjacentes. **Não considerar a cena Engenharia aprovada.**
+
+**Diagnóstico de UI confirmado no código:** o botão flutuante `Abrir Design + Motion QA` continuava visível em DEV mesmo sem `?motionQA=1`, pois `LandingMotionQA.tsx` devolvia um launcher `fixed bottom-4 left-4` quando QA não estava ativo. A instrução anterior de retirar o parâmetro de URL não ocultava esse botão.
+
+**Correção aplicada na branch:** `LandingMotionQA.tsx` passa a ocultar o *launcher inativo* abaixo de `md` (Tailwind `hidden md:inline-flex`). Em desktop continua descobrível; o painel QA explícito com `?motionQA=1` não foi alterado. Commit `f4212eb`.
+
+**Pendente:** confirmar no browser que o botão desaparece em mobile após `git pull`/refresh. A questão editorial de Engenharia permanece aberta e deve ser especificada com o proprietário antes de nova tentativa de redesenho. Preservar decisão device-led enquanto não houver autorização diferente; não inventar imagem de Engenharia nem alterar Ciência/Hero.
+
+**Testes:** sem execução real de typecheck/build/browser nesta sessão; não declarar QA validado.
+
+
+## 21. MOBILE FUTURO — HEADER / CIÊNCIA CONTRAST QA (2026-10-16)
+
+**Nova evidência do proprietário:** terceira screenshot Edge mobile 440×956, sem `?motionQA=1`. Botão QA ausente (fix de launcher aparentemente eficaz). Persistem duas falhas específicas: Header fixo corta título de Engenharia durante scroll; o título de Ciência sobrepõe-se a estudantes no vídeo.
+
+**Fix somente na branch `feat/colus-mobile-editorial-storytelling`:**
+- `frontend/src/components/landing/LandingHeader.tsx` (commit `d1f6aae`): proteção mobile exclusiva para headlines de Futuro que entram na faixa superior do viewport. A lógica normal do Header mantém-se fora desse encontro e no desktop.
+- `frontend/src/components/landing/FuturoSection.tsx` (commit `1a3bc81`): scene Ciência com campo de leitura escuro no início e vídeo progressivamente visível abaixo; marcas nos quatro títulos mobile para proteção do Header. Vídeo upright/poster inalterados; secção desktop comparada com `main` e idêntica.
+- Relatório: `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md`.
+
+**Verificação:** referências do vídeo/poster preservadas, comparação textual do bloco desktop sem diferenças, quatro títulos marcados e contagem de tags JSX balanceada; nenhum browser/build/teste npm executado após estas alterações. Não declarar aprovação visual ou técnica; PR #2 permanece draft, `main` intacta.
+
+**Próxima ação:** atualizar a branch no VS Code; inspeção Edge mobile em 440×956/390×844, scroll lento reverso e direto no Header sobre Engenharia, cena Ciência sem texto sobre rostos, playback/pausa, responsive/tablet e testes `typecheck`, `test:qa`, `build`. Se continuar problema de composição, solicitar localização exata na captura antes de novo redesenho device-led; não modificar Hero, mídia original ou backend.
+
+
+## 22. AUDITORIA ESTÁTICA DE RITMO MOBILE — 2026-10-16
+
+**Motivo:** continuar o PR #2 sem repetir ajustes visuais especulativos antes de validar as últimas correções no Edge.
+
+**Estado GitHub:** `main@b5b493386377cc54d4f8850e294557abe4a90bd5`; PR #2 draft, branch `feat/colus-mobile-editorial-storytelling` antes desta auditoria em `2b5729d5152eb61e56bf600369b636061746d66a`. Sem GitHub Actions configuradas/execuções observadas. Nenhum merge.
+
+**Resultado do código:** mínimos nominais de palcos mobile são Aprender ~172svh, Futuro ~321svh, Vida ~262svh, Pertencer ~213svh, Transformar ~232svh, total ~1200svh, antes de espaçamentos e conteúdo excedente. O Scroll Budget prevê 675–735svh como referência conjunta para esses cinco blocos. Isto é **REVIEW editorial**, não `FAIL`; não encurtar mecanicamente porque a documentação define ritmo, não CSS obrigatório. Ver [relatório de ritmo](../colus/presentation/qa-reports/mobile-editorial-2026-10-16/RHYTHM-REVIEW.md).
+
+**Validação:** inspeção do GitHub e comparação estática; não houve `typecheck`, `test:qa`, `build`, screenshot pós-fix ou QA do vídeo mobile. O runtime do agente não resolve github.com para clone nem tem acesso ao localhost do utilizador.
+
+**Próxima ação:** atualizar branch no VS Code; executar os três comandos npm; inspecionar em Edge 390×844 / 440×956 a transição Engenharia→Ciência, scroll reverso sobre os headings, vídeo Ciência e legibilidade; depois confirmar ou refutar o risco do ritmo excessivo antes de alterar alturas. Preservar Hero, desktop e os assets protegidos. PR continua draft.
+
+
+## 23. FUTURO MOBILE — CIÊNCIA PRECISA COMEÇAR COM VÍDEO (2026-10-16)
+
+**Nova evidência:** screenshot Edge 440×956 do proprietário mostra que, após Engenharia, Ciência ainda começava com texto em fundo escuro e sem imagem visível no momento de entrada. O banner de tradução é chrome do Edge, não componente COLUS.
+
+**Causa técnica:** `FuturoSection.tsx` colocava o vídeo mobile Ciência na região que começava em `top-[32%]`, criando entrada text-first sem o media. Contradiz o pedido aprovado de **texto imerso nas imagens** e continuidade de storytelling.
+
+**Implementado na branch**, commit `0a33ea34044b3574f7d78ccf9d1fde88bb4cc5f5`: vídeo Ciência ocupa a cena desde o topo (`absolute inset-0`); headline e supporting copy ancorados ao fundo com scrim para legibilidade; altura mobile reduzida de `88svh` para `78svh` apenas pela eliminação da abertura sem media. O vídeo upright e o poster não foram trocados, `LandingMedia.tsx` não foi alterado, bloco desktop do Futuro continua idêntico à `main`, Hero protegido não tocado.
+
+**Verificação observada:** comparação textual desktop idêntica, assets referenciados, tags JSX básicas balanceadas. Não ocorreu typecheck/build/QA real no Edge após este commit: correção é candidato para validação, não aprovação.
+
+**Próxima ação:** `git pull --ff-only origin feat/colus-mobile-editorial-storytelling` com working tree limpa; hard refresh do Edge; no viewport 440×956 percorrer Engenharia → Ciência. Confirmar que o vídeo entra imediatamente, que texto no fundo não cobre rostos nem fica ilegível, e que pause/play/reduced-motion/Save-Data continuam corretos. Executar os testes npm pendentes. PR #2 permanece draft, sem merge. Relatório atualizado em `docs/colus/presentation/qa-reports/mobile-editorial-2026-10-16/README.md`.
+
+
+## 24. ENGENHARIA 02 MOBILE — IMAGEM CONTEXTUAL INTRODUZIDA (2026-10-16)
+
+**Feedback recorrente e autorização explícita:** proprietário comunicou que Engenharia «continua sem imagem», depois confirmou «sim» à solução proposta de fotografia real `COLUS-APRENDER-CRIAR-001.webp` como base, SVG técnico secundário e texto sobreposto. As capturas anteriores mostram que o painel exclusivamente esquemático não satisfazia a narrativa mobile.
+
+**Intervenção implementada apenas na branch `feat/colus-mobile-editorial-storytelling`**, commit `9c3a3eb0c7aa7f1a84a8a7ceadc7d7d4ad6d8735`:
+- `FuturoSection.tsx`: imagem COLUS da atividade prática/experiência incorporada como base real de Engenharia 02; os SVG Path/Node continuam como metáfora visual, em overlay discreto no terço inferior.
+- Removida a cor de fundo opaca do componente `EngineeringMobileDevice`, que ocultaria a foto mesmo depois de inserida. O overlay tem agora fundo transparente, intensidade reduzida e máscara que privilegia imagem/rostos.
+- Mantida a tipografia e o copy editorial, bem como os media aprovados de Ciência e o Hero.
+- JSX desktop comparado com `main`: idêntico. `LandingMedia.tsx` e `IntroHeroSection.tsx` não alterados.
+
+**Regra editorial importante:** a fotografia foi inspecionada; mostra experiência/criação prática de alunos, **não é evidência confirmada de uma atividade de Engenharia**. O Asset Gate histórico mantinha Engenharia como device-led por falta de media validado. A adaptação foto + device foi agora solicitada e aceite como tentativa no contexto mobile; não apresentar a imagem como prova específica de Engenharia, não declarar direitos aprovados para publicação.
+
+**QA:** referências media e balanceamento JSX verificados estaticamente; nenhum browser/typecheck/build/test:qa pós-correção executado. Sem merge para `main`, PR #2 draft. Próxima ação: atualizar branch no VS Code, abrir Edge mobile 440×956 e 390×844, verificar imagem realmente visível, crop/rostos e texto, engenharia→ciência, redução de movimento e testes antes de solicitar aprovação.
+
+## 25. ENGENHARIA MOBILE — REMOÇÃO DO PENTÁGONO (2026-10-16)
+
+**Feedback com screenshot Edge 440×956:** a fotografia contextual de Engenharia já aparece, mas o grande pentágono técnico permanece sobre alunos e materiais. Pedido do responsável: eliminar a marca.
+
+**Fix na branch de revisão:** `FuturoSection.tsx` commit `a023884f3a6e64b43e26a0cae86858695ff9fbae`. Foram retirados a montagem de `EngineeringMobileDevice` e o componente SVG exclusivo do mobile. O gradiente foi moderadamente aliviado, preservando a foto real `COLUS-APRENDER-CRIAR-001.webp`, title/copy, continuidade editorial, vídeo Ciência e poster; desktop/Hero protegidos mantidos.
+
+**Status:** implementação feita, sem build/testes npm ou screenshot pós-correção nesta sessão. PR #2 mantém-se draft, `main` intacta. Verificar visualmente que o pentágono desapareceu e que texto e foto continuam legíveis. A fotografia retrata criação/experiência prática e não confirma um programa de Engenharia.
+
+
+## 26. MOBILE STORYTELLING — ASSET DUPLICADO ENTRE CRIAR E ENGENHARIA (2026-10-16)
+
+**Feedback:** duas screenshots Edge mobile 440×956 (Aprender/02 Criar e Futuro/02 Engenharia) mostraram a mesma fotografia `COLUS-APRENDER-CRIAR-001.webp` em ambas as cenas, juntamente com copy muito volumosa sobre ação/pessoas. A questão não era mais pentágono nem falta de media: era repetição visual e colisão da hierarquia editorial.
+
+**Correção aplicada à branch `feat/colus-mobile-editorial-storytelling`:**
+- `frontend/src/components/landing/FuturoSection.tsx`, commit `d9710eb`: substituiu apenas a imagem de **Engenharia mobile** por `03-aprender/descobrir/COLUS-APRENDER-DESCOBRIR-002.webp`, fotografia diferente com demonstração de circuito e lâmpadas; crop mobile `object-[67%_center]`; headline mais contida e alt factual. A imagem continua **contextual**, sem comprovar programa Engenharia.
+- `frontend/src/components/landing/AprenderSection.tsx`, commit `c43306f`: tipografia de Criar mobile reduzida e gradiente suavizado. Texto original mantido.
+- Nenhum componente desktop, Hero, Science upright/poster nem `LandingMedia.tsx` foi deliberadamente alterado.
+
+**Nota:** a nova fotografia de Engenharia foi inspecionada no repositório, distinta do asset Criar; está presente também como detalhe na versão desktop Aprender (já existente). A duplicação apontada nas screenshots refere-se especificamente ao **mobile** e foi eliminada no código. A imagem não prova aula de Engenharia. Preservar o Asset Gate histórico e usar a nova cena apenas como contextual até aprovação.
+
+**Estado:** implementação na branch, sem screenshot pós-correção, `typecheck`, `test:qa` ou `build` observados. PR #2 continua rascunho e `main` intacta. Próxima ação: atualizar branch e inspecionar Edge 440×956/390×844 o contraste, o corte no topo dos rostos, a visualização dos circuitos, a legibilidade dos títulos e a continuidade para Ciência antes de decidir merge.
+
+
+## 27. MOBILE MASTER V0.18 — PATH/NODE MOTION + RITMO (2026-10-17)
+
+**Pedido do proprietário:** depois da auditoria do `landing-colus-master (10).drawio`, autorizou «vamos então aplicar o que falta». O objetivo é alinhar os dispositivos mobile e a continuidade narrativa, sem alteração dos assets nem do Hero/desktop. Não equivale a aprovação para publicar ou integrar em `main`.
+
+**Branch e PR:** `feat/colus-mobile-editorial-storytelling`, PR #2 permanece draft, `main` não modificada.
+
+**Implementação na branch:**
+- Novo `frontend/src/components/landing/MobileNarrativePath.tsx` com PATH/NODE ligados a scroll nativo. Variantes distintas: Aprender/Trail, Futuro/Signal Field, Vida/Story Marker, Pertencer/Community Ring, Transformar/Rise Axis que abre em Horizon. Um único nó ativo percorre cada path; não há pulsação infinita ou scroll-jacking. Nó mantém geometria circular em mobile mesmo com SVG vertical alongado.
+- Novo `MobileSceneWindow.tsx` com media motion suave (scale 1.028→1→1.028, y +6→−6 px), montado em 14 janelas de fotografia, sem alteração de assets, vídeo ou dados. `LandingMedia` de Ciência fica intocado, sem parallax adicionado.
+- Removidas linhas/pontos isolados estáticos no markup mobile das cinco secções e substituídos por narrativa PATH/NODE.
+- Pertencer agora explicita os três estados do Master: `01 / Acompanhar`, `02 / Participar`, `03 / Crescer juntos`.
+- Alturas mobile-only moderadas: Aprender ~144svh, Futuro ~255svh, Vida ~199svh, Pertencer ~173svh, Transformar ~188svh em mínimos nominais, total ~959svh versus ~1190svh antes. Ainda não equivale ao orçamento-alvo da landing completa nem garante crop legível.
+
+**Verificação estática nesta sessão:** sem elementos JSX básicos desequilibrados nos sete ficheiros envolvidos; variantes e janelas presentes; regiões desktop comparadas durante as edições e preservadas. Hero e pasta de media não alterados. Não houve testes npm, screenshot novo ou validação runtime; não declarar QA aprovado.
+
+**Fonte auditável e plano:** `docs/colus/presentation/qa-reports/mobile-master-alignment-2026-10-17/README.md`.
+
+**Gates restantes:** validar 360/390/440/768px, Path/Node a percorrer a ligação real sem saltos, contexto de fotografia e legibilidade, curvas/ramificações, fast-scroll/reverso, âncoras, Header e Ciência upright/poster; executar `npm run typecheck`, `npm run test:qa`, `npm run build`. **Ainda existe a divergência de media secundário em Aprender/Criar** do Master (asset não escolhido neste pass) e a calibração global da duração. Preservar todos os assets e Hero até decisão explícita de revisão editorial.
+
+**Próxima ação exata:** pull da mesma branch no VS Code; capturar scroll contínuo mobile Aprender→Futuro→Vida e Pertencer→Transformar para validação da cadeia visual; corrigir problemas observados antes de pensar em merge. Sem nova branch.
+
+
+## 28. MOBILE MOTION — TESTE DE CONTRATO AUTOMATIZADO (2026-10-17)
+
+**Continuação autorizada:** depois de implementar a cadeia do Master V0.18, a intervenção seguinte concentrou-se na integridade técnica, sem novos efeitos ou alterações gráficas.
+
+**Implementado na branch `feat/colus-mobile-editorial-storytelling` / PR #2:**
+- Criado `frontend/scripts/qa-mobile-story-contract.mjs` com verificações estáticas usando a dependência TypeScript existente. Comprova que Aprender/Trail, Futuro/Signal, Vida/Marker, Pertencer/Ring e Transformar/Axis estão montados nas secções corretas e que existem ao menos 14 `MobileSceneWindow`, controlo por scroll, `getPointAtLength`, fallback reduced-motion e nenhum pulse infinito ou scroll-jacking introduzido.
+- Contrato confirma referências do vídeo Ciência upright/poster preservadas e proíbe reintroduzir o componente mobile de pentágono rejeitado.
+- `frontend/package.json`: `npm run test:qa` passa a executar testes anteriores + `qa-mobile-story-contract.mjs` + proteção de assets.
+- Assets, Hero, fotografias, cenas desktop e branch `main` não foram alterados neste pass.
+
+**Verificação realizada aqui:** reconsulta de todos os cinco componentes e dos dois auxiliares diretamente no GitHub, conferência da presença de 5 devices + 14 janelas, imports e guardrails do contrato. Todas as verificações estáticas feitas pelo conector deram resultado esperado. **Não foram executados localmente** `npm run typecheck`, `npm run test:qa`, `npm run build` ou browser QA; o runtime do agente não tem acesso DNS a GitHub nem ao localhost do utilizador.
+
+**Próximo gate:** utilizador faz pull da branch, executa o trio npm em `frontend` e recolhe captura/vídeo do scroll mobile real entre Aprender→Futuro e Pertencer→Transformar; só depois corrigir desvios visuais efetivamente observados. PR #2 deve continuar draft, sem merge nem claim de aprovação final.
+
+## 29. FILLED RINGS — MANIFESTO / VOZES MOBILE (2026-10-17)
+
+**Owner feedback:** Edge screenshots explicitly circled empty/decorative ring outlines and disconnected orange dots in the Manifesto and Vozes COLUS areas. Owner instructed that engineering should edit GitHub directly, not give manual paste instructions.
+
+**Precise diagnosis:** these elements come from `ManifestoSection.tsx` (photo ellipse + horizontal timeline node) and `TestimonialsSection.tsx` (photo ellipse + horizontal line node), not the shared `MobileNarrativePath.tsx`. This corrects the preceding assumed diagnosis.
+
+**Implemented only on `feat/colus-mobile-editorial-storytelling`:**
+- Added `frontend/src/components/landing/EditorialOrbitNode.tsx` (commit `f6d6825`), a compact or photo-size **filled** deep-blue/orange ring with centre and two pointer dots rotating in response to the section's `scrollYProgress`; reduced-motion static; inert to touch and navigation.
+- Updated `ManifestoSection.tsx` (commit `2647081`): mobile photo corner and mobile timeline now use filled ring/node; prior ellipse/rail visuals retained desktop-only.
+- Updated `TestimonialsSection.tsx` (commit `b66ff55`): same two mobile-only replacements in Vozes; positioned photo ring clear of the caption; original desktop graphics retained.
+- Updated `frontend/scripts/qa-mobile-story-contract.mjs` (commit `716318e`) with static regression checks for the **actual sections** and motion semantics. Existing `npm run test:qa` script already executes this file.
+
+**Protected:** photographs, media, Hero, Science, official assets, desktop rendering and `main` unchanged. This is a UI correction, **not** an editorial decision about whether to retain Vozes COLUS as an official public section.
+
+**Verification still pending:** Edge mobile screenshot/video 440×956 + 390×844, reduced-motion, scroll forward/reverse, crop and heading/caption clearance; run `npm run typecheck`, `npm run test:qa`, `npm run build`. No npm or browser run was performed by the agent. Keep PR #2 DRAFT until visually approved; do not merge.
+
+
+## 30. FILLED RINGS — AUTOMATED BROWSER QA PASSED (2026-10-17)
+
+**Implementation and validation, branch `feat/colus-mobile-editorial-storytelling`:**
+- New `EditorialOrbitNode.tsx`, consumed twice each by mobile Manifesto and Vozes COLUS, with solid blue/orange face, active centre, two pointers driven by native-scroll progress. Static fallback for reduced motion.
+- Added stable data attributes; new Playwright browser smoke `frontend/scripts/qa-mobile-browser.mjs`. GitHub Actions workflow `.github/workflows/colus-frontend-qa.yml` executes frontend typecheck/QA contract/build, installs Chromium, previews production output, checks motion and screenshots; trigger limited to pull requests to main to avoid duplicated runs.
+- Final browser QA run **PASS**: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38980178093; artifact `colus-mobile-ring-qa` ID `12081260195`, 6 PNG screenshots and JSON evidence, at 440×956 and 390×844. Both photo rings rendered at 72px; pointer rotation changed when scrolling, remained static with reduced-motion; zero uncaught page errors; typecheck, test:qa, build succeeded.
+- Screenshot review confirmed filled rings are visually present and caption/headline regions unblocked in captured frames. Found a narrow dark triangular artefact at the top of the Manifesto during its book/page transition; **separate REVIEW**, do not change protected Hero without continuous visual evidence/approval.
+
+**Not approved:** entire landing mobile and motion choreography, CTA/final footer, editorial status of Vozes, or merge. `main` unchanged and PR #2 draft. Next: review ring alignment in owner's Edge during continuous scroll, review Manifesto triangle as an independent motion QA issue, then revisit wider PATH/NODE section handoffs before merging.
+
+
+## 31. MANIFESTO SEAM + 5-DEVICE MOBILE BROWSER QA (2026-10-17)
+
+**Authorised continuation:** examine the dark triangle at Hero→Manifesto and verify scroll handoffs from the mobile Master, while preserving protected assets and avoiding merge.
+
+**Actual fix:** dark triangular wedge in Manifesto came from a gap between two rounded `bg-colus-paper` leaves. `ManifestoSection.tsx` gained a narrow matching animated centre spine. The Hero and assets were not modified. The exact screenshots before/after and pixel assertions at x=center, y=15/30/45, on widths 390 and 440, confirmed the dark `#071A2A` slit is replaced by paper `#FFF8EF`. QA result: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38981030829 PASS.
+
+**New browser contract:** `MobileNarrativePath.tsx` has stable data markers only; `frontend/scripts/qa-mobile-handoffs.mjs` captures ten screenshots at 390×844 and checks active node movement through Trail, Signal, Marker, Ring and Axis, page width containment, static reduced-motion paths, and absence of page errors. Hooked into existing CI alongside filled-ring tests. Result: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38981335443 SUCCESS; TypeScript, QA scripts and build PASS; artifact `12081750112` with screenshots/results.
+
+**Interpretation:** internal device motion works in the actual Chromium production preview, **not yet proof of pixel-perfect continuous handoffs between sections**. In screenshots certain scene windows still have inset margins/rounded edges and blank gaps, which is an editorial REVIEW against Master V0.18, not yet approved for further change. Keep PR #2 draft and `main` intact; no Hero/asset file changed.
+
+**Next work:** focused visual review of boundary placement with owner-provided Edge continuous scroll; check Science playback/Save-Data and reduced-motion and desktop regression before any merge. Do not assert full mobile design approval.
+
+
+### 31.1 — Proteção desktop e revalidação final
+
+A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar **apenas abaixo de 1024px**, sem alterar a composição desktop previamente aprovada. Commit `eb1a013f28150acdd25068f5d851e57622821cec`. GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38981869303 concluiu **SUCCESS**, incluindo TypeScript, `test:qa`, build, pixel-check do Manifesto, filled rings e 5-device PATH/NODE smoke em Chromium. Os assets e a `main` mantêm-se intactos. PR #2 segue DRAFT por faltar aprovação editorial e QA manual contínuo no Edge.
+
+
+## 32. MOBILE CHAPTER SEAMS / VISUAL CONTINUITY — 2026-10-17
+
+**Authorization:** user said «vamos» to previous action plan to refine mobile composition and continuity between Aprender→Futuro→Vida→Pertencer→Transformar, not permission to publish/merge.
+
+**Implemented in the existing branch `feat/colus-mobile-editorial-storytelling`:** the five mobile `max-w-[680px]` wrappers now have a connected dark narrative field and stable `data-colus-mobile-story` markers; tablet-specific wrapper top/bottom margins/padding were removed; artificial 40px/24px spacer blocks between/after scenes were compressed to 12px or removed. The special staggered crops and margins inside Vida/Pertencer remain intentional. No media or text content replacements, no Hero changes, no changes to desktop JSX during these edits.
+
+**Browser validation:** `frontend/scripts/qa-mobile-handoffs.mjs` now checks wrapper and path continuity for four major chapter boundaries at widths 390, **440**, and 768px. GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38982859788 succeeded, including typecheck, test:qa, build, asset lock, filled rings, Manifesto pixel check, five scroll devices and 12 boundary geometry checks. Artifact ID `12082295931` includes screenshots/results. Captures inspected, visual chapter gaps reduced at 440px. PR #2 remains DRAFT; `main` unchanged.
+
+**Remaining gate:** review real Edge mobile continuous scroll (not just captured frames), text/crop/contrast and actual Science video behavior; outer gutters at tablet/maxwidth680 are an editorial decision pending owner review. No approval to merge. QA report: `docs/colus/presentation/qa-reports/mobile-master-alignment-2026-10-17/README.md`.
+
+
+## 33. HERO → MANIFESTO MOBILE — OPEN BOOK GEOMETRY (2026-10-17)
+
+**Feedback:** screenshot do proprietário Edge 440×956 mostra duas pétalas Warm Paper gigantes com uma barra central («coração»), contrário ao Master V0.18. Não era um problema de media do Hero: origem em `ManifestoSection.tsx`.
+
+**Alterações na branch atual:** a geometria mobile anterior (`rounded-t-[52%]` nas duas folhas e `data-colus-manifesto-spine` de 9% de largura) foi substituída por **uma única superfície de papel com curva dupla suave**, SVG `data-colus-manifesto-curve`, ligada ao progresso nativo de scroll. Curvas Bézier retificadas para centro com tangente horizontal (commit `b0fc762`). Uma faixa superior recebe o mesmo papel progressivamente no final do scroll, eliminando wedge escuro. As duas folhas antigas foram preservadas **apenas no desktop** (`hidden lg:block`). Hero, media e assets oficiais não foram alterados.
+
+**QA introduzido:** `qa-mobile-browser.mjs` captura o momento de transição em 390×844 e 440×956 e rejeita curvas com diferença centro/lateral >80px, além do teste anterior de paper pleno; `qa-mobile-story-contract.mjs` protege a composição contra regressão para pétalas/stem. Primeiro screenshot de produção antes do último ajuste dos control points: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38983926935 PASS, demonstrando que as formas gigantes desapareceram. **Falta confirmar o último ajuste na execução CI mais recente** e obter validação visual do proprietário.
+
+**Estado:** PR #2 draft; `main` intacta. Não fazer merge sem QA final do scroll contínuo e aprovação visual.
+
+
+## 34. CORREÇÃO DE DIREÇÃO DE ARTE — CORAÇÃO, NÃO LIVRO (2026-10-17)
+
+**ÚLTIMA DECISÃO EXPLÍCITA DO RESPONSÁVEL — PREVALECE SOBRE §33:** «o coração era a ideia, só que não devia ter aquela barra no meio»; a transição deve comunicar o coração, **não** passar a uma curva rasa que parece livro. A fotografia imediatamente a seguir mostra **duas pessoas a segurar dois corações verdes reais**, o que confirma a ligação psicológica intencional. O diagnóstico anterior de que o coração inteiro era um erro estava incorreto. **Não retirar novamente as duas pétalas arredondadas.**
+
+**Implementação na branch `feat/colus-mobile-editorial-storytelling` (sem merge):**
+- `ManifestoSection.tsx`: duas metades arredondadas Warm Paper restauradas em mobile com `pageScaleY` + separação lateral vinculados ao scroll; eliminada completamente a barra retangular central; preenchimento de fundo apenas na fase seguinte para tornar a fotografia e a copy legíveis. Identificadores `data-colus-manifesto-heart-left/right` e `data-colus-manifesto-paper-settle`.
+- Fotografia aprovada `COLUS-MANIFESTO-HUMANO-001.webp` foi inspecionada no GitHub e **preservada**; Hero/desktop/media/texto/rings intactos.
+- `qa-mobile-browser.mjs` e `qa-mobile-story-contract.mjs` corrigidos para proteger a intenção de coração com ausência de barra, e não proibir a silhueta. Teste de scroll intermédio a 390px e 440px e papel estabilizado junto ao retrato.
+
+**Evidência browser:** GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38985381293 SUCCESS; artifact ID `12082474833` contém capturas `manifesto-heart-390.png`, `manifesto-heart-440.png`, estados seguintes, QA ring/path e JSON. Verificação visual efetuada nesta sessão: lobos presentes, espaço negativo central livre, sem barra; retrato posterior apresenta os dois corações verdes e texto legível.
+
+**Estado:** conceito de coração explícito/confirmado pelo responsável; qualidade visual final do scroll contínuo ainda por aprovar no Edge; PR #2 draft, main intacta. **A referência artística válida é agora CORAÇÃO → CORAÇÕES REAIS NA FOTOGRAFIA**, não a anterior substituição por uma Open Book curve.
+
+
+## 35. DESKTOP MASTER V0.18 — FILLED ACTIVE NODES, OPEN COMMUNITY RING (2026-10-17)
+
+**Pedido e autorização:** utilizador confirmou que atualizou a branch e solicitou execução direta no GitHub do sistema Ring/Node em desktop, **não só preencher**. Estudar o wireframe desktop e respeitar assets/arquitetura.
+
+**Revisão do Master `docs/colus/design/landing/landing-colus-master.drawio` e Motion Spec V1.0:**
+- Aprender: Learning Trail como eixo principal, um node ativo, endpoints contextuais e media editorial.
+- Futuro: Signal Field ativo, 4 Scene Windows preservadas, sem HUD ou overlay invasivo.
+- Pertencer: Community Ring permanece deliberadamente INCOMPLETO/ABERTO; apenas nó relacional tem face sólida e ponteiros.
+- Transformar: Rise Axis anima e entrega progressão ao Horizon Node; não esticar o ring com transformações da linha.
+- Vida/Manifesto/Vozes: pequenos nodes editoriais, sem saturar com órbitas múltiplas; 1 movimento dominante por secção.
+
+**Implementado apenas na branch `feat/colus-mobile-editorial-storytelling`:**
+- Criado `frontend/src/components/landing/DesktopOrbitNode.tsx`: SVG preenchido, microponteiros scroll-driven, suporte reduced motion, sem pulse infinito.
+- `AprenderSection.tsx`: ring segue a curva SVG real.
+- `FuturoSection.tsx`: Signal Field recebe ring pontual dinâmico.
+- `PertencerSection.tsx`: o arco aberto fica intacto e o node ativo ganha massa/preenchimento.
+- `TransformarSection.tsx`: ring acompanha eixo, desaparece quando surge Horizon; Horizon ring independente do scaleX da linha para evitar elipse.
+- `VidaSection.tsx`: Story Marker de saída preenchido.
+- `ManifestoSection.tsx` e `TestimonialsSection.tsx`: ring da imagem + node da linha editorial em desktop, preservando mobile.
+- `frontend/scripts/qa-desktop-rings.mjs` + GitHub Actions ampliado para 1440×900 e 1024×768.
+
+**CI/Browser:** https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38988536282 **SUCCESS**: TypeScript, contrato QA, proteção assets, build, antigos testes Chromium mobile e novo desktop. Screenshots/results no artifact ID `12083819266`, vistas em contact sheets. Em ambos os viewports, quatro dispositivos possuem ring redondo preenchido que se desloca, Community Ring continua aberto, compact orbits de Manifesto/Vida/Vozes presentes, sem overflow horizontal. Corrigidos dois assertions de QA antigos que contavam nós ocultos mobile/desktop como simultaneamente visíveis.
+
+**Protegido:** `frontend/public/media/**`, Hero, imagens, vídeo Ciência, branding e `main`. Diff GitHub confirma nenhum asset/IntroHero alterado vs `main`. PR #2 draft.
+
+**Ainda não aprovado:** high fidelity definitivo, tamanho/peso visual dos rings, timings de scroll físico no Edge local, publicação de testemunhos, direitos de imagem ou merge. Pedir avaliação do desktop no Edge após pull para aprovação editorial. Não mudar assets na próxima iteração.
+
+## 36. DESKTOP — RECONCILIAÇÃO CIRÚRGICA DOS RINGS COM MASTER PLUS (2026-10-17)
+
+**AUTORIZAÇÃO CONFIRMADA:** a landing COLUS está quase pronta. O responsável solicitou uma intervenção estritamente cirúrgica nas capturas do Edge de **Manifesto, Aprender, Futuro, Pertencer**. Handoff e `landing-colus-master-plus.drawio` (anexo de 2026-10-17) são as fontes de direção. Proibido substituir/alterar assets, vídeos, cartazes, logótipo, textos, imagens ou crops, ou redesenhar Hero e mobile. **Apenas efeitos, nós, percursos e microposições dos elementos existentes**; branch `feat/colus-mobile-editorial-storytelling`, PR #2 DRAFT; não integrar em `main`.
+
+**Diagnóstico das 4 imagens do Edge:** (1) Manifesto: dois rings tinham peso semelhante e o da fotografia deslocava-se sobre a pessoa, fora da elipse; (2) Aprender: o ring e o Learning Trail atravessavam rostos, mais um ponto laranja distante competia com o nó; (3) Futuro: o Signal Field cortava headline/parágrafo e o ring estava afastado na extrema direita; (4) Pertencer: 3 rings vazios redundantes, arco aberto sem hierarquia, textos centrais demasiado próximos de uma foto e da curva laranja.
+
+**Correções efetivas — só paths/nodes/layout de 4 componentes:**
+- `ManifestoSection.tsx`: nó principal segue matematicamente a **semielipse inferior** em `orbitLeft/Top`, não o retrato. Rail secundário desktop usa ring reduzido a 72% para hierarquia; removidos os pontos soltos sem função. **Coração mobile intencional sem barra central continua protegido.**
+- `AprenderSection.tsx`: Trail SVG z-index `0` atrás das fotos, trajeto redesenhado no espaço livre **abaixo da fotografia principal e para a lateral direita**; ring só emerge fora do media. Removido ponto terminal redundante, sem mudança nos media.
+- `FuturoSection.tsx`: Signal Field redesenhado para percorrer a base da cena e subir no corredor lateral até **acima do limite superior** da fotografia; ring acompanha esse traçado e permanece visível sem atravessar copy ou rostos. Ativos TIC/ENG/Ciência/Segurança Digital, headline e imagem estão iguais.
+- `PertencerSection.tsx`: removidas somente as 3 circunferências vazias de SVG que competiam com o nó. Pontos contextuais restantes mais pequenos e discretos; **o arco do Community Ring permanece aberto**. Container dos três textos centrais foi limitado a `max-w-[10rem]` e elevado de `top-[54%]` para `top-[48%]`, **sem alterar palavras**.
+- `frontend/scripts/qa-desktop-rings.mjs` acrescenta verificações reais em Chromium: 151 amostras da geometria do path não podem cruzar headline/parágrafo de Futuro; Trail com z-index atrás das fotografias; órbita de Manifesto aderente à sua elipse; ring aberto, nós circulares e scroll-driven. Data attributes apenas para QA.
+
+**Prova técnica e visual:** `npm run typecheck`, `npm run test:qa`, `npm run build`, desktop Chromium 1440×900 e 1024×768, e regressões mobile **PASS** na última execução: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39066528379 ; artifact `colus-mobile-ring-qa`, ID `12113214093` (capturas de antes/depois). Capturas abertas: Aprender com ring visível fora da foto no progresso final; Futuro com ring azul acima do media; Pertencer sem rings vazios nem colisão com copy. Cópias dos media/copy foram comparadas durante as substituições — invariáveis. `IntroHeroSection.tsx` e `frontend/public/media/**` não alterados.
+
+**ESTADO:** engenharia da microcomposição concluída, visual demonstrado em Chromium; aprovação estética do responsável **ainda pendente**, assim como scroll contínuo no Microsoft Edge do proprietário. Não confundir PASS técnico com aprovação de todo o projeto. Mais ajustes só perante nova evidência de captura e sem substituir assets nem copy. `main` intacta.

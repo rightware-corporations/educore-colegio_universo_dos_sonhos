@@ -1,6 +1,7 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
+import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -14,13 +15,20 @@ export function ManifestoSection() {
   });
 
   const pageScaleY = useTransform(scrollYProgress, [0.02, 0.2], [0.08, 1]);
+  // The two heart lobes open first; Warm Paper settles only when the human
+  // portrait is taking over, so no central rectangle interrupts the metaphor.
+  const paperSettledOpacity = useTransform(scrollYProgress, [0.21, 0.29], [0, 1]);
   const leftPageX = useTransform(scrollYProgress, [0.02, 0.2], ["-8%", "0%"]);
   const rightPageX = useTransform(scrollYProgress, [0.02, 0.2], ["8%", "0%"]);
   const bridgePosterOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.34], [1, 1, 0]);
   const mediaScale = useTransform(scrollYProgress, [0.08, 0.4], [1.04, 1]);
-  const nodeX = useTransform(scrollYProgress, [0.3, 0.72], ["0%", "280%"]);
-  const ringNodeX = useTransform(scrollYProgress, [0.3, 0.72], [0, 155]);
-  const ringNodeY = useTransform(scrollYProgress, [0.3, 0.5, 0.72], [0, 28, 0]);
+  const mobileRailX = useTransform(scrollYProgress, [0.3, 0.72], ["5%", "95%"]);
+  const mobileRailDraw = useTransform(scrollYProgress, [0.3, 0.72], [0, 1]);
+  // Trace the LOWER edge of the existing photo ellipse, not the people.
+  // Photo/media geometry and the mobile heart stay unchanged.
+  const orbitProgress = useTransform(scrollYProgress, [0.3, 0.72], [0, 1]);
+  const orbitLeft = useTransform(orbitProgress, (t) => `${50 - 41 * Math.cos(Math.PI * t)}%`);
+  const orbitTop = useTransform(orbitProgress, (t) => `${50 + 44 * Math.sin(Math.PI * t)}%`);
 
   return (
     <section
@@ -37,13 +45,39 @@ export function ManifestoSection() {
       />
 
       <div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        {/* Mobile: the HEART is intentional. Both rising lobes anticipate the
+            real green hearts held by the two people in the Manifesto photo.
+            There is deliberately NO central spine, line or rectangle. */}
+        <motion.div
+          aria-hidden="true"
+          data-colus-manifesto-heart-left
+          style={reduceMotion ? undefined : { scaleY: pageScaleY, x: leftPageX }}
+          className="absolute bottom-0 left-[-4%] h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper lg:hidden"
+        />
+        <motion.div
+          aria-hidden="true"
+          data-colus-manifesto-heart-right
+          style={reduceMotion ? undefined : { scaleY: pageScaleY, x: rightPageX }}
+          className="absolute bottom-0 right-[-4%] h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper lg:hidden"
+        />
+        {/* Once the emotional bridge has been read, the Manifesto becomes
+            a calm, full-paper surface behind the real human photograph.
+            This is a fade, never a vertical "heart stem". */}
+        <motion.div
+          aria-hidden="true"
+          data-colus-manifesto-paper-settle
+          style={reduceMotion ? { opacity: 1 } : { opacity: paperSettledOpacity }}
+          className="absolute inset-0 bg-colus-paper lg:hidden"
+        />
+
+        {/* Retain the historical two-page composition at desktop breakpoints. */}
         <motion.div
           style={
             reduceMotion
               ? undefined
               : { scaleY: pageScaleY, x: leftPageX }
           }
-          className="absolute bottom-0 left-[-4%] h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper"
+          className="absolute bottom-0 left-[-4%] hidden h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper lg:block"
         />
         <motion.div
           style={
@@ -51,7 +85,7 @@ export function ManifestoSection() {
               ? undefined
               : { scaleY: pageScaleY, x: rightPageX }
           }
-          className="absolute bottom-0 right-[-4%] h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper"
+          className="absolute bottom-0 right-[-4%] hidden h-[108%] w-[56%] origin-bottom rounded-t-[52%] bg-colus-paper lg:block"
         />
       </div>
 
@@ -70,11 +104,31 @@ export function ManifestoSection() {
             Conhecimento, curiosidade e experiências que ajudam cada aluno a descobrir possibilidades e crescer com confiança.
           </p>
 
-          <div className="mt-10 h-px max-w-md bg-black/10">
-            <motion.span
-              style={reduceMotion ? undefined : { x: nodeX }}
-              className="block h-3 w-3 -translate-y-[5px] rounded-full bg-colus-orange"
+          {/* Mobile: a filled ring is the moving node on the actual rail. */}
+          <div className="relative mt-12 mb-6 h-[2px] max-w-md bg-colus-deep-blue/20 lg:hidden" aria-hidden="true">
+            <motion.div
+              className="absolute inset-0 origin-left bg-colus-orange"
+              style={reduceMotion ? { scaleX: 1 } : { scaleX: mobileRailDraw }}
             />
+            <motion.div
+              className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
+              style={{ left: reduceMotion ? "95%" : mobileRailX }}
+            >
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </motion.div>
+          </div>
+          <div className="relative mt-10 hidden h-px max-w-md bg-black/10 lg:block" aria-hidden="true">
+            <motion.div className="absolute inset-0 origin-left bg-colus-orange/65"
+              style={reduceMotion ? { scaleX: 1 } : { scaleX: mobileRailDraw }}
+            />
+            <motion.div
+              style={{ left: reduceMotion ? "95%" : mobileRailX }}
+              className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <span className="block origin-center scale-[.72]">
+                <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+              </span>
+            </motion.div>
           </div>
         </div>
 
@@ -108,20 +162,23 @@ export function ManifestoSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-colus-ink/16 via-transparent to-transparent" />
           </motion.div>
 
+          {/* Filled photo-ring on mobile; preserve the established desktop ellipse. */}
+          <div className="pointer-events-none absolute bottom-3 left-3 z-20 lg:hidden" aria-hidden="true">
+            <EditorialOrbitNode progress={scrollYProgress} />
+          </div>
           <div
             aria-hidden="true"
-            className="pointer-events-none absolute -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:h-40 lg:w-64"
+            data-colus-desktop-photo-orbit
+            className="pointer-events-none absolute hidden -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:block lg:h-40 lg:w-64"
           >
-            <motion.span
-              style={reduceMotion ? undefined : { x: ringNodeX, y: ringNodeY }}
-              className="absolute left-[10%] top-[18%] h-3 w-3 rounded-full bg-colus-orange shadow-[0_0_0_5px_rgba(241,129,54,.12)]"
-            />
-            <span className="absolute bottom-[14%] right-[18%] h-2 w-2 rounded-full bg-colus-orange/75" />
+            <motion.div
+              style={reduceMotion ? { left: "50%", top: "94%" } : { left: orbitLeft, top: orbitTop }}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
+            >
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </motion.div>
           </div>
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute -right-1 top-[18%] h-3 w-3 rounded-full bg-colus-orange lg:right-[2%]"
-          />
+
         </div>
       </div>
     </section>

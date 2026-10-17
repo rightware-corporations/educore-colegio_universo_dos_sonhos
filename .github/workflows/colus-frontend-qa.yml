@@ -1,0 +1,71 @@
+name: COLUS Frontend QA
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/colus-frontend-qa.yml"
+      - "frontend/**"
+      - "docs/colus/presentation/hero-protected-asset-lock.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: colus-frontend-qa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Typecheck + QA contract + Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout PR revision
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install exact declared dependencies without modifying tracked files
+        run: npm install --no-audit --no-fund --package-lock=false
+      - name: Typecheck
+        run: npm run typecheck
+      - name: QA contracts and protected assets
+        run: npm run test:qa
+      - name: Production build
+        run: npm run build
+      - name: Install browser QA runtime
+        run: npm install --no-save --package-lock=false playwright@1.56.1 pngjs@7.0.0
+      - name: Install Chromium for mobile QA
+        run: npx playwright install --with-deps chromium
+      - name: Start production preview
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4173 --strictPort &
+          for i in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:4173/ >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          echo "Vite preview did not start" >&2
+          exit 1
+      - name: Real-browser mobile ring QA and screenshots
+        run: node scripts/qa-mobile-browser.mjs
+      - name: Native-scroll mobile PATH/NODE handoff QA
+        run: node scripts/qa-mobile-handoffs.mjs
+      - name: Desktop Master orbit and path QA
+        run: node scripts/qa-desktop-rings.mjs
+      - name: Upload screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: colus-mobile-ring-qa
+          path: |
+            frontend/qa-artifacts/mobile-rings/
+            frontend/qa-artifacts/mobile-handoffs/
+            frontend/qa-artifacts/desktop-rings/
+          if-no-files-found: warn
+          retention-days: 14
