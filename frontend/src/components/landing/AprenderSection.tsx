@@ -29,6 +29,13 @@ export function AprenderSection() {
   const discoverScale = useTransform(scrollYProgress, [0, 0.46], [1, 0.94]);
   const createOpacity = useTransform(scrollYProgress, [0.38, 0.54, 1], [0, 1, 1]);
   const createY = useTransform(scrollYProgress, [0.38, 0.58], [42, 0]);
+
+  useMotionValueEvent(discoverOpacity, "change", v => {
+    if (ref.current) ref.current.dataset.colusDiscoverOpacity = v.toFixed(4);
+  });
+  useMotionValueEvent(createOpacity, "change", v => {
+    if (ref.current) ref.current.dataset.colusCreateOpacity = v.toFixed(4);
+  });
   const trailColor = useTransform(scrollYProgress, [0.3, 0.7], ["#0C5898", "#F18136"]);
   const detailOpacity = useTransform(scrollYProgress, [0.1, 0.26, 0.44], [0, 1, 0]);
   const outroOpacity = useTransform(scrollYProgress, [0.82, 1], [0, 1]);
