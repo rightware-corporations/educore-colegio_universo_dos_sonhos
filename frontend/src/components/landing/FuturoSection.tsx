@@ -225,7 +225,7 @@ export function FuturoSection() {
           <svg viewBox="0 0 1440 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
               ref={signalPathRef}
-              d="M-80 690 C230 660 340 270 700 340 C1010 400 1040 120 1520 200"
+              d="M-60 780 C165 780 365 800 560 795 C780 790 850 180 1150 180 C1200 180 1232 185 1270 180"
               fill="none"
               stroke="url(#signalGradient)"
               strokeWidth="3"
@@ -233,7 +233,7 @@ export function FuturoSection() {
               style={{ pathLength: reduceMotion ? 1 : fieldLength }}
             />
             {/* Filled active node belongs to Signal Field, not the scene media. */}
-            <motion.g style={reduceMotion ? { x: 1410, y: 210 } : { x: pointerX, y: pointerY }} aria-hidden="true">
+            <motion.g style={reduceMotion ? { x: 1270, y: 180 } : { x: pointerX, y: pointerY }} aria-hidden="true">
               <DesktopOrbitNode progress={scrollYProgress} tone="blue" size={15} />
             </motion.g>
             <defs>
