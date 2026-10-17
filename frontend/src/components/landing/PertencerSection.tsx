@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
@@ -16,34 +16,43 @@ const relations = [
 export function PertencerSection() {
   const ref = useRef<HTMLElement>(null);
   const ringPathRef = useRef<SVGPathElement>(null);
-  const markerX = useMotionValue(112);
-  const markerY = useMotionValue(528);
+  const markerX = useMotionValue(570);
+  const markerY = useMotionValue(135);
+  const [communityPhase, setCommunityPhase] = useState(1);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ["start start", "end end"],
   });
 
-  const headlineOpacity = useTransform(scrollYProgress, [0, 0.12], [0.92, 1]);
-  const headlineY = useTransform(scrollYProgress, [0, 0.12], [8, 0]);
-  const ringLength = useTransform(scrollYProgress, [0.06, 0.68], [0, 1]);
-  const ringNodesOpacity = useTransform(scrollYProgress, [0.12, 0.38], [0, 1]);
-  const ringFade = useTransform(scrollYProgress, [0.78, 1], [1, 0.7]);
+  // Desktop Master Plus: RELAÇÃO → ARCO NASCE → COMUNIDADE →
+  // ESTABILIDADE → ABERTURA. Preserve all three approved media sources.
+  const headlineOpacity = useTransform(scrollYProgress, [0.36, 0.55], [0.35, 1]);
+  const headlineY = useTransform(scrollYProgress, [0.36, 0.55], [15, 0]);
+  const ringLength = useTransform(scrollYProgress, [0.12, 0.34, 0.55], [0, 0.76, 1]);
+  const ringNodesOpacity = useTransform(scrollYProgress, [0.18, 0.4], [0, 1]);
+  const ringFade = useTransform(scrollYProgress, [0.8, 1], [1, 0.55]);
 
-  const mediaA = useTransform(scrollYProgress, [0, 0.15], [0.85, 1]);
-  const mediaB = useTransform(scrollYProgress, [0.05, 0.2], [0.8, 1]);
-  const mediaC = useTransform(scrollYProgress, [0.09, 0.24], [0.72, 1]);
+  const mediaA = useTransform(scrollYProgress, [0.04, 0.24], [0.6, 1]);
+  const mediaB = useTransform(scrollYProgress, [0.25, 0.43], [0, 1]);
+  const mediaC = useTransform(scrollYProgress, [0.38, 0.56], [0, 1]);
 
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    const nextPhase = progress < 0.15 ? 1
+      : progress < 0.34 ? 2
+      : progress < 0.56 ? 3
+      : progress < 0.8 ? 4 : 5;
+    setCommunityPhase((previous) => previous === nextPhase ? previous : nextPhase);
     const path = ringPathRef.current;
-    if (!path) return;
-    const point = path.getPointAtLength(Math.min(progress / 0.72, 1) * path.getTotalLength());
+    if (!path || reduceMotion) return;
+    const portion = Math.max(0, Math.min(1, (progress - 0.1) / 0.73));
+    const point = path.getPointAtLength(portion * path.getTotalLength());
     markerX.set(point.x);
     markerY.set(point.y);
   });
 
-  const handoffOpacity = useTransform(scrollYProgress, [0.72, 0.92], [0, 1]);
-  const handoffScaleY = useTransform(scrollYProgress, [0.72, 0.96], [0.1, 1]);
+  const handoffOpacity = useTransform(scrollYProgress, [0.78, 0.94], [0, 1]);
+  const handoffScaleY = useTransform(scrollYProgress, [0.78, 0.97], [0.05, 1]);
 
   return (
     <section
@@ -132,86 +141,69 @@ export function PertencerSection() {
       <div className={reduceMotion ? "hidden" : "hidden h-[155vh] lg:block"}>
         <div className="sticky top-0 h-screen overflow-hidden py-12 lg:py-14">
           <div className="mx-auto flex h-full max-w-[1440px] flex-col px-16">
-            <motion.div
-              style={reduceMotion ? undefined : { opacity: headlineOpacity, y: headlineY }}
-              className="relative z-20 max-w-3xl shrink-0"
-            >
-              <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
-                Pertencer
-              </p>
-              <h2 className="mt-5 max-w-[14ch] font-editorial text-[clamp(48px,4.3vw,68px)] font-medium leading-[1.03] tracking-[-.03em] text-colus-ink">
-                Crescer é uma jornada partilhada.
-              </h2>
-              <p className="mt-6 max-w-[56ch] text-lg leading-7 text-colus-muted">
-                Escola, alunos e famílias constroem experiências mais fortes quando participam, acompanham e crescem em conjunto.
-              </p>
-            </motion.div>
+            <p className="relative z-20 shrink-0 text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
+              Pertencer
+            </p>
 
-            <div className="relative mx-auto mt-5 min-h-0 w-full max-w-6xl flex-1">
+            <div data-colus-community-stage data-colus-community-phase={communityPhase} className="relative mx-auto mt-5 min-h-0 w-full max-w-6xl flex-1">
               <motion.svg
-                viewBox="0 0 1100 690"
+                viewBox="0 0 1720 760"
                 className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
                 aria-hidden="true"
-                preserveAspectRatio="xMidYMid meet"
+                preserveAspectRatio="none"
                 style={reduceMotion ? undefined : { opacity: ringFade }}
               >
-                {/* The master calls for a substantial but deliberately open
-                    Community Ring: blue relation, orange continuity, moving nodes. */}
+                {/* Master Plus: 650×500 relational ellipse, intentionally OPEN.
+                    Dotted orange arc; six contextual nodes; one active pointer. */}
                 <path
-                  d="M112 528 C150 230 420 112 666 166 C896 216 984 408 850 580 C690 675 360 674 205 606"
-                  fill="none"
-                  stroke="#0C5898"
-                  strokeOpacity=".10"
-                  strokeWidth="10"
-                  strokeLinecap="round"
+                  data-colus-community-ring-ghost
+                  d="M570 135 C685 63 850 72 995 120 C1128 174 1218 290 1190 420 C1167 535 1050 600 895 606 C754 612 633 548 570 450 C526 376 527 250 570 185"
+                  fill="none" stroke="#F18136" strokeOpacity=".15"
+                  strokeWidth="2" strokeDasharray="4 13"
                 />
                 <motion.path
                   ref={ringPathRef}
-                  d="M112 528 C150 230 420 112 666 166 C896 216 984 408 850 580 C690 675 360 674 205 606"
-                  fill="none"
-                  stroke="#0C5898"
-                  strokeOpacity=".55"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
+                  data-colus-community-ring-path
+                  d="M570 135 C685 63 850 72 995 120 C1128 174 1218 290 1190 420 C1167 535 1050 600 895 606 C754 612 633 548 570 450 C526 376 527 250 570 185"
+                  fill="none" stroke="#F18136" strokeOpacity=".85"
+                  strokeWidth="3" strokeDasharray="4 13" strokeLinecap="round"
                   style={{ pathLength: reduceMotion ? 1 : ringLength }}
                 />
-                <motion.path
-                  d="M160 554 C205 310 427 177 653 216 C833 250 929 417 804 559"
-                  fill="none"
-                  stroke="#2899EF"
-                  strokeOpacity=".33"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  style={{ pathLength: reduceMotion ? 1 : ringLength }}
-                />
-                <motion.path
-                  d="M205 606 C372 672 684 648 908 476"
-                  fill="none"
-                  stroke="#F18136"
-                  strokeOpacity=".72"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  style={{ pathLength: reduceMotion ? 1 : ringLength }}
-                />
-                <motion.g style={{ opacity: reduceMotion ? 1 : ringNodesOpacity }}>
-                  {/* Context points: no hollow competing rings.
-                      Only the scroll-driven relation node is dominant. */}
-                  <g fill="#F18136" fillOpacity=".56">
-                    <circle cx="152" cy="386" r="4" />
-                    <circle cx="360" cy="173" r="4" />
-                    <circle cx="672" cy="168" r="4" />
+                <motion.g data-colus-community-context-nodes style={{ opacity: reduceMotion ? 1 : ringNodesOpacity }}>
+                  <g fill="#F18136">
+                    <circle cx="570" cy="135" r="7" />
+                    <circle cx="735" cy="85" r="7" />
+                    <circle cx="995" cy="120" r="7" />
+                    <circle cx="1145" cy="245" r="7" />
+                    <circle cx="1040" cy="545" r="7" />
+                    <circle cx="765" cy="590" r="7" />
                   </g>
                 </motion.g>
-                {/* Community Ring stays OPEN as drawn in the desktop Master.
-                    Only its active relation node has a solid core and pointers. */}
-                <motion.g style={reduceMotion ? { x: 824, y: 588 } : { x: markerX, y: markerY }}>
-                  <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={16} />
+                <motion.g data-colus-community-active-node
+                  style={reduceMotion ? { x: 570, y: 135 } : { x: markerX, y: markerY }}
+                >
+                  <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={14} />
                 </motion.g>
               </motion.svg>
 
+              {/* Master Plus: headline + description INSIDE the open ellipse,
+                  rather than detached above the image composition. */}
+              <motion.div
+                data-colus-community-central-copy
+                style={reduceMotion ? undefined : { opacity: headlineOpacity, y: headlineY }}
+                className="pointer-events-none absolute left-[36%] top-[28%] z-20 w-[30%] text-center"
+              >
+                <h2 className="font-editorial text-[clamp(28px,3.15vw,46px)] font-medium leading-[1.06] tracking-[-.03em] text-colus-ink">
+                  Crescer é uma jornada partilhada.
+                </h2>
+                <p className="mx-auto mt-5 max-w-[39ch] text-[clamp(11px,1vw,15px)] leading-[1.45] text-colus-muted">
+                  Escola, alunos e famílias constroem experiências mais fortes quando participam, acompanham e crescem em conjunto.
+                </p>
+              </motion.div>
+
               <motion.article
                 style={reduceMotion ? undefined : { opacity: mediaA }}
-                className="absolute bottom-[7%] left-[1%] h-[44%] w-[39%]"
+                className="absolute left-[4%] top-[14%] h-[38%] w-[23%]"
               >
                 <div className="h-full overflow-hidden rounded-[30px_90px_30px_30px]">
                   <LandingMedia
@@ -225,7 +217,7 @@ export function PertencerSection() {
 
               <motion.article
                 style={reduceMotion ? undefined : { opacity: mediaB }}
-                className="absolute right-[3%] top-[4%] h-[52%] w-[32%]"
+                className="absolute right-[5%] top-[10%] h-[32%] w-[24%]"
               >
                 <div className="h-full overflow-hidden rounded-[84px_28px_28px_28px]">
                   <LandingMedia
@@ -240,7 +232,7 @@ export function PertencerSection() {
 
               <motion.article
                 style={reduceMotion ? undefined : { opacity: mediaC }}
-                className="absolute bottom-[1%] right-[17%] h-[30%] w-[23%]"
+                className="absolute bottom-[12%] right-[9%] h-[29%] w-[23%]"
               >
                 <div className="h-full overflow-hidden rounded-[28px_28px_70px_28px]">
                   <LandingMedia
@@ -252,14 +244,19 @@ export function PertencerSection() {
                 <p className="mt-3 text-sm font-semibold text-colus-text">Crescer juntos</p>
               </motion.article>
 
-              <div className="absolute left-[43%] top-[48%] z-20 max-w-[10rem]">
-                {relations.map(([title, copy]) => (
-                  <div key={title} className="mb-4">
-                    <p className="text-sm font-bold text-colus-ink">{title}</p>
-                    <p className="mt-1 text-xs leading-5 text-colus-muted">{copy}</p>
-                  </div>
-                ))}
-              </div>
+              {/* Three relation beats occupy distinct positions around the ring. */}
+              {relations.map(([title, copy], index) => (
+                <div
+                  data-colus-community-relation={index + 1}
+                  key={title}
+                  className={["absolute left-[5%] top-[62%] z-20 w-[19%]",
+                    "absolute left-[27%] top-[82%] z-20 w-[19%]",
+                    "absolute left-[48%] top-[84%] z-20 w-[20%]"][index]}
+                >
+                  <p className="text-sm font-bold text-colus-ink">{title}</p>
+                  <p className="mt-1 text-xs leading-5 text-colus-muted">{copy}</p>
+                </div>
+              ))}
 
               <motion.div
                 style={
@@ -267,7 +264,8 @@ export function PertencerSection() {
                     ? undefined
                     : { opacity: handoffOpacity, scaleY: handoffScaleY }
                 }
-                className="absolute -bottom-[18vh] left-[61%] z-10 h-[34vh] w-px origin-top bg-gradient-to-b from-colus-orange via-colus-orange to-transparent"
+                data-colus-community-rise-handoff
+                className="absolute -bottom-[18vh] left-1/2 z-10 h-[34vh] w-px origin-top bg-gradient-to-b from-colus-orange via-colus-orange to-transparent"
                 aria-hidden="true"
               >
                 <span className="absolute -left-[5px] top-0 h-3 w-3 rounded-full bg-colus-orange" />
