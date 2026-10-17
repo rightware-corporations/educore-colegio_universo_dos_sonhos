@@ -147,3 +147,17 @@ Check local `git status` before switching/pulling; preserve user's uncommitted c
 **Initial real-browser evidence:** run https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38983926935 PASS; original intermediate screenshot showed large heart replaced by one shallow curved paper field. After seeing a slight sharp 'V' at the centre, the control points were refined (commit `b0fc762`) to make the centre smooth. **Final refined screenshot and tests must be confirmed on the latest branch HEAD**; user visual approval still pending.
 
 **Required next check:** compare refined `manifesto-bridge-390.png` and `manifesto-bridge-440.png` (after final CI) against original Edge heart screenshot; no petals, no centre rectangle, no sharp cusp, Hero/CTA intact. Verify mobile natural scroll and reduced-motion and desktop regression. Do NOT declare approved for merge before owner review.
+
+
+## 2026-10-17 — SUPERSEDES previous "heart rejected" diagnosis: heart is INTENTIONAL
+
+**Latest explicit OWNER clarification:** the heart was always the intended emotional device in the mobile Hero → Manifesto transition. The only mistake was the **tall, straight centre bar**; the broad two-lobed heart silhouette itself was correct. The following approved photograph, `02-manifesto/COLUS-MANIFESTO-HUMANO-001.webp`, was visually inspected: two real people hold two vivid green paper hearts. The symbolic heart opening is a psychological/emotional handoff to that documentary moment, **not a book-opening graphic**. This clarification overrides the contradictory language in the earlier "Mobile Open Book — giant heart/petals rejected" QA note and handoff §33. Historical notes remain only as error provenance, not as active art direction.
+
+**Implementation (branch `feat/colus-mobile-editorial-storytelling`):**
+- `ManifestoSection.tsx`: reinstated two mobile-only, round-topped Warm Paper lobes animated with the existing scroll `pageScaleY`/lateral movement; no central stem/rectangle; `data-colus-manifesto-heart-left/right` plus `data-colus-manifesto-paper-settle`. After the meaningful heart opening, a paper-opacity transition settles the background behind the real human photograph.
+- Preserved the approved media, existing photographic crop, Hero component, desktop leaf composition, text and orange ring UI. **No media assets modified**.
+- `frontend/scripts/qa-mobile-browser.mjs` now captures `manifesto-heart-390.png` and `manifesto-heart-440.png` at an intermediate scroll state, asserts **two heart lobes, no centre bar, no early paper fill**, and checks settled Warm Paper behind the photo.
+- `frontend/scripts/qa-mobile-story-contract.mjs` now preserves heart markers and human-photo path rather than incorrectly enforcing a shallow "book" curve.
+- Latest successful production Chromium run for this code: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38985381293; artifact `colus-mobile-ring-qa` ID `12082474833`. Results include `typecheck`, `test:qa`, production `build`, heart/ring/scroll/reduced-motion screenshot checks and multi-section PATH/NODE handoffs, all passed. Captures were inspected: mobile mid-scroll shows two full paper lobes with a dark negative-space gap, **no centre rectangle**; the settled portrait shows both green hearts held by people and legible text.
+
+**Gate remains:** visual approval by owner in Microsoft Edge after pull; animation timing / device perceptual quality cannot be completely decided by a static screenshot. PR #2 DRAFT; no merge.
