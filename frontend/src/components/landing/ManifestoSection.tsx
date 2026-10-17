@@ -22,7 +22,6 @@ export function ManifestoSection() {
   const rightPageX = useTransform(scrollYProgress, [0.02, 0.2], ["8%", "0%"]);
   const bridgePosterOpacity = useTransform(scrollYProgress, [0.08, 0.22, 0.34], [1, 1, 0]);
   const mediaScale = useTransform(scrollYProgress, [0.08, 0.4], [1.04, 1]);
-  const nodeX = useTransform(scrollYProgress, [0.3, 0.72], ["0%", "280%"]);
   const mobileRailX = useTransform(scrollYProgress, [0.3, 0.72], ["5%", "95%"]);
   const mobileRailDraw = useTransform(scrollYProgress, [0.3, 0.72], [0, 1]);
   const ringNodeX = useTransform(scrollYProgress, [0.3, 0.72], [0, 155]);
@@ -115,11 +114,16 @@ export function ManifestoSection() {
               <EditorialOrbitNode progress={scrollYProgress} size="compact" />
             </motion.div>
           </div>
-          <div className="mt-10 hidden h-px max-w-md bg-black/10 lg:block">
-            <motion.span
-              style={reduceMotion ? undefined : { x: nodeX }}
-              className="block h-3 w-3 -translate-y-[5px] rounded-full bg-colus-orange"
+          <div className="relative mt-10 hidden h-px max-w-md bg-black/10 lg:block" aria-hidden="true">
+            <motion.div className="absolute inset-0 origin-left bg-colus-orange/65"
+              style={reduceMotion ? { scaleX: 1 } : { scaleX: mobileRailDraw }}
             />
+            <motion.div
+              style={{ left: reduceMotion ? "95%" : mobileRailX }}
+              className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
+            >
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </motion.div>
           </div>
         </div>
 
@@ -161,10 +165,12 @@ export function ManifestoSection() {
             aria-hidden="true"
             className="pointer-events-none absolute hidden -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:block lg:h-40 lg:w-64"
           >
-            <motion.span
+            <motion.div
               style={reduceMotion ? undefined : { x: ringNodeX, y: ringNodeY }}
-              className="absolute left-[10%] top-[18%] h-3 w-3 rounded-full bg-colus-orange shadow-[0_0_0_5px_rgba(241,129,54,.12)]"
-            />
+              className="absolute left-[10%] top-[18%]"
+            >
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </motion.div>
             <span className="absolute bottom-[14%] right-[18%] h-2 w-2 rounded-full bg-colus-orange/75" />
           </div>
           <span
