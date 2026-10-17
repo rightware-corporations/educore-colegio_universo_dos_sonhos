@@ -37,7 +37,7 @@ try {
     await page.goto(base, { waitUntil: "networkidle", timeout: 45000 });
     const stage = page.locator("#comunidade [data-colus-community-stage]");
     assert.equal(await stage.count(), 1, "One desktop community stage is required");
-    assert.equal(await stage.locator("[data-colus-community-context-nodes] circle").count(), 6,
+    assert.equal(await stage.locator("[data-colus-community-context-nodes] > span").count(), 6,
       "Master Plus demands six small contextual nodes, not three or hollow duplicates");
     assert.equal(await stage.locator("[data-colus-community-media]").count(), 3,
       "Three existing approved media windows must surround the ellipse");
