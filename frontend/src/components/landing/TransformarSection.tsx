@@ -141,6 +141,7 @@ export function TransformarSection() {
           <svg viewBox="0 0 1400 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
               ref={risePathRef}
+              data-colus-desktop-rise-axis
               d="M690 980 C684 710 720 570 704 390 C692 248 732 146 780 -80"
               fill="none"
               stroke="#F18136"
