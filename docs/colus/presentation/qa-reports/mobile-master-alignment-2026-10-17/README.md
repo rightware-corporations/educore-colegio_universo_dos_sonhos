@@ -161,3 +161,29 @@ Check local `git status` before switching/pulling; preserve user's uncommitted c
 - Latest successful production Chromium run for this code: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38985381293; artifact `colus-mobile-ring-qa` ID `12082474833`. Results include `typecheck`, `test:qa`, production `build`, heart/ring/scroll/reduced-motion screenshot checks and multi-section PATH/NODE handoffs, all passed. Captures were inspected: mobile mid-scroll shows two full paper lobes with a dark negative-space gap, **no centre rectangle**; the settled portrait shows both green hearts held by people and legible text.
 
 **Gate remains:** visual approval by owner in Microsoft Edge after pull; animation timing / device perceptual quality cannot be completely decided by a static screenshot. PR #2 DRAFT; no merge.
+
+
+## Desktop Master V0.18 — PATH/NODE and filled rings (2026-10-17)
+
+**User authorization:** user confirmed local pull and explicitly requested desktop viewport motion/rings, with direction to **study the desktop Master** and not merely fill shapes or alter media. Work remained on `feat/colus-mobile-editorial-storytelling` / draft PR #2, no merge.
+
+**Source validation (actual Draw.io Master, not assumptions):**
+- `landing-colus-master.drawio`: Aprender desktop **190–230vh / moderate sticky / Trail principal / nodes contextual**; Futuro **220–280vh / Signal Field / four Scene Windows / no PCB effect**; Pertencer **open Community Ring** with a small active relational node, opens towards Rise Axis; Transformar **Rise Axis → Horizon** with a moving node, then handoff; Vida **subtle Story Markers**; Vozes **one Horizon Node marks active voice**.
+- `motion-spec-tecnico-colus.md` V1.0: native scroll, no extra RAF loops or infinite pulse; 1 dominant motion + 1 secondary + 1 microinteraction; reduced-motion keeps semantic state.
+- Importantly **only the NODE has a solid blue/orange core**. The big Community Ring remains a drawn **incomplete outline**, not a filled disk, to maintain Master fidelity.
+
+**Implementation scope:**
+1. Added `frontend/src/components/landing/DesktopOrbitNode.tsx`: an SVG-local, 28–32px filled blue/orange editorial node with two pointer dots rotating with existing section `scrollYProgress`. No media assets, timers, input capture or new dependencies.
+2. `AprenderSection.tsx` desktop only: single ring follows actual existing Bézier Learning Trail via `getPointAtLength`, replacing the idea of two competing active endpoint nodes.
+3. `FuturoSection.tsx` desktop: existing Signal Field pointer is now filled ring with two pointers; signal curve, 4 scenes, engineering/photo and video remain unchanged.
+4. `PertencerSection.tsx` desktop: dynamic relational pointer upgraded, open Community Ring SVG / three images / contextual nodes preserved.
+5. `TransformarSection.tsx` desktop: active filled ring follows Rise Axis; fades when Horizon takes over. Horizon node is deliberately **outside** the line's `scaleX` transform so it stays perfectly circular.
+6. `VidaSection.tsx` desktop: single photoessay exit Story Marker becomes a compact filled ring; other markers remain understated.
+7. `ManifestoSection.tsx` desktop: existing photo ellipse remains as secondary shape; its moving node and rail node are solid filled orbits; the approved **mobile heart WITHOUT centre bar** remains untouched.
+8. `TestimonialsSection.tsx` desktop: photo orbit and Horizon timeline node use the same compact ring; placeholder testimony policy and photographic asset remain unchanged.
+
+**Real browser QA:** added `frontend/scripts/qa-desktop-rings.mjs` to PR GitHub Actions. Production Chromium at **1440×900 and 1024×768** validates filled circular geometry, two scroll-driven pointers, native-scroll movement on four signature/narrative devices, no horizontal overflow, Community Ring paths remain **open**, desktop Manifesto/Vida/Vozes compact orbits and undistorted Horizon node. Previous mobile ring/path tests still execute. **PASS** in https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38988536282 together with `typecheck`, `test:qa`, protected-asset checks, `build` and mobile Chromium QA. Screenshots/results in artifact `colus-mobile-ring-qa` (ID `12083819266`); screenshots downloaded and inspected for text/media and ring composition. Contact sheets 1440 and 1024 produced separately for visual review. This is a technical browser smoke + visual sampling, **not final owner/editorial approval**.
+
+**No asset edits:** GitHub diff check showed no `frontend/public/media/**` and no `IntroHeroSection.tsx` changes on the branch versus `main`. Mobile JSX was not changed in this desktop pass (only shared import declarations); earlier mobile corrections remain in the branch. PR #2 DRAFT; main intact.
+
+**Remaining gate:** owner to scroll actual Microsoft Edge desktop (1440/1024), inspect active ring placement and transition timing; then assess whether ring visual weight should be increased/decreased without changing photos. Visual acceptance, performance on target hardware and final desktop/mobile integration remain pending.
