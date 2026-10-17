@@ -48,6 +48,12 @@ try {
     const ring = stage.locator("[data-colus-community-ring-path]");
     const d = await ring.getAttribute("d");
     assert.ok(d && !/[zZ]\s*$/.test(d), "Master Plus Community Ring must remain OPEN");
+    assert.equal(await ring.getAttribute("stroke-dasharray"), "4 13",
+      "Master Plus ring must remain dotted, not a solid line");
+    assert.equal(await ring.getAttribute("mask"), "url(#colus-community-arc-reveal)",
+      "A separate animated mask must reveal the dots without replacing dasharray");
+    assert.equal(await stage.locator("[data-colus-community-reveal-mask]").count(), 1,
+      "A dedicated progressive reveal mask must drive the ring");
     assert.equal(await stage.locator("[data-colus-community-rise-handoff]").count(), 1,
       "The open arc must yield into Rise Axis via its own connecting path");
 
