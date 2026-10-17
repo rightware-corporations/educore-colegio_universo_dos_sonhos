@@ -134,6 +134,7 @@ export function AprenderSection() {
               <svg
                 viewBox="0 0 800 620"
                 aria-hidden="true"
+                data-colus-desktop-learning-trail
                 className="pointer-events-none absolute inset-0 z-0 h-full w-full overflow-visible"
               >
                 <motion.path
