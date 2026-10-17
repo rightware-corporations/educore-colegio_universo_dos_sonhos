@@ -534,3 +534,31 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **Evidência browser:** GitHub Actions https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38985381293 SUCCESS; artifact ID `12082474833` contém capturas `manifesto-heart-390.png`, `manifesto-heart-440.png`, estados seguintes, QA ring/path e JSON. Verificação visual efetuada nesta sessão: lobos presentes, espaço negativo central livre, sem barra; retrato posterior apresenta os dois corações verdes e texto legível.
 
 **Estado:** conceito de coração explícito/confirmado pelo responsável; qualidade visual final do scroll contínuo ainda por aprovar no Edge; PR #2 draft, main intacta. **A referência artística válida é agora CORAÇÃO → CORAÇÕES REAIS NA FOTOGRAFIA**, não a anterior substituição por uma Open Book curve.
+
+
+## 35. DESKTOP MASTER V0.18 — FILLED ACTIVE NODES, OPEN COMMUNITY RING (2026-10-17)
+
+**Pedido e autorização:** utilizador confirmou que atualizou a branch e solicitou execução direta no GitHub do sistema Ring/Node em desktop, **não só preencher**. Estudar o wireframe desktop e respeitar assets/arquitetura.
+
+**Revisão do Master `docs/colus/design/landing/landing-colus-master.drawio` e Motion Spec V1.0:**
+- Aprender: Learning Trail como eixo principal, um node ativo, endpoints contextuais e media editorial.
+- Futuro: Signal Field ativo, 4 Scene Windows preservadas, sem HUD ou overlay invasivo.
+- Pertencer: Community Ring permanece deliberadamente INCOMPLETO/ABERTO; apenas nó relacional tem face sólida e ponteiros.
+- Transformar: Rise Axis anima e entrega progressão ao Horizon Node; não esticar o ring com transformações da linha.
+- Vida/Manifesto/Vozes: pequenos nodes editoriais, sem saturar com órbitas múltiplas; 1 movimento dominante por secção.
+
+**Implementado apenas na branch `feat/colus-mobile-editorial-storytelling`:**
+- Criado `frontend/src/components/landing/DesktopOrbitNode.tsx`: SVG preenchido, microponteiros scroll-driven, suporte reduced motion, sem pulse infinito.
+- `AprenderSection.tsx`: ring segue a curva SVG real.
+- `FuturoSection.tsx`: Signal Field recebe ring pontual dinâmico.
+- `PertencerSection.tsx`: o arco aberto fica intacto e o node ativo ganha massa/preenchimento.
+- `TransformarSection.tsx`: ring acompanha eixo, desaparece quando surge Horizon; Horizon ring independente do scaleX da linha para evitar elipse.
+- `VidaSection.tsx`: Story Marker de saída preenchido.
+- `ManifestoSection.tsx` e `TestimonialsSection.tsx`: ring da imagem + node da linha editorial em desktop, preservando mobile.
+- `frontend/scripts/qa-desktop-rings.mjs` + GitHub Actions ampliado para 1440×900 e 1024×768.
+
+**CI/Browser:** https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/38988536282 **SUCCESS**: TypeScript, contrato QA, proteção assets, build, antigos testes Chromium mobile e novo desktop. Screenshots/results no artifact ID `12083819266`, vistas em contact sheets. Em ambos os viewports, quatro dispositivos possuem ring redondo preenchido que se desloca, Community Ring continua aberto, compact orbits de Manifesto/Vida/Vozes presentes, sem overflow horizontal. Corrigidos dois assertions de QA antigos que contavam nós ocultos mobile/desktop como simultaneamente visíveis.
+
+**Protegido:** `frontend/public/media/**`, Hero, imagens, vídeo Ciência, branding e `main`. Diff GitHub confirma nenhum asset/IntroHero alterado vs `main`. PR #2 draft.
+
+**Ainda não aprovado:** high fidelity definitivo, tamanho/peso visual dos rings, timings de scroll físico no Edge local, publicação de testemunhos, direitos de imagem ou merge. Pedir avaliação do desktop no Edge após pull para aprovação editorial. Não mudar assets na próxima iteração.
