@@ -112,8 +112,8 @@ for (const file of ["ManifestoSection.tsx", "TestimonialsSection.tsx"]) {
   const source = read(file);
   assert.ok(source.includes('import { EditorialOrbitNode }'),
     file + " must import the solid editorial node");
-  assert.equal((source.match(/<EditorialOrbitNode progress=\{scrollYProgress\}/g) ?? []).length, 2,
-    file + " must render a photo ring and a rail ring on mobile");
+  assert.equal((source.match(/<EditorialOrbitNode progress=\{scrollYProgress\}/g) ?? []).length, 4,
+    file + " must retain TWO mobile and TWO desktop photo/rail orbit nodes");
   assert.ok(source.includes("lg:hidden") && source.includes("lg:block"),
     file + " must preserve the desktop composition and scope the new rings to mobile");
 }
