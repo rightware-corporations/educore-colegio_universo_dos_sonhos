@@ -187,3 +187,13 @@ Check local `git status` before switching/pulling; preserve user's uncommitted c
 **No asset edits:** GitHub diff check showed no `frontend/public/media/**` and no `IntroHeroSection.tsx` changes on the branch versus `main`. Mobile JSX was not changed in this desktop pass (only shared import declarations); earlier mobile corrections remain in the branch. PR #2 DRAFT; main intact.
 
 **Remaining gate:** owner to scroll actual Microsoft Edge desktop (1440/1024), inspect active ring placement and transition timing; then assess whether ring visual weight should be increased/decreased without changing photos. Visual acceptance, performance on target hardware and final desktop/mobile integration remain pending.
+
+## Desktop precision pass — current approved-assets lock (2026-10-17)
+
+**Scope:** following the owner’s latest screenshots and `landing-colus-master-plus.drawio`, desktop PATH/NODE placement only in Manifesto, Aprender, Futuro and Pertencer. Media sources, files, captions, displayed text, crops/masks, Hero, approved mobile and `main` are out of scope. Never infer approval to change them.
+
+**Measured corrections:** photo node follows lower ellipse (Manifesto), Learning Trail SVG layers behind photos and uses whitespace instead of people's faces (Aprender), Signal Field uses stage perimeter and is prevented from crossing the headline or copy (Futuro), redundant hollow community circles removed while the open ring remains, and centre copy repositioned without rewording (Pertencer). Ring visibility was inspected at intermediate and late scroll frames: extra final route refinements were required so the active nodes appear **outside** media rather than disappearing beneath them.
+
+**Automated regression:** `frontend/scripts/qa-desktop-rings.mjs` now tests path-vs-title/copy geometry (151 sampled path points), ring-on-ellipse, Learning Trail behind media, Community Ring open, node movement/shape at 1440×900 and 1024×768. Full frontend and mobile tests PASS on https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39066528379 . Artifact ID `12113214093`, name `colus-mobile-ring-qa`; contains desktop stage before/after PNGs and result JSON plus mobile regression evidence.
+
+**Visual observation:** 1440 desktop screenshots inspected after final CI: active Aprender node is outside the protected hero image at the stage transition, Futuro blue ring is visible above its Scene Window instead of colliding with the copy/subjects, and Pertencer retains the blue/orange open ellipse with fewer distracting contextual circles. This establishes a stronger visual match, not final high-fidelity approval. Continuous scroll in the owner’s Edge and editorial acceptance remain required. No merge; PR #2 DRAFT.
