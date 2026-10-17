@@ -27,12 +27,12 @@ try {
     await wait(620);
     const row=await page.evaluate(([id,f])=>{
      const s=document.getElementById(id),r=s.getBoundingClientRect();
-     const style=node=>node?{opacity:getComputedStyle(node).opacity,rect:(()=>{let b=node.getBoundingClientRect();return [b.x,b.y,b.width,b.height].map(v=>Math.round(v))})()}:null;
+     const style=node=>node?{opacity:getComputedStyle(node).opacity,inlineStyle:node.getAttribute("style"),rect:(()=>{let b=node.getBoundingClientRect();return [b.x,b.y,b.width,b.height].map(v=>Math.round(v))})()}:null;
      const headingSelector=id==="experiencia"?"h2":id==="comunidade"?"[data-colus-community-central-copy]":"[class*=min-h-\\[66vh\\]]";
      const headings=[...s.querySelectorAll("h2")].map(el=>({text:el.textContent.trim().slice(0,90),wrap:style(el.parentElement),self:style(el)}));
      const momentArticles=id==="transformar"?[...s.querySelectorAll("motion-article,article")].filter(el=>/0[123] \/ (?:EXPRESSAR|CONSTRUIR|AVANÇAR)/.test(el.textContent)).map(el=>({label:el.textContent.match(/0[123] \/ [A-ZÁÇÃ ]+/)?.[0]??"",style:style(el)})):[];
      const media=[...s.querySelectorAll("[data-colus-community-media]")].map(el=>({name:el.getAttribute("data-colus-community-media"),style:style(el)}));
-     return {id,f,motionProgress:s.dataset.colusScrollProgress ?? null,scrollY:Math.round(scrollY),sectionTop:Math.round(r.top),sectionHeight:Math.round(r.height),
+     return {id,f,motionProgress:s.dataset.colusScrollProgress ?? null,derived:{discover:s.dataset.colusDiscoverOpacity,create:s.dataset.colusCreateOpacity,first:s.dataset.colusFirstOpacity,second:s.dataset.colusSecondOpacity,third:s.dataset.colusThirdOpacity,mediaA:s.dataset.colusMediaAOpacity,mediaB:s.dataset.colusMediaBOpacity,mediaC:s.dataset.colusMediaCOpacity},scrollY:Math.round(scrollY),sectionTop:Math.round(r.top),sectionHeight:Math.round(r.height),
        headings,momentArticles,media,phase:s.querySelector("[data-colus-community-stage]")?.getAttribute("data-colus-community-phase")??null};
     },[id,f]);
     rows.push({width,...row});
