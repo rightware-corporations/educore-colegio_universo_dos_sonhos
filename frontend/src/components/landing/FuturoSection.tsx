@@ -3,6 +3,7 @@ import { useRef, useState } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
+import { DesktopOrbitNode } from "./DesktopOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -231,9 +232,9 @@ export function FuturoSection() {
               strokeLinecap="round"
               style={{ pathLength: reduceMotion ? 1 : fieldLength }}
             />
-            <motion.g style={{ x: pointerX, y: pointerY }} aria-hidden="true">
-              <circle r="13" fill="#F18136" fillOpacity="0.14" />
-              <circle r="6" fill="#F18136" stroke="#FFF8EF" strokeWidth="1.5" />
+            {/* Filled active node belongs to Signal Field, not the scene media. */}
+            <motion.g style={reduceMotion ? { x: 1410, y: 210 } : { x: pointerX, y: pointerY }} aria-hidden="true">
+              <DesktopOrbitNode progress={scrollYProgress} tone="blue" size={15} />
             </motion.g>
             <defs>
               <linearGradient id="signalGradient" x1="0" y1="0" x2="1" y2="0">
