@@ -13,11 +13,19 @@ const relations = [
   ["Crescer juntos", "confiança, pertença e desenvolvimento."],
 ] as const;
 
+// Six small nodes from the desktop Master Plus, in its 1720×760 coordinate
+// system. Render HTML dots separately from the responsive SVG so they stay
+// physically ROUND even when the elliptical path scales nonuniformly.
+const masterContextNodes = [
+  [570, 135], [735, 85], [995, 120],
+  [1145, 245], [1040, 545], [765, 590],
+] as const;
+
 export function PertencerSection() {
   const ref = useRef<HTMLElement>(null);
   const ringPathRef = useRef<SVGPathElement>(null);
-  const markerX = useMotionValue(570);
-  const markerY = useMotionValue(135);
+  const markerX = useMotionValue("33.14%");
+  const markerY = useMotionValue("17.76%");
   const [communityPhase, setCommunityPhase] = useState(1);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({
@@ -47,8 +55,8 @@ export function PertencerSection() {
     if (!path || reduceMotion) return;
     const portion = Math.max(0, Math.min(1, (progress - 0.1) / 0.73));
     const point = path.getPointAtLength(portion * path.getTotalLength());
-    markerX.set(point.x);
-    markerY.set(point.y);
+    markerX.set(`${(point.x / 1720) * 100}%`);
+    markerY.set(`${(point.y / 760) * 100}%`);
   });
 
   const handoffOpacity = useTransform(scrollYProgress, [0.78, 0.94], [0, 1]);
@@ -169,21 +177,7 @@ export function PertencerSection() {
                   strokeWidth="3" strokeDasharray="4 13" strokeLinecap="round"
                   style={{ pathLength: reduceMotion ? 1 : ringLength }}
                 />
-                <motion.g data-colus-community-context-nodes style={{ opacity: reduceMotion ? 1 : ringNodesOpacity }}>
-                  <g fill="#F18136">
-                    <circle cx="570" cy="135" r="7" />
-                    <circle cx="735" cy="85" r="7" />
-                    <circle cx="995" cy="120" r="7" />
-                    <circle cx="1145" cy="245" r="7" />
-                    <circle cx="1040" cy="545" r="7" />
-                    <circle cx="765" cy="590" r="7" />
-                  </g>
-                </motion.g>
-                <motion.g data-colus-community-active-node
-                  style={reduceMotion ? { x: 570, y: 135 } : { x: markerX, y: markerY }}
-                >
-                  <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={14} />
-                </motion.g>
+
                 {/* During ABERTURA the last ring segment flows towards the
                     Rise Axis at the same 50% horizontal locus used by Transformar. */}
                 <motion.path
@@ -194,6 +188,34 @@ export function PertencerSection() {
                     opacity: reduceMotion ? 1 : handoffOpacity }}
                 />
               </motion.svg>
+
+              {/* Separate fixed-size nodes from nonuniform SVG scaling. */}
+              <motion.div
+                data-colus-community-context-nodes
+                style={reduceMotion ? undefined : { opacity: ringNodesOpacity }}
+                className="pointer-events-none absolute inset-0 z-10"
+                aria-hidden="true"
+              >
+                {masterContextNodes.map(([x, y], index) => (
+                  <span
+                    key={index}
+                    className="absolute h-[10px] w-[10px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-colus-orange"
+                    style={{ left: `${(x / 1720) * 100}%`, top: `${(y / 760) * 100}%` }}
+                  />
+                ))}
+              </motion.div>
+              <motion.div
+                data-colus-community-active-node
+                style={reduceMotion
+                  ? { left: "33.14%", top: "17.76%" }
+                  : { left: markerX, top: markerY }}
+                className="pointer-events-none absolute z-20 h-10 w-10 -translate-x-1/2 -translate-y-1/2"
+                aria-hidden="true"
+              >
+                <svg viewBox="-20 -20 40 40" className="h-10 w-10 overflow-visible">
+                  <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={14} />
+                </svg>
+              </motion.div>
 
               {/* Master Plus: headline + description INSIDE the open ellipse,
                   rather than detached above the image composition. */}
