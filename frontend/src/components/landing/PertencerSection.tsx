@@ -40,6 +40,8 @@ export function PertencerSection() {
   const ringLength = useTransform(scrollYProgress, [0.12, 0.34, 0.55], [0, 0.76, 1]);
   const ringNodesOpacity = useTransform(scrollYProgress, [0.18, 0.4], [0, 1]);
   const ringFade = useTransform(scrollYProgress, [0.8, 1], [1, 0.55]);
+  const entryLineOpacity = useTransform(scrollYProgress, [0, 0.14, 0.2], [1, 1, 0]);
+  const entryLineLength = useTransform(scrollYProgress, [0, 0.14], [0, 1]);
 
   const mediaA = useTransform(scrollYProgress, [0.04, 0.24], [0.6, 1]);
   const mediaB = useTransform(scrollYProgress, [0.25, 0.43], [0, 1]);
