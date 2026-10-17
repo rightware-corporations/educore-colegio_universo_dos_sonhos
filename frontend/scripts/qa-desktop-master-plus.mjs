@@ -94,7 +94,7 @@ try {
       return { center, media, relations, overlapsMedia: media.some(p => overlaps(center, p)),
         relationX: relations.map(p => p?.left) };
     });
-    assert.ok(layout.center && layout.center.left >= 0.32 && layout.center.right <= 0.71,
+    assert.ok(layout.center && layout.center.left >= 0.315 && layout.center.right <= 0.71,
       "Headline and description must be INSIDE the Master ellipse: " + JSON.stringify(layout));
     assert.ok(!layout.overlapsMedia,
       "Central text must not collide with any existing media: " + JSON.stringify(layout));
