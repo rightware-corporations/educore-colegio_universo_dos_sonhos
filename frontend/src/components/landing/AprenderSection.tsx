@@ -19,6 +19,12 @@ export function AprenderSection() {
     offset: ["start start", "end end"],
   });
 
+  // Instrument only the section's motion progress for deterministic visual QA.
+  // No DOM repaint, state change, content or layout modification.
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (ref.current) ref.current.dataset.colusScrollProgress = progress.toFixed(4);
+  });
+
   const discoverOpacity = useTransform(scrollYProgress, [0, 0.38, 0.52], [1, 1, 0]);
   const discoverScale = useTransform(scrollYProgress, [0, 0.46], [1, 0.94]);
   const createOpacity = useTransform(scrollYProgress, [0.38, 0.54, 1], [0, 1, 1]);
