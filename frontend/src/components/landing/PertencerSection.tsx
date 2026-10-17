@@ -309,7 +309,7 @@ export function PertencerSection() {
               <motion.article
                 data-colus-community-media="3"
                 style={reduceMotion ? undefined : { opacity: mediaC }}
-                className="absolute bottom-[13%] right-[12%] h-[29%] w-[23%]"
+                className="absolute bottom-[13%] right-[8%] h-[29%] w-[23%]"
               >
                 <div className="h-full overflow-hidden rounded-[28px_28px_70px_28px]">
                   <LandingMedia
