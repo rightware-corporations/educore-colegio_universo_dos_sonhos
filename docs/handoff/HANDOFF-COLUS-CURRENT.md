@@ -604,3 +604,15 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **Gate actual:** implementação CANDIDATA em CI; ainda sem aprovação estética nem merge. As imagens podem ter um enquadramento visível diferente devido à mudança de tamanho/posição das janelas apesar de os ficheiros media, links e object-position serem os mesmos. Confirmar no Edge antes de aceitar.
 
 **REGRA ABSOLUTA:** não converter este trabalho em revisão de copy, substituição de imagens ou redesign de Hero/mobile; não mudar `main`; PR #3 continua DRAFT até aprovação explícita.
+
+## 38. DESKTOP MASTER PLUS — OPACIDADE REAL CORRIGIDA / PATH CONTÍNUO VALIDADO (2026-10-17)
+
+**Origem:** auditoria visual posterior ao CI expôs que scrollYProgress progredia mas `Aprender 01→02`, `Transformar 01→02→03` e as três fotografias de `Pertencer` não acompanhavam as opacidades previstas (aceleração nativa de opacity no Chromium). Criado `useScrollOpacity.ts` sem timers, RAFrame extra ou alterações a media/copy. As mudanças ficaram limitadas a canais desktop dos três componentes.
+
+**Estado atual PR #3:** `feat/colus-desktop-master-plus-fidelity` → `feat/colus-mobile-editorial-storytelling` (ainda DRAFT, NÃO MERGED). CI final: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39077107986 — **SUCCESS**. Testes chromium 1440×900 e 1024×768 verificam opacidade **computada** de Descobrir/Criar, Expressar/Construir/Avançar e media Pertencer em 12/50/88%, sem congelamento da cena. Mobile e redução de movimento continuam em QA.
+
+**Pertencer agora:** layout centralizado verticalmente preservando proporção Draw.io `1720×760`, headline central em duas linhas, 3 media inalterados, 6 pontos de contexto, ring aberto e pontilhado; 3 relações visíveis uma única vez, sem apagar a copy. Nó ativo acompanha o ring e no estado 5 percorre a própria saída; ramo de saída liga ao Rise Axis abaixo da zona das relações, **zero colisões** verificadas geometricamente no Chromium. Capturas realmente revistas nos estados 2/4/5 a 1440/1024, artefacto GitHub `12116579447`.
+
+**INVARIÁVEL:** `frontend/public/media/**`, fontes media `src`, posters, textos, Hero, clips/crops aprovados e arte mobile NÃO podem ser alterados para estes refinamentos. `main` intacta. A alteração nas dimensões dos containers desktop pode mudar a área visível da imagem sem alterar o asset; só aprovação visual no Edge confirma composição final.
+
+**NEXT:** não continuar alterações gratuitas. Aguardar revisão do responsável no Edge desktop com scroll para frente e para trás (Pertencer fase 5 → Rise, Aprender→Futuro, Futuro→Vida, Transformar→Vozes). Depois PR #3 pode ser integrado na branch original apenas mediante aprovação explícita; PR #2 permanece outro gate antes de `main`. Ver relatório completo em `docs/colus/presentation/qa-reports/desktop-master-plus-fidelity-2026-10-17.md`.
