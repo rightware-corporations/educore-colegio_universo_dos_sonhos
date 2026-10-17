@@ -103,7 +103,7 @@ try {
   ];
   for (const item of cases) {
     const photo = page.locator(item.scope + ' [data-colus-orbit-node="photo"]');
-    const rail = page.locator(item.scope + ' [data-colus-orbit-node="compact"]');
+    const rail = page.locator(item.scope + ' [data-colus-orbit-node="compact"]:visible');
     assert.equal(await photo.count(), 1, item.id + " must expose its filled photo ring");
     assert.equal(await rail.count(), 1, item.id + " must expose its filled timeline node");
 
