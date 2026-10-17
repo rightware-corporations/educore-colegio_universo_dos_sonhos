@@ -27,7 +27,7 @@ try {
     await wait(620);
     const row=await page.evaluate(([id,f])=>{
      const s=document.getElementById(id),r=s.getBoundingClientRect();
-     const style=node=>node?{opacity:getComputedStyle(node).opacity,inlineStyle:node.getAttribute("style"),rect:(()=>{let b=node.getBoundingClientRect();return [b.x,b.y,b.width,b.height].map(v=>Math.round(v))})()}:null;
+     const style=node=>node?{opacity:getComputedStyle(node).opacity,inlineStyle:node.getAttribute("style"),animations:node.getAnimations().map(a=>({name:a.animationName??null,state:a.playState,css:a.effect?.getKeyframes?.().map(k=>({opacity:k.opacity,offset:k.offset})).slice(0,3)})).slice(0,5),rect:(()=>{let b=node.getBoundingClientRect();return [b.x,b.y,b.width,b.height].map(v=>Math.round(v))})()}:null;
      const headingSelector=id==="experiencia"?"h2":id==="comunidade"?"[data-colus-community-central-copy]":"[class*=min-h-\\[66vh\\]]";
      const headings=[...s.querySelectorAll("h2")].map(el=>({text:el.textContent.trim().slice(0,90),wrap:style(el.parentElement),self:style(el)}));
      const momentArticles=id==="transformar"?[...s.querySelectorAll("motion-article,article")].filter(el=>/0[123] \/ (?:EXPRESSAR|CONSTRUIR|AVANÇAR)/.test(el.textContent)).map(el=>({label:el.textContent.match(/0[123] \/ [A-ZÁÇÃ ]+/)?.[0]??"",style:style(el)})):[];
