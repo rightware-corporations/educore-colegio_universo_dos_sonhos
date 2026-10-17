@@ -53,6 +53,16 @@ export function PertencerSection() {
   const mediaB = useTransform(scrollYProgress, [0.25, 0.43], [0, 1]);
   const mediaC = useTransform(scrollYProgress, [0.38, 0.56], [0, 1]);
 
+  useMotionValueEvent(mediaA, "change", v => {
+    if (ref.current) ref.current.dataset.colusMediaAOpacity = v.toFixed(4);
+  });
+  useMotionValueEvent(mediaB, "change", v => {
+    if (ref.current) ref.current.dataset.colusMediaBOpacity = v.toFixed(4);
+  });
+  useMotionValueEvent(mediaC, "change", v => {
+    if (ref.current) ref.current.dataset.colusMediaCOpacity = v.toFixed(4);
+  });
+
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     const nextPhase = progress < 0.15 ? 1
       : progress < 0.34 ? 2
