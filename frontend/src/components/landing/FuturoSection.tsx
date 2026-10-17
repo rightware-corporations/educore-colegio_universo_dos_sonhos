@@ -259,7 +259,14 @@ export function FuturoSection() {
               </p>
               <div className="mt-10 flex gap-3">
                 {["01", "02", "03", "04"].map((value) => (
-                  <span key={value} className="text-[11px] font-bold tracking-[0.16em] text-white/35">
+                  <span
+                    key={value}
+                    data-colus-desktop-scene-progress={value}
+                    aria-current={value === scenes[activeScene].number ? "step" : undefined}
+                    className={`border-b-2 pb-2 text-[11px] font-bold tracking-[0.16em] transition-colors duration-300 ${value === scenes[activeScene].number
+                      ? "border-colus-orange text-colus-orange"
+                      : "border-transparent text-white/35"}`}
+                  >
                     {value}
                   </span>
                 ))}
@@ -267,17 +274,25 @@ export function FuturoSection() {
             </div>
 
             <div className="relative min-h-[64vh] lg:col-span-8">
-              <motion.article
-                key={scenes[activeScene].number}
+              {/* One stable Scene Window: media transforms INSIDE its approved
+                  rounded mask, instead of remounting the whole card/container. */}
+              <div
+                data-colus-desktop-scene-window
                 data-colus-scene={scenes[activeScene].number}
-                initial={{ opacity: 0.15, scale: 1.015 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.34, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute inset-0 grid content-end overflow-hidden rounded-[32px_82px_32px_32px] border border-white/10 bg-colus-ink-soft"
               >
-                <div className="absolute inset-0">{scenes[activeScene].media}</div>
+                <motion.div
+                  key={scenes[activeScene].number}
+                  data-colus-active-scene-media={scenes[activeScene].number}
+                  initial={{ opacity: 0.4, scale: 1.025, clipPath: "inset(7% 0 0 0)" }}
+                  animate={{ opacity: 1, scale: 1, clipPath: "inset(0% 0 0 0)" }}
+                  transition={{ duration: 0.46, ease: [0.22, 1, 0.36, 1] }}
+                  className="absolute inset-0"
+                >
+                  {scenes[activeScene].media}
+                </motion.div>
                 <div className="absolute inset-0 bg-gradient-to-t from-colus-ink via-colus-ink/18 to-transparent" />
-              </motion.article>
+              </div>
               {/* Caption remains outside the media layers, with no clipping. */}
               <div className="pointer-events-none absolute inset-x-0 bottom-0 z-20 rounded-b-[32px] bg-gradient-to-t from-colus-ink/95 via-colus-ink/60 to-transparent px-10 pb-10 pt-20">
                 <p className="text-xs font-bold tracking-[0.18em] text-colus-orange">
