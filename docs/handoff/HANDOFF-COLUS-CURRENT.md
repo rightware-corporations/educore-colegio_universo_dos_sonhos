@@ -579,3 +579,28 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **Prova técnica e visual:** `npm run typecheck`, `npm run test:qa`, `npm run build`, desktop Chromium 1440×900 e 1024×768, e regressões mobile **PASS** na última execução: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39066528379 ; artifact `colus-mobile-ring-qa`, ID `12113214093` (capturas de antes/depois). Capturas abertas: Aprender com ring visível fora da foto no progresso final; Futuro com ring azul acima do media; Pertencer sem rings vazios nem colisão com copy. Cópias dos media/copy foram comparadas durante as substituições — invariáveis. `IntroHeroSection.tsx` e `frontend/public/media/**` não alterados.
 
 **ESTADO:** engenharia da microcomposição concluída, visual demonstrado em Chromium; aprovação estética do responsável **ainda pendente**, assim como scroll contínuo no Microsoft Edge do proprietário. Não confundir PASS técnico com aprovação de todo o projeto. Mais ajustes só perante nova evidência de captura e sem substituir assets nem copy. `main` intacta.
+
+
+## 37. DESKTOP MASTER PLUS — BRANCH DE VALIDAÇÃO ISOLADA (2026-10-17)
+
+**DECISÃO ATIVA, AUTORIZADA PELO RESPONSÁVEL:** executar correções espaciais e de coreografia que faltam no `landing-colus-master-plus.drawio`, mas **sem mexer em assets, fontes de media, vídeo/cartazes, copy, branding, Hero ou mobile**. Trabalhar numa NOVA branch para avaliar e só depois integrar. **Não existe autorização para merge para `main`.**
+
+**Branches/PRs:**
+- Branch original aprovada como base técnica (mas PR ainda draft): `feat/colus-mobile-editorial-storytelling` → PR #2 → `main`.
+- NOVA branch: `feat/colus-desktop-master-plus-fidelity` criada A PARTIR DA ORIGINAL → PR #3 DRAFT → `feat/colus-mobile-editorial-storytelling`.
+- Fluxo: validar PR #3 em Chromium e Edge do responsável → integrar na original → rerun geral → só depois rever PR #2 para eventual `main`.
+
+**Origem:** `landing-colus-master-plus.drawio` enviado em 2026-10-17, especialmente `belong_9111–belong_9136`. Foi detectado que o diagnóstico antigo que removeu nós contextualizados estava errado: Master exige SEIS nós pequenos ao longo de elipse aberta pontilhada, com headline/descrição NO CENTRO, três imagens a rodear, três relações distribuídas, e cinco fases RELAÇÃO → ARCO NASCE → COMUNIDADE → ESTABILIDADE → ABERTURA. Fundo de produção permanece Warm Paper; fundo escuro do canvas Draw.io não justifica troca de identidade.
+
+**Alterações propostas no PR #3:**
+- `PertencerSection.tsx`: redisposição dos elementos desktop EXISTENTES, ring pontilhado aberto e seis pequenos nós. O nó principal tem escala própria (um SVG isolado num HTML overlay), para não ficar elíptico sob `preserveAspectRatio="none"`. Fases marcadas por `data-colus-community-phase`, media intactos.
+- `FuturoSection.tsx`: mesmo Scene Window exterior persistente durante quatro cenas, alterando apenas o conteúdo interno/clip/opacity; indicador 01–04 demonstra a cena ativa. Signal Field passa a receber a curva vinda de Aprender pelo canto superior direito.
+- `VidaSection.tsx`: marcador final microalinhado com a entrada do Community Ring; imagens intactas.
+- `PertencerSection.tsx` → `TransformarSection.tsx`: último arco prolonga-se para o eixo ascendente de Transformar, sem uma barra desconectada.
+- `AprenderSection.tsx` e `TransformarSection.tsx`: somente marcadores estáveis para comparar handoffs em testes.
+
+**Proteção contra testes superficiais:** `frontend/scripts/qa-desktop-master-plus.mjs` verifica 390/440? Não: em **1440×900 e 1024×768** a geometria central, seis nós, três relações, três media, CINCO fases, persistência do Scene Window TIC→ENG→CIÊNCIA→SEG. DIGITAL e alinhamento de percursos entre secções. Testes legados mobile e desktop continuam obrigatórios; em especial os nós devem continuar realmente circulares em viewport. Documentação completa: `docs/colus/presentation/qa-reports/desktop-master-plus-fidelity-2026-10-17.md`.
+
+**Gate actual:** implementação CANDIDATA em CI; ainda sem aprovação estética nem merge. As imagens podem ter um enquadramento visível diferente devido à mudança de tamanho/posição das janelas apesar de os ficheiros media, links e object-position serem os mesmos. Confirmar no Edge antes de aceitar.
+
+**REGRA ABSOLUTA:** não converter este trabalho em revisão de copy, substituição de imagens ou redesign de Hero/mobile; não mudar `main`; PR #3 continua DRAFT até aprovação explícita.
