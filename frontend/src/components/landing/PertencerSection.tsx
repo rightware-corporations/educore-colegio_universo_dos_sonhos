@@ -265,7 +265,7 @@ export function PertencerSection() {
               <motion.div
                 data-colus-community-central-copy
                 style={reduceMotion ? undefined : { opacity: headlineOpacity, y: headlineY }}
-                className="pointer-events-none absolute left-[32%] top-[28%] z-20 w-[37%] text-center"
+                className="pointer-events-none absolute left-[32%] top-[28%] z-20 w-[36%] text-center"
               >
                 <h2 className="font-editorial text-[clamp(27px,2.65vw,40px)] font-medium leading-[1.06] tracking-[-.03em] text-colus-ink">
                   Crescer é uma jornada partilhada.
