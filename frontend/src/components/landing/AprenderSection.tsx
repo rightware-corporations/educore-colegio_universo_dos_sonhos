@@ -10,8 +10,8 @@ const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 export function AprenderSection() {
   const ref = useRef<HTMLElement>(null);
   const trailPathRef = useRef<SVGPathElement>(null);
-  const trailX = useMotionValue(48);
-  const trailY = useMotionValue(470);
+  const trailX = useMotionValue(40);
+  const trailY = useMotionValue(520);
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -139,7 +139,7 @@ export function AprenderSection() {
               >
                 <motion.path
                   ref={trailPathRef}
-                  d="M48 470 C140 390 192 184 365 208 C500 226 522 465 754 330"
+                  d="M40 520 C180 525 340 544 540 516 C580 510 618 460 624 404 C642 296 710 172 760 60"
                   fill="none"
                   strokeWidth="2"
                   strokeLinecap="round"
@@ -148,9 +148,9 @@ export function AprenderSection() {
                     stroke: trailColor,
                   }}
                 />
-                <circle cx="48" cy="470" r="4" fill="#0C5898" opacity=".6" />
+                <circle cx="40" cy="520" r="4" fill="#0C5898" opacity=".6" />
 
-                <motion.g style={reduceMotion ? { x: 754, y: 330 } : { x: trailX, y: trailY }}>
+                <motion.g style={reduceMotion ? { x: 760, y: 60 } : { x: trailX, y: trailY }}>
                   <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={13} />
                 </motion.g>
               </svg>
