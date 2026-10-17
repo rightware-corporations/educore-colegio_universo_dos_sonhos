@@ -194,17 +194,12 @@ export function PertencerSection() {
                   style={{ pathLength: reduceMotion ? 1 : ringLength }}
                 />
                 <motion.g style={{ opacity: reduceMotion ? 1 : ringNodesOpacity }}>
-                  <g fill="#F18136">
-                    <circle cx="152" cy="386" r="7" />
-                    <circle cx="360" cy="173" r="6" />
-                    <circle cx="672" cy="168" r="7" />
-                    <circle cx="914" cy="325" r="6" />
-                    <circle cx="824" cy="588" r="7" />
-                  </g>
-                  <g fill="none" stroke="#0C5898" strokeOpacity=".28" strokeWidth="2">
-                    <circle cx="360" cy="173" r="18" />
-                    <circle cx="672" cy="168" r="22" />
-                    <circle cx="824" cy="588" r="17" />
+                  {/* Context points: no hollow competing rings.
+                      Only the scroll-driven relation node is dominant. */}
+                  <g fill="#F18136" fillOpacity=".56">
+                    <circle cx="152" cy="386" r="4" />
+                    <circle cx="360" cy="173" r="4" />
+                    <circle cx="672" cy="168" r="4" />
                   </g>
                 </motion.g>
                 {/* Community Ring stays OPEN as drawn in the desktop Master.
@@ -257,7 +252,7 @@ export function PertencerSection() {
                 <p className="mt-3 text-sm font-semibold text-colus-text">Crescer juntos</p>
               </motion.article>
 
-              <div className="absolute left-[43%] top-[54%] z-20 max-w-[15rem]">
+              <div className="absolute left-[43%] top-[54%] z-20 max-w-[10rem]">
                 {relations.map(([title, copy]) => (
                   <div key={title} className="mb-4">
                     <p className="text-sm font-bold text-colus-ink">{title}</p>
