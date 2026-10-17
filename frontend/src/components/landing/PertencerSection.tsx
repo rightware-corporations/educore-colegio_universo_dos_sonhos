@@ -252,7 +252,7 @@ export function PertencerSection() {
                 <p className="mt-3 text-sm font-semibold text-colus-text">Crescer juntos</p>
               </motion.article>
 
-              <div className="absolute left-[43%] top-[54%] z-20 max-w-[10rem]">
+              <div className="absolute left-[43%] top-[48%] z-20 max-w-[10rem]">
                 {relations.map(([title, copy]) => (
                   <div key={title} className="mb-4">
                     <p className="text-sm font-bold text-colus-ink">{title}</p>
