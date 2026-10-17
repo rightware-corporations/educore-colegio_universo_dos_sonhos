@@ -16,6 +16,12 @@ export function TransformarSection() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
+  // Instrument only the section's motion progress for deterministic visual QA.
+  // No DOM repaint, state change, content or layout modification.
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (ref.current) ref.current.dataset.colusScrollProgress = progress.toFixed(4);
+  });
+
   const axisLength = useTransform(scrollYProgress, [0.04, 0.92], [0, 1]);
   const first = useTransform(scrollYProgress, [0, 0.18, 0.4, 0.48], [1, 1, 1, 0]);
   const second = useTransform(scrollYProgress, [0.39, 0.47, 0.65, 0.73], [0, 1, 1, 0]);
