@@ -61,6 +61,8 @@ jobs:
         run: node scripts/qa-desktop-rings.mjs
       - name: Desktop Master Plus composition and five-phase QA
         run: node scripts/qa-desktop-master-plus.mjs
+      - name: Chromium desktop scene-state audit (read only)
+        run: node scripts/qa-desktop-state-audit.mjs
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
@@ -71,5 +73,6 @@ jobs:
             frontend/qa-artifacts/mobile-handoffs/
             frontend/qa-artifacts/desktop-rings/
             frontend/qa-artifacts/desktop-master-plus/
+            frontend/qa-artifacts/desktop-state-audit/
           if-no-files-found: warn
           retention-days: 14
