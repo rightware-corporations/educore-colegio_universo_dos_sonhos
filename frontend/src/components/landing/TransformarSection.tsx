@@ -22,6 +22,7 @@ export function TransformarSection() {
   const third = useTransform(scrollYProgress, [0.64, 0.72, 1], [0, 1, 1]);
   const horizonOpacity = useTransform(scrollYProgress, [0.86, 0.96], [0, 1]);
   const horizonScaleX = useTransform(scrollYProgress, [0.86, 1], [0.08, 1]);
+  const horizonNodePosition = useTransform(scrollYProgress, [0.86, 1], ["50%", "100%"]);
   const riseNodeOpacity = useTransform(scrollYProgress, [0.78, 0.91], [1, 0]);
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     if (reduceMotion || !risePathRef.current) return;
@@ -153,15 +154,20 @@ export function TransformarSection() {
             </motion.g>
           </svg>
 
-          <motion.div
-            style={reduceMotion ? undefined : { opacity: horizonOpacity, scaleX: horizonScaleX }}
-            className="pointer-events-none absolute bottom-[12vh] left-1/2 z-10 h-px w-[72vw] max-w-[1040px] -translate-x-1/2 origin-center bg-white/18"
-            aria-hidden="true"
-          >
-            <span className="absolute -right-4 -top-4">
+          {/* The line grows into Horizon; the node stays ROUND and travels
+              independently (never inherits the line's scaleX distortion). */}
+          <div className="pointer-events-none absolute bottom-[12vh] left-1/2 z-10 w-[72vw] max-w-[1040px] -translate-x-1/2" aria-hidden="true">
+            <motion.div
+              style={reduceMotion ? undefined : { opacity: horizonOpacity, scaleX: horizonScaleX }}
+              className="absolute inset-x-0 bottom-0 h-px origin-center bg-white/25"
+            />
+            <motion.div
+              style={reduceMotion ? { left: "100%" } : { left: horizonNodePosition, opacity: horizonOpacity }}
+              className="absolute -top-4 -translate-x-1/2"
+            >
               <EditorialOrbitNode progress={scrollYProgress} size="compact" />
-            </span>
-          </motion.div>
+            </motion.div>
+          </div>
 
           <div className="relative z-10 mx-auto grid min-h-screen max-w-[1440px] items-center gap-8 px-16 py-24 lg:grid-cols-12">
             <div className="lg:col-span-5">
