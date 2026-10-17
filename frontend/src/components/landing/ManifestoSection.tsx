@@ -24,8 +24,11 @@ export function ManifestoSection() {
   const mediaScale = useTransform(scrollYProgress, [0.08, 0.4], [1.04, 1]);
   const mobileRailX = useTransform(scrollYProgress, [0.3, 0.72], ["5%", "95%"]);
   const mobileRailDraw = useTransform(scrollYProgress, [0.3, 0.72], [0, 1]);
-  const ringNodeX = useTransform(scrollYProgress, [0.3, 0.72], [0, 155]);
-  const ringNodeY = useTransform(scrollYProgress, [0.3, 0.5, 0.72], [0, 28, 0]);
+  // Trace the LOWER edge of the existing photo ellipse, not the people.
+  // Photo/media geometry and the mobile heart stay unchanged.
+  const orbitProgress = useTransform(scrollYProgress, [0.3, 0.72], [0, 1]);
+  const orbitLeft = useTransform(orbitProgress, (t) => `${50 - 41 * Math.cos(Math.PI * t)}%`);
+  const orbitTop = useTransform(orbitProgress, (t) => `${50 + 44 * Math.sin(Math.PI * t)}%`);
 
   return (
     <section
@@ -122,7 +125,9 @@ export function ManifestoSection() {
               style={{ left: reduceMotion ? "95%" : mobileRailX }}
               className="absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
             >
-              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+              <span className="block origin-center scale-[.72]">
+                <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+              </span>
             </motion.div>
           </div>
         </div>
@@ -166,17 +171,13 @@ export function ManifestoSection() {
             className="pointer-events-none absolute hidden -bottom-8 -left-4 h-32 w-56 rounded-[50%] border border-colus-deep-blue/20 lg:-bottom-10 lg:-left-8 lg:block lg:h-40 lg:w-64"
           >
             <motion.div
-              style={reduceMotion ? undefined : { x: ringNodeX, y: ringNodeY }}
-              className="absolute left-[10%] top-[18%]"
+              style={reduceMotion ? { left: "50%", top: "94%" } : { left: orbitLeft, top: orbitTop }}
+              className="absolute -translate-x-1/2 -translate-y-1/2"
             >
               <EditorialOrbitNode progress={scrollYProgress} size="compact" />
             </motion.div>
-            <span className="absolute bottom-[14%] right-[18%] h-2 w-2 rounded-full bg-colus-orange/75" />
           </div>
-          <span
-            aria-hidden="true"
-            className="pointer-events-none absolute hidden -right-1 top-[18%] h-3 w-3 rounded-full bg-colus-orange lg:right-[2%] lg:block"
-          />
+
         </div>
       </div>
     </section>
