@@ -181,13 +181,27 @@ export function PertencerSection() {
                   fill="none" stroke="#F18136" strokeOpacity=".15"
                   strokeWidth="2" strokeDasharray="4 13"
                 />
-                <motion.path
+                {/* Framer Motion's pathLength sets its own dasharray; drawing
+                    the ORANGE dotted path directly with pathLength would
+                    silently turn it into a continuous line. Reveal the dots
+                    through an independently animated MASK instead. */}
+                <defs>
+                  <mask id="colus-community-arc-reveal" maskUnits="userSpaceOnUse">
+                    <motion.path
+                      data-colus-community-reveal-mask
+                      d="M570 135 C685 63 850 72 995 120 C1128 174 1218 290 1190 420 C1167 535 1050 600 895 606 C754 612 633 548 570 450 C526 376 527 250 570 185"
+                      fill="none" stroke="#fff" strokeWidth="16" strokeLinecap="round"
+                      style={{ pathLength: reduceMotion ? 1 : ringLength }}
+                    />
+                  </mask>
+                </defs>
+                <path
                   ref={ringPathRef}
                   data-colus-community-ring-path
                   d="M570 135 C685 63 850 72 995 120 C1128 174 1218 290 1190 420 C1167 535 1050 600 895 606 C754 612 633 548 570 450 C526 376 527 250 570 185"
                   fill="none" stroke="#F18136" strokeOpacity=".85"
                   strokeWidth="3" strokeDasharray="4 13" strokeLinecap="round"
-                  style={{ pathLength: reduceMotion ? 1 : ringLength }}
+                  mask="url(#colus-community-arc-reveal)"
                 />
 
                 {/* During ABERTURA the last ring segment flows towards the
