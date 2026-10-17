@@ -4,6 +4,7 @@ import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
 import { DesktopOrbitNode } from "./DesktopOrbitNode";
+import { useScrollOpacity } from "./useScrollOpacity";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -25,9 +26,9 @@ export function AprenderSection() {
     if (ref.current) ref.current.dataset.colusScrollProgress = progress.toFixed(4);
   });
 
-  const discoverOpacity = useTransform(scrollYProgress, [0, 0.38, 0.52], [1, 1, 0]);
+  const discoverOpacity = useScrollOpacity(scrollYProgress, [0, 0.38, 0.52], [1, 1, 0]);
   const discoverScale = useTransform(scrollYProgress, [0, 0.46], [1, 0.94]);
-  const createOpacity = useTransform(scrollYProgress, [0.38, 0.54, 1], [0, 1, 1]);
+  const createOpacity = useScrollOpacity(scrollYProgress, [0.38, 0.54, 1], [0, 1, 1]);
   const createY = useTransform(scrollYProgress, [0.38, 0.58], [42, 0]);
 
   useMotionValueEvent(discoverOpacity, "change", v => {
@@ -37,8 +38,8 @@ export function AprenderSection() {
     if (ref.current) ref.current.dataset.colusCreateOpacity = v.toFixed(4);
   });
   const trailColor = useTransform(scrollYProgress, [0.3, 0.7], ["#0C5898", "#F18136"]);
-  const detailOpacity = useTransform(scrollYProgress, [0.1, 0.26, 0.44], [0, 1, 0]);
-  const outroOpacity = useTransform(scrollYProgress, [0.82, 1], [0, 1]);
+  const detailOpacity = useScrollOpacity(scrollYProgress, [0.1, 0.26, 0.44], [0, 1, 0]);
+  const outroOpacity = useScrollOpacity(scrollYProgress, [0.82, 1], [0, 1]);
   // The single active desktop ring follows the actual Learning Trail; the
   // two tiny endpoints stay as contextual marks, not competing active nodes.
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
