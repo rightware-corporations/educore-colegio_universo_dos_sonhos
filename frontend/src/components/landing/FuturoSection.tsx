@@ -226,7 +226,7 @@ export function FuturoSection() {
             <motion.path
               ref={signalPathRef}
               data-colus-desktop-signal-path
-              d="M-70 795 C150 798 350 815 530 790 C600 764 636 676 650 545 C660 412 635 265 668 175 C860 149 1100 162 1280 175"
+              d="M-70 795 C150 798 350 815 530 790 C600 764 636 676 650 545 C660 412 635 210 668 112 C860 88 1100 102 1280 115"
               fill="none"
               stroke="url(#signalGradient)"
               strokeWidth="3"
@@ -234,7 +234,7 @@ export function FuturoSection() {
               style={{ pathLength: reduceMotion ? 1 : fieldLength }}
             />
             {/* Filled active node belongs to Signal Field, not the scene media. */}
-            <motion.g style={reduceMotion ? { x: 1280, y: 175 } : { x: pointerX, y: pointerY }} aria-hidden="true">
+            <motion.g style={reduceMotion ? { x: 1280, y: 115 } : { x: pointerX, y: pointerY }} aria-hidden="true">
               <DesktopOrbitNode progress={scrollYProgress} tone="blue" size={15} />
             </motion.g>
             <defs>
