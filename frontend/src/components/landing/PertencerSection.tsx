@@ -234,7 +234,7 @@ export function PertencerSection() {
                 <motion.path
                   ref={riseHandoffRef}
                   data-colus-community-rise-handoff
-                  d="M765 590 C758 660 760 702 769 724 C783 749 838 754 860 760"
+                  d="M765 590 C760 655 758 735 760 800 C765 850 808 897 860 940"
                   fill="none" stroke="#F18136" strokeWidth="3" strokeLinecap="round"
                   style={{ pathLength: reduceMotion ? 1 : handoffLength,
                     opacity: reduceMotion ? 1 : handoffOpacity }}
