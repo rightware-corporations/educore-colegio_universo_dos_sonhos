@@ -35,6 +35,12 @@ export function PertencerSection() {
 
   // Desktop Master Plus: RELAÇÃO → ARCO NASCE → COMUNIDADE →
   // ESTABILIDADE → ABERTURA. Preserve all three approved media sources.
+  // Instrument only the section's motion progress for deterministic visual QA.
+  // No DOM repaint, state change, content or layout modification.
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (ref.current) ref.current.dataset.colusScrollProgress = progress.toFixed(4);
+  });
+
   const headlineOpacity = useTransform(scrollYProgress, [0.36, 0.55], [0.35, 1]);
   const headlineY = useTransform(scrollYProgress, [0.36, 0.55], [15, 0]);
   const ringLength = useTransform(scrollYProgress, [0.12, 0.34, 0.55], [0, 0.76, 1]);
