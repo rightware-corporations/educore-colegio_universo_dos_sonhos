@@ -172,7 +172,7 @@ export function PertencerSection() {
               Pertencer
             </p>
 
-            <div data-colus-community-stage data-colus-community-phase={communityPhase} className="relative mx-auto mt-5 min-h-0 w-full max-w-6xl flex-1">
+            <div data-colus-community-stage data-colus-community-phase={communityPhase} className="relative mx-auto mt-5 aspect-[1720/760] max-h-full w-full max-w-6xl shrink-0">
               <motion.svg
                 viewBox="0 0 1720 760"
                 className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
@@ -265,9 +265,9 @@ export function PertencerSection() {
               <motion.div
                 data-colus-community-central-copy
                 style={reduceMotion ? undefined : { opacity: headlineOpacity, y: headlineY }}
-                className="pointer-events-none absolute left-[36%] top-[28%] z-20 w-[30%] text-center"
+                className="pointer-events-none absolute left-[32%] top-[28%] z-20 w-[37%] text-center"
               >
-                <h2 className="font-editorial text-[clamp(28px,3.15vw,46px)] font-medium leading-[1.06] tracking-[-.03em] text-colus-ink">
+                <h2 className="font-editorial text-[clamp(27px,2.65vw,40px)] font-medium leading-[1.06] tracking-[-.03em] text-colus-ink">
                   Crescer é uma jornada partilhada.
                 </h2>
                 <p className="mx-auto mt-5 max-w-[39ch] text-[clamp(11px,1vw,15px)] leading-[1.45] text-colus-muted">
@@ -287,13 +287,13 @@ export function PertencerSection() {
                     alt="Interação humana na comunidade escolar COLUS"
                   />
                 </div>
-                <p className="mt-3 text-sm font-semibold text-colus-text">Acompanhar</p>
+                <p className="sr-only">Acompanhar</p>
               </motion.article>
 
               <motion.article
                 data-colus-community-media="2"
                 style={reduceMotion ? undefined : { opacity: mediaB }}
-                className="absolute right-[5%] top-[10%] h-[32%] w-[24%]"
+                className="absolute right-[7%] top-[10%] h-[32%] w-[24%]"
               >
                 <div className="h-full overflow-hidden rounded-[84px_28px_28px_28px]">
                   <LandingMedia
@@ -303,13 +303,13 @@ export function PertencerSection() {
                     className="object-top"
                   />
                 </div>
-                <p className="mt-3 text-sm font-semibold text-colus-text">Participar</p>
+                <p className="sr-only">Participar</p>
               </motion.article>
 
               <motion.article
                 data-colus-community-media="3"
                 style={reduceMotion ? undefined : { opacity: mediaC }}
-                className="absolute bottom-[12%] right-[9%] h-[29%] w-[23%]"
+                className="absolute bottom-[13%] right-[12%] h-[29%] w-[23%]"
               >
                 <div className="h-full overflow-hidden rounded-[28px_28px_70px_28px]">
                   <LandingMedia
@@ -318,7 +318,7 @@ export function PertencerSection() {
                     alt="Momento coletivo de comunidade escolar"
                   />
                 </div>
-                <p className="mt-3 text-sm font-semibold text-colus-text">Crescer juntos</p>
+                <p className="sr-only">Crescer juntos</p>
               </motion.article>
 
               {/* Three relation beats occupy distinct positions around the ring. */}
@@ -326,9 +326,9 @@ export function PertencerSection() {
                 <div
                   data-colus-community-relation={index + 1}
                   key={title}
-                  className={["absolute left-[5%] top-[62%] z-20 w-[19%]",
-                    "absolute left-[27%] top-[82%] z-20 w-[19%]",
-                    "absolute left-[48%] top-[84%] z-20 w-[20%]"][index]}
+                  className={["absolute left-[5%] top-[58%] z-20 w-[19%] rounded-2xl border border-colus-ink/10 bg-colus-paper/95 px-3 py-2",
+                    "absolute left-[24%] top-[78%] z-20 w-[19%] rounded-2xl border border-colus-ink/10 bg-colus-paper/95 px-3 py-2",
+                    "absolute left-[45%] top-[81%] z-20 w-[20%] rounded-2xl border border-colus-ink/10 bg-colus-paper/95 px-3 py-2"][index]}
                 >
                   <p className="text-sm font-bold text-colus-ink">{title}</p>
                   <p className="mt-1 text-xs leading-5 text-colus-muted">{copy}</p>
