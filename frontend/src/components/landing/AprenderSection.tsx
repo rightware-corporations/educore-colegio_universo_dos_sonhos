@@ -1,13 +1,17 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
+import { DesktopOrbitNode } from "./DesktopOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
 export function AprenderSection() {
   const ref = useRef<HTMLElement>(null);
+  const trailPathRef = useRef<SVGPathElement>(null);
+  const trailX = useMotionValue(48);
+  const trailY = useMotionValue(470);
   const reduceMotion = useReducedMotion();
 
   const { scrollYProgress } = useScroll({
@@ -22,6 +26,17 @@ export function AprenderSection() {
   const trailColor = useTransform(scrollYProgress, [0.3, 0.7], ["#0C5898", "#F18136"]);
   const detailOpacity = useTransform(scrollYProgress, [0.1, 0.26, 0.44], [0, 1, 0]);
   const outroOpacity = useTransform(scrollYProgress, [0.82, 1], [0, 1]);
+  // The single active desktop ring follows the actual Learning Trail; the
+  // two tiny endpoints stay as contextual marks, not competing active nodes.
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (reduceMotion || !trailPathRef.current) return;
+    const path = trailPathRef.current;
+    const point = path.getPointAtLength(
+      Math.max(0, Math.min(1, progress)) * path.getTotalLength(),
+    );
+    trailX.set(point.x);
+    trailY.set(point.y);
+  });
 
   return (
     <section
@@ -122,6 +137,7 @@ export function AprenderSection() {
                 className="pointer-events-none absolute inset-0 z-10 h-full w-full overflow-visible"
               >
                 <motion.path
+                  ref={trailPathRef}
                   d="M48 470 C140 390 192 184 365 208 C500 226 522 465 754 330"
                   fill="none"
                   strokeWidth="2"
@@ -131,8 +147,11 @@ export function AprenderSection() {
                     stroke: trailColor,
                   }}
                 />
-                <circle cx="50" cy="468" r="6" fill="#0C5898" />
-                <circle cx="754" cy="330" r="6" fill="#F18136" />
+                <circle cx="48" cy="470" r="4" fill="#0C5898" opacity=".6" />
+                <circle cx="754" cy="330" r="4" fill="#F18136" opacity=".6" />
+                <motion.g style={reduceMotion ? { x: 754, y: 330 } : { x: trailX, y: trailY }}>
+                  <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={13} />
+                </motion.g>
               </svg>
 
               <motion.div
