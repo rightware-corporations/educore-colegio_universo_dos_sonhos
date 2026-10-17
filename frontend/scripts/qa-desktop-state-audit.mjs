@@ -32,7 +32,7 @@ try {
      const headings=[...s.querySelectorAll("h2")].map(el=>({text:el.textContent.trim().slice(0,90),wrap:style(el.parentElement),self:style(el)}));
      const momentArticles=id==="transformar"?[...s.querySelectorAll("motion-article,article")].filter(el=>/0[123] \/ (?:EXPRESSAR|CONSTRUIR|AVANÇAR)/.test(el.textContent)).map(el=>({label:el.textContent.match(/0[123] \/ [A-ZÁÇÃ ]+/)?.[0]??"",style:style(el)})):[];
      const media=[...s.querySelectorAll("[data-colus-community-media]")].map(el=>({name:el.getAttribute("data-colus-community-media"),style:style(el)}));
-     return {id,f,scrollY:Math.round(scrollY),sectionTop:Math.round(r.top),sectionHeight:Math.round(r.height),
+     return {id,f,motionProgress:s.dataset.colusScrollProgress ?? null,scrollY:Math.round(scrollY),sectionTop:Math.round(r.top),sectionHeight:Math.round(r.height),
        headings,momentArticles,media,phase:s.querySelector("[data-colus-community-stage]")?.getAttribute("data-colus-community-phase")??null};
     },[id,f]);
     rows.push({width,...row});
