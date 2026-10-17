@@ -163,6 +163,16 @@ export function PertencerSection() {
                 preserveAspectRatio="none"
                 style={reduceMotion ? undefined : { opacity: ringFade }}
               >
+                {/* The previous Vida Story Marker arrives from above at the
+                    same relative x position; it grows into this relational arc. */}
+                <motion.path
+                  data-colus-community-entry-bridge
+                  d="M570 -30 C568 25 570 75 570 135"
+                  fill="none" stroke="#F18136" strokeWidth="2.5"
+                  strokeLinecap="round"
+                  style={{ pathLength: reduceMotion ? 1 : entryLineLength,
+                    opacity: reduceMotion ? 1 : entryLineOpacity }}
+                />
                 {/* Master Plus: 650×500 relational ellipse, intentionally OPEN.
                     Dotted orange arc; six contextual nodes; one active pointer. */}
                 <path
