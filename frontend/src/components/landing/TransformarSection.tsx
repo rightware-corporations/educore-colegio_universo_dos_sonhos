@@ -1,13 +1,18 @@
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
+import { motion, useMotionValue, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
+import { DesktopOrbitNode } from "./DesktopOrbitNode";
+import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
 export function TransformarSection() {
   const ref = useRef<HTMLElement>(null);
+  const risePathRef = useRef<SVGPathElement>(null);
+  const riseX = useMotionValue(690);
+  const riseY = useMotionValue(980);
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
@@ -17,6 +22,15 @@ export function TransformarSection() {
   const third = useTransform(scrollYProgress, [0.64, 0.72, 1], [0, 1, 1]);
   const horizonOpacity = useTransform(scrollYProgress, [0.86, 0.96], [0, 1]);
   const horizonScaleX = useTransform(scrollYProgress, [0.86, 1], [0.08, 1]);
+  const riseNodeOpacity = useTransform(scrollYProgress, [0.78, 0.91], [1, 0]);
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (reduceMotion || !risePathRef.current) return;
+    const path = risePathRef.current;
+    const distance = Math.max(0, Math.min(1, (progress - 0.04) / 0.88));
+    const point = path.getPointAtLength(distance * path.getTotalLength());
+    riseX.set(point.x);
+    riseY.set(point.y);
+  });
 
   const moments = [
     {
@@ -125,6 +139,7 @@ export function TransformarSection() {
           <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_48%_22%,rgba(241,129,54,.18),transparent_28%),linear-gradient(180deg,#FFF8EF_0%,#071A2A_34%,#071A2A_100%)] opacity-95" />
           <svg viewBox="0 0 1400 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
+              ref={risePathRef}
               d="M690 980 C684 710 720 570 704 390 C692 248 732 146 780 -80"
               fill="none"
               stroke="#F18136"
@@ -132,6 +147,10 @@ export function TransformarSection() {
               strokeLinecap="round"
               style={{ pathLength: reduceMotion ? 1 : axisLength }}
             />
+            {/* One filled node rises along the real path, then yields to Horizon. */}
+            <motion.g style={reduceMotion ? { x: 780, y: -40 } : { x: riseX, y: riseY, opacity: riseNodeOpacity }}>
+              <DesktopOrbitNode progress={scrollYProgress} size={15} />
+            </motion.g>
           </svg>
 
           <motion.div
@@ -139,7 +158,9 @@ export function TransformarSection() {
             className="pointer-events-none absolute bottom-[12vh] left-1/2 z-10 h-px w-[72vw] max-w-[1040px] -translate-x-1/2 origin-center bg-white/18"
             aria-hidden="true"
           >
-            <span className="absolute -right-1 -top-[5px] h-3 w-3 rounded-full bg-colus-orange" />
+            <span className="absolute -right-4 -top-4">
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </span>
           </motion.div>
 
           <div className="relative z-10 mx-auto grid min-h-screen max-w-[1440px] items-center gap-8 px-16 py-24 lg:grid-cols-12">
