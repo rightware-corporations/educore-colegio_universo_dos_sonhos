@@ -86,11 +86,13 @@ export function TestimonialsSection() {
                 className="absolute inset-0 origin-left bg-gradient-to-r from-colus-bright-blue to-colus-orange"
                 aria-hidden="true"
               />
-              <motion.span
-                style={reduceMotion ? { left: "100%" } : { left: storyNodeX }}
-                className="absolute -top-[5px] h-3 w-3 -translate-x-1/2 rounded-full bg-colus-orange shadow-[0_0_0_5px_rgba(241,129,54,.12)]"
+              <motion.div
+                style={{ left: reduceMotion ? "100%" : storyNodeX }}
+                className="pointer-events-none absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
                 aria-hidden="true"
-              />
+              >
+                <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+              </motion.div>
             </div>
             <div className="mt-4 flex items-center justify-between gap-4 text-[10px] font-bold uppercase tracking-[0.14em] text-white/40">
               <span>A nossa comunidade</span>
@@ -120,7 +122,9 @@ export function TestimonialsSection() {
             aria-hidden="true"
             className="pointer-events-none absolute hidden -bottom-6 -left-5 h-24 w-32 rounded-[50%] border border-colus-bright-blue/35 lg:block"
           >
-            <span className="absolute left-[16%] top-[20%] h-3 w-3 rounded-full bg-colus-orange" />
+            <div className="absolute left-[16%] top-[20%]">
+              <EditorialOrbitNode progress={scrollYProgress} size="compact" />
+            </div>
           </div>
           <figcaption className="relative mt-5 text-xs font-semibold uppercase tracking-[0.13em] text-white/55">
             A vida COLUS, vista de perto
