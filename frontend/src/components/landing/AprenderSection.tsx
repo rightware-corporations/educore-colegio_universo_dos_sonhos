@@ -4,6 +4,7 @@ import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
 import { DesktopOrbitNode } from "./DesktopOrbitNode";
+import { useScrollOpacity } from "./useScrollOpacity";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -19,13 +20,26 @@ export function AprenderSection() {
     offset: ["start start", "end end"],
   });
 
-  const discoverOpacity = useTransform(scrollYProgress, [0, 0.38, 0.52], [1, 1, 0]);
+  // Instrument only the section's motion progress for deterministic visual QA.
+  // No DOM repaint, state change, content or layout modification.
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (ref.current) ref.current.dataset.colusScrollProgress = progress.toFixed(4);
+  });
+
+  const discoverOpacity = useScrollOpacity(scrollYProgress, [0, 0.38, 0.52], [1, 1, 0]);
   const discoverScale = useTransform(scrollYProgress, [0, 0.46], [1, 0.94]);
-  const createOpacity = useTransform(scrollYProgress, [0.38, 0.54, 1], [0, 1, 1]);
+  const createOpacity = useScrollOpacity(scrollYProgress, [0.38, 0.54, 1], [0, 1, 1]);
   const createY = useTransform(scrollYProgress, [0.38, 0.58], [42, 0]);
+
+  useMotionValueEvent(discoverOpacity, "change", v => {
+    if (ref.current) ref.current.dataset.colusDiscoverOpacity = v.toFixed(4);
+  });
+  useMotionValueEvent(createOpacity, "change", v => {
+    if (ref.current) ref.current.dataset.colusCreateOpacity = v.toFixed(4);
+  });
   const trailColor = useTransform(scrollYProgress, [0.3, 0.7], ["#0C5898", "#F18136"]);
-  const detailOpacity = useTransform(scrollYProgress, [0.1, 0.26, 0.44], [0, 1, 0]);
-  const outroOpacity = useTransform(scrollYProgress, [0.82, 1], [0, 1]);
+  const detailOpacity = useScrollOpacity(scrollYProgress, [0.1, 0.26, 0.44], [0, 1, 0]);
+  const outroOpacity = useScrollOpacity(scrollYProgress, [0.82, 1], [0, 1]);
   // The single active desktop ring follows the actual Learning Trail; the
   // two tiny endpoints stay as contextual marks, not competing active nodes.
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
@@ -108,7 +122,7 @@ export function AprenderSection() {
                 Aprender em movimento
               </p>
 
-              <motion.div style={reduceMotion ? undefined : { opacity: discoverOpacity }}>
+              <motion.div data-colus-desktop-discover style={reduceMotion ? undefined : { opacity: discoverOpacity }}>
                 <p className="mt-10 text-xs font-bold tracking-[0.18em] text-colus-orange">
                   01 / DESCOBRIR
                 </p>
@@ -118,6 +132,7 @@ export function AprenderSection() {
               </motion.div>
 
               <motion.div
+                data-colus-desktop-create
                 style={reduceMotion ? undefined : { opacity: createOpacity, y: createY }}
                 className="absolute left-0 top-24"
               >
@@ -139,6 +154,7 @@ export function AprenderSection() {
               >
                 <motion.path
                   ref={trailPathRef}
+                  data-colus-desktop-trail-path
                   d="M40 520 C180 525 340 544 540 516 C580 510 618 460 624 404 C642 296 710 172 760 60"
                   fill="none"
                   strokeWidth="2"

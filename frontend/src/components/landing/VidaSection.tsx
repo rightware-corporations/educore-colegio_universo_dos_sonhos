@@ -227,7 +227,8 @@ export function VidaSection() {
 
               <motion.div
                 style={reduceMotion ? undefined : { x: exitMarkerX }}
-                className="absolute -bottom-5 left-[8%] flex items-center gap-3"
+                data-colus-vida-exit-marker
+                className="absolute -bottom-5 left-[1%] flex items-center gap-3"
                 aria-hidden="true"
               >
                 <EditorialOrbitNode progress={scrollYProgress} size="compact" />

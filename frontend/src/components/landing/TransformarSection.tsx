@@ -4,6 +4,7 @@ import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
 import { DesktopOrbitNode } from "./DesktopOrbitNode";
+import { useScrollOpacity } from "./useScrollOpacity";
 import { EditorialOrbitNode } from "./EditorialOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
@@ -16,14 +17,30 @@ export function TransformarSection() {
   const reduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end end"] });
 
+  // Instrument only the section's motion progress for deterministic visual QA.
+  // No DOM repaint, state change, content or layout modification.
+  useMotionValueEvent(scrollYProgress, "change", (progress) => {
+    if (ref.current) ref.current.dataset.colusScrollProgress = progress.toFixed(4);
+  });
+
   const axisLength = useTransform(scrollYProgress, [0.04, 0.92], [0, 1]);
-  const first = useTransform(scrollYProgress, [0, 0.18, 0.4, 0.48], [1, 1, 1, 0]);
-  const second = useTransform(scrollYProgress, [0.39, 0.47, 0.65, 0.73], [0, 1, 1, 0]);
-  const third = useTransform(scrollYProgress, [0.64, 0.72, 1], [0, 1, 1]);
-  const horizonOpacity = useTransform(scrollYProgress, [0.86, 0.96], [0, 1]);
+  const first = useScrollOpacity(scrollYProgress, [0, 0.18, 0.4, 0.48], [1, 1, 1, 0]);
+  const second = useScrollOpacity(scrollYProgress, [0.39, 0.47, 0.65, 0.73], [0, 1, 1, 0]);
+  const third = useScrollOpacity(scrollYProgress, [0.64, 0.72, 1], [0, 1, 1]);
+
+  useMotionValueEvent(first, "change", v => {
+    if (ref.current) ref.current.dataset.colusFirstOpacity = v.toFixed(4);
+  });
+  useMotionValueEvent(second, "change", v => {
+    if (ref.current) ref.current.dataset.colusSecondOpacity = v.toFixed(4);
+  });
+  useMotionValueEvent(third, "change", v => {
+    if (ref.current) ref.current.dataset.colusThirdOpacity = v.toFixed(4);
+  });
+  const horizonOpacity = useScrollOpacity(scrollYProgress, [0.86, 0.96], [0, 1]);
   const horizonScaleX = useTransform(scrollYProgress, [0.86, 1], [0.08, 1]);
   const horizonNodePosition = useTransform(scrollYProgress, [0.86, 1], ["50%", "100%"]);
-  const riseNodeOpacity = useTransform(scrollYProgress, [0.78, 0.91], [1, 0]);
+  const riseNodeOpacity = useScrollOpacity(scrollYProgress, [0.78, 0.91], [1, 0]);
   useMotionValueEvent(scrollYProgress, "change", (progress) => {
     if (reduceMotion || !risePathRef.current) return;
     const path = risePathRef.current;
@@ -141,6 +158,7 @@ export function TransformarSection() {
           <svg viewBox="0 0 1400 900" className="pointer-events-none absolute inset-0 h-full w-full" aria-hidden="true">
             <motion.path
               ref={risePathRef}
+              data-colus-desktop-rise-axis
               d="M690 980 C684 710 720 570 704 390 C692 248 732 146 780 -80"
               fill="none"
               stroke="#F18136"
@@ -183,6 +201,7 @@ export function TransformarSection() {
               {desktopMoments.map((moment) => (
                 <motion.article
                   key={moment.number}
+                  data-colus-desktop-moment={moment.number}
                   style={reduceMotion ? undefined : { opacity: moment.opacity }}
                   className="absolute inset-0 overflow-hidden rounded-[34px_90px_34px_34px]"
                 >
