@@ -201,6 +201,7 @@ export function TransformarSection() {
               {desktopMoments.map((moment) => (
                 <motion.article
                   key={moment.number}
+                  data-colus-desktop-moment={moment.number}
                   style={reduceMotion ? undefined : { opacity: moment.opacity }}
                   className="absolute inset-0 overflow-hidden rounded-[34px_90px_34px_34px]"
                 >
