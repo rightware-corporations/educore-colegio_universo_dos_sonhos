@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { LandingMedia } from "./LandingMedia";
 import { MobileNarrativePath } from "./MobileNarrativePath";
 import { MobileSceneWindow } from "./MobileSceneWindow";
+import { DesktopOrbitNode } from "./DesktopOrbitNode";
 
 const MEDIA_ROOT = "/media/colus/landing/colus-assets-final-v03";
 
@@ -206,12 +207,11 @@ export function PertencerSection() {
                     <circle cx="824" cy="588" r="17" />
                   </g>
                 </motion.g>
-                {!reduceMotion && (
-                  <motion.g style={{ x: markerX, y: markerY }}>
-                    <circle r="16" fill="#F18136" fillOpacity=".14" />
-                    <circle r="6" fill="#F18136" stroke="#FFF8EF" strokeWidth="2" />
-                  </motion.g>
-                )}
+                {/* Community Ring stays OPEN as drawn in the desktop Master.
+                    Only its active relation node has a solid core and pointers. */}
+                <motion.g style={reduceMotion ? { x: 824, y: 588 } : { x: markerX, y: markerY }}>
+                  <DesktopOrbitNode progress={scrollYProgress} tone="orange" size={16} />
+                </motion.g>
               </motion.svg>
 
               <motion.article
