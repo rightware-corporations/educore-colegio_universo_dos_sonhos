@@ -1,10 +1,13 @@
 name: COLUS Frontend QA
 
 on:
+  push:
+    branches:
+      - develop
   pull_request:
     branches:
       - main
-      - feat/colus-mobile-editorial-storytelling
+      - develop
     paths:
       - ".github/workflows/colus-frontend-qa.yml"
       - "frontend/**"
