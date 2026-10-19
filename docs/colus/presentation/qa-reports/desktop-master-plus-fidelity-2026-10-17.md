@@ -65,3 +65,13 @@ On this isolated branch, the desktop Community Ring stage has the central copy, 
 **Latest actual Chromium acceptance:** https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39077107986 **SUCCESS** on commit `b7ec8b322cb720ecf8e7aad277e0f27afefaf2ff` including typecheck, production build, protected-asset checks, mobile browser tests, desktop ring tests, Master Plus structure and 30 measured scene opacity states. New geometric test samples outgoing path against ALL relationship cards: **zero collisions**; node follows outgoing path within 32px; arc joins outgoing branch within 7 SVG units; stage vertical centre occupies an intentional band of the viewport. Browser screenshots at 1440/1024 in artifact `colus-mobile-ring-qa` ID `12116579447`.
 
 **Editorial assessment:** inspected contact sheets for 1440/1024 states 2 (Arco Nasce), 4 (Estabilidade), 5 (Abertura), confirming visible composition-centering and node following the descending handoff. This is validated **technical/visual smoke**, not formal signoff for every aspect of source Draw.io fidelity. The transitions must still be assessed by the owner in Microsoft Edge during continuous normal/reverse scroll. No PR merge authorized; keep PR #3 in draft.
+
+## Bidirectional-scroll acceptance gate (2026-10-19)
+
+The earlier Master Plus browser QA observed static milestones; the new `frontend/scripts/qa-desktop-reverse-motion.mjs` deliberately traverses each narrative forward and backward using native browser scroll and asserts real **computed opacity** and scene selection. There is **no production-component or content change** in this iteration.
+
+Final successful Action: https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39203930468 ; artifact `colus-mobile-ring-qa`, ID `12165266270`, folder `desktop-reversal`.
+
+Pass: 60 samples, 1440×900 and 1024×768, `experiencia`, `futuro`, `comunidade`, `transformar`; max horizontal overflow 0. `comunidade` reverses 5→4→3→2→1; `transformar` reverses from only-third-visible to only-second-visible to only-first-visible. Futuro scene-number and progress indicator agree in both directions. Tests assert section progress close to requested scroll fraction to avoid false-green checks. Existing build, protected-asset, mobile and desktop contract tests PASS.
+
+**Approval split:** code/automated Chromium behavior accepted as regression-safe. Pixel-level fidelity and the rhythm of native scroll on owner's Edge **still require human signoff**. PR #3 remains draft, no merge. All photos, videos, `src`, captions, original public copy, Hero, mobile art direction remain protected.
