@@ -86,3 +86,20 @@ git diff --stat origin/main...origin/feat/colus-desktop-master-plus-fidelity
 Ler `docs/handoff/README.md`, todas as fontes cronológicas, `HANDOFF-COLUS-2026-10-19-CONTINUIDADE-E-BRANCHES.md` e `CURRENT`. Na primeira mensagem: inventário real das branches/PRs, estado do QA, pendências de aprovação estética, e proposta de integrar **sem executar merges**. Trabalhar no PR #3 enquanto aberto. Registar novo marco se o estado de merges mudar.
 
 **Situação:** `main` + `develop` como solução final = **RECOMENDAÇÃO**; `develop` ainda não criada e nenhuma branch apagada nesta atividade.
+
+
+## 7. Auditoria objetiva de consolidação — 2026-10-19 (verificação atual)
+
+**Confirmado diretamente no GitHub, após a última atualização deste documento:**
+- Existem 11 branches remotas: `main`, `feat/colus-mobile-editorial-storytelling`, `feat/colus-desktop-master-plus-fidelity`, `fix/colus-science-video-orientation` e sete `backup/*`. `develop` NÃO existe.
+- PR #1 da Ciência: MERGED para `main`. PR #2 mobile → `main`: OPEN/DRAFT, NÃO MERGED. PR #3 desktop → branch mobile: OPEN/DRAFT, NÃO MERGED.
+- Comparações neste checkpoint: `main → mobile` = 130 commits à frente, 0 atrás; `mobile → desktop` = 63 commits à frente, 0 atrás; `main → desktop` = 193 commits à frente, 0 atrás. Não confundir com 193 commits por integrar diretamente em `main` agora: são melhorias ainda submetidas à aprovação visual.
+- SHA do PR #3 auditado: `6f3a74aceccb5fc30eee2a3791d01eea905dac7b`; GitHub Actions [run 39211975269](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39211975269): SUCCESS, sem passos falhados. **QA técnico ≠ autorização de merge**.
+- Todas as SETE branches `backup/*` deram `behind_by=0` no compare backup→branch desktop: são ancestrais completos da história atual, sem commits exclusivos fora dela. A branch `fix/colus-science-video-orientation` também é ancestral da branch desktop e PR #1 já foi merged. **Não apagar ainda**: confirmar referências finais e eventual preservação por tags antes de limpeza.
+- Diffs inspecionados de `main→mobile` e `mobile→desktop` não contêm alterações em `frontend/public/media/**`, `IntroHeroSection.tsx` ou `LandingMedia.tsx`. Não estender esta conclusão automaticamente a todos os restantes aspetos artísticos.
+- A aprovação visual humana em Edge (scroll normal/inverso, recortes de fotografia, ring e handoffs) continua PENDENTE nos PRs. Portanto a verificação atual é uma **AUDITORIA SEM MERGES NEM DELETES**.
+
+**Objetivo proposto para duas branches permanentes (sujeito a confirmação):** `main` (estável) + `develop` (integração). Ordem autorizável por gates: signoff visual → PR #3 para branch mobile → novo CI → criar `develop` da `main` contemporânea e integrar PR #2 mediante autorização → checks → release futura para `main` somente se aprovada → preservar SHAs históricos/tags → retirar branches antigas com autorização. Antes de concluir “duas branches”, verificar `git branch -r`/GitHub ao vivo.
+
+**Limitação operacional verificada:** a integração GitHub ligada a este chat expõe merge de PR, mas não expõe uma ação de apagar branch remota. Não prometer limpeza automática sem uma ferramenta autorizada com essa capacidade. Nenhuma branch foi eliminada nesta auditoria.
+
