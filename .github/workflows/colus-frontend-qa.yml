@@ -63,6 +63,8 @@ jobs:
         run: node scripts/qa-desktop-master-plus.mjs
       - name: Chromium desktop scene-state audit (read only)
         run: node scripts/qa-desktop-state-audit.mjs
+      - name: Desktop Master Plus forward and reverse scroll regression
+        run: node scripts/qa-desktop-reverse-motion.mjs
       - name: Upload screenshots and results
         if: always()
         uses: actions/upload-artifact@v4
@@ -74,5 +76,6 @@ jobs:
             frontend/qa-artifacts/desktop-rings/
             frontend/qa-artifacts/desktop-master-plus/
             frontend/qa-artifacts/desktop-state-audit/
+            frontend/qa-artifacts/desktop-reversal/
           if-no-files-found: warn
           retention-days: 14
