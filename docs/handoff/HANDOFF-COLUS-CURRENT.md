@@ -616,3 +616,15 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **INVARIÁVEL:** `frontend/public/media/**`, fontes media `src`, posters, textos, Hero, clips/crops aprovados e arte mobile NÃO podem ser alterados para estes refinamentos. `main` intacta. A alteração nas dimensões dos containers desktop pode mudar a área visível da imagem sem alterar o asset; só aprovação visual no Edge confirma composição final.
 
 **NEXT:** não continuar alterações gratuitas. Aguardar revisão do responsável no Edge desktop com scroll para frente e para trás (Pertencer fase 5 → Rise, Aprender→Futuro, Futuro→Vida, Transformar→Vozes). Depois PR #3 pode ser integrado na branch original apenas mediante aprovação explícita; PR #2 permanece outro gate antes de `main`. Ver relatório completo em `docs/colus/presentation/qa-reports/desktop-master-plus-fidelity-2026-10-17.md`.
+
+## 39. DESKTOP MASTER PLUS — SCROLL DIRETO/INVERSO CHROMIUM VALIDADO (2026-10-19)
+
+**AUTORIZAÇÃO:** «vamos continuar» mantendo a branch isolada, todos os media, copy, Hero e mobile bloqueados. Nenhuma autorização para merge PR #3 ou PR #2.
+
+**Trabalho nesta iteração:** novo `frontend/scripts/qa-desktop-reverse-motion.mjs`, integrado em `.github/workflows/colus-frontend-qa.yml`. Sem alterações nos componentes de produção nem nos assets. O teste usa Chromium real, scroll imediato e observação de **computed opacity / data-colus-community-phase / scene indicator** ao caminhar para a frente e para trás em quatro secções. Viewports **1440×900** e **1024×768**.
+
+**Evidência verificada:** https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39203930468 — **SUCCESS**. Teste novo **COLUS MASTER PLUS BIDIRECTIONAL SCROLL PASS 60 samples**. Resultado JSON extraído e revisto: 60 amostras, capítulos `experiencia`, `futuro`, `comunidade`, `transformar`, overflow horizontal máximo **0px**. No scroll inverso de Pertencer (1440px): `5 → 4 → 3 → 2 → 1`. Em Transformar (1440px): `Avançar [0,0,1] → Construir [0,1,0] → Expressar [1,0,0]`. Todos os critérios repetidos a 1024px. A compilação, QA legado mobile, contratos de media, Master Plus de geometria e 30 cenas de opacidade também PASS. Artifact `colus-mobile-ring-qa`, ID `12165266270`, com `desktop-reversal/results.json` e screenshots.
+
+**Imagem capturada e comparada:** estado ESTABILIDADE e ABERTURA do Community Ring 1440/1024; headline central em duas linhas, três janelas de imagem, seis nós e abertura para o Rise Axis. Sem alteração dos media, do Hero ou da copy. PR #3 continua **DRAFT**, base `feat/colus-mobile-editorial-storytelling`; PR #2 continua DRAFT; `main` intocada. Não afirmar que QA técnico substitui **revisão estética do responsável no Microsoft Edge**, especialmente movimentos perceptivos contínuos e recortes das imagens.
+
+**NEXT:** apresentar as capturas novas; recolher aprovação visual explícita antes de merge; se houver novos screenshots com problema, corrigir exclusivamente dispositivos de motion/posicionamentos, sem mexer nos assets. A versão atual não precisa de mais alterações gratuitas.
