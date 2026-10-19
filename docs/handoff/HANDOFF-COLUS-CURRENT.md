@@ -675,3 +675,19 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 
 **REGRA PARA NOVO CHAT:** ler `docs/handoff/BRANCH-STRATEGY-COLUS.md` §7, este marco, o handoff datado e estado GitHub atual; falar em branches permanentes versus temporárias/históricas. Não recomeçar design nem criar branches extra. Não fazer merges/deletes por engano; distinguir QA técnico aprovado de aprovação visual ainda pendente.
 
+
+## 41. DECISÃO DE CONSOLIDAÇÃO — FLUXO COM MAIN + DEVELOP (2026-10-19)
+
+**DECISÃO OFICIAL DO RESPONSÁVEL (2026-10-19):** simplificar o repositório para **exatamente duas branches de longa duração**: `main` (versão estável, publicada) e `develop` (produção e validação de alterações). O próximo chat não deve voltar a criar, gerir ou alternar branches; deve focar-se na execução do produto em `develop`. Promoção futura para `main` apenas depois de aprovação visual explícita.
+
+**CONSOLIDAÇÃO REAL:** `develop` foi criada da SHA `94bf9870ef5f2826132f1f8cbb3e6ae33a30bf6f`, o HEAD previamente aprovado no CI da antiga `feat/colus-desktop-master-plus-fidelity`. Essa branch já era descendente de `feat/colus-mobile-editorial-storytelling` (66 commits à frente e 0 atrás); por sua vez a mobile era descendente da `main` (130 commits à frente e 0 atrás). Logo, `develop` reúne ambos os conjuntos **sem reset, sem perda de commits e sem merge prematuro para main**.
+
+**Prova de preservação dos backups:** sete `backup/*` e a branch `fix/colus-science-video-orientation` têm zero commits à frente da branch desktop (comparação GitHub). PR #1 de Ciência já foi integrado em main. As antigas PRs #2 e #3 foram originariamente abertas em DRAFT e deixam de ser a fonte de trabalho depois desta consolidação. O processo de limpeza de refs e encerramento dos PRs deve ser confirmado pelo GitHub, nunca presumido.
+
+**Código e produto:** frontend COLUS com Hero, Aprender, Futuro, Vida, Pertencer, Transformar e motion do Master Plus presentes em `develop`. No último commit da branch desktop, GitHub Actions [39213476959](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39213476959) passou. A correção de opacidade para scroll Chromium usa `useScrollOpacity.ts`; o Master Plus tem cinco fases de Pertencer, seis nós, ring aberto e 4 cenas no Scene Window de Futuro. Protegidos media, posters, copy, logótipo, coração mobile e Hero. **QA técnico PASS não significa aprovação estética definitiva:** Edge desktop, recortes e transições ainda exigem revisão editorial final.
+
+**CI da nova estrutura:** `.github/workflows/colus-frontend-qa.yml` executa QA no `push` de `develop` e nos PRs destinados a `main`/`develop`. O próximo chat deve usar o estado de `develop` como fonte única e trabalhar apenas no produto, qualidade, experiência visual, desempenho, segurança e publicação — sem abrir ou reabrir o tema de branches.
+
+**RESTRIÇÕES:** não alterar ficheiros media, imagens, vídeos, posters, branding, copy aprovado, Hero, mobile aprovado ou base `main` sem autorização. Não misturar conceitos de decisões oficiais com hipóteses. Nunca declarar `main` atualizada sem evidência de merge/release aprovado.
+
+**LEITURA PRIORITÁRIA PARA O NOVO CHAT:** `docs/handoff/NEXT-CHAT-PRODUCTION.md` e este marco §41 (prevalecem sobre recomendações obsoletas nos marcos anteriores).
