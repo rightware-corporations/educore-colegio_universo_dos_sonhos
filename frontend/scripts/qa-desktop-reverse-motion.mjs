@@ -32,7 +32,11 @@ async function sample(page,chapter,fraction) {
       const el=sec?.querySelector(selector);
       return el ? Number(getComputedStyle(el).opacity):null;
     };
-    return {progress:Number(sec?.dataset.colusScrollProgress ?? -1),
+    return {progress:Number(sec?.dataset.colusScrollProgress ?? (
+      Math.min(1,Math.max(0,-sec.getBoundingClientRect().top/
+        Math.max(1,sec.getBoundingClientRect().height-window.innerHeight)
+      ))
+    )),
       chapter:id,
       discover:op("[data-colus-desktop-discover]"),
       create:op("[data-colus-desktop-create]"),
