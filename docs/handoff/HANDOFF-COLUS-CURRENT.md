@@ -662,3 +662,16 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **LEITURA NO PRÓXIMO CHAT:** obter `docs/handoff/README.md` da branch do PR #3, seguir os links antigos→novos, ler novo handoff datado, `BRANCH-STRATEGY-COLUS.md` e este `CURRENT` por último. Confrontar branches/PRs reais e consultar master versionado `landing-colus-master.drawio`; `landing-colus-master-plus.drawio` foi anexo externo e não foi encontrado na árvore Git (reenvio específico se necessário).
 
 **NEXT ACTION:** não programar nem criar novas branches por rotina; primeiro confirmar status atual de Git e screenshots/scroll no Edge, depois decidir explicitamente sobre PR #3, PR #2, `develop` e eventual `main`. Não apagar handoffs antigos.
+
+## 40. Consolidação Git — auditoria sem merge (2026-10-19)
+
+**PEDIDO ATUAL:** reduzir no futuro o repositório a **duas branches permanentes**, para que um chat novo não fique confuso com várias versões. **Recomendação documentada, não decisão oficial:** `main` estável + `develop` desenvolvimento/QA; as features e backups são temporários/históricos.
+
+**VERIFICAÇÃO AO VIVO:** GitHub mostra 11 branches, sem `develop`. PR #1 Ciência foi merged na main; PR #2 (`feat/colus-mobile-editorial-storytelling` → `main`) ainda DRAFT/OPEN; PR #3 (`feat/colus-desktop-master-plus-fidelity` → branch mobile) ainda DRAFT/OPEN. PR #3 commit `6f3a74aceccb5fc30eee2a3791d01eea905dac7b`, último CI [39211975269](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39211975269) SUCCESS. Compare `main→mobile` +130 commits; `mobile→desktop` +63; cumulativo +193, sempre behind 0. Nenhum media, Hero ou LandingMedia alterado nesses dois conjuntos de diffs.
+
+**AUDITORIA DE BACKUPS:** sete branches `backup/*` são HEADs ancestrais da branch desktop; nenhum commit exclusivo por integrar nelas. `fix/colus-science-video-orientation` também é ancestral e PR #1 já merged. Isto demonstra integridade de histórico para possível arquivo/limpeza futura, NÃO autorização para apagar. Guardar SHAs/tags e confirmar permissão de eliminação antes de mexer nas referências.
+
+**GATES PENDENTES:** aprovação visual Edge do responsável → merge PR #3 na feature mobile → CI/inspeção → criar `develop` da `main` atual → integrar PR #2 na `develop` após aprovação → verificar conteúdo → eventual release `develop→main` distinta → apenas então limpar backups/feature com aprovação. Na integração atual GitHub, merge PR existe mas **delete de branches remotas não está exposto**. Não prometer que sobraram duas branches enquanto GitHub continuar com 11 referências.
+
+**REGRA PARA NOVO CHAT:** ler `docs/handoff/BRANCH-STRATEGY-COLUS.md` §7, este marco, o handoff datado e estado GitHub atual; falar em branches permanentes versus temporárias/históricas. Não recomeçar design nem criar branches extra. Não fazer merges/deletes por engano; distinguir QA técnico aprovado de aprovação visual ainda pendente.
+
