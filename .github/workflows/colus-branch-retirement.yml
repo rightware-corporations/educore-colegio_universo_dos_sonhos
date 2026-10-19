@@ -10,7 +10,7 @@ permissions:
 jobs:
   retire:
     name: Confirm lineage then retire 10 legacy refs
-    if: github.event.head_commit.message == 'chore(colus): retire consolidated remote branches'
+    if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
