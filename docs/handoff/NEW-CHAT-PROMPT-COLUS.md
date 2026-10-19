@@ -64,3 +64,10 @@ Após aprovação, apresentar proposta de integração controlada PR #3 → bran
 - Se um arquivo do chat expirou, preferir cópia GitHub; pedir reenvio **apenas** do arquivo exato indispensável.
 - Nunca “limpar” handoffs históricos, nem substituir documentação por memória não verificável.
 - Depois de cada ciclo substancial: atualizar `docs/handoff/HANDOFF-COLUS-CURRENT.md`, criar novo marco datado quando necessário, atualizar índice e plano de branches se mudar.
+
+### ATUALIZAÇÃO DE GOVERNANÇA — verificação posterior de 2026-10-19
+
+Antes de agir, consultar `docs/handoff/BRANCH-STRATEGY-COLUS.md` §7 e `HANDOFF-COLUS-CURRENT.md` §40 (seção de consolidação). O GitHub foi auditado: **11 branches**, `main`, duas features abertas (PR #2 e PR #3, ambas DRAFT, não merged), uma branch Ciência já integrada via PR #1 e sete backups que são **ancestrais da feature desktop** (sem commits exclusivos). Em snapshot auditado: `main→mobile` +130 commits e `mobile→desktop` +63, total 193 à frente da main. PR #3 CI PASS [39211975269](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39211975269), SHA `6f3a74aceccb5fc30eee2a3791d01eea905dac7b`, mas **aprovação visual no Edge ainda pendente**.
+
+O responsável pediu organização futura com **duas branches permanentes**; `main` + `develop` é a recomendação operacional, ainda por confirmar. Não iniciar próximo chat a fazer merge ou apagar refs: primeiro constatar o GitHub atual e apresentar gates (PR #3 → branch do PR #2 → develop → eventual main → arquivar/remover branches antigas com consentimento). Nenhuma integração ou eliminação foi executada nesta auditoria. Não afirmar que o trabalho está em `main`. **A ferramenta GitHub atual não disponibiliza operação de eliminar branch remota**, por isso a limpeza exige outro caminho autorizado quando chegar a altura.
+
