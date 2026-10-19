@@ -1,0 +1,59 @@
+name: COLUS Consolidation - Retire Legacy Branches
+on:
+  push:
+    branches: [develop]
+    paths:
+      - ".github/workflows/colus-branch-retirement.yml"
+permissions:
+  contents: write
+  pull-requests: read
+jobs:
+  retire:
+    name: Confirm lineage then retire 10 legacy refs
+    if: github.event.head_commit.message == 'chore(colus): retire consolidated remote branches'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Retire ONLY explicit refs after validating consolidated history
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          targets=(
+            "backup/colus-2026-10-13-before-contract-motion-qa"
+            "backup/colus-2026-10-13-before-motion-overlap-fixes"
+            "backup/colus-2026-10-13-before-motion-scene-fix"
+            "backup/colus-2026-10-13-before-polish-batch"
+            "backup/colus-2026-10-14-before-phase2-qa"
+            "backup/colus-2026-10-14-before-qa-accuracy-fix"
+            "backup/landing-colus-2026-10-13-before-restore"
+            "feat/colus-desktop-master-plus-fidelity"
+            "feat/colus-mobile-editorial-storytelling"
+            "fix/colus-science-video-orientation"
+          )
+          git fetch origin "+refs/heads/*:refs/remotes/origin/*"
+          git merge-base --is-ancestor 94bf9870ef5f2826132f1f8cbb3e6ae33a30bf6f refs/remotes/origin/develop
+          test "$(gh api "repos/$GH_REPOSITORY/pulls/2" --jq .state)" = "closed"
+          test "$(gh api "repos/$GH_REPOSITORY/pulls/3" --jq .state)" = "closed"
+          expected="$(printf '%s\n' main develop "${targets[@]}" | LC_ALL=C sort)"
+          actual="$(gh api --paginate "repos/$GH_REPOSITORY/branches?per_page=100" --jq ".[].name" | LC_ALL=C sort)"
+          diff -u <(printf '%s\n' "$expected") <(printf '%s\n' "$actual")
+          for name in "${targets[@]}"; do
+            git merge-base --is-ancestor "refs/remotes/origin/$name" "refs/remotes/origin/develop" || { echo "Not consolidated: $name" >&2; exit 1; }
+            tracked="$(git rev-parse "refs/remotes/origin/$name")"
+            remote="$(gh api "repos/$GH_REPOSITORY/git/ref/heads/$name" --jq .object.sha)"
+            test "$tracked" = "$remote" || { echo "Branch moved: $name" >&2; exit 1; }
+          done
+          echo "Preflight verified all legacy refs contained in develop; deleting exact allowlist only."
+          for name in "${targets[@]}"; do
+            echo "Retiring $name"
+            gh api --method DELETE "repos/$GH_REPOSITORY/git/refs/heads/$name" >/dev/null
+          done
+          left="$(gh api --paginate "repos/$GH_REPOSITORY/branches?per_page=100" --jq ".[].name" | LC_ALL=C sort)"
+          keep="$(printf '%s\n' main develop | LC_ALL=C sort)"
+          diff -u <(printf '%s\n' "$keep") <(printf '%s\n' "$left")
+          echo "SUCCESS: exactly main and develop remain."
