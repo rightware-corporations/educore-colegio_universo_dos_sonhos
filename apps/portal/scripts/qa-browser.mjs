@@ -181,9 +181,21 @@ try{
  await page.getByRole("textbox",{name:"Título da avaliação"}).fill("Avaliação de Álgebra");
  await page.getByRole("button",{name:"Propor"}).click();
  assert.ok((await page.locator("main").innerText()).includes("Avaliação de Álgebra"),"Assessment proposal persisted");
+ await page.goto(base+"/app/teacher/grades?class=CL-11-B",{waitUntil:"networkidle"});
+ assert.ok((await page.locator("main").innerText()).includes("Diário de notas"),"Teacher must have class-first gradebook");
+ assert.ok((await page.locator("table").innerText()).includes("Célia Mucavele"),"11B must show its own students");
+ assert.ok(!(await page.locator("table").innerText()).includes("Tiago Nhampossa"),"Gradebook must not mix student classes");
+ await page.goto(base+"/app/teacher/grades?class=CL-09-A",{waitUntil:"networkidle"});
+ await page.getByRole("combobox",{name:"Aluno da avaliação"}).selectOption("ALU-003");
+ await page.getByRole("spinbutton",{name:"Nota de avaliação"}).fill("17");
+ await page.getByRole("button",{name:"Lançar nota"}).click();
+ assert.ok((await page.locator("main").innerText()).includes("Nota registada"),"Teacher grade is saved for selected class");
+ records.push({step:"teacher class-scoped gradebook and student roster",status:"pass"});
  await page.goto(base+"/app/teacher/learning",{waitUntil:"networkidle"});
  await page.getByRole("textbox",{name:"Título do trabalho"}).fill("Ficha prática V5");
  await page.getByRole("textbox",{name:"Instruções do conteúdo"}).fill("Resolver os problemas e explicar a estratégia.");
+ await page.getByLabel("Carregar ficheiro do professor").setInputFiles({name:"roteiro-tpc.pdf",mimeType:"application/pdf",buffer:Buffer.from("%PDF-1.4\\nDemo roteiro COLUS")});
+ await page.getByRole("link",{name:/roteiro-tpc.pdf/}).first().waitFor();
  await page.getByRole("button",{name:"Publicar conteúdo"}).click();
  assert.ok((await page.locator("main").innerText()).includes("Ficha prática V5"),"Teaching materials shared");
  records.push({step:"teacher assessment calendar and learning resources",status:"pass"});
@@ -216,6 +228,8 @@ try{
  await page.goto(base+"/app/student/assignments",{waitUntil:"networkidle"});
  assert.ok((await page.locator("main").innerText()).includes("Ficha prática V5"),"Assignment delivered to student");
  await page.getByRole("textbox",{name:"Resposta para Ficha prática V5"}).fill("Utilizei a propriedade distributiva e confirmei a solução.");
+ await page.getByLabel("Carregar ficheiro para Ficha prática V5").setInputFiles({name:"resposta-tpc.pdf",mimeType:"application/pdf",buffer:Buffer.from("%PDF-1.4\\nDemo entrega COLUS")});
+ await page.getByRole("link",{name:/resposta-tpc.pdf/}).first().waitFor();
  await page.getByRole("textbox",{name:"Resposta para Ficha prática V5"}).locator("xpath=ancestor::form").getByRole("button",{name:"Entregar trabalho"}).click();
  assert.ok((await page.locator("main").innerText()).includes("Entregue"));
  await page.goto(base+"/app/student/notices",{waitUntil:"networkidle"});
@@ -224,6 +238,7 @@ try{
  records.push({step:"student calendar, submission and notice acknowledgement",status:"pass"});
  await enter(page,"Professor");
  await page.goto(base+"/app/teacher/learning",{waitUntil:"networkidle"});
+ assert.ok((await page.locator("main").innerText()).includes("resposta-tpc.pdf"),"Professor must see the student's submitted attachment");
  await page.getByRole("textbox",{name:/Feedback da entrega/}).first().fill("Resolução correta. Continue a praticar.");
  await page.getByRole("button",{name:"Rever entrega"}).click();
  await enter(page,"Encarregado");
