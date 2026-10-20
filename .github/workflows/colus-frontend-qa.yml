@@ -58,6 +58,8 @@ jobs:
           exit 1
       - name: Real-browser mobile ring QA and screenshots
         run: node scripts/qa-mobile-browser.mjs
+      - name: Public booking accessibility and mobile visual snapshots
+        run: node scripts/qa-public-booking-browser.mjs
       - name: Native-scroll mobile PATH/NODE handoff QA
         run: node scripts/qa-mobile-handoffs.mjs
       - name: Desktop Master orbit and path QA
@@ -75,6 +77,7 @@ jobs:
           name: colus-mobile-ring-qa
           path: |
             frontend/qa-artifacts/mobile-rings/
+            frontend/qa-artifacts/public-booking/
             frontend/qa-artifacts/mobile-handoffs/
             frontend/qa-artifacts/desktop-rings/
             frontend/qa-artifacts/desktop-master-plus/
