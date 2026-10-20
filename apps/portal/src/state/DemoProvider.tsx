@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState, type PropsWithChildren } from "react";
 import { isRole, type Role } from "../config/roles";
-import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Fee, type Message, type Event } from "../data/school";
+import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event } from "../data/school";
 
 const DB_KEY="colus.portal.sandbox.v2";
 const ROLE_KEY="colus.portal.role";
