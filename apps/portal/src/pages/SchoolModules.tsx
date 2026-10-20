@@ -92,16 +92,24 @@ export function StudentRegistry(){
 }
 export function ClassAssignments({role}:{role:Role}){
  const {state,assignStudent}=useDemo();const students=activeStudents(state);
+ const teacherClasses=state.staff.find(t=>t.id==="PROF-001"&&t.role==="teacher")?.classIds??[];
+ const shown=state.classes.filter(c=>c.active&&(role!=="teacher"||teacherClasses.includes(c.id)));
  return <div className="space-y-5">
-  <Panel title="Turmas e organização académica" subtitle="Oferta configurável por classe; apenas turmas ativas são apresentadas como operacionais no cenário.">
-   <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{state.classes.map(c=>{
+  <Panel title={role==="teacher"?"As minhas turmas":"Turmas e organização académica"} subtitle={role==="teacher"?"Turmas atribuídas ao Professor. Cada turma liga ao diário de notas e aos trabalhos específicos.":"Oferta configurável por classe; apenas turmas ativas são apresentadas como operacionais no cenário."}>
+   <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">{shown.map(c=>{
     const enrolled=students.filter(s=>s.classId===c.id).length;
     return <div key={c.id} className="rounded-2xl border border-border bg-[#FBFCFD] p-4"><div className="flex items-center justify-between"><p className="text-base font-extrabold">{c.name}</p><Pill tone="success">Ativa</Pill></div>
     <p className="mt-2 text-xs text-muted-foreground">{enrolled} alunos · {c.capacity} lugares na turma</p>
     <div className="mt-3 h-2 overflow-hidden rounded-full bg-[#E8EDF0]"><div className="h-full rounded-full bg-[#0C5898]" style={{width:(enrolled/c.capacity*100)+"%"}}/></div>
     <p className="mt-3 text-xs leading-6 text-muted-foreground">{state.staff.filter(t=>t.role==="teacher"&&t.classIds?.includes(c.id)).map(t=>t.name).join(" · ")||"Atribuição docente em preparação"}</p>
+    {role==="teacher"&&<div className="mt-4 flex flex-wrap gap-2 border-t border-border pt-3">
+     <Link to={"/app/teacher/grades?class="+encodeURIComponent(c.id)} className="action-secondary">Diário de notas</Link>
+     <Link to={"/app/teacher/learning?class="+encodeURIComponent(c.id)} className="action-secondary">Trabalhos e materiais</Link>
+     <Link to="/app/teacher/attendance" className="action-secondary">Chamada</Link>
+    </div>}
     </div>})}</div>
   </Panel>
+  {role==="teacher"&&shown.length===0&&<Empty>Sem turmas atribuídas. Solicite a atribuição à Coordenação Pedagógica.</Empty>}
   {role==="pedagogy"&&<Panel title="Atribuir turma a aluno" subtitle="Apenas a coordenação pedagógica pode atribuir turmas, respeitando classe e lotação.">
    <div className="space-y-3">{students.filter(x=>!x.classId).map(s=><div key={s.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-[#F5F7F8] p-4"><span className="text-sm font-bold">{s.name} · {s.grade}ª Classe</span>
     <select aria-label={"Atribuir turma a "+s.name} defaultValue="" className="h-10 rounded-lg border border-border bg-white px-3 text-xs" onChange={e=>{if(e.target.value)assignStudent(s.id,e.target.value)}}>
