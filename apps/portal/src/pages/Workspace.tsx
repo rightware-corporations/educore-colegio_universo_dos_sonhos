@@ -16,11 +16,21 @@ const lessons=[
  {time:"09:15",subject:"Língua Portuguesa",room:"Sala B04",teacher:"Daniel Machava"},
  {time:"11:00",subject:"Biologia",room:"Laboratório",teacher:"Lídia Mabunda"}
 ];
-function ActivityFeed(){
+function ActivityFeed({role}:{role:Role}){
  const {state}=useDemo();
+ const familyIds=guardianStudents(state).map(s=>s.id);
+ const scopedEvents=state.events.filter(e=>role==="executive" ||
+  (role==="student"&&e.studentId==="ALU-001"&&["attendance","assessment"].includes(e.kind)) ||
+  (role==="guardian"&&!!e.studentId&&familyIds.includes(e.studentId)&&["attendance","assessment","payment","message","student"].includes(e.kind)) ||
+  (role==="teacher"&&["attendance","assessment","message"].includes(e.kind)) ||
+  (role==="pedagogy"&&["attendance","assessment","student"].includes(e.kind)) ||
+  (role==="secretary"&&["student","admission"].includes(e.kind)) ||
+  (role==="reception"&&e.kind==="admission") ||
+  (role==="finance"&&e.kind==="payment")
+ );
  return <Panel title="Atividade recente" subtitle="Histórico das operações realizadas neste ambiente.">
-  {state.events.length===0?<div className="rounded-2xl bg-[#F5F7F8] p-5"><p className="text-sm font-bold">Tudo preparado para começar.</p><p className="mt-2 text-xs leading-6 text-muted-foreground">Os movimentos escolares serão registados aqui à medida que os perfis executarem tarefas.</p></div>:
-   <div className="space-y-4">{state.events.slice(0,6).map(e=><div key={e.id} className="flex items-start gap-3 border-b border-border/60 pb-4 last:border-b-0 last:pb-0"><span className="rounded-xl bg-[#0C5898]/10 p-2 text-[#0C5898]"><Activity size={16}/></span><div className="min-w-0"><p className="text-xs font-extrabold">{e.title}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{e.detail}</p></div></div>)}</div>}
+  {scopedEvents.length===0?<div className="rounded-2xl bg-[#F5F7F8] p-5"><p className="text-sm font-bold">Tudo preparado para começar.</p><p className="mt-2 text-xs leading-6 text-muted-foreground">Os movimentos escolares serão registados aqui à medida que os perfis executarem tarefas.</p></div>:
+   <div className="space-y-4">{scopedEvents.slice(0,6).map(e=><div key={e.id} className="flex items-start gap-3 border-b border-border/60 pb-4 last:border-b-0 last:pb-0"><span className="rounded-xl bg-[#0C5898]/10 p-2 text-[#0C5898]"><Activity size={16}/></span><div className="min-w-0"><p className="text-xs font-extrabold">{e.title}</p><p className="mt-1 text-xs leading-5 text-muted-foreground">{e.detail}</p></div></div>)}</div>}
  </Panel>;
 }
 const sum=(data:SchoolData,id:string)=>average(data.assessments.filter(a=>a.studentId===id&&a.published).map(a=>a.score));
@@ -165,7 +175,7 @@ function Dashboard({role}:{role:Role}){
     {role==="guardian"&&<Panel title="Estado financeiro da família" subtitle="Apenas o encarregado e os perfis de gestão autorizados podem consultar.">
      <div className="space-y-3">{state.fees.filter(f=>guardianStudents(state).some(s=>s.id===f.studentId)).map(f=><div className="flex items-center justify-between gap-3" key={f.id}><div><p className="text-xs font-bold">{state.students.find(s=>s.id===f.studentId)?.name}</p><p className="text-xs text-muted-foreground">{mt(f.amount)}</p></div><Pill tone={f.status==="validated"?"success":"warning"}>{f.status==="validated"?"Validado":"Pendente"}</Pill></div>)}</div>
      </Panel>}
-    <ActivityFeed/>
+    <ActivityFeed role={role}/>
    </div>
   </div>
  </PageContainer>;
@@ -205,6 +215,6 @@ export function Workspace(){
   <h1 className="mt-3 font-display text-[clamp(38px,5vw,55px)] leading-tight text-[#071A2A]">{info.items.find(i=>i.path===active)?.label}</h1>
   <p className="mt-2 text-sm text-muted-foreground">Ano letivo 2026 · Informação do cenário escolar de avaliação.</p></div>
   <OtherModule role={allowedRole} section={active}/>
-  <div className="mt-6"><ActivityFeed/></div>
+  <div className="mt-6"><ActivityFeed role={role}/></div>
  </PageContainer>;
 }
