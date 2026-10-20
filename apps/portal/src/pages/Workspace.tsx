@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { Activity, ArrowRight, Bell, BookOpen, CalendarDays, ChartColumnIncreasing, Check, CheckCircle2, ClipboardList, Clock, CreditCard, FileText, GraduationCap, HeartHandshake, Layers3, MessageCircle, ShieldCheck, TrendingUp, Users, Wallet } from "lucide-react";
+import { Activity, ArrowRight, Bell, BookOpen, CalendarDays, Check, CheckCircle2, ClipboardList, Clock, CreditCard, FileText, GraduationCap, HeartHandshake, Layers3, MessageCircle, ShieldCheck, TrendingUp, Users, Wallet } from "lucide-react";
 import { ROLE_DEFS, isRole, type Role } from "../config/roles";
 import { useDemo } from "../state/DemoProvider";
 import { activeStudents, attendanceRate, average, guardianStudents, gradeSubjects, mt, paymentsReceived, type SchoolData } from "../data/school";
@@ -174,6 +174,7 @@ function StudentWork(){return <Panel title="Trabalhos e atividades" subtitle="Or
  <div className="grid gap-3 sm:grid-cols-2"><LinkFeature icon={ClipboardList} label="Matemática" description="Ficha de revisão · Entrega prevista para 23 de outubro."/><LinkFeature icon={BookOpen} label="Língua Portuguesa" description="Leitura orientada · 27 de outubro."/></div>
  </Panel>;}
 function OtherModule({role,section}:{role:Role;section:string}){
+ const {state}=useDemo();
  if(section==="students"&&role==="secretary")return <StudentRegistry/>;
  if(section==="admissions")return <AdmissionsDesk role={role}/>;
  if(section==="classes"||section==="assignments"&&role==="pedagogy")return <ClassAssignments role={role}/>;
@@ -185,7 +186,7 @@ function OtherModule({role,section}:{role:Role;section:string}){
  if(section==="subjects")return <SubjectsSpotlight/>;
  if(section==="children")return <GuardianSpotlight/>;
  if(section==="assignments"&&role==="student")return <StudentWork/>;
- if(section==="analytics")return <div className="grid gap-5 lg:grid-cols-2"><Panel title="Distribuição por ciclo"><GradeDistribution data={useDemo().state}/></Panel><Panel title="Assiduidade"><AttendanceChart data={useDemo().state}/></Panel></div>;
+ if(section==="analytics")return <div className="grid gap-5 lg:grid-cols-2"><Panel title="Distribuição por ciclo"><GradeDistribution data={state}/></Panel><Panel title="Assiduidade"><AttendanceChart data={state}/></Panel></div>;
  if(section==="documents")return <Panel title="Arquivo administrativo" subtitle="Gestão da documentação do processo escolar.">
   <div className="grid gap-3 sm:grid-cols-2"><LinkFeature icon={FileText} label="Fichas de matrícula" description="Registos do cenário escolar."/><LinkFeature icon={ShieldCheck} label="Arquivo preservado" description="Alunos arquivados mantêm o histórico." /></div></Panel>;
  return <Empty>Esta área não possui registos associados ao perfil selecionado.</Empty>;
