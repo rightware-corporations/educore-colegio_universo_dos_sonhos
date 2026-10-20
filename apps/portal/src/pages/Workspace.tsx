@@ -10,6 +10,7 @@ import { QuickActionCard } from "../components/QuickActionCard";
 import { AttendanceChart, FinanceChart, GradeDistribution, PerformanceChart } from "../components/SchoolCharts";
 import { ClassesManagement, TeachersManagement, AssignmentsManagement, TimetableManagement } from "./AcademicManagement";
 import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
+import { TeacherSessionAttendance, AbsenceCases, AssessmentWorkflow, NoticesWorkspace, DocumentsWorkspace, FinanceOperations, InterventionsWorkspace, ExecutiveReports } from "./OperationalWorkflows";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
 const focusStudent="ALU-001";
@@ -229,6 +230,18 @@ export function Workspace(){
  if(allowedRole==="pedagogy"&&active==="timetable")return <PageContainer><TimetableManagement/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="attendance")return <PageContainer><PedagogyAttendance/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="grades")return <PageContainer><PedagogyAssessments/></PageContainer>;
+ if(allowedRole==="teacher"&&active==="attendance")return <PageContainer><TeacherSessionAttendance/></PageContainer>;
+ if(allowedRole==="teacher"&&active==="assessments")return <PageContainer><AssessmentWorkflow role="teacher"/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="reviews")return <PageContainer><AssessmentWorkflow role="pedagogy"/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="justifications")return <PageContainer><AbsenceCases role="pedagogy"/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="interventions")return <PageContainer><InterventionsWorkspace/></PageContainer>;
+ if(allowedRole==="guardian"&&active==="justifications")return <PageContainer><AbsenceCases role="guardian"/></PageContainer>;
+ if((allowedRole==="guardian"||allowedRole==="student")&&active==="assessments")return <PageContainer><AssessmentWorkflow role={allowedRole}/></PageContainer>;
+ if((allowedRole==="guardian"||allowedRole==="student"||allowedRole==="pedagogy"||allowedRole==="secretary"||allowedRole==="executive")&&active==="notices")return <PageContainer><NoticesWorkspace role={allowedRole}/></PageContainer>;
+ if(allowedRole==="secretary"&&active==="documents")return <PageContainer><DocumentsWorkspace/></PageContainer>;
+ if(allowedRole==="finance"&&(active==="validation"||active==="obligations"||active==="receipts"||active==="accounts"))
+  return <PageContainer><FinanceOperations section={active}/></PageContainer>;
+ if(allowedRole==="executive"&&(active==="reports"||active==="audit"))return <PageContainer><ExecutiveReports/></PageContainer>;
  return <PageContainer>
   <div className="mb-7"><Link to={"/app/"+allowedRole+"/dashboard"} className="inline-flex items-center gap-2 text-xs font-extrabold text-[#0C5898]"><ArrowRight className="rotate-180" size={14}/> Regressar ao painel</Link>
   <p className="eyebrow mt-6">COLUS · {info.short}</p>
