@@ -24,7 +24,10 @@ const schoolClass=(grade:number,letter="A"):SchoolClass=>({id:"CL-"+String(grade
 export const DEMO_TODAY="2026-10-20";
 export const createSchool=():SchoolData=>{const seed:SchoolData={
  lessons:[],
- appointments:[],learningItems:[
+ appointments:[
+ {id:"ATD-DEMO-01",studentId:"ALU-001",guardianName:"Marta Nhampossa",reason:"Acompanhamento pedagógico",date:"2026-10-22",time:"10:00",status:"confirmed"},
+ {id:"ATD-DEMO-02",studentId:"ALU-002",guardianName:"Marta Nhampossa",reason:"Pedido de informação administrativa",date:"2026-10-23",time:"11:00",status:"cancelled"}
+ ],learningItems:[
   {id:"MAT-001",classId:"CL-09-A",subject:"Matemática",teacherId:"PROF-001",title:"Equações do 2.º grau",details:"Material de revisão para o 3.º trimestre. Consulte os exercícios disponibilizados em aula.",kind:"material"},
   {id:"TRAB-001",classId:"CL-09-A",subject:"Matemática",teacherId:"PROF-001",title:"Resolução de problemas",details:"Apresente a estratégia utilizada para resolver duas equações.",kind:"assignment",dueDate:"2026-10-28"}
  ],workSubmissions:[],justifications:[],assessmentPlans:[],documents:[],notices:[

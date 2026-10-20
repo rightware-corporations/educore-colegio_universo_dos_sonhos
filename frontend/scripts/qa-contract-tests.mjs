@@ -293,4 +293,14 @@ assert.ok(!futureSource.includes("[&_video]:scale-[1.4]"), "do not overzoom Scie
 assert.ok(qaSource.includes('href="/?motionQA=1#top"'), "QA is discoverable without a query on localhost");
 assert.ok(qaSource.includes("import.meta.env.DEV"), "QA launcher must not be exposed publicly");
 
+
+const bookingPageSource=readFileSync(path.resolve(process.cwd(),"src/pages/PublicBookingPage.tsx"),"utf8");
+const bookingRoutes=readFileSync(path.resolve(process.cwd(),"src/App.tsx"),"utf8");
+assert.ok(bookingRoutes.includes('path="/agendar"')&&bookingRoutes.includes('lazy('),
+  "booking must be an isolated lazy route, leaving the approved landing composition unchanged");
+assert.ok(footerSource.includes('href="/agendar"')&&footerSource.includes("Marcar uma visita"),
+  "approved contact CTA must open COLUS booking without changing its copy");
+assert.ok(bookingPageSource.includes("VITE_COLUS_SCHEDULING_API_URL")&&bookingPageSource.includes('!API'),
+  "public booking must require the real shared scheduling backend and fail closed without it");
+
 console.log("RIGHTWARE Design & Motion QA: comparadores e observações condicionais verificados.");
