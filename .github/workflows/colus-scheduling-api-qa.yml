@@ -1,0 +1,21 @@
+name: COLUS Scheduling API QA
+on:
+  push:
+    branches: [develop]
+    paths:
+      - 'apps/scheduling-api/**'
+      - '.github/workflows/colus-scheduling-api-qa.yml'
+  workflow_dispatch:
+jobs:
+  scheduling:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/scheduling-api
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify slot overlap, Maputo timezone and HTTP API syntax
+        run: npm test

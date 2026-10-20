@@ -1,23 +1,13 @@
 import http from "node:http";
 import { randomUUID, timingSafeEqual } from "node:crypto";
 import pg from "pg";
+import {services,windowHours,dateOK,dayOK,serviceOf,slotsFor} from "./core.mjs";
 
 const {Pool}=pg;
 const port=Number(process.env.PORT??8088);
 const origins=(process.env.ALLOWED_ORIGINS??"http://localhost:8080,http://127.0.0.1:8080,http://localhost:5173,http://127.0.0.1:5173").split(",").map(x=>x.trim()).filter(Boolean);
 const secret=process.env.RECEPTION_TOKEN??"";
 const pool=new Pool({connectionString:process.env.DATABASE_URL,ssl:process.env.PGSSL==="require"?{rejectUnauthorized:true}:undefined,max:6});
-const services=[
- {id:"admission",name:"Admissões e matrículas",duration:30,description:"Informações sobre a candidatura e requisitos documentais"},
- {id:"visit",name:"Visita ao colégio",duration:45,description:"Conhecer os espaços e o projeto educativo"},
- {id:"secretary",name:"Atendimento à Secretaria",duration:30,description:"Informações e procedimentos administrativos"}
-];
-const windowHours={start:"08:00",end:"16:00",stepMinutes:15};
-const mins=time=>{const [h,m]=time.split(":").map(Number);return h*60+m};
-const timeOf=m=>String(Math.floor(m/60)).padStart(2,"0")+":"+String(m%60).padStart(2,"0");
-const dateOK=d=>/^\d{4}-\d{2}-\d{2}$/.test(d)&&!Number.isNaN(Date.parse(d+"T12:00:00Z"))&&new Date(d+"T12:00:00Z").toISOString().slice(0,10)===d;
-const dayOK=d=>{const day=new Date(d+"T12:00:00Z").getUTCDay();return day>0&&day<6};
-const serviceOf=id=>services.find(s=>s.id===id);
 const reply=(res,code,data)=>{res.writeHead(code,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store"});res.end(JSON.stringify(data))};
 const input=async req=>{let body="";for await(const chunk of req){body+=chunk;if(body.length>8000)throw Error("Pedido demasiado grande");}return JSON.parse(body||"{}")};
 const authorized=req=>{if(secret.length<24)return false;const given=req.headers.authorization?.replace(/^Bearer /,"")??"";if(given.length!==secret.length)return false;return timingSafeEqual(Buffer.from(given),Buffer.from(secret))};
@@ -36,21 +26,6 @@ async function initialize(){
  await pool.query("CREATE INDEX IF NOT EXISTS colus_public_bookings_day_idx ON colus_public_bookings(date,status)");
 }
 const selectRows=async(date)=>{const q=await pool.query("SELECT id,reference,service_id as \"serviceId\",date::text,time,duration_minutes as \"durationMinutes\",client_name as \"clientName\",email,phone,notes,status,source,created_at as \"createdAt\" FROM colus_public_bookings WHERE date=$1 ORDER BY time", [date]);return q.rows};
-function slotsFor(date,serviceId,bookings,now=new Date()){
- const svc=serviceOf(serviceId);if(!svc||!dateOK(date)||!dayOK(date))return [];
- // Mozambique's local date and clock, independent of server hosting region.
- const moz=new Intl.DateTimeFormat("sv-SE",{timeZone:"Africa/Maputo",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).format(now).replace(" ","T");
- const localDate=moz.slice(0,10),localClock=moz.slice(11,16);
- if(date<localDate)return [];
- const result=[];
- for(let at=mins(windowHours.start);at+svc.duration<=mins(windowHours.end);at+=windowHours.stepMinutes){
-  const time=timeOf(at);
-  if(date===localDate&&time<=localClock)continue;
-  if(bookings.some(b=>b.status!=="cancelled"&&at<mins(b.time)+b.durationMinutes&&at+svc.duration>mins(b.time)))continue;
-  result.push(time);
- }
- return result;
-}
 async function reserve(body){
  const svc=serviceOf(body.serviceId);
  const {date,time}=body;const name=String(body.clientName??"").trim(),email=String(body.email??"").trim(),phone=String(body.phone??"").trim(),notes=String(body.notes??"").trim();
