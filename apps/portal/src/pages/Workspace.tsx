@@ -162,7 +162,7 @@ function Dashboard({role}:{role:Role}){
     {(role==="executive"||role==="secretary"||role==="pedagogy")&&<Panel title="Distribuição dos alunos" subtitle="Contagem atualizada com os registos ativos."><GradeDistribution data={state}/></Panel>}
     {(role==="executive"||role==="pedagogy")&&<Panel title="Desempenho académico" subtitle="Médias calculadas a partir de avaliações publicadas."><PerformanceChart data={state}/></Panel>}
     {(role==="student"||role==="teacher")&&<Panel title="Aulas e horários" subtitle="Agenda académica da 9.ª A"><ScheduleCard day="Terça-feira · 20 outubro" items={lessons}/></Panel>}
-    {role==="guardian"&&<Panel title="Desempenho dos educandos" subtitle="Registos publicados pela Coordenação Pedagógica"><PerformanceChart data={state}/></Panel>}
+    {role==="guardian"&&<Panel title="Desempenho dos educandos" subtitle="Registos publicados pela Coordenação Pedagógica"><PerformanceChart data={state} studentIds={guardianStudents(state).map(s=>s.id)}/></Panel>}
     {role==="finance"&&<Panel title="Distribuição dos recebimentos" subtitle="Valores agrupados pelo estado dos pagamentos."><FinanceChart data={state}/></Panel>}
     {role==="executive"&&<Panel title="Assiduidade por turma" subtitle="Percentagem observada nos registos da amostra."><AttendanceChart data={state}/></Panel>}
     {role==="reception"&&<Panel title="A sua responsabilidade" subtitle="Encaminhar processos sem aprovar matrículas ou pagamentos."><div className="grid grid-cols-2 gap-3"><LinkFeature icon={HeartHandshake} label="Atendimento" description="Receber pedidos e orientar famílias."/><LinkFeature icon={FileText} label="Protocolo" description="Registar e encaminhar documentação." /></div></Panel>}
