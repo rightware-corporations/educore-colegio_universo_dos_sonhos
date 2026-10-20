@@ -9,6 +9,22 @@ on:
 jobs:
   scheduling:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: colus_qa
+          POSTGRES_PASSWORD: colus_qa
+          POSTGRES_DB: colus_qa
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U colus_qa"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgresql://colus_qa:colus_qa@127.0.0.1:5432/colus_qa
     defaults:
       run:
         working-directory: apps/scheduling-api
@@ -17,5 +33,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify slot overlap, Maputo timezone and HTTP API syntax
+      - name: Install PostgreSQL driver
+        run: npm install --no-audit --no-fund --package-lock=false
+      - name: Verify slots, HTTP contract and public-to-reception flow
         run: npm test
