@@ -17,7 +17,7 @@ async function readUpload(file:File):Promise<DemoAttachment>{
 function AttachedFile({file}:{file?:DemoAttachment}){return file?<a className="inline-flex items-center gap-2 rounded-lg bg-[#EDF5FA] px-3 py-2 text-xs font-bold text-[#0C5898] hover:underline" href={file.dataUrl} download={file.name}><FileText size={14}/>{file.name} · {Math.ceil(file.size/1024)} KB</a>:null;}
 export function LearningWorkspace({role,section}:{role:"student"|"teacher"|"guardian";section:string}){
  const {state,createLearningItem,submitWork,reviewWork}=useDemo();
- const [selectedClass,setSelectedClass]=useState("CL-09-A"),[title,setTitle]=useState(""),[details,setDetails]=useState(""),[kind,setKind]=useState<"assignment"|"material">("assignment"),[dueDate,setDueDate]=useState("2026-10-28");
+ const [selectedClass,setSelectedClass]=useState(()=>new URLSearchParams(window.location.search).get("class")??"CL-09-A"),[title,setTitle]=useState(""),[details,setDetails]=useState(""),[kind,setKind]=useState<"assignment"|"material">("assignment"),[dueDate,setDueDate]=useState("2026-10-28");
  const [response,setResponse]=useState<Record<string,string>>({}),[feedback,setFeedback]=useState<Record<string,string>>({});
  const [childId,setChild]=useGuardianChildSelection();
  const [uploads,setUploads]=useState<Record<string,DemoAttachment>>({});

@@ -10,7 +10,7 @@ export function TeacherGradebook(){
  const {state,recordGrade}=useDemo();
  const teacher=state.staff.find(t=>t.id==="PROF-001");
  const classes=state.classes.filter(c=>c.active&&teacher?.classIds?.includes(c.id));
- const [classId,setClassId]=useState(classes[0]?.id??"");
+ const [classId,setClassId]=useState(()=>{const query=new URLSearchParams(window.location.search).get("class");return classes.some(c=>c.id===query)?query!:classes[0]?.id??"";});
  const [studentId,setStudentId]=useState("");
  const [score,setScore]=useState("");
  const [query,setQuery]=useState("");
