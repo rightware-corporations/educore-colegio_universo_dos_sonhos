@@ -6,7 +6,7 @@ const API=(import.meta.env.VITE_COLUS_SCHEDULING_API_URL??"").replace(/\/$/,"");
 const field="h-11 min-w-0 rounded-xl border border-[#DBE5EC] bg-white px-3 text-sm";
 const primary="inline-flex min-h-10 items-center gap-2 rounded-xl bg-[#0C5898] px-4 text-xs font-bold text-white disabled:opacity-40";
 const neutral="inline-flex min-h-10 items-center gap-2 rounded-xl border border-[#D8E4EB] bg-white px-4 text-xs font-bold text-[#0C5898] disabled:opacity-40";
-const day=d=>new Date(d+"T12:00:00").toLocaleDateString("pt-MZ",{weekday:"short",day:"numeric",month:"short"});
+const day=(d:string)=>new Date(d+"T12:00:00").toLocaleDateString("pt-MZ",{weekday:"short",day:"numeric",month:"short"});
 function upcoming(offset:number){const x=new Intl.DateTimeFormat("en-CA",{timeZone:"Africa/Maputo",year:"numeric",month:"2-digit",day:"2-digit"}).formatToParts(new Date());const get=(name:string)=>Number(x.find(y=>y.type===name)?.value);return new Date(Date.UTC(get("year"),get("month")-1,get("day")+offset)).toISOString().slice(0,10)}
 export function ReceptionPublicBookings(){
  const [token,setToken]=useState(""),[connected,setConnected]=useState(false),[services,setServices]=useState<Service[]>([]);

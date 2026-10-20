@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {BookOpen, ChevronRight, ClipboardCheck, GraduationCap, Users} from "lucide-react";
+import {BookOpen, ChevronRight, ClipboardCheck, GraduationCap} from "lucide-react";
 import {useDemo} from "../state/DemoProvider";
 import {useGuardianChildSelection} from "../state/useGuardianChildSelection";
 import {activeStudents,average,guardianStudents} from "../data/school";
