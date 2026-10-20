@@ -4,8 +4,8 @@ import {ArrowLeft,ArrowRight,CalendarDays,CheckCircle2,Clock3,MapPin,ShieldCheck
 type Service={id:string;name:string;duration:number;description:string};
 const API=(import.meta.env.VITE_COLUS_SCHEDULING_API_URL??"").replace(/\/$/,"");
 const input="min-h-12 w-full rounded-xl border border-[#D9E3E7] bg-white px-4 text-sm outline-none focus:border-[#0C5898]";
-const weekday=d=>{const n=new Date(d+"T12:00:00").getDay();return n>0&&n<6};
-const fmt=d=>new Date(d+"T12:00:00").toLocaleDateString("pt-MZ",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
+const weekday=(d:string)=>{const n=new Date(d+"T12:00:00").getDay();return n>0&&n<6};
+const fmt=(d:string)=>new Date(d+"T12:00:00").toLocaleDateString("pt-MZ",{weekday:"long",day:"numeric",month:"long",year:"numeric"});
 function nextDate(offset:number){const formatter=new Intl.DateTimeFormat("en-CA",{timeZone:"Africa/Maputo",year:"numeric",month:"2-digit",day:"2-digit"});const parts=formatter.formatToParts(new Date());const y=Number(parts.find(p=>p.type==="year")?.value),m=Number(parts.find(p=>p.type==="month")?.value),day=Number(parts.find(p=>p.type==="day")?.value);const d=new Date(Date.UTC(y,m-1,day+offset));return d.toISOString().slice(0,10)}
 const card="rounded-[24px] border border-[#DDE6EA] bg-white p-5 shadow-[0_10px_35px_rgba(7,26,42,.06)] sm:p-7";
 export function PublicBookingPage(){
