@@ -95,7 +95,7 @@ try{
  assert.ok((await page.locator("main").innerText()).includes("Hélio Macuácua"));
  await page.screenshot({path:resolve(dir,"pedagogia-docentes-v3.png"),fullPage:true});
  await page.goto(base+"/app/pedagogy/assignments",{waitUntil:"networkidle"});
- await page.getByRole("button",{name:/^8ª A$/}).click();
+ await page.getByRole("button",{name:/8ª A/}).click();
  await page.getByRole("button",{name:"Atribuir Hélio Macuácua"}).click();
  assert.ok((await page.locator("main").innerText()).includes("Atribuído"));
  await page.screenshot({path:resolve(dir,"pedagogia-atribuicoes-v3.png"),fullPage:true});
