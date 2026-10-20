@@ -72,7 +72,7 @@ export function ContactFooter() {
             className="mt-9 flex w-full max-w-md flex-col items-stretch gap-5 sm:w-auto sm:max-w-none sm:flex-row sm:items-center"
           >
             <a
-              href="mailto:info@colus.ac.mz?subject=Pedido%20de%20visita%20ao%20COLUS"
+              href="/agendar"
               className="group inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-colus-ink px-7 text-sm font-bold text-white transition hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-colus-deep-blue focus-visible:ring-offset-4"
             >
               Marcar uma visita
