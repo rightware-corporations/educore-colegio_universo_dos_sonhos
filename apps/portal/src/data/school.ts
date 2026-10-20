@@ -3,18 +3,26 @@ export type Student={id:string;name:string;grade:number;classId:string|null;guar
 export type Guardian={id:string;name:string};
 export type Staff={id:string;name:string;role:"teacher"|"pedagogy"|"secretary"|"reception"|"finance"|"executive";subject?:string;classIds?:string[]};
 export type SchoolClass={id:string;grade:number;name:string;capacity:number;active:boolean};
-export type Attendance={id:string;studentId:string;classId:string;date:string;status:"present"|"absent";teacherId:string};
+export type Attendance={id:string;studentId:string;classId:string;date:string;status:"present"|"absent"|"late";teacherId:string;lessonId?:string};
 export type Assessment={id:string;studentId:string;subject:string;score:number;term:1|2|3;published:boolean;teacherId:string};
-export type Fee={id:string;studentId:string;description:string;amount:number;status:"pending"|"submitted"|"validated";reference?:string};
+export type Fee={id:string;studentId:string;description:string;amount:number;status:"pending"|"submitted"|"validated"|"rejected";reference?:string;dueDate?:string;reason?:string};
 export type Admission={id:string;candidate:string;grade:number;guardianName:string;status:"received"|"referred"|"review"|"enrolled"};
 export type Event={id:string;kind:string;title:string;detail:string;at:string;studentId?:string};
 export type Message={id:string;sender:"teacher"|"guardian";studentId:string;text:string;at:string};
 export type Lesson={id:string;classId:string;teacherId:string;weekday:number;start:string;minutes:number;room:string};
-export type SchoolData={lessons:Lesson[];students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
+export type AbsenceJustification={id:string;attendanceId:string;studentId:string;reason:string;status:"submitted"|"approved"|"rejected";decisionReason?:string};
+export type AssessmentPlan={id:string;classId:string;teacherId:string;subject:string;title:string;date:string;status:"submitted"|"approved"|"rejected";reason?:string};
+export type SchoolDocument={id:string;studentId:string;kind:string;status:"requested"|"issued";createdAt:string};
+export type SchoolNotice={id:string;title:string;text:string;studentId?:string;at:string;readBy:string[]};
+export type Intervention={id:string;studentId:string;note:string;followUp:string;status:"open"|"closed"};
+export type SchoolData={justifications:AbsenceJustification[];assessmentPlans:AssessmentPlan[];documents:SchoolDocument[];notices:SchoolNotice[];interventions:Intervention[];lessons:Lesson[];students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
 const schoolClass=(grade:number,letter="A"):SchoolClass=>({id:"CL-"+String(grade).padStart(2,"0")+"-"+letter,grade,name:grade+"ª "+letter,capacity:30,active:true});
 export const DEMO_TODAY="2026-10-20";
 export const createSchool=():SchoolData=>{const seed:SchoolData={
  lessons:[],
+ justifications:[],assessmentPlans:[],documents:[],notices:[
+ {id:"COM-001",title:"Encontro com encarregados",text:"Aviso fictício: reunião de acompanhamento pedagógico no final do trimestre.",at:"2026-10-19",readBy:[]}
+ ],interventions:[],
  classes:[schoolClass(1),schoolClass(3),schoolClass(5),schoolClass(7),schoolClass(9),schoolClass(11,"B"),schoolClass(12)],
  students:[
  {id:"ALU-001",name:"Tiago Nhampossa",grade:9,classId:"CL-09-A",guardianId:"ENC-001",status:"active"},
