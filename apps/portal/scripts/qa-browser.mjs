@@ -278,6 +278,11 @@ try{
  assert.ok(scheduleOverflow<=3,"Mobile weekly timetable overflow "+scheduleOverflow);
  await page.screenshot({path:resolve(dir,"aluno-horario-semanal-mobile.png"),fullPage:true});
  records.push({step:"student full weekly timetable at 390px",status:"pass",scheduleOverflow});
+ const studentText=(await page.locator("main").innerText()).toLocaleLowerCase();
+ assert.ok(!/propina|pagamento|finan[cç]/i.test(studentText),"Student must never see finance or payment info");
+ await page.goto(base+"/app/student/payments",{waitUntil:"networkidle"});
+ assert.match(page.url(),/\/app\/student\/dashboard$/,"Student finance route must be denied");
+ records.push({step:"student financial modules and deep link excluded",status:"pass"});
  await enter(page,"Secretaria");
  await page.goto(base+"/app/secretary/students",{waitUntil:"networkidle"});
  assert.ok(await page.getByRole("region",{name:"Fichas de alunos em dispositivos móveis"}).isVisible().catch(()=>false)||
@@ -286,11 +291,6 @@ try{
  assert.ok(registryOverflow<=3,"Mobile secretary registry overflow "+registryOverflow);
  await page.screenshot({path:resolve(dir,"secretaria-registo-mobile-v6.png"),fullPage:true});
  records.push({step:"secretary mobile cards without horizontal scroll",status:"pass",registryOverflow});
- const studentText=(await page.locator("main").innerText()).toLocaleLowerCase();
- assert.ok(!/propina|pagamento|finan[cç]/i.test(studentText),"Student must never see finance or payment info");
- await page.goto(base+"/app/student/payments",{waitUntil:"networkidle"});
- assert.match(page.url(),/\/app\/student\/dashboard$/,"Student finance route must be denied");
- records.push({step:"student financial modules and deep link excluded",status:"pass"});
  records.push({step:"mobile 390px welcome login dashboard",status:"pass",overflow,appOverflow});
  await page.goto(base+"/",{waitUntil:"domcontentloaded"});
  assert.equal(await page.locator('img[alt="COLUS"]').count(),1,"Independent splash required");
