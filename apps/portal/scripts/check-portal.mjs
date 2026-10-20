@@ -24,4 +24,13 @@ const academic=read("src/pages/AcademicManagement.tsx");
 assert.ok(academic.includes("WeeklyLessonList")&&academic.includes("onRemove={removeLesson}"),"Pedagogy must manage the whole week in one list");
 const workspace=read("src/pages/Workspace.tsx");
 assert.ok(workspace.includes("RoleWeeklyTimetable")&&workspace.includes('allowedRole==="guardian"'),"All academic roles must use shared weekly schedule");
+const extended=read("src/pages/OperationalWorkflows.tsx");
+for(const module of ["TeacherSessionAttendance","AbsenceCases","AssessmentWorkflow","NoticesWorkspace","DocumentsWorkspace","FinanceOperations","InterventionsWorkspace","ExecutiveReports"]){
+ assert.ok(extended.includes("export function "+module),"Missing cross-role workflow: "+module);
+}
+const learning=read("src/pages/LearningWorkflows.tsx");
+assert.ok(learning.includes("export function LearningWorkspace")&&learning.includes("StudentRecord"),"Student and teacher learning workflows required");
+const booking=read("src/pages/SchoolAppointments.tsx");
+assert.ok(booking.includes("requestAppointment")&&booking.includes("decideAppointment"),"Guardian-reception scheduling required");
+assert.ok(!studentMenu.includes('["finance"')&&!studentMenu.includes('["payments"'),"Student finance must remain excluded");
 console.log("COLUS PORTAL CONTRACT PASS: 8 profiles, split routes, brand, cross-role demo and no foreign-school copy");

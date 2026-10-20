@@ -230,6 +230,18 @@ try{
  assert.ok((await page.locator("main").innerText()).includes("Visão institucional"),"Executive reports require real domain aggregates");
  assert.ok((await page.locator("main").innerText()).includes("Auditoria demonstrativa"));
  records.push({step:"direction reporting and audit driven by operations",status:"pass"});
+ await enter(page,"Encarregado");
+ await page.goto(base+"/app/guardian/appointments",{waitUntil:"networkidle"});
+ await page.getByRole("button",{name:"Submeter pedido"}).click();
+ assert.ok((await page.locator("main").innerText()).includes("Reunião de acompanhamento escolar"));
+ await enter(page,"Receção");
+ await page.goto(base+"/app/reception/appointments",{waitUntil:"networkidle"});
+ await page.getByRole("button",{name:"Confirmar"}).first().click();
+ assert.ok((await page.locator("main").innerText()).includes("Confirmado"),"Reception updates appointment");
+ await enter(page,"Encarregado");
+ await page.goto(base+"/app/guardian/appointments",{waitUntil:"networkidle"});
+ assert.ok((await page.locator("main").innerText()).includes("Confirmado"),"Guardian sees accepted appointment");
+ records.push({step:"guardian appointment and reception confirmation",status:"pass"});
 
  await page.setViewportSize({width:390,height:844});
  await page.goto(base+"/welcome",{waitUntil:"networkidle"});
