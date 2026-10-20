@@ -189,7 +189,7 @@ try{
  await page.goto(base+"/app/student/assignments",{waitUntil:"networkidle"});
  assert.ok((await page.locator("main").innerText()).includes("Ficha prática V5"),"Assignment delivered to student");
  await page.getByRole("textbox",{name:"Resposta para Ficha prática V5"}).fill("Utilizei a propriedade distributiva e confirmei a solução.");
- await page.getByRole("button",{name:"Entregar trabalho"}).first().click();
+ await page.getByRole("textbox",{name:"Resposta para Ficha prática V5"}).locator("xpath=ancestor::form").getByRole("button",{name:"Entregar trabalho"}).click();
  assert.ok((await page.locator("main").innerText()).includes("Entregue"));
  await page.goto(base+"/app/student/notices",{waitUntil:"networkidle"});
  assert.ok((await page.locator("main").innerText()).includes("Reunião escolar de acompanhamento"));
