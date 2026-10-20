@@ -30,10 +30,10 @@ export function FinanceChart({data}:{data:SchoolData}){
  {series.map((s,i)=><Cell key={s.name} fill={PALETTE[i]}/>)}</Pie><Tooltip contentStyle={toolStyle}/><Legend iconType="circle" wrapperStyle={{fontSize:11}}/></PieChart>
  </ResponsiveContainer></div>;
 }
-export function PerformanceChart({data}:{data:SchoolData}){
+export function PerformanceChart({data,studentIds}:{data:SchoolData;studentIds?:string[]}){
  const names=["Matemática","Língua Portuguesa","Biologia","Ciências Naturais","Inglês"];
  const series=names.map(name=>({name:name==="Língua Portuguesa"?"Português":name==="Ciências Naturais"?"C. Naturais":name,
-  média:average(data.assessments.filter(a=>a.subject===name&&a.published).map(a=>a.score))
+  média:average(data.assessments.filter(a=>a.subject===name&&a.published&&(!studentIds||studentIds.includes(a.studentId))).map(a=>a.score))
  })).filter(x=>x.média>0);
  return <div className="h-60 w-full" aria-label="Gráfico: média das avaliações publicadas"><ResponsiveContainer width="100%" height="100%">
  <BarChart data={series} layout="vertical" margin={{top:4,right:12,left:1,bottom:4}}>
