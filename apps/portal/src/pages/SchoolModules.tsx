@@ -106,7 +106,7 @@ export function AttendanceDesk({role}:{role:Role}){
 export function GradesDesk({role}:{role:Role}){
  const {state,recordGrade,publishGrades}=useDemo();
  const [studentId,setStudentId]=useState("ALU-001"),[score,setScore]=useState(""),[subject,setSubject]=useState("Matemática");
- const rows=state.assessments.filter(a=>(role==="pedagogy"||role==="teacher")||a.published).filter(a=>
+ const rows=state.assessments.filter(a=>role==="teacher"?a.teacherId==="PROF-001":role==="pedagogy"||a.published).filter(a=>
   role==="student"?a.studentId==="ALU-001":role==="guardian"?guardianStudents(state).some(s=>s.id===a.studentId):true);
  const chosen=state.students.find(s=>s.id===studentId);
  return <Panel title="Avaliações e resultados" subtitle="O professor lança notas; a Pedagogia valida a publicação; alunos e encarregados consultam apenas resultados publicados.">
