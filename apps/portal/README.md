@@ -76,3 +76,8 @@ Horários, docentes, salas e alunos do cenário são **fictícios**, não dados 
 ## Evolução funcional V5
 
 Consultar [auditoria funcional e matriz de prioridades](docs/COLUS-FUNCTIONAL-CONSOLIDATION-2026-10-20.md). A aplicação continua a ser uma demonstração sem autenticação e backend de produção.
+
+
+## Revisão V6 dos dashboards e da experiência mobile
+
+Revisão e decisões em [COLUS V6 — auditoria UX e fluxos](docs/COLUS-V6-UX-FUNCTIONAL-REVIEW-2026-10-20.md). Dashboards têm filas de tarefas contextualizadas; Secretaria possui registo adaptado a mobile; Encarregado mantém seleção do educando em módulos académicos. **Tudo permanece demonstrativo, sem autenticação de servidor.**

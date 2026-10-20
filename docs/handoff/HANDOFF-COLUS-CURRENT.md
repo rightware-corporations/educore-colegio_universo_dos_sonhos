@@ -785,3 +785,15 @@ Após seis capturas Edge do responsável foi identificada falha de profundidade 
 **Não confundir aprovação de QA com produto pronto:** continuam ausentes backend, autenticação real, RBAC server-side, certificados fiscais, arquivo documental oficial, dados escolares reais, notificações externas, integrações, validação curricular do COLUS e operações multiutilizador. As contas representadas nos fluxos continuam fictícias/hardcoded. **Nunca colocar dados reais de alunos na sandbox.** O produto real depende de validação do cliente, orçamento e trabalho de engenharia subsequente.
 
 **Restrições:** não tocar landing já aprovada, `frontend/**`, Hero, media, identidade, copyright, backups, `main`, nem efetuar merge/deploy sem autorização. Continuar a trabalhar só em `develop`.
+
+## 48. REVISÃO V6 DO PORTAL — DASHBOARDS, MOBILE E EDUCAÇÃO FAMILIAR (2026-10-20)
+
+**Pedido explícito:** o responsável pediu continuar a partir da auditoria funcional V5. Iniciada revisão das páginas e do Chromium com foco prioritário em Secretaria, Professor e Encarregado; landing continua congelada.
+
+**Problemas identificados e corrigidos:** chamada rápida de Professor em data fixa, validação financeira diretamente do dashboard e aviso familiar de falta dependente de uma única data. Os três fluxos passaram a ser representados por filas de tarefas contextuais com links para módulos operacionais, nunca por botões com efeitos parciais escondidos.
+
+**Componentes/ficheiros:** `components/DashboardActionCenter.tsx` (prioridades específicas dos oito perfis), `pages/GuardianChildren.tsx` (ficha por filho), `state/useGuardianChildSelection.ts` (seleção partilhada por consulta e `sessionStorage`), `components/RoleShell.tsx` (ícones, bottom navigation por papel, nested route labels, confirmação reset, alertas familiares), `pages/SchoolModules.tsx` (Secretaria: KPIs, pesquisa, filtro, paginação e cards mobile; Finanças: sem validação direta), `pages/Workspace.tsx` (hero e painéis operacionais), `components/WeeklyTimetable.tsx`, `pages/LearningWorkflows.tsx` e `pages/OperationalWorkflows.tsx` (seleção de educando coerente).
+
+**Validação:** Portal QA [39465661340](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39465661340) SUCCESS no commit `02cddf8`, incluindo typecheck, contrato, build, Chromium ponta a ponta, QA mobile e seleção familiar. Landing QA [39464787835](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39464787835) SUCCESS antes da melhoria adicional de seleção. Diff de 11 ficheiros apenas em `apps/portal/**`, sem `frontend/**`. Nenhuma alteração em `main`, backups, assets, Hero ou rotas da landing.
+
+**Relatório:** `apps/portal/docs/COLUS-V6-UX-FUNCTIONAL-REVIEW-2026-10-20.md`. A aprovação visual institucional continua pendente, bem como backend, identidade/autorização real e validação curricular. Não declarar sistema pronto para produção.
