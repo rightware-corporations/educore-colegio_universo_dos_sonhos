@@ -215,6 +215,6 @@ export function Workspace(){
   <h1 className="mt-3 font-display text-[clamp(38px,5vw,55px)] leading-tight text-[#071A2A]">{info.items.find(i=>i.path===active)?.label}</h1>
   <p className="mt-2 text-sm text-muted-foreground">Ano letivo 2026 · Informação do cenário escolar de avaliação.</p></div>
   <OtherModule role={allowedRole} section={active}/>
-  <div className="mt-6"><ActivityFeed role={role}/></div>
+  <div className="mt-6"><ActivityFeed role={allowedRole}/></div>
  </PageContainer>;
 }
