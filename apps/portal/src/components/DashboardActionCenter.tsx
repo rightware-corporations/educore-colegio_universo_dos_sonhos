@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { AlertCircle, ArrowUpRight, BookOpen, CalendarDays, CheckCircle2, ChevronRight, ClipboardCheck, CreditCard, FileText, GraduationCap, UserRoundCheck, Users } from "lucide-react";
+import { AlertCircle, ArrowUpRight, BookOpen, CalendarDays, CheckCircle2, ChevronRight, ClipboardCheck, CreditCard, FileText, GraduationCap, Users } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
 import { activeStudents, guardianStudents, mt } from "../data/school";
 import type { Role } from "../config/roles";
