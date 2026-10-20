@@ -691,3 +691,20 @@ A peça central de papel introduzida em Manifesto recebeu `lg:hidden` para atuar
 **RESTRIÇÕES:** não alterar ficheiros media, imagens, vídeos, posters, branding, copy aprovado, Hero, mobile aprovado ou base `main` sem autorização. Não misturar conceitos de decisões oficiais com hipóteses. Nunca declarar `main` atualizada sem evidência de merge/release aprovado.
 
 **LEITURA PRIORITÁRIA PARA O NOVO CHAT:** `docs/handoff/NEXT-CHAT-PRODUCTION.md` e este marco §41 (prevalecem sobre recomendações obsoletas nos marcos anteriores).
+
+
+## 42. FUTURO — DESKTOP 1024, TIPOGRAFIA EQUILIBRADA (2026-10-20)
+
+**Escopo e autorização:** continuidade da revisão visual da landing em `develop`, após auditoria de handoff e QA. O responsável autorizou «vamos continuar». Não houve autorização de publicação, merge para `main`, limpeza de branches, mudança dos assets/copy ou alteração do mobile.
+
+**Evidência de entrada:** screenshot Chromium 1024×768 do run [39215283274](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39215283274) mostrava a headline «O futuro também se aprende.» em quatro linhas, com «se» isolado. Em 1440×900 o mesmo título estava equilibrado em três linhas. Causa observável em `frontend/src/components/landing/FuturoSection.tsx`: classe única `text-[clamp(42px,5.4vw,84px)]` aplicava ~55.3px em 1024px ao painel de quatro colunas.
+
+**Fix cirúrgico em `develop`:** commit `58d0166a3a8e6f9ce1f37050fae9457af1a2ded5`. A headline desktop passou a `text-[clamp(42px,4.5vw,60px)] xl:text-[clamp(42px,5.4vw,84px)]`, preservando a tipografia >=1280px, todos os media, vídeos, fontes de media, copy, Hero, layouts mobile e cenas Futuro. Adicionado apenas atributo não visual de QA `data-colus-desktop-futuro-headline`.
+
+**Regressão adicionada:** commit `072916d764b93c79838337834f25f37a8229e34e`, em `frontend/scripts/qa-desktop-master-plus.mjs`, verifica no browser a copy imutável e as três linhas reais calculadas de `getBoundingClientRect().height / lineHeight` nos viewports 1024×768 e 1440×900. Não interpreta PASS estrutural como aprovação estética.
+
+**Validação comprovada:** GitHub Actions [39382082257](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39382082257) `SUCCESS` no SHA `072916d`. Typecheck, testes contratuais e proteção de assets, build, QA Chromium mobile, PATH/NODE, Desktop Master Rings, Desktop Master Plus, scene-state e scroll progressivo/inverso: todos PASS. Artefacto `colus-mobile-ring-qa` ID `12245766908`. `desktop-master-plus/results.json` confirmou 3.000 linhas em 1440px (77.76px) e 3.000 linhas em 1024px (46.08px); a screenshot `futuro-1024-02.png` foi inspecionada e mostra «também se» na mesma linha. A screenshot `futuro-1440-02.png` mantém o título original em três linhas. Comparação `d9c82b7 → 072916d`: somente os dois ficheiros mencionados foram alterados.
+
+**Estado:** correção desktop implementada, testada e visualmente conferida em screenshot Chromium. Não foi reproduzido scroll contínuo no Microsoft Edge do responsável; o `landing-colus-master-plus.drawio` exato, previamente fornecido como anexo e não localizado no Git versionado, continua necessário para comparação geométrica fina. Pertencer/fases/handoffs e enquadramentos continuam sujeitos à aprovação editorial final. `main` não foi alterada; nenhuma branch/back-up apagada.
+
+**NEXT:** prosseguir validação visual contínua desktop em Edge, sobretudo Pertencer fase 5 → Rise Axis, transições Futuro → Vida e transformações reversas, e regressão mobile, preservando media/copy/Hero. Corrigir apenas desvios comprovados. Não iniciar backend, merge/publicação nem limpeza de branches sem autorização.
