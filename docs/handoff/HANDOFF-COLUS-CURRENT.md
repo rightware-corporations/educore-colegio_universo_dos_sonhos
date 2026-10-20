@@ -770,3 +770,18 @@ Após seis capturas Edge do responsável foi identificada falha de profundidade 
 **Testes:** workflow Portal QA de Chromium verifica todos os dias para Aluno, Professor, Encarregado e Pedagogia, alternância do segundo educando, disciplinas diferentes por turma, interdição de aulas sobrepostas e mobile 390px; QA de landing separado garante intocabilidade. Artefactos de capturas na execução GitHub correspondente à versão.
 
 **Restrições:** não alterar `frontend/**`, identidade, media, textos, Hero, backups, `main`, branches ou deploy da landing; não fazer merge, nem alegar sincronização/backend/autenticação real. Próximas prioridades de produto mantidas no §45.
+
+
+## 47. CONSOLIDAÇÃO FUNCIONAL PÓS-AUDITORIA EDUCORE V1.1 (2026-10-20)
+
+**AUTORIZAÇÃO EXPLÍCITA:** perante a auditoria de funcionalidades do `aevumlux1-rwbot/educore.v1.1` (branch `tenant/colegio-pascoa-live`), responsável perguntou por que não aplicar todas as melhorias estabelecidas. Foi iniciada implementação incremental em `develop`, exclusivamente `apps/portal/**`. O objetivo é **aproveitar funcionalidades e padrões, não copiar a UI, assets ou o código inteiro**.
+
+**Domínios e fluxos adicionados:** modelo partilhado `school.ts` + `DemoProvider.tsx`: chamada por aula/data (presença/falta/atraso, data coerente com dia da semana); justificação por encarregado e parecer da Pedagogia; propostas de avaliação e aprovação; publicação individual de notas; conteúdos e trabalhos (publicação/entrega/feedback); comunicados/leituras; pedidos/emissões de documentos modelo; obrigações financeiras, comprovativos, validação/rejeição e pré-visualização sem validade fiscal; intervenções pedagógicas; agendamento de atendimento Encarregado→Receção com validação de horários confirmados. Ficha individual de aluno e pesquisa/filtro/paginação do cadastro. Direção dispõe de relatório agregado, auditoria local e CSV gerado de verdade. Guardas cliente mantêm Aluno SEM módulos de finanças.
+
+**Novos componentes:** `pages/OperationalWorkflows.tsx`, `pages/LearningWorkflows.tsx`, `pages/SchoolAppointments.tsx`; rotas registadas em `config/roles.ts`, `pages/Workspace.tsx`, `App.tsx`. Persistência demonstrativa local conserva sandbox v4 através de hidratação de novos campos, sem eliminar dados já armazenados. O mesmo modelo é consultado pelos perfis.
+
+**Matriz detalhada entregue/pedente:** `apps/portal/docs/COLUS-FUNCTIONAL-CONSOLIDATION-2026-10-20.md`. QA Chromium ampliado com sequências role-to-role (incluindo marcações e trabalhos). Manter testes de landing e diffs zero `frontend/**`.
+
+**Não confundir aprovação de QA com produto pronto:** continuam ausentes backend, autenticação real, RBAC server-side, certificados fiscais, arquivo documental oficial, dados escolares reais, notificações externas, integrações, validação curricular do COLUS e operações multiutilizador. As contas representadas nos fluxos continuam fictícias/hardcoded. **Nunca colocar dados reais de alunos na sandbox.** O produto real depende de validação do cliente, orçamento e trabalho de engenharia subsequente.
+
+**Restrições:** não tocar landing já aprovada, `frontend/**`, Hero, media, identidade, copyright, backups, `main`, nem efetuar merge/deploy sem autorização. Continuar a trabalhar só em `develop`.

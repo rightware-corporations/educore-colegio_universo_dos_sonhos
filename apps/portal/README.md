@@ -72,3 +72,7 @@ Após referência visual fornecida pelo responsável: todas as aulas da semana d
 - Integração em `components/WeeklyTimetable.tsx`, `pages/AcademicManagement.tsx` e `pages/Workspace.tsx`. QA verifica 5 dias visíveis, distinção entre educandos, horário docente e ausência de overflow a 390px.
 
 Horários, docentes, salas e alunos do cenário são **fictícios**, não dados oficiais do COLUS. A escola deve aprovar o horário efetivo antes de qualquer utilização operacional.
+
+## Evolução funcional V5
+
+Consultar [auditoria funcional e matriz de prioridades](docs/COLUS-FUNCTIONAL-CONSOLIDATION-2026-10-20.md). A aplicação continua a ser uma demonstração sem autenticação e backend de produção.
