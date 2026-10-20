@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+:root {
+  font-family: Manrope, system-ui, sans-serif; color: #102231; font-synthesis:none;
+  --primary: 207 85% 32%; --secondary: 35 100% 97%; --accent: 24 88% 58%;
+  --foreground: 206 49% 13%; --background: 35 100% 98%; --card: 0 0% 100%;
+  --muted: 210 22% 96%; --muted-foreground: 207 13% 43%; --border: 209 22% 88%;
+  --warning: 29 91% 51%; --success: 157 67% 33%; --destructive: 0 70% 50%;
+  background: hsl(var(--background));
+}
+* { box-sizing:border-box }
+body { margin:0; min-width:320px; }
+button, input, select, textarea { font: inherit; }
+:focus-visible {outline:3px solid #F18136;outline-offset:3px}
+.panel { @apply rounded-3xl border border-border bg-white shadow-[0_12px_35px_rgba(7,26,42,0.04)]; }
+.eyebrow { @apply text-[11px] font-extrabold uppercase tracking-[0.19em] text-[#F18136]; }
+.action { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#0C5898] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#084879] disabled:cursor-not-allowed disabled:opacity-50; }
+.action-secondary { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-white px-5 py-3 text-sm font-bold text-foreground transition hover:bg-muted; }
+.fade-up {animation:fade-up .55s cubic-bezier(.22,1,.36,1) both}
+@keyframes fade-up { from {opacity:0;transform:translateY(14px)} to{opacity:1;transform:translateY(0)} }
+@keyframes brand-in {from{opacity:0;transform:scale(.9)} to{opacity:1;transform:scale(1)}}
+.splash-logo {animation: brand-in .85s cubic-bezier(.22,1,.36,1) both}
+@media (prefers-reduced-motion:reduce) {.fade-up,.splash-logo{animation:none!important}*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}

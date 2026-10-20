@@ -1,0 +1,30 @@
+name: COLUS Portal Demo QA
+on:
+  push:
+    branches: [develop]
+    paths:
+      - "apps/portal/**"
+      - ".github/workflows/colus-portal-qa.yml"
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "apps/portal/**"
+      - ".github/workflows/colus-portal-qa.yml"
+permissions:
+  contents: read
+jobs:
+  portal:
+    name: Portal typecheck, demo contract and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/portal
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm install --no-audit --no-fund --package-lock=false
+      - run: npm run typecheck
+      - run: npm run test:contract
+      - run: npm run build
