@@ -35,7 +35,7 @@ const hydrate=(s:SchoolData):SchoolData=>({...s,
  justifications:s.justifications??[],assessmentPlans:s.assessmentPlans??[],documents:s.documents??[],notices:s.notices??[],interventions:s.interventions??[],learningItems:s.learningItems??createSchool().learningItems,workSubmissions:s.workSubmissions??[],appointments:s.appointments??[]
 });
 const acceptedAttachment=(a?:DemoAttachment)=>!a||(a.size>0&&a.size<=512*1024&&a.name.length<=140&&
-  /^(application\\/pdf|image\\/(png|jpeg)|text\\/plain|application\\/vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document)$/.test(a.type)&&
+  /^(application\/pdf|image\/(png|jpeg)|text\/plain|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document)$/.test(a.type)&&
   a.dataUrl.startsWith("data:"+a.type+";base64,")&&a.dataUrl.length<=720000);
 const read=():SchoolData=>{
  try{
