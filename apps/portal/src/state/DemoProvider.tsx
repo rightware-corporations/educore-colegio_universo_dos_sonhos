@@ -4,6 +4,7 @@ import { createSchool, type SchoolData, type Student, type Admission, type Atten
 
 const DB_KEY="colus.portal.sandbox.v4";
 const PREVIOUS_KEY="colus.portal.sandbox.v3";
+const WEEK_UPGRADE_KEY="colus.portal.weekly.v4.1";
 const ROLE_KEY="colus.portal.role";
 const uid=(prefix:string)=>prefix+"-"+crypto.randomUUID().slice(0,8).toUpperCase();
 const makeEvent=(kind:string,title:string,detail:string,studentId?:string):Event=>({id:uid("EVT"),kind,title,detail,at:new Date().toISOString(),studentId});
@@ -12,30 +13,45 @@ const sane=(v:unknown):v is SchoolData=>{
  const x=v as Record<string,unknown>;
  return ["lessons","students","guardians","staff","classes","attendance","assessments","fees","admissions","events","messages"].every(k=>Array.isArray(x[k]));
 };
+const mergeWeekSeed=(previous:SchoolData):SchoolData=>{
+ const blueprint=createSchool();
+ // Expand reference teachers only; do not overwrite the client's local edits.
+ const staff=[...previous.staff,...blueprint.staff.filter(t=>
+  ["PROF-006","PROF-007","PROF-008"].includes(t.id)&&!previous.staff.some(p=>p.id===t.id))];
+ const lessons:Lesson[]=[...previous.lessons];
+ const toMinute=(time:string)=>{const [h,m]=time.split(":").map(Number);return 60*h+m;};
+ for(const planned of blueprint.lessons){
+  if(lessons.some(l=>l.id===planned.id))continue;
+  if(!previous.classes.some(c=>c.id===planned.classId&&c.active))continue;
+  if(!staff.some(t=>t.id===planned.teacherId&&t.role==="teacher"&&t.classIds?.includes(planned.classId)))continue;
+  const blocked=lessons.some(l=>l.weekday===planned.weekday&&toMinute(l.start)<toMinute(planned.start)+planned.minutes&&
+   toMinute(planned.start)<toMinute(l.start)+l.minutes&&
+   (l.classId===planned.classId||l.teacherId===planned.teacherId||l.room===planned.room));
+  if(!blocked)lessons.push(planned);
+ }
+ return {...previous,staff,lessons};
+};
 const read=():SchoolData=>{
  try{
   const raw=localStorage.getItem(DB_KEY);
-  if(raw){const obj:unknown=JSON.parse(raw);if(sane(obj))return obj;}
-  // One-time safe upgrade: retain edits made in the V3 sandbox and fill reference
-  // weekly lessons only where there are no class, teacher or room conflicts.
-  const previous=localStorage.getItem(PREVIOUS_KEY);
-  if(previous){
-   const parsed:unknown=JSON.parse(previous);
+  if(raw){
+   const parsed:unknown=JSON.parse(raw);
    if(sane(parsed)){
-    const seed=createSchool();
-    const imported:Lesson[]=[...parsed.lessons];
-    const toMin=(time:string)=>{const [h,m]=time.split(":").map(Number);return 60*h+m;};
-    for(const l of seed.lessons){
-     const schoolClass=parsed.classes.find(c=>c.id===l.classId&&c.active);
-     const teacher=parsed.staff.find(t=>t.id===l.teacherId&&t.role==="teacher"&&t.classIds?.includes(l.classId));
-     if(!schoolClass||!teacher||imported.some(old=>old.id===l.id))continue;
-     const collision=imported.some(old=>old.weekday===l.weekday&&
-      toMin(old.start)<toMin(l.start)+l.minutes&&toMin(l.start)<toMin(old.start)+old.minutes&&
-      (old.classId===l.classId||old.teacherId===l.teacherId||old.room===l.room));
-     if(!collision)imported.push(l);
-    }
-    const migrated={...parsed,lessons:imported};
+    if(localStorage.getItem(WEEK_UPGRADE_KEY))return parsed;
+    const enriched=mergeWeekSeed(parsed);
+    localStorage.setItem(DB_KEY,JSON.stringify(enriched));
+    localStorage.setItem(WEEK_UPGRADE_KEY,"1");
+    return enriched;
+   }
+  }
+  // Upgrade V3 without losing existing local student, grade or payment changes.
+  const legacy=localStorage.getItem(PREVIOUS_KEY);
+  if(legacy){
+   const parsed:unknown=JSON.parse(legacy);
+   if(sane(parsed)){
+    const migrated=mergeWeekSeed(parsed);
     localStorage.setItem(DB_KEY,JSON.stringify(migrated));
+    localStorage.setItem(WEEK_UPGRADE_KEY,"1");
     return migrated;
    }
   }

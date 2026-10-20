@@ -32,6 +32,9 @@ export const createSchool=():SchoolData=>{const seed:SchoolData={
  {id:"PROF-003",name:"Lídia Mabunda",role:"teacher",subject:"Biologia",classIds:["CL-09-A","CL-11-B"]},
  {id:"PROF-004",name:"Celso Nhantumbo",role:"teacher",subject:"Ciências Naturais",classIds:["CL-05-A"]},
  {id:"PROF-005",name:"Sara Tembe",role:"teacher",subject:"Inglês",classIds:["CL-11-B","CL-09-A"]},
+ {id:"PROF-006",name:"Regina Nhaca",role:"teacher",subject:"Língua Portuguesa",classIds:["CL-05-A"]},
+ {id:"PROF-007",name:"Joaquim Massango",role:"teacher",subject:"Matemática",classIds:["CL-05-A"]},
+ {id:"PROF-008",name:"Alice Baloi",role:"teacher",subject:"Educação Física",classIds:["CL-05-A"]},
  {id:"STAFF-006",name:"Ana Matola",role:"pedagogy"},
  {id:"STAFF-007",name:"Alda Magalhães",role:"secretary"},
  {id:"STAFF-008",name:"Rosa Mucavele",role:"reception"},
@@ -85,6 +88,17 @@ export const createSchool=():SchoolData=>{const seed:SchoolData={
  for(let weekday=1;weekday<=5;weekday++){
   for(const [start,teacherId,room] of plan)template.push({classId:"CL-09-A",teacherId,weekday,start,minutes:45,room});
   template.push({classId:"CL-05-A",teacherId:"PROF-004",weekday,start:"07:30",minutes:45,room:"B04"});
+  // Balanced 5A timetable: language, mathematics and physical education
+  // alongside science; all fictional, pending official school validation.
+  const grade5Extras:[string,string,string][][]=[
+   [["08:20","PROF-006","B04"],["09:15","PROF-007","B04"]],
+   [["08:20","PROF-007","B04"],["09:15","PROF-006","B04"]],
+   [["08:20","PROF-006","B04"],["09:15","PROF-008","PAV-1"]],
+   [["08:20","PROF-007","B04"],["09:15","PROF-006","B04"]],
+   [["08:20","PROF-008","PAV-1"],["09:15","PROF-007","B04"]]
+  ];
+  for(const [start,teacherId,room] of grade5Extras[weekday-1])
+   template.push({classId:"CL-05-A",teacherId,weekday,start,minutes:45,room});
  }
  const seniorTeachers=["PROF-003","PROF-001","PROF-005","PROF-003","PROF-005"];
  for(let weekday=1;weekday<=5;weekday++)

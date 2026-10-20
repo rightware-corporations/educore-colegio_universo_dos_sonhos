@@ -756,3 +756,17 @@ Após seis capturas Edge do responsável foi identificada falha de profundidade 
 **GitHub QA:** `3d077aec`, Portal [39401629394](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39401629394) SUCCESS, Landing [39401629377](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39401629377) SUCCESS, artefacto screenshots Portal `12254684494`. Chrome verifica novo CRUD de turma, registo/atribuição docente, aula e conflito, monitorização distinta, antigo CRUD Secretaria, fluxos família/pagamentos, exclusão financeira do Aluno e mobile. Diff desde `01ce4a3` altera apenas `apps/portal/**`. Nenhum código/media/asset landing modificado.
 
 **Não considerar aplicação completa:** sete perfis e Pedagogia ainda requerem ampliação do trabalho real e validação dos processos da escola. Prioridades e limitações detalhadas na auditoria V3. Sem backend/autenticação real, sem dados reais, sem deploy Railway. Próximo foco: Secretaria + Professor + Encarregado, seguindo matriz P0 e validação visual no Edge.
+
+
+## 46. HORÁRIO SEMANAL EM LISTA CONTÍNUA — COLUS PORTAL (2026-10-20)
+
+**PEDIDO EXPLÍCITO:** imagem de referência mostra aulas como lista por dia, mas responsável exige **TODOS os cinco dias da semana no mesmo ecrã, em lista vertical**, não uma vista limitada ao dia selecionado. Aprovação da landing continua imutável.
+
+**Execução exclusivamente em `apps/portal/` na `develop`:**
+`src/components/WeeklyTimetable.tsx` é a apresentação única da semana (segunda–sexta, aulas por ordem de início, disciplina, docente, sala, turma, duração); `/app/student/schedule` mostra só a turma do estudante representado, `/app/guardian/schedule` permite alternar educandos da família sem cruzar dados, `/app/teacher/schedule` mostra todas as turmas atribuídas ao docente da sessão, `/app/pedagogy/timetable` permite gerir cada turma na mesma lista semanal, com os conflitos anteriormente implementados. Os cards estáticos de horário do dashboard foram substituídos por pré-visualizações derivadas da store.
+
+**Dados sintéticos de referência:** 9.ª A possui aulas nos cinco dias, 5.ª A dispõe de Ciências Naturais, Português, Matemática e Educação Física com docentes fictícios coerentes; 11.ª B mantém aulas sem conflito. Base do modelo continuam classes/turmas configuráveis, sem alegar horários oficiais. `DemoProvider` conserva alterações da sandbox V3/V4 na atualização de semana V4.1, evitando perda de alunos/avaliações de demonstração; adiciona somente aulas válidas e não sobrepostas. Não é infraestrutura de dados reais.
+
+**Testes:** workflow Portal QA de Chromium verifica todos os dias para Aluno, Professor, Encarregado e Pedagogia, alternância do segundo educando, disciplinas diferentes por turma, interdição de aulas sobrepostas e mobile 390px; QA de landing separado garante intocabilidade. Artefactos de capturas na execução GitHub correspondente à versão.
+
+**Restrições:** não alterar `frontend/**`, identidade, media, textos, Hero, backups, `main`, branches ou deploy da landing; não fazer merge, nem alegar sincronização/backend/autenticação real. Próximas prioridades de produto mantidas no §45.

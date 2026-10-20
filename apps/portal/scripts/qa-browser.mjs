@@ -50,7 +50,10 @@ try{
  assert.ok((await page.locator("main").innerText()).includes("Matemática"),"Guardian schedule should display Tiago's lessons");
  await page.getByRole("combobox",{name:"Educando"}).selectOption("ALU-002");
  assert.ok((await page.locator("main").innerText()).includes("Ciências Naturais"),"Guardian child schedule should change");
- assert.ok(!(await page.locator("main").innerText()).includes("Língua Portuguesa"),"Guardian schedule must not mix children");
+ assert.ok((await page.locator("main").innerText()).includes("Língua Portuguesa"),"5A should include language lessons");
+ assert.ok((await page.locator("main").innerText()).includes("Matemática"),"5A should include mathematics lessons");
+ assert.ok(!(await page.locator("main").innerText()).includes("Biologia"),"Guardian schedule must not mix the other child's lessons");
+ assert.ok(await page.locator('section[aria-label="Segunda-feira"] li').count()>=3,"5A should have a realistic multi-subject day");
  await page.screenshot({path:resolve(dir,"encarregado-horario-leonor.png"),fullPage:true});
  records.push({step:"guardian whole-week view and child selection",status:"pass"});
  await enter(page,"Finanças");
