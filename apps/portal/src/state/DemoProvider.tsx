@@ -85,7 +85,15 @@ export function DemoProvider({children}:PropsWithChildren){
     if(!((role==="reception"&&item.status==="received"&&status==="referred")||
      (role==="secretary"&&item.status==="referred"&&status==="review")||
      (role==="secretary"&&item.status==="review"&&status==="enrolled")))return s;
-    return {...s,admissions:s.admissions.map(x=>x.id===id?{...x,status}:x),events:[makeEvent("admission","Pedido atualizado",item.candidate+" → "+status),...s.events]};
+    const enrolling=status==="enrolled";
+    const existingGuardian=s.guardians.find(g=>g.name.toLocaleLowerCase()===item.guardianName.toLocaleLowerCase());
+    const guardianId=existingGuardian?.id??uid("ENC");
+    const guardians=enrolling&&!existingGuardian?[...s.guardians,{id:guardianId,name:item.guardianName}]:s.guardians;
+    const studentExists=s.students.some(st=>st.name===item.candidate&&st.grade===item.grade);
+    const newStudent:Student={id:uid("ALU"),name:item.candidate,grade:item.grade,classId:null,guardianId,status:"active"};
+    const students=enrolling&&!studentExists?[...s.students,newStudent]:s.students;
+    return {...s,guardians,students,admissions:s.admissions.map(x=>x.id===id?{...x,status}:x),
+      events:[makeEvent("admission",enrolling?"Matrícula formalizada":"Pedido atualizado",item.candidate+(enrolling?" · ficha criada para atribuição pela Pedagogia":" → "+status)),...s.events]};
    });
   },
   recordAttendance(studentId,status,teacherId="PROF-001"){
