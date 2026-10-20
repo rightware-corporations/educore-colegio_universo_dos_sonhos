@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { Activity, ArrowRight, Bell, BookOpen, CalendarDays, Check, CheckCircle2, CircleAlert, ClipboardList, Clock, CreditCard, FileText, GraduationCap, HeartHandshake, MessageCircle, Send, ShieldCheck, Users, Wallet } from "lucide-react";
-import { ROLES, ROLE_DEFS, isRole, type Role } from "../config/roles";
+import { ROLE_DEFS, isRole, type Role } from "../config/roles";
 import { useDemo } from "../state/DemoProvider";
 import { PageContainer } from "../components/PageContainer";
 import { StatsCard } from "../components/StatsCard";
