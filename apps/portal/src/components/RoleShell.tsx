@@ -54,7 +54,7 @@ export function RoleShell(){
       <p className="mt-1 truncate text-[15px] font-extrabold text-[#071A2A]">{selected?.label||"Portal"}</p></div>
     </div>
     <div className="flex items-center gap-2">
-     {state.guardianUnread>0&&role==="guardian"&&<span className="flex items-center gap-1 rounded-full bg-[#F18136]/15 px-3 py-2 text-xs font-bold text-[#9E5018]"><Bell size={14}/> {state.guardianUnread}</span>}
+     {state.events.filter(e=>e.kind==="attendance"||e.kind==="message").length>0&&role==="guardian"&&<span className="flex items-center gap-1 rounded-full bg-[#F18136]/15 px-3 py-2 text-xs font-bold text-[#9E5018]"><Bell size={14}/> {state.events.filter(e=>e.kind==="attendance"||e.kind==="message").length}</span>}
      <span className="hidden rounded-full bg-[#0C5898]/10 px-3 py-2 text-[10px] font-extrabold uppercase tracking-wider text-[#0C5898] sm:inline">Modo demo</span>
      <button title="Reiniciar dados da demonstração" aria-label="Reiniciar dados da demonstração" className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#071A2A]/10 text-[#65727C] hover:bg-[#FFF8EF]" onClick={reset}><RotateCcw size={17}/></button>
      <button className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#071A2A] text-white" onClick={leavePortal} aria-label="Trocar perfil"><ArrowLeftRight size={18}/></button>
