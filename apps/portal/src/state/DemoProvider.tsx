@@ -5,7 +5,7 @@ import { createSchool, type SchoolData, type Student, type Admission, type Atten
 const DB_KEY="colus.portal.sandbox.v2";
 const ROLE_KEY="colus.portal.role";
 const uid=(prefix:string)=>prefix+"-"+crypto.randomUUID().slice(0,8).toUpperCase();
-const makeEvent=(kind:string,title:string,detail:string):Event=>({id:uid("EVT"),kind,title,detail,at:new Date().toISOString()});
+const makeEvent=(kind:string,title:string,detail:string,studentId?:string):Event=>({id:uid("EVT"),kind,title,detail,at:new Date().toISOString(),studentId});
 const sane=(v:unknown):v is SchoolData=>{
  if(!v||typeof v!=="object")return false;
  const x=v as Record<string,unknown>;
@@ -45,7 +45,7 @@ export function DemoProvider({children}:PropsWithChildren){
    mutate(s=>{
     if(!s.guardians.some(g=>g.id===input.guardianId))return s;
     const item:Student={id:uid("ALU"),name,grade:input.grade,classId:null,guardianId:input.guardianId,status:"active"};
-    return {...s,students:[...s.students,item],events:[makeEvent("student","Aluno registado",name+" · aguarda atribuição a turma"),...s.events]};
+    return {...s,students:[...s.students,item],events:[makeEvent("student","Aluno registado",name+" · aguarda atribuição a turma",item.id),...s.events]};
    });
   },
   editStudent(id,patch){
@@ -55,13 +55,13 @@ export function DemoProvider({children}:PropsWithChildren){
     const name=patch.name===undefined?target.name:patch.name.trim();
     const guardianId=patch.guardianId??target.guardianId;
     if(name.length<3||name.length>90||!s.guardians.some(g=>g.id===guardianId))return s;
-    return {...s,students:s.students.map(x=>x.id===id?{...x,name,guardianId}:x),events:[makeEvent("student","Ficha atualizada",name),...s.events]};
+    return {...s,students:s.students.map(x=>x.id===id?{...x,name,guardianId}:x),events:[makeEvent("student","Ficha atualizada",name,id),...s.events]};
    });
   },
   archiveStudent(id){
    if(role!=="secretary")return;
    mutate(s=>{const student=s.students.find(x=>x.id===id&&x.status==="active");if(!student)return s;
-    return {...s,students:s.students.map(x=>x.id===id?{...x,status:"archived" as const}:x),events:[makeEvent("student","Aluno arquivado",student.name+" · histórico preservado"),...s.events]};
+    return {...s,students:s.students.map(x=>x.id===id?{...x,status:"archived" as const}:x),events:[makeEvent("student","Aluno arquivado",student.name+" · histórico preservado",id),...s.events]};
    });
   },
   assignStudent(studentId,classId){
@@ -69,7 +69,7 @@ export function DemoProvider({children}:PropsWithChildren){
    mutate(s=>{const student=s.students.find(x=>x.id===studentId&&x.status==="active");
     const turma=s.classes.find(x=>x.id===classId&&x.active);
     if(!student||!turma||student.grade!==turma.grade||s.students.filter(x=>x.classId===classId&&x.status==="active").length>=turma.capacity)return s;
-    return {...s,students:s.students.map(x=>x.id===studentId?{...x,classId}:x),events:[makeEvent("student","Turma atribuída",student.name+" → "+turma.name),...s.events]};
+    return {...s,students:s.students.map(x=>x.id===studentId?{...x,classId}:x),events:[makeEvent("student","Turma atribuída",student.name+" → "+turma.name,studentId),...s.events]};
    });
   },
   createAdmission(input){
@@ -104,7 +104,7 @@ export function DemoProvider({children}:PropsWithChildren){
     if(!student||!teacher||!student.classId)return s;
     const rest=s.attendance.filter(x=>!(x.studentId===studentId&&x.date==="2026-10-20"));
     const row:Attendance={id:uid("ATT"),studentId,classId:student.classId,date:"2026-10-20",status,teacherId};
-    return {...s,attendance:[row,...rest],events:[makeEvent("attendance",status==="absent"?"Falta registada":"Presença registada",student.name+" · "+teacher.name),...s.events]};
+    return {...s,attendance:[row,...rest],events:[makeEvent("attendance",status==="absent"?"Falta registada":"Presença registada",student.name+" · "+teacher.name,studentId),...s.events]};
    });
   },
   markAbsent(){if(role==="teacher")value.recordAttendance("ALU-001","absent","PROF-001");},
@@ -115,7 +115,7 @@ export function DemoProvider({children}:PropsWithChildren){
     const teacher=s.staff.find(x=>x.id===teacherId&&x.role==="teacher"&&x.subject===subject&&x.classIds?.includes(student?.classId??""));
     if(!student||!teacher)return s;
     const note:Assessment={id:uid("NOT"),studentId,subject,score,term:3,published:false,teacherId};
-    return {...s,assessments:[note,...s.assessments],events:[makeEvent("assessment","Nota lançada para revisão",student.name+" · "+subject),...s.events]};
+    return {...s,assessments:[note,...s.assessments],events:[makeEvent("assessment","Nota lançada para revisão",student.name+" · "+subject,studentId),...s.events]};
    });
   },
   publishGrades(){
@@ -130,13 +130,13 @@ export function DemoProvider({children}:PropsWithChildren){
    mutate(s=>{const fee=s.fees.find(f=>f.id===feeId&&f.status==="pending");const student=s.students.find(x=>x.id===fee?.studentId);
     if(!fee||student?.guardianId!=="ENC-001")return s;
     return {...s,fees:s.fees.map(f=>f.id===feeId?{...f,status:"submitted" as const,reference:reference.trim()}:f),
-     events:[makeEvent("payment","Comprovativo apresentado","Submissão fictícia para validação"),...s.events]};
+     events:[makeEvent("payment","Comprovativo apresentado","Submissão fictícia para validação",fee.studentId),...s.events]};
    });
   },
   validateFee(id){
    if(role!=="finance")return;
    mutate(s=>{const fee=s.fees.find(x=>x.id===id&&x.status!=="validated");if(!fee)return s;
-    return {...s,fees:s.fees.map(f=>f.id===id?{...f,status:"validated" as const}:f),events:[makeEvent("payment","Pagamento validado",fee.description+" · "+fee.amount+" MT"),...s.events]};
+    return {...s,fees:s.fees.map(f=>f.id===id?{...f,status:"validated" as const}:f),events:[makeEvent("payment","Pagamento validado",fee.description+" · "+fee.amount+" MT",fee.studentId),...s.events]};
    });
   },
   validatePayment(){if(role==="finance")value.validateFee("FIN-001");},
@@ -146,7 +146,7 @@ export function DemoProvider({children}:PropsWithChildren){
     if(!student||(role==="guardian"&&student.guardianId!=="ENC-001")||
      (role==="teacher"&&!s.staff.some(t=>t.id==="PROF-001"&&t.classIds?.includes(student.classId??""))))return s;
     const m:Message={id:uid("MSG"),sender:role,text:text.trim(),studentId,at:new Date().toISOString()};
-    return {...s,messages:[...s.messages,m],events:[makeEvent("message","Mensagem enviada",student.name+" · comunicação escola–família"),...s.events]};
+    return {...s,messages:[...s.messages,m],events:[makeEvent("message","Mensagem enviada",student.name+" · comunicação escola–família",studentId),...s.events]};
    });
   }
  }),[role,state]);
