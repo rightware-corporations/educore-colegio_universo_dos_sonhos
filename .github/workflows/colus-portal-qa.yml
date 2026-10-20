@@ -28,3 +28,26 @@ jobs:
       - run: npm run typecheck
       - run: npm run test:contract
       - run: npm run build
+      - name: Install browser QA runtime
+        run: npm install --no-save --package-lock=false playwright@1.56.1
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Start portal preview
+        run: |
+          npm run preview -- --host 127.0.0.1 --port 4174 --strictPort &
+          for i in $(seq 1 45); do
+            if curl --fail --silent http://127.0.0.1:4174/welcome >/dev/null; then exit 0; fi
+            sleep 1
+          done
+          echo "Portal preview not ready" >&2
+          exit 1
+      - name: Cross-role browser QA and screenshots
+        run: node scripts/qa-browser.mjs
+      - name: Upload portal screenshots and results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: colus-portal-browser-qa
+          path: apps/portal/qa-artifacts/browser/
+          if-no-files-found: warn
+          retention-days: 7
