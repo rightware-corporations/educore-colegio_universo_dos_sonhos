@@ -13,7 +13,7 @@ export const ROLE_DEFS:Record<Role,RoleDef>={
  teacher:{label:"Professor",short:"Professor",caption:"Turmas, conteúdos e acompanhamento",icon:BookOpen,
  items:items(["dashboard","Visão geral"],["classes","Minhas turmas"],["attendance","Presenças"],["grades","Avaliações"],["schedule","Horários"],["messages","Comunicação"])},
  pedagogy:{label:"Coordenação pedagógica",short:"Pedagogia",caption:"Gestão académica e validação de avaliações",icon:Layers,
- items:items(["dashboard","Visão geral"],["classes","Classes e turmas"],["assignments","Atribuições"],["grades","Avaliações"],["attendance","Assiduidade"],["schedule","Currículo"])},
+ items:items(["dashboard","Visão geral"],["classes","Classes e turmas"],["staff","Professores"],["assignments","Atribuições docentes"],["timetable","Horários letivos"],["grades","Avaliações"],["attendance","Assiduidade"],["schedule","Currículo"])},
  reception:{label:"Receção",short:"Receção",caption:"Atendimento e encaminhamento de pedidos",icon:Headset,
  items:items(["dashboard","Visão geral"],["admissions","Pedidos de admissão"],["messages","Atendimento"])},
  secretary:{label:"Secretaria",short:"Secretaria",caption:"Matrículas, alunos e documentação",icon:Files,

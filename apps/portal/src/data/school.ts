@@ -9,10 +9,12 @@ export type Fee={id:string;studentId:string;description:string;amount:number;sta
 export type Admission={id:string;candidate:string;grade:number;guardianName:string;status:"received"|"referred"|"review"|"enrolled"};
 export type Event={id:string;kind:string;title:string;detail:string;at:string;studentId?:string};
 export type Message={id:string;sender:"teacher"|"guardian";studentId:string;text:string;at:string};
-export type SchoolData={students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
+export type Lesson={id:string;classId:string;teacherId:string;weekday:number;start:string;minutes:number;room:string};
+export type SchoolData={lessons:Lesson[];students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
 const schoolClass=(grade:number,letter="A"):SchoolClass=>({id:"CL-"+String(grade).padStart(2,"0")+"-"+letter,grade,name:grade+"ª "+letter,capacity:30,active:true});
 export const DEMO_TODAY="2026-10-20";
-export const createSchool=():SchoolData=>({
+export const createSchool=():SchoolData=>{const seed:SchoolData={
+ lessons:[],
  classes:[schoolClass(1),schoolClass(3),schoolClass(5),schoolClass(7),schoolClass(9),schoolClass(11,"B"),schoolClass(12)],
  students:[
  {id:"ALU-001",name:"Tiago Nhampossa",grade:9,classId:"CL-09-A",guardianId:"ENC-001",status:"active"},
@@ -57,7 +59,24 @@ export const createSchool=():SchoolData=>({
  {id:"ADM-003",candidate:"Mina Bila",grade:5,guardianName:"Américo Bila",status:"review"}],
  events:[],
  messages:[{id:"MSG-001",sender:"teacher",studentId:"ALU-001",text:"Tiago tem participado com interesse nas aulas de Matemática.",at:"2026-10-17"}]
-});
+};
+ const first=["Amélia","Armando","Belmira","Bento","Celina","Custódio","Dália","Edson","Elsa","Estêvão","Fátima","Gilberto","Helena","Ismael","Júlia","Leandro","Maira","Nelson","Olívia","Rui","Sofia","Tomás","Vera","Wilson"];
+ const last=["Chongo","Maluleque","Massango","Mabote","Macuácua","Matsinhe","Muianga","Machava","Mucavel","Mavota","Sumbana","Tembe","Zimba","Nhantumbo","Mondlane","Chissano","Cossa","Sitoe"];
+ const extra=seed.classes.flatMap((c,k)=>Array.from({length:19+(k%4)-seed.students.filter(s=>s.classId===c.id).length},(_,j)=>{
+   const n=k*31+j;const id="SIM-"+String(n+1).padStart(4,"0");
+   return {id,name:first[n%first.length]+" "+last[(n*7+k)%last.length],grade:c.grade,classId:c.id,guardianId:"ENC-"+id,status:"active" as const};
+ }));
+ const lessons:Lesson[]=[
+ {id:"AULA-001",classId:"CL-09-A",teacherId:"PROF-001",weekday:1,start:"07:30",minutes:45,room:"A12"},
+ {id:"AULA-002",classId:"CL-09-A",teacherId:"PROF-002",weekday:1,start:"08:20",minutes:45,room:"A12"},
+ {id:"AULA-003",classId:"CL-09-A",teacherId:"PROF-003",weekday:2,start:"09:15",minutes:45,room:"LAB-1"},
+ {id:"AULA-004",classId:"CL-09-A",teacherId:"PROF-005",weekday:3,start:"10:05",minutes:45,room:"A12"},
+ {id:"AULA-005",classId:"CL-05-A",teacherId:"PROF-004",weekday:1,start:"07:30",minutes:45,room:"B04"},
+ {id:"AULA-006",classId:"CL-11-B",teacherId:"PROF-003",weekday:4,start:"09:15",minutes:45,room:"LAB-2"},
+ {id:"AULA-007",classId:"CL-11-B",teacherId:"PROF-001",weekday:5,start:"07:30",minutes:45,room:"A16"}
+ ];
+ return {...seed,lessons,students:[...seed.students,...extra],guardians:[...seed.guardians,...extra.map((x,i)=>({id:x.guardianId,name:"Família fictícia "+String(i+1)}))]};
+};
 export const activeStudents=(s:SchoolData)=>s.students.filter(x=>x.status==="active");
 export const guardianStudents=(s:SchoolData,g="ENC-001")=>activeStudents(s).filter(x=>x.guardianId===g);
 export const gradeSubjects=(g:number)=>CURRICULUM.find(x=>x.grade===g)?.subjects??[];

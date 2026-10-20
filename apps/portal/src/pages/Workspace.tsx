@@ -8,6 +8,7 @@ import { StatsCard } from "../components/StatsCard";
 import { ScheduleCard } from "../components/ScheduleCard";
 import { QuickActionCard } from "../components/QuickActionCard";
 import { AttendanceChart, FinanceChart, GradeDistribution, PerformanceChart } from "../components/SchoolCharts";
+import { ClassesManagement, TeachersManagement, AssignmentsManagement, TimetableManagement } from "./AcademicManagement";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
 const focusStudent="ALU-001";
@@ -209,6 +210,10 @@ export function Workspace(){
  const active=section??"dashboard";
  if(!info.items.some(i=>i.path===active))return <Navigate to={"/app/"+allowedRole+"/dashboard"} replace/>;
  if(active==="dashboard")return <Dashboard role={allowedRole}/>;
+ if(allowedRole==="pedagogy"&&active==="classes")return <PageContainer><ClassesManagement/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="staff")return <PageContainer><TeachersManagement/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="assignments")return <PageContainer><AssignmentsManagement/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="timetable")return <PageContainer><TimetableManagement/></PageContainer>;
  return <PageContainer>
   <div className="mb-7"><Link to={"/app/"+allowedRole+"/dashboard"} className="inline-flex items-center gap-2 text-xs font-extrabold text-[#0C5898]"><ArrowRight className="rotate-180" size={14}/> Regressar ao painel</Link>
   <p className="eyebrow mt-6">COLUS · {info.short}</p>

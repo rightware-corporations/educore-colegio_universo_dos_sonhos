@@ -1,15 +1,15 @@
 import { createContext, useContext, useMemo, useState, type PropsWithChildren } from "react";
 import { isRole, type Role } from "../config/roles";
-import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event } from "../data/school";
+import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event, type Lesson, gradeSubjects } from "../data/school";
 
-const DB_KEY="colus.portal.sandbox.v2";
+const DB_KEY="colus.portal.sandbox.v3";
 const ROLE_KEY="colus.portal.role";
 const uid=(prefix:string)=>prefix+"-"+crypto.randomUUID().slice(0,8).toUpperCase();
 const makeEvent=(kind:string,title:string,detail:string,studentId?:string):Event=>({id:uid("EVT"),kind,title,detail,at:new Date().toISOString(),studentId});
 const sane=(v:unknown):v is SchoolData=>{
  if(!v||typeof v!=="object")return false;
  const x=v as Record<string,unknown>;
- return ["students","guardians","staff","classes","attendance","assessments","fees","admissions","events","messages"].every(k=>Array.isArray(x[k]));
+ return ["lessons","students","guardians","staff","classes","attendance","assessments","fees","admissions","events","messages"].every(k=>Array.isArray(x[k]));
 };
 const read=():SchoolData=>{try{const raw=localStorage.getItem(DB_KEY);if(raw){const obj:unknown=JSON.parse(raw);if(sane(obj))return obj;}}catch{}return createSchool();};
 const readRole=():Role|null=>{try{const r=sessionStorage.getItem(ROLE_KEY);return isRole(r??undefined)?r as Role:null;}catch{return null;}};
@@ -22,6 +22,12 @@ type Ctx={
  markAbsent:()=>void;recordAttendance:(studentId:string,status:Attendance["status"],teacherId?:string)=>void;
  recordGrade:(studentId:string,subject:string,score:number,teacherId?:string)=>void;publishGrades:()=>void;
  submitPayment:(feeId:string,reference:string)=>void;validatePayment:()=>void;validateFee:(id:string)=>void;
+ createClass:(grade:number,letter:string,capacity:number)=>void;
+ updateClass:(id:string,capacity:number,active:boolean)=>void;
+ createTeacher:(name:string,subject:string)=>void;
+ assignTeacher:(teacherId:string,classId:string,enabled:boolean)=>void;
+ addLesson:(input:Omit<Lesson,"id">)=>void;
+ removeLesson:(id:string)=>void;
  sendMessage:(text:string,studentId?:string)=>void;
 };
 const Context=createContext<Ctx|null>(null);
@@ -38,6 +44,67 @@ export function DemoProvider({children}:PropsWithChildren){
   enter(r){setRole(r);try{sessionStorage.setItem(ROLE_KEY,r);}catch{}},
   leave(){setRole(null);try{sessionStorage.removeItem(ROLE_KEY);}catch{}},
   reset(){const next=createSchool();setState(next);try{localStorage.setItem(DB_KEY,JSON.stringify(next));}catch{}},
+  createClass(grade,letter,capacity){
+   if(role!=="pedagogy"||!Number.isInteger(grade)||grade<1||grade>12||!Number.isInteger(capacity)||capacity<5||capacity>60)return;
+   const code=letter.trim().toUpperCase();
+   if(!/^[A-Z]$/.test(code))return;
+   const id="CL-"+String(grade).padStart(2,"0")+"-"+code;
+   mutate(s=>s.classes.some(c=>c.id===id)?s:{
+     ...s,classes:[...s.classes,{id,grade,name:grade+"ª "+code,capacity,active:true}],
+     events:[makeEvent("class","Turma criada",grade+"ª "+code),...s.events]
+   });
+  },
+  updateClass(id,capacity,active){
+   if(role!=="pedagogy"||!Number.isInteger(capacity)||capacity<5||capacity>60)return;
+   mutate(s=>{
+    const cls=s.classes.find(c=>c.id===id);
+    if(!cls)return s;
+    const enrolled=s.students.filter(x=>x.classId===id&&x.status==="active").length;
+    if(capacity<enrolled||(!active&&enrolled>0))return s;
+    return {...s,classes:s.classes.map(c=>c.id===id?{...c,capacity,active}:c),events:[makeEvent("class","Configuração da turma",cls.name),...s.events]};
+   });
+  },
+  createTeacher(name,subject){
+   if(role!=="pedagogy"||name.trim().length<3||name.trim().length>90||!subject.trim()||subject.length>80)return;
+   mutate(s=>({
+    ...s,staff:[...s.staff,{id:uid("PROF"),name:name.trim(),role:"teacher",subject:subject.trim(),classIds:[]}],
+    events:[makeEvent("staff","Professor registado",name.trim()+" · "+subject.trim()),...s.events]
+   }));
+  },
+  assignTeacher(teacherId,classId,enabled){
+   if(role!=="pedagogy")return;
+   mutate(s=>{
+    const teacher=s.staff.find(x=>x.id===teacherId&&x.role==="teacher");
+    const cls=s.classes.find(x=>x.id===classId&&x.active);
+    if(!teacher||!cls)return s;
+    const assigned=teacher.classIds??[];
+    if(enabled&&assigned.includes(classId)||!enabled&&!assigned.includes(classId))return s;
+    if(enabled&&!gradeSubjects(cls.grade).includes(teacher.subject??""))return s;
+    if(!enabled&&s.lessons.some(l=>l.teacherId===teacherId&&l.classId===classId))return s;
+    return {...s,staff:s.staff.map(x=>x.id===teacherId?{...x,classIds:enabled?[...assigned,classId]:assigned.filter(y=>y!==classId)}:x),
+      events:[makeEvent("staff",enabled?"Atribuição docente":"Atribuição retirada",teacher.name+" · "+cls.name),...s.events]};
+   });
+  },
+  addLesson(input){
+   if(role!=="pedagogy"||!Number.isInteger(input.weekday)||input.weekday<1||input.weekday>5||!Number.isInteger(input.minutes)||input.minutes<30||input.minutes>120||!/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/.test(input.start)||!input.room.trim())return;
+   const toMinute=(time:string)=>{const [h,m]=time.split(":").map(Number);return h*60+m;};
+   const start=toMinute(input.start),end=start+input.minutes;
+   if(start<420||end>1080)return;
+   mutate(s=>{
+    const teacher=s.staff.find(x=>x.id===input.teacherId&&x.role==="teacher"&&x.classIds?.includes(input.classId));
+    const cls=s.classes.find(x=>x.id===input.classId&&x.active);
+    if(!teacher||!cls)return s;
+    const conflict=s.lessons.some(l=>l.weekday===input.weekday&&start<toMinute(l.start)+l.minutes&&end>toMinute(l.start)&&
+      (l.classId===input.classId||l.teacherId===input.teacherId||l.room.toUpperCase()===input.room.toUpperCase()));
+    if(conflict)return s;
+    return {...s,lessons:[...s.lessons,{...input,room:input.room.trim().toUpperCase(),id:uid("AULA")}],
+      events:[makeEvent("schedule","Aula agendada",cls.name+" · "+teacher.name),...s.events]};
+   });
+  },
+  removeLesson(id){
+   if(role!=="pedagogy")return;
+   mutate(s=>s.lessons.some(l=>l.id===id)?{...s,lessons:s.lessons.filter(l=>l.id!==id),events:[makeEvent("schedule","Aula removida",id),...s.events]}:s);
+  },
   createStudent(input){
    if(role!=="secretary")return;
    const name=input.name.trim();
