@@ -797,3 +797,15 @@ Após seis capturas Edge do responsável foi identificada falha de profundidade 
 **Validação:** Portal QA [39465661340](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39465661340) SUCCESS no commit `02cddf8`, incluindo typecheck, contrato, build, Chromium ponta a ponta, QA mobile e seleção familiar. Landing QA [39464787835](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39464787835) SUCCESS antes da melhoria adicional de seleção. Diff de 11 ficheiros apenas em `apps/portal/**`, sem `frontend/**`. Nenhuma alteração em `main`, backups, assets, Hero ou rotas da landing.
 
 **Relatório:** `apps/portal/docs/COLUS-V6-UX-FUNCTIONAL-REVIEW-2026-10-20.md`. A aprovação visual institucional continua pendente, bem como backend, identidade/autorização real e validação curricular. Não declarar sistema pronto para produção.
+
+## 49. V7 — NOTAS E TPC POR TURMA; UPLOAD; AGENDAMENTO PÚBLICO POR SLOTS (2026-10-20)
+
+**Pedido expresso:** Professor deve trabalhar sempre por turma; lançar notas com pauta da turma; TPC em lista e upload de ficheiros, além de texto; Receção deve receber reservas do website público por slots. O utilizador entregou `scheduling-template.zip` para análise e adaptação. Foi autorizada a nova funcionalidade de scheduling da landing, mantendo a sua composição aprovada.
+
+**Implementação:** Gradebook/Minhas turmas isolam `PROF-001` por turma; Aluno/Encarregado veem notas publicadas por disciplina; aprendizagem inclui materiais, tarefas e anexos PDF/DOCX/JPG/PNG/TXT de até 512 KB num armazenamento local **de demonstração**, com devolução/consulta de ficheiros e feedback; a landing recebeu rota independente lazy `/agendar` e apenas o destino do CTA «Marcar uma visita» mudou. Todos os assets, Hero, composição, copy e identidade aprovados permanecem intactos.
+
+**Scheduling:** motor derivado do ZIP, adaptado para PostgreSQL em `apps/scheduling-api`, com serviços, slots, fuso Maputo, exclusão de sobreposição, transações, reservas e transições; `ReceptionPublicBookings.tsx` consulta a mesma API, autenticada por token manual de sessão de apresentação. As origens/deployments precisam de `VITE_COLUS_SCHEDULING_API_URL` comum e backend publicado; **sem infraestrutura não há sincronização real** e a landing não permite falsos agendamentos. Fluxo local do Encarregado permanece separado e explicitamente fictício.
+
+**Qualidade:** testes de motor em GitHub Actions `COLUS Scheduling API QA`; regressão portal Chromium aumentada para pauta por turma e upload. A conclusão de CI **não equivale** à aprovação visual COLUS ou prontidão para operação real. Continua a faltar autenticação institutional, storage seguro de ficheiros, notificações, consentimento/privacidade e confirmação de horários do colégio.
+
+**Referência técnica e pendências:** `apps/portal/docs/COLUS-V7-CLASS-GRADEBOOK-TPC-SCHEDULING-2026-10-20.md`. Sem merge em main, sem deployment, sem eliminar backups/branches. Não importar indevidamente nomes ou marca de outros colégios.

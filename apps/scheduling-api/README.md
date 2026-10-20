@@ -12,3 +12,7 @@ Implementação independente, adaptada do algoritmo de slots e sobreposições d
 Instalar dependências com `npm install`, configurar `DATABASE_URL`, `RECEPTION_TOKEN` (mínimo 24 carateres) e `ALLOWED_ORIGINS`; `npm start`. A tabela é criada na inicialização. Landing e portal devem receber a mesma URL via `VITE_COLUS_SCHEDULING_API_URL`.
 
 **Não está publicado nem conectado automaticamente.** Sem esse URL a landing mostra estado indisponível e a Receção continua com as marcações locais de demonstração. O token é introduzido manualmente em sessão na Receção e nunca colocado em VITE ou no bundle. Para produção substituir por login de equipa/RBAC, gateway, captcha/proteção anti-spam, consentimento de dados, notificações, logs e backups. PostgreSQL exige DATABASE_URL real.
+
+## Testes automatizados
+
+`npm test` valida sintaxe HTTP, slots e sobreposição (incluindo pedidos pendentes), horários passados em Africa/Maputo, dias úteis e cancelamentos. Workflow: `.github/workflows/colus-scheduling-api-qa.yml`.

@@ -81,3 +81,7 @@ Consultar [auditoria funcional e matriz de prioridades](docs/COLUS-FUNCTIONAL-CO
 ## Revisão V6 dos dashboards e da experiência mobile
 
 Revisão e decisões em [COLUS V6 — auditoria UX e fluxos](docs/COLUS-V6-UX-FUNCTIONAL-REVIEW-2026-10-20.md). Dashboards têm filas de tarefas contextualizadas; Secretaria possui registo adaptado a mobile; Encarregado mantém seleção do educando em módulos académicos. **Tudo permanece demonstrativo, sem autenticação de servidor.**
+
+## V7 · Turmas, TPC com anexos e scheduling público
+
+Consultar [handoff funcional e plano de integração](docs/COLUS-V7-CLASS-GRADEBOOK-TPC-SCHEDULING-2026-10-20.md). Agendamentos reais exigem API PostgreSQL e credenciais de Receção, descritos em `../scheduling-api/README.md`.
