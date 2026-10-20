@@ -11,6 +11,7 @@ import { AttendanceChart, FinanceChart, GradeDistribution, PerformanceChart } fr
 import { ClassesManagement, TeachersManagement, AssignmentsManagement, TimetableManagement } from "./AcademicManagement";
 import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
 import { TeacherSessionAttendance, AbsenceCases, AssessmentWorkflow, NoticesWorkspace, DocumentsWorkspace, FinanceOperations, InterventionsWorkspace, ExecutiveReports } from "./OperationalWorkflows";
+import { LearningWorkspace, StudentRecord } from "./LearningWorkflows";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
 const focusStudent="ALU-001";
@@ -215,13 +216,17 @@ function OtherModule({role,section}:{role:Role;section:string}){
  return <Empty>Esta área não possui registos associados ao perfil selecionado.</Empty>;
 }
 export function Workspace(){
- const {role,section}=useParams();
+ const {role,section,id}=useParams();
  const allowedRole=isRole(role)?role:null;
  if(!allowedRole)return <Navigate to="/login" replace/>;
  const info=ROLE_DEFS[allowedRole];
  const active=section??"dashboard";
  if(!info.items.some(i=>i.path===active))return <Navigate to={"/app/"+allowedRole+"/dashboard"} replace/>;
  if(active==="dashboard")return <Dashboard role={allowedRole}/>;
+ if(allowedRole==="secretary"&&active==="students"&&id)return <PageContainer><StudentRecord studentId={id}/></PageContainer>;
+ if((allowedRole==="student"&&(active==="assignments"||active==="materials"))||
+    (allowedRole==="teacher"&&active==="learning")||(allowedRole==="guardian"&&active==="learning"))
+  return <PageContainer><LearningWorkspace role={allowedRole as "student"|"teacher"|"guardian"} section={active}/></PageContainer>;
  if(active==="schedule"&&(allowedRole==="student"||allowedRole==="guardian"||allowedRole==="teacher"))
   return <PageContainer><RoleWeeklyTimetable role={allowedRole}/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="classes")return <PageContainer><ClassesManagement/></PageContainer>;

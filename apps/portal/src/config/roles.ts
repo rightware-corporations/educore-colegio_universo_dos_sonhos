@@ -7,11 +7,11 @@ export type RoleDef={label:string;short:string;caption:string;icon:LucideIcon;it
 const items=(...pairs:[string,string][]):NavItem[]=>pairs.map(([path,label])=>({path,label}));
 export const ROLE_DEFS:Record<Role,RoleDef>={
  student:{label:"Aluno",short:"Aluno",caption:"Aprendizagem e percurso académico",icon:GraduationCap,
- items:items(["dashboard","Visão geral"],["subjects","Disciplinas"],["grades","Notas"],["schedule","Horário"],["attendance","Assiduidade"],["assessments","Avaliações"],["notices","Comunicados"],["assignments","Trabalhos"])},
+ items:items(["dashboard","Visão geral"],["subjects","Disciplinas"],["grades","Notas"],["schedule","Horário"],["attendance","Assiduidade"],["assessments","Avaliações"],["notices","Comunicados"],["materials","Materiais"],["assignments","Trabalhos"])},
  guardian:{label:"Encarregado de educação",short:"Encarregado",caption:"Acompanhamento integral dos educandos",icon:Users,
- items:items(["dashboard","Visão geral"],["children","Educandos"],["grades","Desempenho"],["attendance","Assiduidade"],["payments","Pagamentos"],["justifications","Justificações"],["assessments","Avaliações"],["notices","Comunicados"],["schedule","Horários"],["messages","Mensagens"])},
+ items:items(["dashboard","Visão geral"],["children","Educandos"],["grades","Desempenho"],["attendance","Assiduidade"],["payments","Pagamentos"],["justifications","Justificações"],["assessments","Avaliações"],["notices","Comunicados"],["schedule","Horários"],["learning","Trabalhos"],["messages","Mensagens"])},
  teacher:{label:"Professor",short:"Professor",caption:"Turmas, conteúdos e acompanhamento",icon:BookOpen,
- items:items(["dashboard","Visão geral"],["classes","Minhas turmas"],["attendance","Presenças"],["assessments","Planeamento"],["grades","Lançamento de notas"],["schedule","Horários"],["messages","Comunicação"])},
+ items:items(["dashboard","Visão geral"],["classes","Minhas turmas"],["attendance","Presenças"],["assessments","Planeamento"],["grades","Lançamento de notas"],["learning","Conteúdos e trabalhos"],["schedule","Horários"],["messages","Comunicação"])},
  pedagogy:{label:"Coordenação pedagógica",short:"Pedagogia",caption:"Gestão académica e validação de avaliações",icon:Layers,
  items:items(["dashboard","Visão geral"],["classes","Classes e turmas"],["staff","Professores"],["assignments","Atribuições docentes"],["timetable","Horários letivos"],["reviews","Aprovações"],["justifications","Justificações"],["interventions","Intervenções"],["notices","Comunicados"],["grades","Avaliações"],["attendance","Assiduidade"],["schedule","Currículo"])},
  reception:{label:"Receção",short:"Receção",caption:"Atendimento e encaminhamento de pedidos",icon:Headset,

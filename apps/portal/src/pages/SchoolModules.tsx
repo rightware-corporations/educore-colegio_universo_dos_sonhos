@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { Check, ClipboardCheck, Edit3, FilePlus2, Search, Send, UserPlus, UserRoundX, type LucideIcon } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
 import { CURRICULUM, GRADE_NOTE, LEVELS } from "../data/curriculum";
@@ -39,10 +40,10 @@ export function StudentRegistry(){
    <td className="py-4">{s.grade}ª Classe · {state.classes.find(c=>c.id===s.classId)?.name??"Por atribuir"}</td>
    <td className="py-4">{state.guardians.find(g=>g.id===s.guardianId)?.name}</td>
    <td className="py-4"><Pill tone={s.status==="active"?"success":"warning"}>{s.status==="active"?"Ativo":"Arquivado"}</Pill></td>
-   <td className="py-4 text-right">{s.status==="active"&&<div className="flex justify-end gap-2">
+   <td className="py-4 text-right"><div className="flex justify-end gap-2"><Link to={"/app/secretary/students/"+s.id} aria-label={"Consultar ficha de "+s.name} className="rounded-lg border border-border px-3 py-2 text-[11px] font-bold text-[#0C5898]">Ficha</Link>{s.status==="active"&&<>
     <button title={"Editar "+s.name} aria-label={"Editar "+s.name} onClick={()=>{setEditing(s);setName(s.name);setGuardian(s.guardianId);setOpen(true);}} className="rounded-lg border border-border p-2 hover:bg-muted"><Edit3 size={15}/></button>
     <button title={"Arquivar "+s.name} aria-label={"Arquivar "+s.name} onClick={()=>{if(window.confirm("Arquivar a ficha de "+s.name+"? O histórico académico ficará preservado."))archiveStudent(s.id);}} className="rounded-lg border border-border p-2 text-red-700 hover:bg-red-50"><UserRoundX size={15}/></button>
-    </div>}</td>
+    </>}</div></td>
   </tr>)}</tbody></table></div>
   {rows.length===0&&<Empty>Nenhum aluno corresponde à pesquisa.</Empty>}
  </Panel>;

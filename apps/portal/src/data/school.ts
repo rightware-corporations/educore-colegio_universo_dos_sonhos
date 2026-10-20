@@ -15,12 +15,17 @@ export type AssessmentPlan={id:string;classId:string;teacherId:string;subject:st
 export type SchoolDocument={id:string;studentId:string;kind:string;status:"requested"|"issued";createdAt:string};
 export type SchoolNotice={id:string;title:string;text:string;studentId?:string;at:string;readBy:string[]};
 export type Intervention={id:string;studentId:string;note:string;followUp:string;status:"open"|"closed"};
-export type SchoolData={justifications:AbsenceJustification[];assessmentPlans:AssessmentPlan[];documents:SchoolDocument[];notices:SchoolNotice[];interventions:Intervention[];lessons:Lesson[];students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
+export type LearningItem={id:string;classId:string;subject:string;teacherId:string;title:string;details:string;kind:"material"|"assignment";dueDate?:string};
+export type WorkSubmission={id:string;itemId:string;studentId:string;response:string;status:"submitted"|"reviewed";feedback?:string};
+export type SchoolData={learningItems:LearningItem[];workSubmissions:WorkSubmission[];justifications:AbsenceJustification[];assessmentPlans:AssessmentPlan[];documents:SchoolDocument[];notices:SchoolNotice[];interventions:Intervention[];lessons:Lesson[];students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
 const schoolClass=(grade:number,letter="A"):SchoolClass=>({id:"CL-"+String(grade).padStart(2,"0")+"-"+letter,grade,name:grade+"ª "+letter,capacity:30,active:true});
 export const DEMO_TODAY="2026-10-20";
 export const createSchool=():SchoolData=>{const seed:SchoolData={
  lessons:[],
- justifications:[],assessmentPlans:[],documents:[],notices:[
+ learningItems:[
+  {id:"MAT-001",classId:"CL-09-A",subject:"Matemática",teacherId:"PROF-001",title:"Equações do 2.º grau",details:"Material de revisão para o 3.º trimestre. Consulte os exercícios disponibilizados em aula.",kind:"material"},
+  {id:"TRAB-001",classId:"CL-09-A",subject:"Matemática",teacherId:"PROF-001",title:"Resolução de problemas",details:"Apresente a estratégia utilizada para resolver duas equações.",kind:"assignment",dueDate:"2026-10-28"}
+ ],workSubmissions:[],justifications:[],assessmentPlans:[],documents:[],notices:[
  {id:"COM-001",title:"Encontro com encarregados",text:"Aviso fictício: reunião de acompanhamento pedagógico no final do trimestre.",at:"2026-10-19",readBy:[]}
  ],interventions:[],
  classes:[schoolClass(1),schoolClass(3),schoolClass(5),schoolClass(7),schoolClass(9),schoolClass(11,"B"),schoolClass(12)],

@@ -16,6 +16,7 @@ export default function App(){
   <Route path="/app/:role" element={<RoleShell/>}>
    <Route index element={<Navigate to="dashboard" replace/>}/>
    <Route path=":section" element={<Workspace/>}/>
+   <Route path=":section/:id" element={<Workspace/>}/>
   </Route>
   <Route path="*" element={<Navigate to="/welcome" replace/>}/>
  </Routes></>;
