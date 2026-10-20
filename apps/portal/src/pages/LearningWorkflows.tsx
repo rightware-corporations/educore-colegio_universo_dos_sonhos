@@ -2,6 +2,7 @@ import { useState } from "react";
 import { BookOpen, ClipboardList, FileText, ArrowLeft, CalendarDays, UserRound, GraduationCap, Printer } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDemo } from "../state/DemoProvider";
+import { useGuardianChildSelection } from "../state/useGuardianChildSelection";
 import { guardianStudents, average, attendanceRate } from "../data/school";
 const control="min-h-11 rounded-xl border border-[#DAE4EC] bg-white px-3 text-sm outline-none focus:border-[#0C5898]";
 const action="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#0C5898] px-4 text-xs font-bold text-white";
@@ -11,7 +12,7 @@ export function LearningWorkspace({role,section}:{role:"student"|"teacher"|"guar
  const {state,createLearningItem,submitWork,reviewWork}=useDemo();
  const [selectedClass,setSelectedClass]=useState("CL-09-A"),[title,setTitle]=useState(""),[details,setDetails]=useState(""),[kind,setKind]=useState<"assignment"|"material">("assignment"),[dueDate,setDueDate]=useState("2026-10-28");
  const [response,setResponse]=useState<Record<string,string>>({}),[feedback,setFeedback]=useState<Record<string,string>>({});
- const [childId,setChild]=useState("ALU-001");
+ const [childId,setChild]=useGuardianChildSelection();
  const child=role==="student"?state.students.find(x=>x.id==="ALU-001"):role==="guardian"?guardianStudents(state).find(x=>x.id===childId):undefined;
  const accessible=new Set(role==="teacher"?["CL-09-A","CL-11-B"]:child?.classId?[child.classId]:[]);
  const list=state.learningItems.filter(x=>accessible.has(x.classId)&&

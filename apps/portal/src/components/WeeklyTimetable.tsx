@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useGuardianChildSelection } from "../state/useGuardianChildSelection";
 import { CalendarDays, Clock3, GraduationCap, MapPin, UserRound, BookOpen, Trash2 } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
 import { activeStudents, guardianStudents, type Lesson, type SchoolData } from "../data/school";
@@ -55,7 +55,7 @@ export function WeeklyLessonList({data,lessons,onRemove}:{data:SchoolData;lesson
 export function RoleWeeklyTimetable({role}:{role:Extract<Role,"student"|"guardian"|"teacher">}){
  const {state}=useDemo();
  const children=guardianStudents(state);
- const [selectedChild,setSelectedChild]=useState("ALU-001");
+ const [selectedChild,setSelectedChild]=useGuardianChildSelection();
  const student=role==="student"?state.students.find(s=>s.id==="ALU-001"):
   role==="guardian"?children.find(s=>s.id===selectedChild)??children[0]:undefined;
  const enrolled=activeStudents(state).some(x=>x.id===student?.id);

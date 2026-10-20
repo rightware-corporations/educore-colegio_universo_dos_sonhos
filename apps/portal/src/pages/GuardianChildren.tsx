@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useGuardianChildSelection } from "../state/useGuardianChildSelection";
 import { Link } from "react-router-dom";
 import { AlertCircle, BookOpen, CalendarDays, ChevronRight, GraduationCap, Users } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
@@ -6,7 +6,7 @@ import { attendanceRate, average, guardianStudents, mt } from "../data/school";
 export function GuardianChildren(){
  const {state}=useDemo();
  const children=guardianStudents(state);
- const [selectedId,setSelectedId]=useState("ALU-001");
+ const [selectedId,setSelectedId]=useGuardianChildSelection();
  const child=children.find(s=>s.id===selectedId)??children[0];
  if(!child)return <div className="rounded-2xl bg-white p-6"><h1 className="text-xl font-bold">Os meus educandos</h1><p className="mt-3 text-sm">Não existem educandos associados ao perfil familiar de demonstração.</p></div>;
  const grades=state.assessments.filter(a=>a.studentId===child.id&&a.published);
@@ -49,10 +49,10 @@ export function GuardianChildren(){
     <section className="rounded-2xl border border-[#DFE8EF] bg-white p-5 sm:p-6">
      <h2 className="text-base font-extrabold">Próximas ações e resultados</h2>
      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-      <Link to="/app/guardian/schedule" className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><CalendarDays size={17}/> Horário semanal</span><ChevronRight size={15}/></Link>
-      <Link to="/app/guardian/learning" className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><BookOpen size={17}/> Trabalhos escolares</span><ChevronRight size={15}/></Link>
-      <Link to="/app/guardian/grades" className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><GraduationCap size={17}/> Notas publicadas</span><ChevronRight size={15}/></Link>
-      <Link to="/app/guardian/justifications" className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><AlertCircle size={17}/> Justificações</span><ChevronRight size={15}/></Link>
+      <Link to={"/app/guardian/schedule?child="+child.id} className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><CalendarDays size={17}/> Horário semanal</span><ChevronRight size={15}/></Link>
+      <Link to={"/app/guardian/learning?child="+child.id} className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><BookOpen size={17}/> Trabalhos escolares</span><ChevronRight size={15}/></Link>
+      <Link to={"/app/guardian/grades?child="+child.id} className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><GraduationCap size={17}/> Notas publicadas</span><ChevronRight size={15}/></Link>
+      <Link to={"/app/guardian/justifications?child="+child.id} className="flex items-center justify-between gap-2 rounded-xl border border-[#DFE8EF] p-4 text-sm font-bold text-[#0C5898] hover:bg-[#F4F9FC]"><span className="flex items-center gap-2"><AlertCircle size={17}/> Justificações</span><ChevronRight size={15}/></Link>
      </div>
      {grades.length>0&&<div className="mt-5 border-t border-[#E8EEF2] pt-4"><h3 className="mb-2 text-xs font-bold uppercase tracking-wider text-[#667784]">Resultados recentes</h3>
       {grades.slice(-4).map(g=><div key={g.id} className="flex justify-between gap-3 border-b border-[#EBF0F3] py-2 text-xs"><span>{g.subject} · {g.term}.º trimestre</span><strong>{g.score}/20</strong></div>)}

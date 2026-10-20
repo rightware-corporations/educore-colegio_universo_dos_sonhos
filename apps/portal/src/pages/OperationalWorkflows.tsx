@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { CalendarDays, CheckCircle2, FileText, Search, Printer, Send } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
+import { useGuardianChildSelection } from "../state/useGuardianChildSelection";
 import { activeStudents, average, guardianStudents, mt } from "../data/school";
 
 const control="min-h-11 min-w-0 rounded-xl border border-[#DEE6EC] bg-white px-3 text-sm text-[#112534] outline-none focus:border-[#0C5898]";
@@ -63,9 +64,11 @@ export function TeacherSessionAttendance(){
 export function AbsenceCases({role}:{role:"guardian"|"pedagogy"}){
  const {state,justifyAbsence,decideJustification}=useDemo();
  const [drafts,setDrafts]=useState<Record<string,string>>({});
+ const [guardianChild,setGuardianChild]=useGuardianChildSelection();
  const family=new Set(guardianStudents(state).map(x=>x.id));
- const rows=state.attendance.filter(a=>a.status!=="present"&&(role==="pedagogy"||family.has(a.studentId))).slice().reverse();
+ const rows=state.attendance.filter(a=>a.status!=="present"&&(role==="pedagogy"||family.has(a.studentId)&&a.studentId===guardianChild)).slice().reverse();
  return <div className="space-y-5"><Intro eyebrow={role==="guardian"?"Família · Assiduidade":"Pedagogia · Justificações"} title={role==="guardian"?"Justificar faltas":"Revisão de faltas"} subtitle="Acompanhe faltas e atrasos por aula, com justificação, análise pedagógica e histórico."/>
+ {role==="guardian"&&<div className={soft}><label className="text-xs font-bold">Educando<select aria-label="Educando das justificações" value={guardianChild} onChange={e=>setGuardianChild(e.target.value)} className={control+" ml-3"}>{guardianStudents(state).map(st=><option key={st.id} value={st.id}>{st.name}</option>)}</select></label></div>}
  <Summary items={[{label:"Ocorrências",value:rows.length},{label:"Justificadas",value:rows.filter(a=>state.justifications.some(j=>j.attendanceId===a.id&&j.status==="approved")).length},{label:"Por analisar",value:rows.filter(a=>state.justifications.some(j=>j.attendanceId===a.id&&j.status==="submitted")).length},{label:"Sem justificação",value:rows.filter(a=>!state.justifications.some(j=>j.attendanceId===a.id)).length}]}/>
  <section className={soft}><h2 className="mb-5 text-base font-extrabold">Ocorrências registadas</h2>
  <div className="space-y-3">{rows.map(a=>{
@@ -90,7 +93,7 @@ export function AbsenceCases({role}:{role:"guardian"|"pedagogy"}){
 export function AssessmentWorkflow({role}:{role:"teacher"|"pedagogy"|"student"|"guardian"}){
  const {state,createAssessment,decideAssessment,publishGrade}=useDemo();
  const [classId,setClassId]=useState("CL-09-A"),[title,setTitle]=useState(""),[date,setDate]=useState("2026-10-27");
- const [selectedChild,setChild]=useState("ALU-001");
+ const [selectedChild,setChild]=useGuardianChildSelection();
  const family=guardianStudents(state);
  const studentId=role==="student"?"ALU-001":role==="guardian"?selectedChild:null;
  const viewedClass=studentId?state.students.find(x=>x.id===studentId)?.classId:null;

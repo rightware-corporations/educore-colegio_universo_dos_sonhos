@@ -48,7 +48,14 @@ try{
  await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"encarregado-after-absence.png"),fullPage:true});
  records.push({step:"guardian cross-role attendance",status:"pass"});
- await page.goto(base+"/app/guardian/schedule",{waitUntil:"networkidle"});
+ await page.goto(base+"/app/guardian/children",{waitUntil:"networkidle"});
+ await page.getByRole("button",{name:/Leonor Nhampossa/}).click();
+ assert.ok((await page.locator("main").innerText()).includes("Leonor Nhampossa"),"Guardian child selection should work");
+ await page.getByRole("link",{name:/Horário semanal/}).click();
+ assert.match(page.url(),/child=ALU-002/,"Guardian selection must follow the schedule link");
+ assert.equal(await page.getByRole("combobox",{name:"Educando"}).inputValue(),"ALU-002","Schedule must preserve selected child");
+ records.push({step:"guardian child detail and schedule context",status:"pass"});
+ await page.goto(base+"/app/guardian/schedule?child=ALU-001",{waitUntil:"networkidle"});
  for(const day of ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira"])
   assert.equal(await page.locator('section[aria-label="'+day+'"]').count(),1,"Guardian weekly schedule missing "+day);
  assert.ok((await page.locator("main").innerText()).includes("Matemática"),"Guardian schedule should display Tiago's lessons");
@@ -58,6 +65,12 @@ try{
  assert.ok((await page.locator("main").innerText()).includes("Matemática"),"5A should include mathematics lessons");
  assert.ok(!(await page.locator("main").innerText()).includes("Biologia"),"Guardian schedule must not mix the other child's lessons");
  assert.ok(await page.locator('section[aria-label="Segunda-feira"] li').count()>=3,"5A should have a realistic multi-subject day");
+ await page.goto(base+"/app/guardian/grades?child=ALU-002",{waitUntil:"networkidle"});
+ assert.equal(await page.getByRole("combobox",{name:"Educando das notas"}).inputValue(),"ALU-002");
+ await page.goto(base+"/app/guardian/learning?child=ALU-002",{waitUntil:"networkidle"});
+ assert.equal(await page.getByRole("combobox",{name:"Educando dos trabalhos"}).inputValue(),"ALU-002");
+ await page.goto(base+"/app/guardian/schedule?child=ALU-002",{waitUntil:"networkidle"});
+ records.push({step:"guardian selection retained in grades and learning",status:"pass"});
  await page.screenshot({path:resolve(dir,"encarregado-horario-leonor.png"),fullPage:true});
  records.push({step:"guardian whole-week view and child selection",status:"pass"});
  await page.goto(base+"/app/guardian/payments",{waitUntil:"networkidle"});
@@ -175,7 +188,7 @@ try{
  assert.ok((await page.locator("main").innerText()).includes("Ficha prática V5"),"Teaching materials shared");
  records.push({step:"teacher assessment calendar and learning resources",status:"pass"});
  await enter(page,"Encarregado");
- await page.goto(base+"/app/guardian/justifications",{waitUntil:"networkidle"});
+ await page.goto(base+"/app/guardian/justifications?child=ALU-001",{waitUntil:"networkidle"});
  await page.getByRole("textbox",{name:"Motivo da falta de Tiago Nhampossa"}).first().fill("Consulta médica familiar simulada.");
  await page.getByRole("button",{name:"Enviar justificação"}).first().click();
  assert.ok((await page.locator("main").innerText()).includes("Em análise"),"Guardian justification persisted");
@@ -214,7 +227,7 @@ try{
  await page.getByRole("textbox",{name:/Feedback da entrega/}).first().fill("Resolução correta. Continue a praticar.");
  await page.getByRole("button",{name:"Rever entrega"}).click();
  await enter(page,"Encarregado");
- await page.goto(base+"/app/guardian/learning",{waitUntil:"networkidle"});
+ await page.goto(base+"/app/guardian/learning?child=ALU-001",{waitUntil:"networkidle"});
  assert.ok((await page.locator("main").innerText()).includes("Resolução correta"),"Guardian can see teacher feedback");
  records.push({step:"teacher feedback reflected in guardian schoolwork",status:"pass"});
  await enter(page,"Secretaria");

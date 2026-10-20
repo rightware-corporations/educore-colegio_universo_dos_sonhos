@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, ClipboardCheck, Edit3, FilePlus2, Search, Send, UserPlus, UserRoundX, type LucideIcon } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
+import { useGuardianChildSelection } from "../state/useGuardianChildSelection";
 import { CURRICULUM, GRADE_NOTE, LEVELS } from "../data/curriculum";
 import { activeStudents, guardianStudents, gradeSubjects, mt, type Student } from "../data/school";
 import type { Role } from "../config/roles";
@@ -148,10 +149,12 @@ export function AttendanceDesk({role}:{role:Role}){
 export function GradesDesk({role}:{role:Role}){
  const {state,recordGrade,publishGrades}=useDemo();
  const [studentId,setStudentId]=useState("ALU-001"),[score,setScore]=useState(""),[subject,setSubject]=useState("Matemática");
+ const [familyChild,setFamilyChild]=useGuardianChildSelection();
  const rows=state.assessments.filter(a=>role==="teacher"?a.teacherId==="PROF-001":role==="pedagogy"||a.published).filter(a=>
-  role==="student"?a.studentId==="ALU-001":role==="guardian"?guardianStudents(state).some(s=>s.id===a.studentId):true);
+  role==="student"?a.studentId==="ALU-001":role==="guardian"?a.studentId===(guardianStudents(state).find(x=>x.id===familyChild)?.id??guardianStudents(state)[0]?.id):true);
  const chosen=state.students.find(s=>s.id===studentId);
  return <Panel title="Avaliações e resultados" subtitle="O professor lança notas; a Pedagogia valida a publicação; alunos e encarregados consultam apenas resultados publicados.">
+  {role==="guardian"&&<label className="mb-5 block text-xs font-bold">Educando<select aria-label="Educando das notas" value={familyChild} onChange={e=>setFamilyChild(e.target.value)} className="ml-3 h-11 rounded-xl border border-border bg-white px-3">{guardianStudents(state).map(st=><option key={st.id} value={st.id}>{st.name}</option>)}</select></label>}
   {role==="teacher"&&<form className="mb-5 flex flex-wrap items-end gap-3 rounded-xl bg-[#F5FAFE] p-4" onSubmit={e=>{e.preventDefault();recordGrade(studentId,subject,Number(score));setScore("");}}>
    <label className="flex-1 text-xs font-bold">Aluno<select aria-label="Aluno da avaliação" value={studentId} onChange={e=>setStudentId(e.target.value)} className="mt-2 h-11 w-full rounded-xl border border-border bg-white px-3 text-xs">{activeStudents(state).filter(x=>x.classId==="CL-09-A"||x.classId==="CL-11-B").map(x=><option key={x.id} value={x.id}>{x.name}</option>)}</select></label>
    <label className="flex-1 text-xs font-bold">Disciplina<select aria-label="Disciplina da avaliação" value={subject} onChange={e=>setSubject(e.target.value)} className="mt-2 h-11 w-full rounded-xl border border-border bg-white px-3 text-xs">{gradeSubjects(chosen?.grade??9).filter(x=>x==="Matemática").map(x=><option key={x}>{x}</option>)}</select></label>
