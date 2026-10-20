@@ -282,6 +282,10 @@ try{
  assert.ok((await page.locator("main").innerText()).includes("Reunião de acompanhamento escolar"));
  await enter(page,"Receção");
  await page.goto(base+"/app/reception/appointments",{waitUntil:"networkidle"});
+ assert.equal(await page.getByText("Agenda de visitas").count(),0,"Hidden public queue should not appear without API");
+ assert.ok((await page.locator("main").innerText()).includes("Atendimentos da escola"));
+ assert.ok(!/VITE_COLUS_|PostgreSQL|API|deployments|integração técnica|cenário demonstrativo/i.test(await page.locator("main").innerText()),
+   "Reception must not expose integration instructions");
  await page.screenshot({path:resolve(dir,"v7-recepcao-agendamentos-desktop.png"),fullPage:true});
  await page.getByRole("button",{name:"Confirmar"}).first().click();
  assert.ok((await page.locator("main").innerText()).includes("Confirmado"),"Reception updates appointment");

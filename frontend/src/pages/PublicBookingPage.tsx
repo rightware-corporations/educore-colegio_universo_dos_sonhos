@@ -19,9 +19,9 @@ export function PublicBookingPage(){
  const [clientName,setName]=useState(""),[email,setEmail]=useState(""),[phone,setPhone]=useState(""),[notes,setNotes]=useState("");
  const [loading,setLoading]=useState(false),[error,setError]=useState(""),[reference,setReference]=useState("");
  const days=useMemo(()=>Array.from({length:14},(_,i)=>nextDate(i)).filter(weekday),[]);
- useEffect(()=>{if(!API)return;let active=true;fetch(API+"/v1/services").then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>{if(active)setServices(d.services??[])}).catch(()=>{if(active)setError("O serviço de agendamento ainda não está disponível. Contacte a Secretaria.")});return()=>{active=false}},[]);
+ useEffect(()=>{if(!API)return;let active=true;fetch(API+"/v1/services").then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>{if(active)setServices(d.services??[])}).catch(()=>{if(active)setError("O agendamento online está temporariamente indisponível. Contacte a Secretaria.")});return()=>{active=false}},[]);
  useEffect(()=>{if(!API||!service||!date)return;let active=true;setTime("");setLoading(true);
- fetch(API+"/v1/slots?date="+encodeURIComponent(date)+"&serviceId="+encodeURIComponent(service)).then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>{if(active){setSlots(d.slots??[]);setError("");}}).catch(()=>{if(active){setSlots([]);setError("Não foi possível consultar os horários disponíveis.");}}).finally(()=>{if(active)setLoading(false)});
+ fetch(API+"/v1/slots?date="+encodeURIComponent(date)+"&serviceId="+encodeURIComponent(service)).then(r=>{if(!r.ok)throw Error();return r.json()}).then(d=>{if(active){setSlots(d.slots??[]);setError("");}}).catch(()=>{if(active){setSlots([]);setError("Não foi possível consultar os horários. Tente novamente mais tarde.");}}).finally(()=>{if(active)setLoading(false)});
  return()=>{active=false};},[date,service]);
  const save=async(e:React.FormEvent)=>{
   e.preventDefault();if(!API||!time)return;setLoading(true);setError("");
@@ -40,7 +40,7 @@ export function PublicBookingPage(){
      <div className="space-y-6">
       <section className={card}><p className="text-[11px] font-extrabold uppercase tracking-[.15em] text-[#0C5898]">01 · Motivo da visita</p><h2 className="mt-2 text-lg font-extrabold">Como podemos ajudar?</h2>
        <div className="mt-5 grid gap-3 sm:grid-cols-2">{(services.length?services:previewServices).map(s=><button type="button" aria-pressed={service===s.id} key={s.id} onClick={()=>setService(s.id)} className={"rounded-xl border p-4 text-left transition "+(service===s.id?"border-[#0C5898] bg-[#EDF5FB]":"border-[#DFE7ED] hover:bg-[#F7FAFC]")}><p className="text-sm font-extrabold">{s.name}</p><p className="mt-2 text-xs leading-5 text-[#6A7B85]">{s.description}</p><p className="mt-3 text-xs font-bold text-[#0C5898]"><Clock3 className="mr-1 inline" size={14}/>{s.duration} minutos</p></button>)}</div>
-       {!API&&<p role="alert" className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-900">O agendamento online será ativado após a ligação do serviço de reservas partilhado com a Receção. Até lá, não são aceites reservas fictícias nesta página.</p>}
+       {!API&&<p role="alert" className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-900">As marcações online estão temporariamente indisponíveis. Para marcar uma visita, contacte a Secretaria do colégio.</p>}
       </section>
       <section className={card}><p className="text-[11px] font-extrabold uppercase tracking-[.15em] text-[#0C5898]">02 · Calendário</p><h2 className="mt-2 text-lg font-extrabold">Escolha um dia</h2>
        <div className="mt-5 grid grid-cols-3 gap-2 sm:grid-cols-5">{days.map(d=><button type="button" aria-pressed={date===d} onClick={()=>setDate(d)} key={d} className={"rounded-xl border px-2 py-3 text-center "+(date===d?"border-[#0C5898] bg-[#0C5898] text-white":"border-[#E0E8EE] bg-white hover:bg-[#F6FAFC]")}>

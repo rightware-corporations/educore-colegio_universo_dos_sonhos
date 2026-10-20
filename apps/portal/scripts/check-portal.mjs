@@ -30,6 +30,10 @@ for(const module of ["TeacherSessionAttendance","AbsenceCases","AssessmentWorkfl
 }
 const learning=read("src/pages/LearningWorkflows.tsx");
 assert.ok(learning.includes("export function LearningWorkspace")&&learning.includes("StudentRecord"),"Student and teacher learning workflows required");
+const reception=read("src/pages/ReceptionPublicBookings.tsx");
+assert.ok(reception.includes("if(!API)return null"),"Unavailable public calendar must be hidden from Reception");
+assert.ok(!reception.includes("VITE_COLUS_SCHEDULING_API_URL nos dois deployments"),
+ "Reception must not display deployment instructions");
 const booking=read("src/pages/SchoolAppointments.tsx");
 assert.ok(booking.includes("requestAppointment")&&booking.includes("decideAppointment"),"Guardian-reception scheduling required");
 assert.ok(!studentMenu.includes('["finance"')&&!studentMenu.includes('["payments"'),"Student finance must remain excluded");

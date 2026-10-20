@@ -15,10 +15,10 @@ try{
   page.on("pageerror",e=>errors.push(e.message));
   await page.goto(base+"/agendar",{waitUntil:"networkidle",timeout:45000});
   assert.ok(await page.getByRole("heading",{name:/Escolha o momento ideal/i}).isVisible());
-  assert.ok((await page.locator("main").innerText()).includes("Agendamento online")||
-    (await page.locator("main").innerText()).includes("agendamento online")||
-    (await page.locator("main").innerText()).includes("O agendamento online será ativado"),
+  assert.ok((await page.locator("main").innerText()).includes("As marcações online estão temporariamente indisponíveis"),
     "Scheduling must report unavailable backend without offering fake bookings");
+  assert.ok(!/VITE_COLUS_|PostgreSQL|API|deployments|integração técnica/i.test(await page.locator("main").innerText()),
+    "Public booking must not show implementation details");
   assert.equal(await page.getByRole("button",{name:/Enviar pedido/i}).isEnabled(),false,
     "Public bookings must fail closed when shared API is unavailable");
   assert.ok(await page.getByRole("button",{name:/Visita ao colégio/i}).isVisible(),
