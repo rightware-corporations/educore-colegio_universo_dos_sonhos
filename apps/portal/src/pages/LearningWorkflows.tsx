@@ -7,7 +7,7 @@ import { guardianStudents, average, attendanceRate, type DemoAttachment } from "
 const control="min-h-11 rounded-xl border border-[#DAE4EC] bg-white px-3 text-sm outline-none focus:border-[#0C5898]";
 const action="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#0C5898] px-4 text-xs font-bold text-white";
 const frame="rounded-2xl border border-[#DFE8EE] bg-white p-5 sm:p-6";
-function Heading({title,subtitle}:{title:string;subtitle:string}){return <header className="rounded-[25px] bg-[#071A2A] px-7 py-8 text-white sm:px-10"><p className="text-[11px] font-bold uppercase tracking-[.18em] text-[#F18136]">EduCore · Percurso académico</p><h1 className="mt-3 font-display text-[clamp(36px,4vw,56px)]">{title}</h1><p className="mt-3 max-w-xl text-sm leading-7 text-white/70">{subtitle}</p></header>;}
+function Heading({title,subtitle}:{title:string;subtitle:string}){return <header className="rounded-[25px] bg-[#071A2A] px-6 py-7 text-white sm:px-10 sm:py-9"><p className="text-[11px] font-bold uppercase tracking-[.18em] text-[#F18136]">EduCore · Percurso académico</p><h1 className="mt-3 font-display text-[clamp(32px,4vw,56px)]">{title}</h1><p className="mt-3 max-w-xl text-sm leading-7 text-white/70">{subtitle}</p></header>;}
 const allowedTypes=["application/pdf","image/png","image/jpeg","text/plain","application/vnd.openxmlformats-officedocument.wordprocessingml.document"];
 async function readUpload(file:File):Promise<DemoAttachment>{
  if(file.size>512*1024||file.size<1||!allowedTypes.includes(file.type))throw Error("Ficheiro inválido. Use PDF, DOCX, JPG, PNG ou TXT até 512 KB.");
@@ -44,7 +44,7 @@ export function LearningWorkspace({role,section}:{role:"student"|"teacher"|"guar
   <div className="sm:col-span-2 flex flex-wrap items-center gap-3"><label className={action+" cursor-pointer"}>Carregar ficheiro<input type="file" accept=".pdf,.docx,.jpg,.jpeg,.png,.txt" aria-label="Carregar ficheiro do professor" className="sr-only" onChange={async e=>{const f=e.target.files?.[0];if(f)try{setTeacherAttachment(await readUpload(f));setError("");}catch(err){setError(String(err));}}}/></label><AttachedFile file={teacherAttachment}/><button className={action}>Publicar conteúdo</button></div>
   {error&&<p role="alert" className="text-xs font-bold text-red-700 sm:col-span-2">{error}</p>}
  </form>}
- <div className="grid gap-3 sm:grid-cols-3">{[{label:"Materiais disponíveis",value:list.filter(x=>x.kind==="material").length},{label:"Trabalhos",value:presentCount},{label:"Entregas registadas",value:submissions.length}].map(x=><div key={x.label} className={frame}><p className="text-xs text-[#687782]">{x.label}</p><p className="mt-3 text-2xl font-extrabold">{x.value}</p></div>)}</div>
+ <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">{[{label:"Materiais disponíveis",value:list.filter(x=>x.kind==="material").length},{label:"Trabalhos",value:presentCount},{label:"Entregas registadas",value:submissions.length}].map((x,i)=><div key={x.label} className={frame+" min-w-0 "+(i===2?"col-span-2 sm:col-span-1":"")}><p className="text-[11px] leading-5 text-[#687782]">{x.label}</p><p className="mt-2 text-2xl font-extrabold">{x.value}</p></div>)}</div>
  <div className="space-y-4">{list.map(item=>{
   const mine=state.workSubmissions.find(s=>s.itemId===item.id&&s.studentId===child?.id);
   const teacherSubs=state.workSubmissions.filter(s=>s.itemId===item.id);

@@ -14,10 +14,15 @@ export function TeacherGradebook(){
  const [studentId,setStudentId]=useState("");
  const [score,setScore]=useState("");
  const [query,setQuery]=useState("");
+ const [page,setPage]=useState(1);
+ const pageSize=8;
  const [message,setMessage]=useState("");
  const classroom=classes.find(c=>c.id===classId);
  const roster=activeStudents(state).filter(s=>s.classId===classId).sort((a,b)=>a.name.localeCompare(b.name,"pt"));
  const filtered=roster.filter(s=>s.name.toLowerCase().includes(query.toLowerCase())||s.id.toLowerCase().includes(query.toLowerCase()));
+ const pages=Math.max(1,Math.ceil(filtered.length/pageSize));
+ const shownPage=Math.min(page,pages);
+ const visibleStudents=filtered.slice((shownPage-1)*pageSize,shownPage*pageSize);
  const subject=teacher?.subject??"";
  const existing=state.assessments.filter(a=>a.teacherId===teacher?.id&&a.subject===subject&&roster.some(st=>st.id===a.studentId));
  const pending=existing.filter(a=>!a.published).length;
@@ -33,7 +38,7 @@ export function TeacherGradebook(){
  <Header label="COLUS · Professor · Gestão por turma" title="Diário de notas" sub="Selecione primeiro a turma. A pauta, os alunos e o lançamento de resultados respeitam exclusivamente essa atribuição docente."/>
  <section className={panel+" space-y-4"}>
   <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-[#0C5898]">01 · Turma de trabalho</p><h2 className="mt-2 text-base font-extrabold">Selecionar turma</h2></div><span className="rounded-full bg-[#EEF5FA] px-3 py-2 text-xs font-bold text-[#0C5898]">{subject}</span></div>
-  <div className="grid gap-3 sm:grid-cols-2">{classes.map(c=><button type="button" key={c.id} aria-pressed={c.id===classId} onClick={()=>{setClassId(c.id);setStudentId("");setMessage("");}} className={"flex items-center justify-between rounded-xl border p-4 text-left "+(c.id===classId?"border-[#0C5898] bg-[#EDF5FB]":"border-[#E0E7ED] hover:bg-[#F7FAFC]")}>
+  <div className="grid gap-3 sm:grid-cols-2">{classes.map(c=><button type="button" key={c.id} aria-pressed={c.id===classId} onClick={()=>{setClassId(c.id);setStudentId("");setMessage("");setQuery("");setPage(1);}} className={"flex items-center justify-between rounded-xl border p-4 text-left "+(c.id===classId?"border-[#0C5898] bg-[#EDF5FB]":"border-[#E0E7ED] hover:bg-[#F7FAFC]")}>
    <div className="flex items-center gap-3"><span className="flex h-11 w-12 items-center justify-center rounded-xl bg-[#0C5898] text-xs font-extrabold text-white">{c.name}</span><div><p className="text-sm font-extrabold">{activeStudents(state).filter(s=>s.classId===c.id).length} aluno(s)</p><p className="mt-1 text-xs text-[#6D808C]">{subject} · Ano letivo 2026</p></div></div><ChevronRight size={17} className="text-[#0C5898]"/></button>)}</div>
   <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">{[{title:"Turma",value:classroom?.name??"—"},{title:"Inscritos",value:roster.length},{title:"Registos",value:existing.length},{title:"Por publicar",value:pending}].map(v=><div key={v.title} className="rounded-xl bg-[#F3F7FA] p-4"><p className="text-[11px] text-[#687B88]">{v.title}</p><p className="mt-2 text-xl font-extrabold">{v.value}</p></div>)}</div>
  </section>
@@ -50,10 +55,33 @@ export function TeacherGradebook(){
  </section>
  <section className={panel}>
   <div className="flex flex-wrap items-end justify-between gap-3"><div><p className="text-[11px] font-extrabold uppercase tracking-[.16em] text-[#0C5898]">03 · Pauta da turma</p><h2 className="mt-2 text-base font-extrabold">Alunos e resultados — {classroom?.name??"—"}</h2></div>
-   <input aria-label="Pesquisar aluno na pauta" className={field+" w-full max-w-xs"} value={query} onChange={e=>setQuery(e.target.value)} placeholder="Pesquisar por nome ou código"/></div>
-  <div className="mt-5 overflow-x-auto"><table className="w-full min-w-[590px] text-left text-xs"><thead><tr className="border-b border-[#DDE7EE] text-[#607381]"><th className="py-3">Aluno</th><th className="py-3">Disciplina</th><th className="py-3">Notas lançadas</th><th className="py-3">Última nota</th><th className="py-3">Publicação</th></tr></thead>
-   <tbody>{filtered.map(st=>{const notes=existing.filter(a=>a.studentId===st.id);const latest=notes[0];return <tr key={st.id} className="border-b border-[#E6EDF2] last:border-0"><td className="py-4"><p className="font-extrabold">{st.name}</p><p className="mt-1 text-[#69808E]">{st.id}</p></td><td className="py-4">{subject}</td><td className="py-4">{notes.length}</td><td className="py-4 font-extrabold">{latest?latest.score+"/20":"—"}</td><td className="py-4">{!latest?"Sem avaliação":latest.published?"Publicada":"Em revisão"}</td></tr>})}</tbody></table></div>
+   <input aria-label="Pesquisar aluno na pauta" className={field+" w-full max-w-xs"} value={query} onChange={e=>{setQuery(e.target.value);setPage(1)}} placeholder="Pesquisar por nome ou código"/></div>
+  <div className="mt-5 hidden overflow-x-auto md:block"><table className="w-full min-w-[590px] text-left text-xs"><thead><tr className="border-b border-[#DDE7EE] text-[#607381]"><th className="py-3">Aluno</th><th className="py-3">Disciplina</th><th className="py-3">Notas lançadas</th><th className="py-3">Última nota</th><th className="py-3">Publicação</th></tr></thead>
+   <tbody>{visibleStudents.map(st=>{const notes=existing.filter(a=>a.studentId===st.id);const latest=notes[0];return <tr key={st.id} className="border-b border-[#E6EDF2] last:border-0"><td className="py-4"><p className="font-extrabold">{st.name}</p><p className="mt-1 text-[#69808E]">{st.id}</p></td><td className="py-4">{subject}</td><td className="py-4">{notes.length}</td><td className="py-4 font-extrabold">{latest?latest.score+"/20":"—"}</td><td className="py-4">{!latest?"Sem avaliação":latest.published?"Publicada":"Em revisão"}</td></tr>})}</tbody></table></div>
+  <div className="mt-4 space-y-2 md:hidden" aria-label="Pauta de alunos em dispositivos móveis">
+   {visibleStudents.map(st=>{
+    const notes=existing.filter(a=>a.studentId===st.id);const latest=notes[0];
+    return <article key={st.id} className="rounded-xl border border-[#E1E9F0] p-4">
+     <div className="flex items-start justify-between gap-3">
+      <div className="min-w-0"><p className="break-words text-sm font-extrabold">{st.name}</p><p className="mt-1 text-[11px] text-[#69808E]">{st.id} · {subject}</p></div>
+      <span className={"shrink-0 rounded-full px-2 py-1 text-[10px] font-extrabold "+(latest?.published?"bg-emerald-50 text-emerald-800":latest?"bg-amber-50 text-amber-800":"bg-[#EEF3F7] text-[#607787]")}>
+       {!latest?"Sem avaliação":latest.published?"Publicada":"Em revisão"}</span>
+     </div>
+     <div className="mt-3 grid grid-cols-2 gap-3 border-t border-[#E5ECF1] pt-3">
+      <div><p className="text-[11px] text-[#657A87]">Registos</p><p className="mt-1 text-base font-extrabold">{notes.length}</p></div>
+      <div><p className="text-[11px] text-[#657A87]">Última nota</p><p className="mt-1 text-base font-extrabold">{latest?latest.score+"/20":"—"}</p></div>
+     </div>
+    </article>;
+   })}
+  </div>
   {!filtered.length&&<p className="mt-4 rounded-xl bg-[#F4F8FA] p-4 text-xs">Não existem alunos nesta turma ou pesquisa.</p>}
+  {filtered.length>0&&<div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-[#E4EDF2] pt-4">
+   <p className="text-xs text-[#617684]">{filtered.length} aluno(s) · Página {shownPage} de {pages}</p>
+   <div className="flex gap-2">
+    <button type="button" aria-label="Página anterior da pauta" disabled={shownPage<=1} onClick={()=>setPage(n=>Math.max(1,n-1))} className="min-h-10 rounded-lg border border-[#DAE5EC] bg-white px-3 text-xs font-bold text-[#0C5898] disabled:opacity-35">Anterior</button>
+    <button type="button" aria-label="Página seguinte da pauta" disabled={shownPage>=pages} onClick={()=>setPage(n=>Math.min(pages,n+1))} className="min-h-10 rounded-lg border border-[#DAE5EC] bg-white px-3 text-xs font-bold text-[#0C5898] disabled:opacity-35">Seguinte</button>
+   </div>
+  </div>}
  </section></div>;
 }
 export function LearnerGrades({role}:{role:"student"|"guardian"}){

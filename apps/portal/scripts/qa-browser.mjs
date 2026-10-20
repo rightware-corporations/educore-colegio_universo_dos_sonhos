@@ -332,6 +332,12 @@ try{
  await page.goto(base+"/app/teacher/grades?class=CL-09-A",{waitUntil:"networkidle"});
  const gradeOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
  assert.ok(gradeOverflow<=3,"Teacher mobile gradebook must not scroll horizontally: "+gradeOverflow);
+ assert.ok(await page.getByRole("region",{name:"Pauta de alunos em dispositivos móveis"}).isVisible().catch(()=>false)||
+   await page.locator('[aria-label="Pauta de alunos em dispositivos móveis"]').isVisible(),"Mobile gradebook cards must replace horizontal table");
+ assert.ok((await page.getByText(/Página 1 de/).count())>=1,"Mobile gradebook must paginate");
+ await page.getByRole("button",{name:"Página seguinte da pauta"}).click();
+ assert.ok((await page.getByText(/Página 2 de/).count())>=1,"Teacher must navigate the next group of students");
+ await page.getByRole("button",{name:"Página anterior da pauta"}).click();
  await page.screenshot({path:resolve(dir,"v7-professor-pauta-mobile-390.png"),fullPage:true});
  records.push({step:"V7 visual reference snapshots desktop and mobile",status:"pass",tpcOverflow,gradeOverflow});
  records.push({step:"secretary mobile cards without horizontal scroll",status:"pass",registryOverflow});
