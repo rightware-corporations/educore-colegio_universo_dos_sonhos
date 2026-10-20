@@ -1,7 +1,7 @@
-import { useMemo, useState } from "react";
-import { CalendarDays, Check, ChevronRight, Clock3, GraduationCap, Plus, Search, Settings2, SlidersHorizontal, UserRoundPlus, Users, X } from "lucide-react";
+import { useState } from "react";
+import { Check, ChevronRight, Clock3, GraduationCap, Plus, Search, Settings2, UserRoundPlus, Users, X } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
-import { CURRICULUM, GRADE_NOTE, subjectsFor } from "../data/curriculum";
+import { CURRICULUM, subjectsFor } from "../data/curriculum";
 import { activeStudents, type SchoolClass } from "../data/school";
 
 const field="h-11 w-full min-w-0 rounded-xl border border-[#DCE4EA] bg-white px-3 text-sm outline-none focus:border-[#0C5898] focus:ring-2 focus:ring-[#0C5898]/15";
@@ -85,7 +85,7 @@ export function TeachersManagement(){
     <button className={btn}><Check size={15}/> Guardar professor</button>
    </form>}
    <div className="mb-5 flex items-center gap-2 rounded-xl border border-[#DCE4EA] px-3"><Search size={16}/><input className="h-11 w-full outline-none" aria-label="Pesquisar professores" placeholder="Pesquisar nome ou disciplina" value={query} onChange={e=>setQuery(e.target.value)}/></div>
-   <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{teachers.map((t,i)=><div key={t.id} className="flex gap-4 rounded-2xl border border-[#E3EAF0] p-4">
+   <div className="grid gap-3 md:grid-cols-2 2xl:grid-cols-3">{teachers.map(t=><div key={t.id} className="flex gap-4 rounded-2xl border border-[#E3EAF0] p-4">
     <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-[#0C5898]/10 text-base font-extrabold text-[#0C5898]">{t.name.split(" ").map(n=>n[0]).slice(0,2).join("")}</div>
     <div className="min-w-0"><p className="text-sm font-extrabold">{t.name}</p><p className="mt-1 text-xs text-[#657680]">{t.subject}</p><p className="mt-3 text-[11px] font-semibold text-[#0C5898]">{t.classIds?.length??0} turmas atribuídas</p><p className="mt-1 text-[11px] text-[#657680]">{(t.classIds??[]).map(id=>state.classes.find(c=>c.id===id)?.name).join(" · ")||"A aguardar atribuição"}</p></div>
    </div>)}</div>
