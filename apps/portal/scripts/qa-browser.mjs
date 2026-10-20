@@ -52,11 +52,11 @@ try{
  await page.getByRole("textbox",{name:"Nome completo"}).fill("Íris Sumbana");
  await page.getByRole("combobox",{name:"Classe pretendida"}).selectOption("9");
  await page.getByRole("button",{name:"Guardar",exact:true}).click();
- assert.equal(await page.getByText("Íris Sumbana", {exact:true}).count(),1,"Secretary student registration");
+ assert.equal(await page.locator("table").getByText("Íris Sumbana", {exact:true}).count(),1,"Secretary student registration");
  await page.getByRole("button",{name:"Editar Íris Sumbana"}).click();
  await page.getByRole("textbox",{name:"Nome completo"}).fill("Íris Sumbana Matola");
  await page.getByRole("button",{name:"Guardar",exact:true}).click();
- assert.equal(await page.getByText("Íris Sumbana Matola",{exact:true}).count(),1,"Secretary edit");
+ assert.equal(await page.locator("table").getByText("Íris Sumbana Matola",{exact:true}).count(),1,"Secretary edit");
  records.push({step:"secretary create and edit student",status:"pass"});
  await enter(page,"Pedagogia");
  await page.goto(base+"/app/pedagogy/assignments",{waitUntil:"networkidle"});
@@ -67,9 +67,9 @@ try{
  assert.ok((await page.locator("main").innerText()).includes("Íris Sumbana Matola"),"School enrolment persists across roles");
  await page.once("dialog",dialog=>dialog.accept());
  await page.getByRole("button",{name:"Arquivar Íris Sumbana Matola"}).click();
- assert.equal(await page.getByText("Íris Sumbana Matola",{exact:true}).count(),0,"Archived student excluded from active registry");
+ assert.equal(await page.locator("table").getByText("Íris Sumbana Matola",{exact:true}).count(),0,"Archived student excluded from active registry");
  await page.getByRole("checkbox",{name:/Mostrar arquivados/}).check();
- assert.equal(await page.getByText("Íris Sumbana Matola",{exact:true}).count(),1,"Archived record remains accessible");
+ assert.equal(await page.locator("table").getByText("Íris Sumbana Matola",{exact:true}).count(),1,"Archived record remains accessible");
  records.push({step:"pedagogy assign class and secretary archive with history",status:"pass"});
  await page.setViewportSize({width:390,height:844});
  await page.goto(base+"/welcome",{waitUntil:"networkidle"});
