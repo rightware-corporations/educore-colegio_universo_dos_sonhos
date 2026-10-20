@@ -18,4 +18,10 @@ assert.ok(school.includes("Elisa Simango")&&school.includes("Marta Nhampossa"),"
 assert.ok(index.includes("Demonstração EduCore"),"Demo must not claim production readiness");
 assert.ok(existsSync(new URL("../public/assets/colus-logo.jpg",import.meta.url)),"Official brand asset missing");
 for(const path of ["src/App.tsx","src/pages/EntryPages.tsx","src/pages/Workspace.tsx","src/components/RoleShell.tsx"]){const t=read(path);assert.ok(!/Deus Connosco|P[aá]scoa/i.test(t),"Foreign-school content in "+path);}
+const weekly=read("src/components/WeeklyTimetable.tsx");
+assert.ok(weekly.includes("SCHOOL_WEEK.map")&&weekly.includes("WeeklyLessonList"),"Full week list must be rendered without day tabs");
+const academic=read("src/pages/AcademicManagement.tsx");
+assert.ok(academic.includes("WeeklyLessonList")&&academic.includes("onRemove={removeLesson}"),"Pedagogy must manage the whole week in one list");
+const workspace=read("src/pages/Workspace.tsx");
+assert.ok(workspace.includes("RoleWeeklyTimetable")&&workspace.includes('allowedRole==="guardian"'),"All academic roles must use shared weekly schedule");
 console.log("COLUS PORTAL CONTRACT PASS: 8 profiles, split routes, brand, cross-role demo and no foreign-school copy");

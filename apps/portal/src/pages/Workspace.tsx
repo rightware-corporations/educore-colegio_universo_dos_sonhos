@@ -5,7 +5,7 @@ import { useDemo } from "../state/DemoProvider";
 import { activeStudents, attendanceRate, average, guardianStudents, gradeSubjects, mt, paymentsReceived, type SchoolData } from "../data/school";
 import { PageContainer } from "../components/PageContainer";
 import { StatsCard } from "../components/StatsCard";
-import { ScheduleCard } from "../components/ScheduleCard";
+import { RoleWeeklyTimetable, orderedLessons, SCHOOL_WEEK, endOfLesson } from "../components/WeeklyTimetable";
 import { QuickActionCard } from "../components/QuickActionCard";
 import { AttendanceChart, FinanceChart, GradeDistribution, PerformanceChart } from "../components/SchoolCharts";
 import { ClassesManagement, TeachersManagement, AssignmentsManagement, TimetableManagement } from "./AcademicManagement";
@@ -13,11 +13,7 @@ import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
 const focusStudent="ALU-001";
-const lessons=[
- {time:"07:30",subject:"Matemática",room:"Sala A12",teacher:"Elisa Simango",current:true},
- {time:"09:15",subject:"Língua Portuguesa",room:"Sala B04",teacher:"Daniel Machava"},
- {time:"11:00",subject:"Biologia",room:"Laboratório",teacher:"Lídia Mabunda"}
-];
+
 function ActivityFeed({role}:{role:Role}){
  const {state}=useDemo();
  const familyIds=guardianStudents(state).map(s=>s.id);
@@ -88,6 +84,20 @@ function metrics(role:Role,s:SchoolData){
   {label:"Faltas registadas",value:absences,icon:ClipboardList},
   {label:"Recebimentos validados",value:mt(paymentsReceived(s)),icon:Wallet}
  ];
+}
+function WeekPreview({role}:{role:"teacher"|"student"}){
+ const {state}=useDemo();
+ const student=state.students.find(s=>s.id==="ALU-001");
+ const relevant=state.lessons.filter(l=>role==="teacher"?l.teacherId==="PROF-001":l.classId===student?.classId);
+ const preview=orderedLessons(relevant).slice(0,4);
+ return <Panel title="Horário escolar" subtitle="Primeiras aulas da programação semanal" action={<Link to={"/app/"+role+"/schedule"} className="text-xs font-bold text-[#0C5898] hover:underline">Ver semana completa →</Link>}>
+  <div className="space-y-2">{preview.map(l=><div key={l.id} className="flex flex-wrap items-center gap-3 rounded-xl border border-[#E8EDF2] p-3">
+   <span className="w-24 shrink-0 text-[11px] font-extrabold text-[#0C5898]">{SCHOOL_WEEK[l.weekday-1]?.split("-")[0]} · {l.start}</span>
+   <div className="min-w-0 flex-1"><p className="text-xs font-extrabold">{state.staff.find(t=>t.id===l.teacherId)?.subject??"Disciplina"}</p>
+    <p className="mt-1 text-[11px] text-[#687782]">{endOfLesson(l.start,l.minutes)} · {l.room} · {state.classes.find(c=>c.id===l.classId)?.name}</p></div>
+  </div>)}
+  {preview.length===0&&<p className="text-xs text-[#687782]">Ainda não há aulas registadas.</p>}</div>
+ </Panel>;
 }
 function TeacherSpotlight(){
  const {state,markAbsent,recordAttendance}=useDemo();
@@ -163,7 +173,7 @@ function Dashboard({role}:{role:Role}){
     {(role==="reception"||role==="secretary")&&<AdmissionsDesk role={role}/>}
     {(role==="executive"||role==="secretary"||role==="pedagogy")&&<Panel title="Distribuição dos alunos" subtitle="Contagem atualizada com os registos ativos."><GradeDistribution data={state}/></Panel>}
     {(role==="executive"||role==="pedagogy")&&<Panel title="Desempenho académico" subtitle="Médias calculadas a partir de avaliações publicadas."><PerformanceChart data={state}/></Panel>}
-    {(role==="student"||role==="teacher")&&<Panel title="Aulas e horários" subtitle="Agenda académica da 9.ª A"><ScheduleCard day="Terça-feira · 20 outubro" items={lessons}/></Panel>}
+    {(role==="student"||role==="teacher")&&<WeekPreview role={role}/>}
     {role==="guardian"&&<Panel title="Desempenho dos educandos" subtitle="Registos publicados pela Coordenação Pedagógica"><PerformanceChart data={state} studentIds={guardianStudents(state).map(s=>s.id)}/></Panel>}
     {role==="finance"&&<Panel title="Distribuição dos recebimentos" subtitle="Valores agrupados pelo estado dos pagamentos."><FinanceChart data={state}/></Panel>}
     {role==="executive"&&<Panel title="Assiduidade por turma" subtitle="Percentagem observada nos registos da amostra."><AttendanceChart data={state}/></Panel>}
@@ -194,7 +204,7 @@ function OtherModule({role,section}:{role:Role;section:string}){
  if(section==="grades")return <GradesDesk role={role}/>;
  if(section==="payments"||section==="accounts"||section==="finance")return <FinanceDesk role={role}/>;
  if(section==="messages")return role==="reception"?<AdmissionsDesk role={role}/>:<MessagesDesk role={role}/>;
- if(section==="schedule")return role==="pedagogy"?<CurriculumDesk/>:<Panel title="Horário académico" subtitle="Agenda de referência da turma."><ScheduleCard day="Terça-feira · 20 outubro" items={lessons}/></Panel>;
+ if(section==="schedule")return role==="pedagogy"?<CurriculumDesk/>:<Empty>Horário escolar indisponível neste perfil.</Empty>;
  if(section==="subjects")return <SubjectsSpotlight/>;
  if(section==="children")return <GuardianSpotlight/>;
  if(section==="assignments"&&role==="student")return <StudentWork/>;
@@ -211,6 +221,8 @@ export function Workspace(){
  const active=section??"dashboard";
  if(!info.items.some(i=>i.path===active))return <Navigate to={"/app/"+allowedRole+"/dashboard"} replace/>;
  if(active==="dashboard")return <Dashboard role={allowedRole}/>;
+ if(active==="schedule"&&(allowedRole==="student"||allowedRole==="guardian"||allowedRole==="teacher"))
+  return <PageContainer><RoleWeeklyTimetable role={allowedRole}/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="classes")return <PageContainer><ClassesManagement/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="staff")return <PageContainer><TeachersManagement/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="assignments")return <PageContainer><AssignmentsManagement/></PageContainer>;

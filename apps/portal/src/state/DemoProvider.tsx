@@ -2,7 +2,8 @@ import { createContext, useContext, useMemo, useState, type PropsWithChildren } 
 import { isRole, type Role } from "../config/roles";
 import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event, type Lesson, gradeSubjects } from "../data/school";
 
-const DB_KEY="colus.portal.sandbox.v3";
+const DB_KEY="colus.portal.sandbox.v4";
+const PREVIOUS_KEY="colus.portal.sandbox.v3";
 const ROLE_KEY="colus.portal.role";
 const uid=(prefix:string)=>prefix+"-"+crypto.randomUUID().slice(0,8).toUpperCase();
 const makeEvent=(kind:string,title:string,detail:string,studentId?:string):Event=>({id:uid("EVT"),kind,title,detail,at:new Date().toISOString(),studentId});
@@ -11,7 +12,36 @@ const sane=(v:unknown):v is SchoolData=>{
  const x=v as Record<string,unknown>;
  return ["lessons","students","guardians","staff","classes","attendance","assessments","fees","admissions","events","messages"].every(k=>Array.isArray(x[k]));
 };
-const read=():SchoolData=>{try{const raw=localStorage.getItem(DB_KEY);if(raw){const obj:unknown=JSON.parse(raw);if(sane(obj))return obj;}}catch{}return createSchool();};
+const read=():SchoolData=>{
+ try{
+  const raw=localStorage.getItem(DB_KEY);
+  if(raw){const obj:unknown=JSON.parse(raw);if(sane(obj))return obj;}
+  // One-time safe upgrade: retain edits made in the V3 sandbox and fill reference
+  // weekly lessons only where there are no class, teacher or room conflicts.
+  const previous=localStorage.getItem(PREVIOUS_KEY);
+  if(previous){
+   const parsed:unknown=JSON.parse(previous);
+   if(sane(parsed)){
+    const seed=createSchool();
+    const imported:Lesson[]=[...parsed.lessons];
+    const toMin=(time:string)=>{const [h,m]=time.split(":").map(Number);return 60*h+m;};
+    for(const l of seed.lessons){
+     const schoolClass=parsed.classes.find(c=>c.id===l.classId&&c.active);
+     const teacher=parsed.staff.find(t=>t.id===l.teacherId&&t.role==="teacher"&&t.classIds?.includes(l.classId));
+     if(!schoolClass||!teacher||imported.some(old=>old.id===l.id))continue;
+     const collision=imported.some(old=>old.weekday===l.weekday&&
+      toMin(old.start)<toMin(l.start)+l.minutes&&toMin(l.start)<toMin(old.start)+old.minutes&&
+      (old.classId===l.classId||old.teacherId===l.teacherId||old.room===l.room));
+     if(!collision)imported.push(l);
+    }
+    const migrated={...parsed,lessons:imported};
+    localStorage.setItem(DB_KEY,JSON.stringify(migrated));
+    return migrated;
+   }
+  }
+ }catch{}
+ return createSchool();
+};
 const readRole=():Role|null=>{try{const r=sessionStorage.getItem(ROLE_KEY);return isRole(r??undefined)?r as Role:null;}catch{return null;}};
 type StudentInput={name:string;grade:number;guardianId:string};
 type AdmissionInput={candidate:string;grade:number;guardianName:string};

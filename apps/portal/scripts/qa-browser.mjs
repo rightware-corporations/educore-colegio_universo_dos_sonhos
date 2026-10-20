@@ -32,12 +32,27 @@ try{
  await page.getByRole("button",{name:/Registar falta/}).click();
  assert.ok((await page.locator("main").innerText()).includes("Falta registada"));
  records.push({step:"teacher register absence",status:"pass"});
+ await page.goto(base+"/app/teacher/schedule",{waitUntil:"networkidle"});
+ for(const day of ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira"])
+  assert.equal(await page.locator('section[aria-label="'+day+'"]').count(),1,"Teacher full week missing: "+day);
+ assert.ok((await page.locator("main").innerText()).includes("Matemática"),"Teacher timetable uses live assigned lessons");
+ await page.screenshot({path:resolve(dir,"professor-horario-semanal.png"),fullPage:true});
+ records.push({step:"teacher weekly list Monday-Friday",status:"pass"});
  await enter(page,"Encarregado");
  assert.match(page.url(),/\/app\/guardian\/dashboard$/);
  assert.ok((await page.locator("main").innerText()).includes("Falta registada"),"Guardian must see teacher absence");
  await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"encarregado-after-absence.png"),fullPage:true});
  records.push({step:"guardian cross-role attendance",status:"pass"});
+ await page.goto(base+"/app/guardian/schedule",{waitUntil:"networkidle"});
+ for(const day of ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira"])
+  assert.equal(await page.locator('section[aria-label="'+day+'"]').count(),1,"Guardian weekly schedule missing "+day);
+ assert.ok((await page.locator("main").innerText()).includes("Matemática"),"Guardian schedule should display Tiago's lessons");
+ await page.getByRole("combobox",{name:"Educando"}).selectOption("ALU-002");
+ assert.ok((await page.locator("main").innerText()).includes("Ciências Naturais"),"Guardian child schedule should change");
+ assert.ok(!(await page.locator("main").innerText()).includes("Língua Portuguesa"),"Guardian schedule must not mix children");
+ await page.screenshot({path:resolve(dir,"encarregado-horario-leonor.png"),fullPage:true});
+ records.push({step:"guardian whole-week view and child selection",status:"pass"});
  await enter(page,"Finanças");
  await page.getByRole("button",{name:/Validar pagamento/}).click();
  assert.ok((await page.locator("main").innerText()).includes("Pagamento validado"));
@@ -117,6 +132,9 @@ try{
  await page.getByRole("button",{name:/Guardar aula/}).click();
  assert.ok((await page.getByRole("alert").innerText()).includes("Conflito de horário"));
  records.push({step:"weekly lesson scheduling and collision prevention",status:"pass"});
+ for(const day of ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira"])
+  assert.equal(await page.locator('section[aria-label="'+day+'"]').count(),1,"Pedagogy must show whole week "+day);
+ records.push({step:"pedagogy full-week timetable list",status:"pass"});
  await page.goto(base+"/app/pedagogy/grades",{waitUntil:"networkidle"});
  assert.ok((await page.locator("main").innerText()).includes("Gestão de avaliações"));
  await page.screenshot({path:resolve(dir,"pedagogia-avaliacoes-v3.png"),fullPage:true});
@@ -138,6 +156,13 @@ try{
  assert.ok(appOverflow<=3,"App mobile horizontal overflow "+appOverflow);
  await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"aluno-mobile.png"),fullPage:true});
+ await page.goto(base+"/app/student/schedule",{waitUntil:"networkidle"});
+ for(const day of ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira"])
+  assert.equal(await page.locator('section[aria-label="'+day+'"]').count(),1,"Student whole week missing "+day);
+ const scheduleOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+ assert.ok(scheduleOverflow<=3,"Mobile weekly timetable overflow "+scheduleOverflow);
+ await page.screenshot({path:resolve(dir,"aluno-horario-semanal-mobile.png"),fullPage:true});
+ records.push({step:"student full weekly timetable at 390px",status:"pass",scheduleOverflow});
  const studentText=(await page.locator("main").innerText()).toLocaleLowerCase();
  assert.ok(!/propina|pagamento|finan[cç]/i.test(studentText),"Student must never see finance or payment info");
  await page.goto(base+"/app/student/payments",{waitUntil:"networkidle"});

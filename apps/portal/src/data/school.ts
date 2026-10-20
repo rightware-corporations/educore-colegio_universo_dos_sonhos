@@ -75,6 +75,30 @@ export const createSchool=():SchoolData=>{const seed:SchoolData={
  {id:"AULA-006",classId:"CL-11-B",teacherId:"PROF-003",weekday:4,start:"09:15",minutes:45,room:"LAB-2"},
  {id:"AULA-007",classId:"CL-11-B",teacherId:"PROF-001",weekday:5,start:"07:30",minutes:45,room:"A16"}
  ];
+ // Grade 9A: make every weekday useful in the demo, without overlapping rooms,
+ // teachers or class slots. Additional slots are reference data, not the COLUS timetable.
+ const template:(Omit<Lesson,"id">)[]=[];
+ const plan:[string,string,string][]=[
+  ["07:30","PROF-001","A12"],["08:20","PROF-002","A12"],
+  ["09:15","PROF-003","LAB-1"],["10:05","PROF-005","A12"]
+ ];
+ for(let weekday=1;weekday<=5;weekday++){
+  for(const [start,teacherId,room] of plan)template.push({classId:"CL-09-A",teacherId,weekday,start,minutes:45,room});
+  template.push({classId:"CL-05-A",teacherId:"PROF-004",weekday,start:"07:30",minutes:45,room:"B04"});
+ }
+ const seniorTeachers=["PROF-003","PROF-001","PROF-005","PROF-003","PROF-005"];
+ for(let weekday=1;weekday<=5;weekday++)
+  template.push({classId:"CL-11-B",teacherId:seniorTeachers[weekday-1],weekday,start:"11:00",minutes:45,room:"A16"});
+ const minutesFrom=(time:string)=>{const [h,m]=time.split(":").map(Number);return h*60+m;};
+ const overlaps=(a:Lesson,b:Omit<Lesson,"id">)=>a.weekday===b.weekday &&
+  minutesFrom(a.start)<minutesFrom(b.start)+b.minutes &&
+  minutesFrom(b.start)<minutesFrom(a.start)+a.minutes &&
+  (a.classId===b.classId||a.teacherId===b.teacherId||a.room===b.room);
+ for(const [index,candidate] of template.entries()){
+  if(!lessons.some(a=>overlaps(a,candidate))){
+   lessons.push({...candidate,id:"AULA-WEEK-"+String(index+1).padStart(3,"0")});
+  }
+ }
  return {...seed,lessons,students:[...seed.students,...extra],guardians:[...seed.guardians,...extra.map((x,i)=>({id:x.guardianId,name:"Família fictícia "+String(i+1)}))]};
 };
 export const activeStudents=(s:SchoolData)=>s.students.filter(x=>x.status==="active");

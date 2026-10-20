@@ -3,6 +3,7 @@ import { Check, ChevronRight, Clock3, GraduationCap, Plus, Search, Settings2, Us
 import { useDemo } from "../state/DemoProvider";
 import { CURRICULUM, subjectsFor } from "../data/curriculum";
 import { activeStudents, type SchoolClass } from "../data/school";
+import { WeeklyLessonList } from "../components/WeeklyTimetable";
 
 const field="h-11 w-full min-w-0 rounded-xl border border-[#DCE4EA] bg-white px-3 text-sm outline-none focus:border-[#0C5898] focus:ring-2 focus:ring-[#0C5898]/15";
 const label="space-y-2 text-xs font-bold text-[#425563]";
@@ -158,16 +159,11 @@ export function TimetableManagement(){
      <div className="flex items-end"><button className={btn}><Check size={15}/> Guardar aula</button></div>
      {error&&<p role="alert" className="col-span-full rounded-lg bg-red-50 p-3 text-xs font-bold text-red-800">{error}</p>}
    </form>}
-   <div className="grid gap-3 lg:grid-cols-5">{days.map((day,i)=><div key={day} className="min-h-[240px] rounded-2xl bg-[#F5F8FA] p-3">
-    <h3 className="mb-4 border-b border-[#DCE5ED] pb-3 text-xs font-extrabold text-[#425664]">{day}</h3>
-    <div className="space-y-2">{weekly.filter(l=>l.weekday===i+1).map(l=>{
-     const teacher=state.staff.find(t=>t.id===l.teacherId);
-     return <div className="rounded-xl border-l-4 border-l-[#F18136] bg-white p-3 shadow-sm" key={l.id}>
-      <p className="text-[11px] font-extrabold text-[#0C5898]">{l.start} · {l.minutes}min</p>
-      <p className="mt-2 text-xs font-bold">{teacher?.subject}</p><p className="mt-1 text-[11px] text-[#687986]">{teacher?.name}</p>
-      <div className="mt-2 flex justify-between text-[10px] text-[#687986]"><span>{l.room}</span><button aria-label={"Remover aula "+l.id} className="text-red-700 hover:underline" onClick={()=>removeLesson(l.id)}>Remover</button></div>
-     </div>})}{!weekly.some(l=>l.weekday===i+1)&&<p className="py-5 text-center text-[11px] text-[#90A0A9]">Sem aulas definidas</p>}</div>
-   </div>)}</div>
+   <div className="mb-4 flex flex-wrap items-center justify-between gap-3 rounded-xl bg-[#F3F7FA] px-4 py-3">
+    <p className="text-xs font-bold text-[#425563]">Semana letiva completa · segunda a sexta-feira</p>
+    <p className="text-[11px] text-[#687986]">Aulas ordenadas por dia e hora</p>
+   </div>
+   <WeeklyLessonList data={state} lessons={weekly} onRemove={removeLesson}/>
    <p className="mt-5 flex items-center gap-2 text-xs text-[#687986]"><Clock3 size={15}/> {missing}: {weekly.length} aulas semanais. As colisões são recusadas ao guardar.</p>
   </Surface>
  </Frame>;
