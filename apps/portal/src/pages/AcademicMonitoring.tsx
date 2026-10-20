@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { CalendarCheck2, Check, ClipboardList, GraduationCap, Search, TrendingUp } from "lucide-react";
+import { CalendarCheck2, Check, Search, TrendingUp } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
-import { activeStudents, attendanceRate, average } from "../data/school";
+import { activeStudents, average } from "../data/school";
 import { AttendanceChart, PerformanceChart } from "../components/SchoolCharts";
 
 const input="h-11 rounded-xl border border-[#DCE4EA] bg-white px-3 text-sm";
