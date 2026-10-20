@@ -251,7 +251,7 @@ export function FuturoSection() {
               <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-colus-orange">
                 Futuro & Tecnologia
               </p>
-              <h2 className="mt-5 max-w-[12ch] text-[clamp(42px,5.4vw,84px)] font-bold leading-[.98] tracking-[-.04em]">
+              <h2 data-colus-desktop-futuro-headline className="mt-5 max-w-[12ch] text-[clamp(42px,4.5vw,60px)] xl:text-[clamp(42px,5.4vw,84px)] font-bold leading-[.98] tracking-[-.04em]">
                 O futuro também se aprende.
               </h2>
               <p className="mt-6 max-w-[42ch] text-base leading-7 text-white/60">
