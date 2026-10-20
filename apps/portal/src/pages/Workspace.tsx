@@ -22,7 +22,7 @@ function ActivityFeed({role}:{role:Role}){
  const scopedEvents=state.events.filter(e=>role==="executive" ||
   (role==="student"&&e.studentId==="ALU-001"&&["attendance","assessment"].includes(e.kind)) ||
   (role==="guardian"&&!!e.studentId&&familyIds.includes(e.studentId)&&["attendance","assessment","payment","message","student"].includes(e.kind)) ||
-  (role==="teacher"&&["attendance","assessment","message"].includes(e.kind)) ||
+  (role==="teacher"&&!!e.studentId&&state.students.some(st=>st.id===e.studentId&&["CL-09-A","CL-11-B"].includes(st.classId??""))&&["attendance","assessment","message"].includes(e.kind)) ||
   (role==="pedagogy"&&["attendance","assessment","student"].includes(e.kind)) ||
   (role==="secretary"&&["student","admission"].includes(e.kind)) ||
   (role==="reception"&&e.kind==="admission") ||
