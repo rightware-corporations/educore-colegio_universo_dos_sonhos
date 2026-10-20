@@ -94,7 +94,7 @@ export function TeachersManagement(){
  </Frame>;
 }
 export function AssignmentsManagement(){
- const {state,assignTeacher}=useDemo();const [classId,setClassId]=useState("CL-09-A");
+ const {state,assignTeacher,assignStudent}=useDemo();const [classId,setClassId]=useState("CL-09-A");
  const current=state.classes.find(c=>c.id===classId);
  const eligible=state.staff.filter(t=>t.role==="teacher"&&(current?subjectsFor(current.grade).includes(t.subject??""):false));
  const allTeachers=state.staff.filter(t=>t.role==="teacher");
@@ -116,6 +116,16 @@ export function AssignmentsManagement(){
     <p className="mt-5 text-xs text-[#8A6330]">Atribuições com aulas marcadas não podem ser removidas antes de ajustar o horário.</p>
    </Surface>
   </div>
+  <Surface title="Colocação dos alunos" sub="Alunos matriculados sem turma; a atribuição pertence exclusivamente à Pedagogia.">
+   <div className="space-y-3">{activeStudents(state).filter(s=>!s.classId).map(s=><div key={s.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-[#E2E9EF] p-4">
+    <div><p className="text-sm font-extrabold">{s.name}</p><p className="mt-1 text-xs text-[#687782]">{s.grade}ª Classe · {s.id}</p></div>
+    <select aria-label={"Atribuir turma a "+s.name} defaultValue="" className="h-11 rounded-xl border border-[#DCE4EA] bg-white px-3 text-sm" onChange={e=>{if(e.target.value)assignStudent(s.id,e.target.value);}}>
+     <option value="">Selecionar turma</option>{state.classes.filter(c=>c.grade===s.grade&&c.active).map(c=><option key={c.id} value={c.id}>{c.name}</option>)}
+    </select>
+   </div>)}
+   {!activeStudents(state).some(x=>!x.classId)&&<p className="rounded-xl bg-[#F4F8FA] p-4 text-sm text-[#687782]">Todos os alunos ativos estão associados a uma turma.</p>}
+   </div>
+  </Surface>
  </Frame>;
 }
 export function TimetableManagement(){
