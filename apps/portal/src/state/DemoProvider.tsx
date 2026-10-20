@@ -32,7 +32,7 @@ const mergeWeekSeed=(previous:SchoolData):SchoolData=>{
  return {...previous,staff,lessons};
 };
 const hydrate=(s:SchoolData):SchoolData=>({...s,
- justifications:s.justifications??[],assessmentPlans:s.assessmentPlans??[],documents:s.documents??[],notices:s.notices??[],interventions:s.interventions??[],learningItems:s.learningItems??createSchool().learningItems,workSubmissions:s.workSubmissions??[],appointments:s.appointments??[]
+ justifications:s.justifications??[],assessmentPlans:s.assessmentPlans??[],documents:s.documents??[],notices:s.notices??[],interventions:s.interventions??[],learningItems:s.learningItems??createSchool().learningItems,workSubmissions:s.workSubmissions??[],appointments:s.appointments?.length?s.appointments:createSchool().appointments
 });
 const acceptedAttachment=(a?:DemoAttachment)=>!a||(a.size>0&&a.size<=512*1024&&a.name.length<=140&&
   /^(application\/pdf|image\/(png|jpeg)|text\/plain|application\/vnd\.openxmlformats-officedocument\.wordprocessingml\.document)$/.test(a.type)&&
