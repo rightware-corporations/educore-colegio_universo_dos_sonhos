@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Check, ClipboardCheck, Edit3, FilePlus2, Search, Send, UserPlus, UserRoundX, type LucideIcon } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
 import { CURRICULUM, GRADE_NOTE, LEVELS } from "../data/curriculum";
-import { activeStudents, guardianStudents, gradeSubjects, mt, type Student, type Admission } from "../data/school";
+import { activeStudents, guardianStudents, gradeSubjects, mt, type Student } from "../data/school";
 import type { Role } from "../config/roles";
 
 export function Panel({title,subtitle,children,action}:{title:string;subtitle?:string;children:React.ReactNode;action?:React.ReactNode}){
