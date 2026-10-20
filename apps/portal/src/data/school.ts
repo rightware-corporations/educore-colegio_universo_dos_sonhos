@@ -7,7 +7,7 @@ export type Attendance={id:string;studentId:string;classId:string;date:string;st
 export type Assessment={id:string;studentId:string;subject:string;score:number;term:1|2|3;published:boolean;teacherId:string};
 export type Fee={id:string;studentId:string;description:string;amount:number;status:"pending"|"submitted"|"validated";reference?:string};
 export type Admission={id:string;candidate:string;grade:number;guardianName:string;status:"received"|"referred"|"review"|"enrolled"};
-export type Event={id:string;kind:string;title:string;detail:string;at:string};
+export type Event={id:string;kind:string;title:string;detail:string;at:string;studentId?:string};
 export type Message={id:string;sender:"teacher"|"guardian";studentId:string;text:string;at:string};
 export type SchoolData={students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
 const schoolClass=(grade:number,letter="A"):SchoolClass=>({id:"CL-"+String(grade).padStart(2,"0")+"-"+letter,grade,name:grade+"ª "+letter,capacity:30,active:true});
