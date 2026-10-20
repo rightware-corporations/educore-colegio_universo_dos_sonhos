@@ -131,7 +131,7 @@ export function FinanceDesk({role}:{role:Role}){
   <div className="space-y-3">{rows.map(f=><div key={f.id} className="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-border p-4">
    <div><p className="text-sm font-extrabold">{state.students.find(s=>s.id===f.studentId)?.name}</p>
     <p className="mt-1 text-xs text-muted-foreground">{f.description} · {f.id}</p><p className="mt-2 text-base font-extrabold">{mt(f.amount)}</p></div>
-   <div className="flex flex-wrap items-center gap-2"><Pill tone={f.status==="validated"?"success":"warning"}>{{pending:"Pendente",submitted:"Em validação",validated:"Validado"}[f.status]}</Pill>
+   <div className="flex flex-wrap items-center gap-2"><Pill tone={f.status==="validated"?"success":"warning"}>{{pending:"Pendente",submitted:"Em validação",validated:"Validado",rejected:"Rejeitado"}[f.status]}</Pill>
     {role==="finance"&&f.status!=="validated"&&<button onClick={()=>validateFee(f.id)} className="action">Validar pagamento</button>}
     {role==="guardian"&&f.status==="pending"&&<form className="flex flex-wrap gap-2" onSubmit={e=>{e.preventDefault();submitPayment(f.id,refs[f.id]??"");}}>
      <input aria-label={"Referência de "+f.id} placeholder="Referência fictícia" minLength={4} maxLength={48} required value={refs[f.id]??""} onChange={e=>setRefs(x=>({...x,[f.id]:e.target.value}))} className="h-11 w-40 rounded-lg border border-border px-3 text-xs"/>

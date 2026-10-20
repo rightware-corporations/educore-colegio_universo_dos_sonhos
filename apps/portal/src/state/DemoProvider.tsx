@@ -257,7 +257,7 @@ export function DemoProvider({children}:PropsWithChildren){
   },
   submitPayment(feeId,reference){
    if(role!=="guardian"||reference.trim().length<4||reference.trim().length>48)return;
-   mutate(s=>{const fee=s.fees.find(f=>f.id===feeId&&f.status==="pending");const student=s.students.find(x=>x.id===fee?.studentId);
+   mutate(s=>{const fee=s.fees.find(f=>f.id===feeId&&(f.status==="pending"||f.status==="rejected"));const student=s.students.find(x=>x.id===fee?.studentId);
     if(!fee||student?.guardianId!=="ENC-001")return s;
     return {...s,fees:s.fees.map(f=>f.id===feeId?{...f,status:"submitted" as const,reference:reference.trim()}:f),
      events:[makeEvent("payment","Comprovativo apresentado","Submissão fictícia para validação",fee.studentId),...s.events]};
@@ -271,7 +271,7 @@ export function DemoProvider({children}:PropsWithChildren){
   },
   validatePayment(){if(role==="finance")value.validateFee("FIN-001");},
   recordSession(lessonId,date,studentId,status){
-   if(role!=="teacher"||!/^\\d{4}-\\d{2}-\\d{2}$/.test(date)||!["present","absent","late"].includes(status))return;
+   if(role!=="teacher"||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!["present","absent","late"].includes(status))return;
    mutate(s=>{
     const lesson=s.lessons.find(l=>l.id===lessonId&&l.teacherId==="PROF-001");
     const student=s.students.find(st=>st.id===studentId&&st.classId===lesson?.classId&&st.status==="active");
@@ -302,7 +302,7 @@ export function DemoProvider({children}:PropsWithChildren){
    });
   },
   createAssessment(classId,title,date){
-   if(role!=="teacher"||title.trim().length<3||title.length>120||!/^\\d{4}-\\d{2}-\\d{2}$/.test(date))return;
+   if(role!=="teacher"||title.trim().length<3||title.length>120||!/^\d{4}-\d{2}-\d{2}$/.test(date))return;
    mutate(s=>{
     const teacher=s.staff.find(t=>t.id==="PROF-001");
     if(!teacher?.classIds?.includes(classId))return s;
@@ -343,7 +343,7 @@ export function DemoProvider({children}:PropsWithChildren){
    });
   },
   createObligation(studentId,description,amount,dueDate){
-   if(role!=="finance"||description.trim().length<3||description.length>120||!Number.isFinite(amount)||amount<=0||amount>1000000||!/^\\d{4}-\\d{2}-\\d{2}$/.test(dueDate))return;
+   if(role!=="finance"||description.trim().length<3||description.length>120||!Number.isFinite(amount)||amount<=0||amount>1000000||!/^\d{4}-\d{2}-\d{2}$/.test(dueDate))return;
    mutate(s=>{
     if(!s.students.some(x=>x.id===studentId&&x.status==="active"))return s;
     const fee={id:uid("FIN"),studentId,description:description.trim(),amount,dueDate,status:"pending" as const};
@@ -376,7 +376,7 @@ export function DemoProvider({children}:PropsWithChildren){
    });
   },
   openIntervention(studentId,note,followUp){
-   if(role!=="pedagogy"||note.trim().length<5||note.length>400||!/^\\d{4}-\\d{2}-\\d{2}$/.test(followUp))return;
+   if(role!=="pedagogy"||note.trim().length<5||note.length>400||!/^\d{4}-\d{2}-\d{2}$/.test(followUp))return;
    mutate(s=>{
     if(!s.students.some(x=>x.id===studentId&&x.status==="active"))return s;
     const item:Intervention={id:uid("INT"),studentId,note:note.trim(),followUp,status:"open"};

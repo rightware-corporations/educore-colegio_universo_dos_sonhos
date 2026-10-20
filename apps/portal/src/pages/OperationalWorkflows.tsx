@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { CalendarDays, CheckCircle2, Clock3, FileText, Search, ShieldCheck, AlertTriangle, ArrowRight, Printer, Send, BookOpen, ClipboardCheck } from "lucide-react";
+import { CalendarDays, CheckCircle2, FileText, Search, Printer, Send } from "lucide-react";
 import { useDemo } from "../state/DemoProvider";
 import { activeStudents, average, guardianStudents, mt } from "../data/school";
-import type { Role } from "../config/roles";
 
 const control="min-h-11 min-w-0 rounded-xl border border-[#DEE6EC] bg-white px-3 text-sm text-[#112534] outline-none focus:border-[#0C5898]";
 const button="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#0C5898] px-4 text-xs font-bold text-white hover:bg-[#0A4778] disabled:opacity-50";
