@@ -33,4 +33,9 @@ assert.ok(learning.includes("export function LearningWorkspace")&&learning.inclu
 const booking=read("src/pages/SchoolAppointments.tsx");
 assert.ok(booking.includes("requestAppointment")&&booking.includes("decideAppointment"),"Guardian-reception scheduling required");
 assert.ok(!studentMenu.includes('["finance"')&&!studentMenu.includes('["payments"'),"Student finance must remain excluded");
+const center=read("src/components/DashboardActionCenter.tsx");
+assert.ok(center.includes("OperationalPriorities")&&center.includes("Fila de validação")&&center.includes("Falta registada"),"Role dashboards need contextual tasks and accurate family alerts");
+const shell=read("src/components/RoleShell.tsx");
+assert.ok(shell.includes("primaryMobileTabs")&&shell.includes('pathname.split("/")[3]'),"Mobile tabs and nested-page breadcrumbs required");
+assert.ok(!read("src/pages/Workspace.tsx").includes("function TeacherSpotlight"),"Fixed-date teacher quick attendance must not return");
 console.log("COLUS PORTAL CONTRACT PASS: 8 profiles, split routes, brand, cross-role demo and no foreign-school copy");

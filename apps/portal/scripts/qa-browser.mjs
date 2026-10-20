@@ -26,11 +26,15 @@ try{
  await page.getByRole("button",{name:"Professor"}).click();
  await page.getByRole("button",{name:/Entrar como Professor/}).click();
  assert.match(page.url(),/\/app\/teacher\/dashboard$/);
- assert.equal(await page.getByRole("button",{name:/Registar falta/}).count(),1);
+ assert.equal(await page.getByRole("link",{name:/Abrir chamada/}).count(),1,"Teacher dashboard must open the complete attendance workflow");
+ assert.equal(await page.getByRole("button",{name:/Registar falta/}).count(),0,"Do not keep a fixed-date dashboard absence shortcut");
  await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"professor-dashboard.png"),fullPage:true});
- await page.getByRole("button",{name:/Registar falta/}).click();
- assert.ok((await page.locator("main").innerText()).includes("Falta registada"));
+ await page.getByRole("link",{name:/Abrir chamada/}).click();
+ assert.match(page.url(),/\/app\/teacher\/attendance$/);
+ await page.getByRole("button",{name:"absent Tiago Nhampossa"}).click();
+ assert.ok((await page.locator("main").innerText()).includes("Falta"),"Absence must be recorded for a specific lesson");
+ await page.goto(base+"/app/teacher/dashboard",{waitUntil:"networkidle"});
  records.push({step:"teacher register absence",status:"pass"});
  await page.goto(base+"/app/teacher/schedule",{waitUntil:"networkidle"});
  for(const day of ["Segunda-feira","Terça-feira","Quarta-feira","Quinta-feira","Sexta-feira"])
@@ -56,10 +60,16 @@ try{
  assert.ok(await page.locator('section[aria-label="Segunda-feira"] li').count()>=3,"5A should have a realistic multi-subject day");
  await page.screenshot({path:resolve(dir,"encarregado-horario-leonor.png"),fullPage:true});
  records.push({step:"guardian whole-week view and child selection",status:"pass"});
+ await page.goto(base+"/app/guardian/payments",{waitUntil:"networkidle"});
+ await page.getByRole("textbox",{name:"Referência de FIN-001"}).fill("COLUS-TESTE-123");
+ await page.getByRole("button",{name:"Submeter comprovativo"}).first().click();
  await enter(page,"Finanças");
- await page.getByRole("button",{name:/Validar pagamento/}).click();
- assert.ok((await page.locator("main").innerText()).includes("Pagamento validado"));
- records.push({step:"finance validate payment",status:"pass"});
+ assert.equal(await page.getByRole("button",{name:/Validar pagamento/}).count(),0,"Finance dashboard must not validate directly");
+ await page.goto(base+"/app/finance/validation",{waitUntil:"networkidle"});
+ await page.getByRole("button",{name:"Validar",exact:true}).first().click();
+ await page.goto(base+"/app/finance/receipts",{waitUntil:"networkidle"});
+ assert.ok((await page.locator("main").innerText()).includes("Validado"),"Validated fee appears in receipt list");
+ records.push({step:"guardian submits evidence then finance validates via queue",status:"pass"});
  await enter(page,"Encarregado");
  assert.ok((await page.locator("main").innerText()).includes("Validado"),"Guardian must see finance validation");
  await page.reload({waitUntil:"networkidle"});
@@ -80,6 +90,10 @@ try{
  await page.getByRole("button",{name:"Guardar",exact:true}).click();
  assert.equal(await page.locator("table").getByText("Íris Sumbana Matola",{exact:true}).count(),1,"Secretary edit");
  records.push({step:"secretary create and edit student",status:"pass"});
+ assert.ok((await page.locator("main").innerText()).includes("Resultados da pesquisa"),"Secretary dashboard must show filtered registry totals");
+ await page.getByRole("combobox",{name:"Filtrar alunos por classe"}).selectOption("9");
+ assert.ok((await page.locator("table").innerText()).includes("9ª Classe"),"Registry must filter by grade");
+ await page.getByRole("combobox",{name:"Filtrar alunos por classe"}).selectOption("all");
  await enter(page,"Pedagogia");
  await page.goto(base+"/app/pedagogy/assignments",{waitUntil:"networkidle"});
  await page.getByRole("combobox",{name:"Atribuir turma a Íris Sumbana Matola"}).selectOption("CL-09-A");
@@ -264,6 +278,14 @@ try{
  assert.ok(scheduleOverflow<=3,"Mobile weekly timetable overflow "+scheduleOverflow);
  await page.screenshot({path:resolve(dir,"aluno-horario-semanal-mobile.png"),fullPage:true});
  records.push({step:"student full weekly timetable at 390px",status:"pass",scheduleOverflow});
+ await enter(page,"Secretaria");
+ await page.goto(base+"/app/secretary/students",{waitUntil:"networkidle"});
+ assert.ok(await page.getByRole("region",{name:"Fichas de alunos em dispositivos móveis"}).isVisible().catch(()=>false)||
+  await page.locator('[aria-label="Fichas de alunos em dispositivos móveis"]').isVisible(),"Mobile student cards must be visible");
+ const registryOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
+ assert.ok(registryOverflow<=3,"Mobile secretary registry overflow "+registryOverflow);
+ await page.screenshot({path:resolve(dir,"secretaria-registo-mobile-v6.png"),fullPage:true});
+ records.push({step:"secretary mobile cards without horizontal scroll",status:"pass",registryOverflow});
  const studentText=(await page.locator("main").innerText()).toLocaleLowerCase();
  assert.ok(!/propina|pagamento|finan[cç]/i.test(studentText),"Student must never see finance or payment info");
  await page.goto(base+"/app/student/payments",{waitUntil:"networkidle"});

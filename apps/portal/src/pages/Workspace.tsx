@@ -1,5 +1,5 @@
 import { Link, Navigate, useParams } from "react-router-dom";
-import { Activity, ArrowRight, Bell, BookOpen, CalendarDays, Check, CheckCircle2, ClipboardList, Clock, CreditCard, FileText, GraduationCap, HeartHandshake, Layers3, MessageCircle, ShieldCheck, TrendingUp, Users, Wallet } from "lucide-react";
+import { Activity, ArrowRight, Bell, BookOpen, CalendarDays, CheckCircle2, ClipboardList, Clock, CreditCard, FileText, GraduationCap, HeartHandshake, Layers3, MessageCircle, ShieldCheck, TrendingUp, Users, Wallet } from "lucide-react";
 import { ROLE_DEFS, isRole, type Role } from "../config/roles";
 import { useDemo } from "../state/DemoProvider";
 import { activeStudents, attendanceRate, average, guardianStudents, gradeSubjects, mt, paymentsReceived, type SchoolData } from "../data/school";
@@ -13,6 +13,7 @@ import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
 import { TeacherSessionAttendance, AbsenceCases, AssessmentWorkflow, NoticesWorkspace, DocumentsWorkspace, FinanceOperations, InterventionsWorkspace, ExecutiveReports } from "./OperationalWorkflows";
 import { LearningWorkspace, StudentRecord } from "./LearningWorkflows";
 import { SchoolAppointments } from "./SchoolAppointments";
+import { OperationalPriorities } from "../components/DashboardActionCenter";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
 const focusStudent="ALU-001";
@@ -52,7 +53,7 @@ function metrics(role:Role,s:SchoolData){
   {label:"Comunicações",value:s.messages.filter(m=>guardian.some(x=>x.id===m.studentId)).length,icon:Bell}
  ];
  if(role==="teacher")return [
-  {label:"Turmas atribuídas",value:2,icon:Users},
+  {label:"Turmas atribuídas",value:s.staff.find(t=>t.id==="PROF-001")?.classIds?.length??0,icon:Users},
   {label:"Alunos acompanhados",value:students.filter(x=>["CL-09-A","CL-11-B"].includes(x.classId??"")).length,icon:GraduationCap},
   {label:"Presenças registadas",value:s.attendance.filter(a=>a.teacherId==="PROF-001").length,icon:CheckCircle2},
   {label:"Notas pendentes",value:s.assessments.filter(a=>a.teacherId==="PROF-001"&&!a.published).length,icon:ClipboardList}
@@ -67,7 +68,7 @@ function metrics(role:Role,s:SchoolData){
   {label:"Pedidos recebidos",value:s.admissions.filter(a=>a.status==="received").length,icon:FileText},
   {label:"Encaminhados",value:s.admissions.filter(a=>a.status==="referred").length,icon:ArrowRight},
   {label:"Em análise",value:s.admissions.filter(a=>a.status==="review").length,icon:Clock},
-  {label:"Atendimentos registados",value:s.admissions.length,icon:HeartHandshake}
+  {label:"Marcações pendentes",value:s.appointments.filter(a=>a.status==="requested").length,icon:HeartHandshake}
  ];
  if(role==="secretary")return [
   {label:"Alunos ativos",value:students.length,icon:GraduationCap},
@@ -77,7 +78,7 @@ function metrics(role:Role,s:SchoolData){
  ];
  if(role==="finance")return [
   {label:"Recebimentos validados",value:mt(paymentsReceived(s)),icon:Wallet},
-  {label:"Pagamentos por validar",value:s.fees.filter(f=>f.status!=="validated").length,icon:Clock},
+  {label:"Obrigações por regularizar",value:s.fees.filter(f=>f.status==="pending"||f.status==="rejected").length,icon:Clock},
   {label:"Comprovativos em análise",value:s.fees.filter(f=>f.status==="submitted").length,icon:FileText},
   {label:"Obrigações registadas",value:s.fees.length,icon:CreditCard}
  ];
@@ -100,38 +101,6 @@ function WeekPreview({role}:{role:"teacher"|"student"}){
     <p className="mt-1 text-[11px] text-[#687782]">{endOfLesson(l.start,l.minutes)} · {l.room} · {state.classes.find(c=>c.id===l.classId)?.name}</p></div>
   </div>)}
   {preview.length===0&&<p className="text-xs text-[#687782]">Ainda não há aulas registadas.</p>}</div>
- </Panel>;
-}
-function TeacherSpotlight(){
- const {state,markAbsent,recordAttendance}=useDemo();
- const student=state.students.find(s=>s.id===focusStudent);
- const today=state.attendance.find(a=>a.studentId===focusStudent&&a.date==="2026-10-20");
- return <Panel title="Chamada de hoje" subtitle="Matemática · 9.ª A · Elisa Simango" action={<Link className="text-xs font-bold text-[#0C5898] hover:underline" to="/app/teacher/attendance">Abrir turma →</Link>}>
-  <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-[#F5F7F8] p-4">
-   <div><p className="text-sm font-extrabold">{student?.name}</p><p className="mt-1 text-xs text-muted-foreground">9.ª A · Número de referência {student?.id}</p></div>
-   <Pill tone={today?.status==="absent"?"warning":today?.status==="present"?"success":"neutral"}>{today?.status==="absent"?"Falta registada":today?.status==="present"?"Presente":"Por registar"}</Pill>
-  </div>
-  <div className="mt-4 flex flex-wrap gap-3"><button className="action" onClick={markAbsent}><ClipboardList size={16}/> Registar falta</button>
-   <button className="action-secondary" onClick={()=>recordAttendance(focusStudent,"present")}><Check size={16}/> Marcar presença</button></div>
- </Panel>;
-}
-function FinanceSpotlight(){
- const {state,validatePayment}=useDemo();const fee=state.fees.find(f=>f.id==="FIN-001");
- return <Panel title="Pagamento para validação" subtitle="Conferência administrativa e atualização do estado da família.">
- <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-[#F5F7F8] p-4"><div><p className="text-sm font-extrabold">Tiago Nhampossa</p><p className="mt-1 text-xs text-muted-foreground">{fee?.description}</p>
- <p className="mt-2 text-xl font-extrabold">{mt(fee?.amount??0)}</p></div><Pill tone={fee?.status==="validated"?"success":"warning"}>{fee?.status==="validated"?"Validado":"Pendente"}</Pill></div>
- {fee?.status!=="validated"&&<button className="action mt-4" onClick={validatePayment}><Check size={16}/> Validar pagamento</button>}
- </Panel>;
-}
-function GuardianSpotlight(){
- const {state}=useDemo();const children=guardianStudents(state);
- return <Panel title="Os meus educandos" subtitle="Acompanhamento escolar da família Nhampossa.">
-  <div className="space-y-3">{children.map(s=><div key={s.id} className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-[#F5F7F8] p-4">
-   <div className="flex items-center gap-3"><span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0C5898]/10 text-sm font-extrabold text-[#0C5898]">{s.name.split(" ").map(w=>w[0]).slice(0,2).join("")}</span>
-   <div><p className="text-sm font-extrabold">{s.name}</p><p className="mt-1 text-xs text-muted-foreground">{s.grade}ª Classe · {state.classes.find(c=>c.id===s.classId)?.name??"Em atribuição"}</p></div></div>
-   <Pill tone={state.attendance.some(a=>a.studentId===s.id&&a.date==="2026-10-20"&&a.status==="absent")?"warning":"success"}>
-    {state.attendance.some(a=>a.studentId===s.id&&a.date==="2026-10-20"&&a.status==="absent")?"Falta registada":"Sem alerta de falta"}</Pill>
-  </div>)}</div>
  </Panel>;
 }
 function PeopleSpotlight(){
@@ -160,27 +129,28 @@ function Dashboard({role}:{role:Role}){
  };
  const stats=metrics(role,state);
  return <PageContainer>
-  <div className="mb-7 flex flex-wrap items-end justify-between gap-4"><div><p className="eyebrow">Colégio Universo dos Sonhos · {info.short}</p>
-   <h1 className="mt-3 font-display text-[clamp(38px,4vw,58px)] leading-[1.05] text-[#071A2A]">{title[role]}</h1>
-   <p className="mt-3 max-w-xl text-sm leading-7 text-muted-foreground">{info.caption}.</p></div>
-   <span className="rounded-full border border-[#0C5898]/10 bg-white px-4 py-2 text-xs font-bold text-[#0C5898]">20 outubro 2026 · 3.º trimestre</span>
-  </div>
+  <header className="relative mb-6 overflow-hidden rounded-[27px] bg-[#071A2A] px-6 py-8 text-white shadow-[0_22px_55px_rgba(7,26,42,.12)] sm:px-9 sm:py-10">
+   <div className="pointer-events-none absolute -right-16 -top-32 h-80 w-80 rounded-full border-[66px] border-[#1F4D70]/25"/>
+   <div className="relative flex flex-wrap items-end justify-between gap-5">
+    <div><p className="text-[11px] font-extrabold uppercase tracking-[.18em] text-[#F18136]">COLUS · {info.short}</p>
+     <h1 className="mt-3 font-display text-[clamp(35px,4vw,55px)] leading-[1.07]">{title[role]}</h1>
+     <p className="mt-4 max-w-2xl text-sm leading-7 text-white/70">{info.caption}. Consulte operações e indicadores atualizados no cenário escolar.</p>
+    </div>
+    <span className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-bold text-white/80">Ano letivo de referência · 2026</span>
+   </div>
+  </header>
   <div className="grid grid-cols-2 gap-3 xl:grid-cols-4">{stats.map((x,i)=><StatsCard key={x.label} label={x.label} value={x.value} icon={x.icon} variant={i===0?"primary":"default"}/>)}</div>
   <div className="mt-6 grid gap-5 xl:grid-cols-[1.55fr_1fr]">
    <div className="space-y-5">
-    {role==="teacher"&&<TeacherSpotlight/>}
-    {role==="finance"&&<FinanceSpotlight/>}
-    {role==="guardian"&&<GuardianSpotlight/>}
+    <OperationalPriorities role={role}/>
     {role==="student"&&<SubjectsSpotlight/>}
     {role==="pedagogy"&&<PeopleSpotlight/>}
-    {(role==="reception"||role==="secretary")&&<AdmissionsDesk role={role}/>}
     {(role==="executive"||role==="secretary"||role==="pedagogy")&&<Panel title="Distribuição dos alunos" subtitle="Contagem atualizada com os registos ativos."><GradeDistribution data={state}/></Panel>}
     {(role==="executive"||role==="pedagogy")&&<Panel title="Desempenho académico" subtitle="Médias calculadas a partir de avaliações publicadas."><PerformanceChart data={state}/></Panel>}
     {(role==="student"||role==="teacher")&&<WeekPreview role={role}/>}
     {role==="guardian"&&<Panel title="Desempenho dos educandos" subtitle="Registos publicados pela Coordenação Pedagógica"><PerformanceChart data={state} studentIds={guardianStudents(state).map(s=>s.id)}/></Panel>}
     {role==="finance"&&<Panel title="Distribuição dos recebimentos" subtitle="Valores agrupados pelo estado dos pagamentos."><FinanceChart data={state}/></Panel>}
     {role==="executive"&&<Panel title="Assiduidade por turma" subtitle="Percentagem observada nos registos da amostra."><AttendanceChart data={state}/></Panel>}
-    {role==="reception"&&<Panel title="A sua responsabilidade" subtitle="Encaminhar processos sem aprovar matrículas ou pagamentos."><div className="grid grid-cols-2 gap-3"><LinkFeature icon={HeartHandshake} label="Atendimento" description="Receber pedidos e orientar famílias."/><LinkFeature icon={FileText} label="Protocolo" description="Registar e encaminhar documentação." /></div></Panel>}
    </div>
    <div className="space-y-5">
     <Panel title="Acesso rápido" subtitle="Ações e informação pertinentes ao seu perfil.">

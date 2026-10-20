@@ -28,6 +28,14 @@ export function StudentRegistry(){
  function save(e:React.FormEvent){e.preventDefault();if(editing){editStudent(editing.id,{name,guardianId});setEditing(null);}else{createStudent({name,grade,guardianId});}setOpen(false);setName("");}
  return <Panel title="Registo de alunos" subtitle="Cadastro escolar e gestão documental; histórico conservado ao arquivar." action={
  <button className="action" onClick={()=>{setEditing(null);setName("");setGrade(9);setGuardian("ENC-001");setOpen(v=>!v);}}><UserPlus size={16}/> Novo aluno</button>}>
+  <div className="mb-5 grid grid-cols-2 gap-3 lg:grid-cols-4">
+   {[
+    {label:"Alunos ativos",value:state.students.filter(x=>x.status==="active").length},
+    {label:"Turmas por atribuir",value:state.students.filter(x=>x.status==="active"&&!x.classId).length},
+    {label:"Registos arquivados",value:state.students.filter(x=>x.status==="archived").length},
+    {label:"Resultados da pesquisa",value:filtered.length}
+   ].map(item=><div key={item.label} className="rounded-xl border border-[#DEE7EF] bg-[#F5F9FC] p-4"><p className="text-[11px] font-bold text-[#647886]">{item.label}</p><p className="mt-2 text-2xl font-extrabold text-[#071A2A]">{item.value}</p></div>)}
+  </div>
   <div className="mb-5 flex flex-wrap gap-3">
    <label className="flex min-w-[200px] flex-1 items-center gap-2 rounded-xl border border-border bg-white px-3"><Search size={16} className="text-muted-foreground"/><input aria-label="Pesquisar aluno" value={query} onChange={e=>{setQuery(e.target.value);setPage(1);}} placeholder="Pesquisar por nome ou código" className="h-11 min-w-0 flex-1 outline-none"/></label>
    <select aria-label="Filtrar alunos por classe" className="h-11 rounded-xl border border-border bg-white px-3 text-xs" value={gradeFilter} onChange={e=>{setGradeFilter(e.target.value);setPage(1);}}>
@@ -42,7 +50,7 @@ export function StudentRegistry(){
    <label className="text-xs font-bold">Encarregado<select aria-label="Encarregado associado" value={guardianId} onChange={e=>setGuardian(e.target.value)} className="mt-2 h-11 w-full rounded-xl border border-border bg-white px-3 text-sm">{state.guardians.map(g=><option key={g.id} value={g.id}>{g.name}</option>)}</select></label>
    <div className="flex items-end gap-3"><button type="submit" className="action"><Check size={16}/> Guardar</button><button type="button" className="action-secondary" onClick={()=>{setOpen(false);setEditing(null)}}>Cancelar</button></div>
   </form>}
-  <div className="overflow-x-auto"><table className="w-full min-w-[630px] text-left text-xs"><thead><tr className="border-b border-border text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+  <div className="hidden overflow-x-auto md:block"><table className="w-full min-w-[630px] text-left text-xs"><thead><tr className="border-b border-border text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
    <th className="pb-3">Aluno</th><th className="pb-3">Classe / turma</th><th className="pb-3">Encarregado</th><th className="pb-3">Situação</th><th className="pb-3 text-right">Ações</th>
   </tr></thead><tbody>{rows.map(s=><tr key={s.id} className="border-b border-border/60 last:border-0">
    <td className="py-4"><p className="font-extrabold text-[#071A2A]">{s.name}</p><p className="mt-1 text-[10px] text-muted-foreground">{s.id}</p></td>
@@ -54,6 +62,25 @@ export function StudentRegistry(){
     <button title={"Arquivar "+s.name} aria-label={"Arquivar "+s.name} onClick={()=>{if(window.confirm("Arquivar a ficha de "+s.name+"? O histórico académico ficará preservado."))archiveStudent(s.id);}} className="rounded-lg border border-border p-2 text-red-700 hover:bg-red-50"><UserRoundX size={15}/></button>
     </>}</div></td>
   </tr>)}</tbody></table></div>
+  <div className="space-y-3 md:hidden" aria-label="Fichas de alunos em dispositivos móveis">
+   {rows.map(s=><article key={s.id} className="rounded-2xl border border-[#DFE8EF] bg-white p-4">
+    <div className="flex flex-wrap items-start justify-between gap-2">
+     <div className="min-w-0"><p className="break-words text-sm font-extrabold">{s.name}</p><p className="mt-1 text-[11px] text-muted-foreground">{s.id} · {s.grade}ª classe</p></div>
+     <Pill tone={s.status==="active"?"success":"warning"}>{s.status==="active"?"Ativo":"Arquivado"}</Pill>
+    </div>
+    <div className="mt-3 border-t border-[#E5EDF2] pt-3 text-xs leading-6 text-[#607380]">
+     <p>Turma: {state.classes.find(c=>c.id===s.classId)?.name??"Por atribuir"}</p>
+     <p className="break-words">Encarregado: {state.guardians.find(g=>g.id===s.guardianId)?.name??"Não associado"}</p>
+    </div>
+    <div className="mt-3 flex flex-wrap gap-2">
+     <Link to={"/app/secretary/students/"+s.id} aria-label={"Consultar ficha de "+s.name} className="action-secondary">Abrir ficha</Link>
+     {s.status==="active"&&<>
+      <button aria-label={"Editar "+s.name} className="action-secondary" onClick={()=>{setEditing(s);setName(s.name);setGuardian(s.guardianId);setOpen(true);}}>Editar</button>
+      <button aria-label={"Arquivar "+s.name} className="action-secondary text-red-700" onClick={()=>{if(window.confirm("Arquivar a ficha de "+s.name+"? O histórico académico ficará preservado."))archiveStudent(s.id);}}>Arquivar</button>
+     </>}
+    </div>
+   </article>)}
+  </div>
   {rows.length===0&&<Empty>Nenhum aluno corresponde à pesquisa.</Empty>}
   <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
    <p className="text-xs text-muted-foreground">{filtered.length} registo(s) · Página {safePage} de {pages}</p>
@@ -139,7 +166,7 @@ export function GradesDesk({role}:{role:Role}){
  </Panel>;
 }
 export function FinanceDesk({role}:{role:Role}){
- const {state,validateFee,submitPayment}=useDemo();const [refs,setRefs]=useState<Record<string,string>>({});
+ const {state,submitPayment}=useDemo();const [refs,setRefs]=useState<Record<string,string>>({});
  const allowed=role==="guardian"?new Set(guardianStudents(state).map(s=>s.id)):null;
  const rows=state.fees.filter(f=>!allowed||allowed.has(f.studentId));
  return <Panel title={role==="finance"?"Contas e recebimentos":role==="executive"?"Visão financeira":"Pagamentos dos educandos"} subtitle={role==="guardian"?"Consulte e apresente um comprovativo fictício para validação.":"Registos financeiros fictícios, separados do módulo académico."}>
@@ -147,7 +174,8 @@ export function FinanceDesk({role}:{role:Role}){
    <div><p className="text-sm font-extrabold">{state.students.find(s=>s.id===f.studentId)?.name}</p>
     <p className="mt-1 text-xs text-muted-foreground">{f.description} · {f.id}</p><p className="mt-2 text-base font-extrabold">{mt(f.amount)}</p></div>
    <div className="flex flex-wrap items-center gap-2"><Pill tone={f.status==="validated"?"success":"warning"}>{{pending:"Pendente",submitted:"Em validação",validated:"Validado",rejected:"Rejeitado"}[f.status]}</Pill>
-    {role==="finance"&&f.status!=="validated"&&<button onClick={()=>validateFee(f.id)} className="action">Validar pagamento</button>}
+    {role==="finance"&&f.status==="submitted"&&<Link to="/app/finance/validation" className="action-secondary">Rever comprovativo</Link>}
+    {role==="finance"&&(f.status==="pending"||f.status==="rejected")&&<Link to="/app/finance/obligations" className="action-secondary">Ver obrigação</Link>}
     {role==="guardian"&&f.status==="pending"&&<form className="flex flex-wrap gap-2" onSubmit={e=>{e.preventDefault();submitPayment(f.id,refs[f.id]??"");}}>
      <input aria-label={"Referência de "+f.id} placeholder="Referência fictícia" minLength={4} maxLength={48} required value={refs[f.id]??""} onChange={e=>setRefs(x=>({...x,[f.id]:e.target.value}))} className="h-11 w-40 rounded-lg border border-border px-3 text-xs"/>
      <button className="action-secondary">Submeter comprovativo</button>

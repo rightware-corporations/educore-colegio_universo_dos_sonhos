@@ -1,11 +1,30 @@
 import { useState } from "react";
 import { Navigate, NavLink, Outlet, useLocation, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeftRight, Bell, ChevronLeft, ChevronRight, LogOut, Menu, RotateCcw, X } from "lucide-react";
+import { ArrowLeftRight, Bell, BookOpen, CalendarDays, ChartNoAxesCombined, CheckCircle2, ChevronLeft, ChevronRight, ClipboardCheck, Clock3, CreditCard, FileText, GraduationCap, Layers3, LayoutDashboard, LogOut, Menu, MessageCircle, RotateCcw, School, Users, Wallet, X, type LucideIcon } from "lucide-react";
 import { Brand } from "./Brand";
-import { ROLE_DEFS, isRole } from "../config/roles";
+import { ROLE_DEFS, isRole, type Role } from "../config/roles";
 import { useDemo } from "../state/DemoProvider";
 import { guardianStudents } from "../data/school";
 
+const navIcons:Record<string,LucideIcon>={
+ dashboard:LayoutDashboard,students:Users,children:Users,classes:School,staff:GraduationCap,assignments:ClipboardCheck,
+ materials:BookOpen,learning:BookOpen,grades:GraduationCap,attendance:CheckCircle2,assessments:CalendarDays,
+ reviews:ClipboardCheck,timetable:CalendarDays,schedule:CalendarDays,subjects:BookOpen,admissions:FileText,
+ messages:MessageCircle,notices:Bell,appointments:Clock3,justifications:ClipboardCheck,
+ payments:Wallet,accounts:Wallet,validation:CheckCircle2,obligations:CreditCard,receipts:FileText,
+ analytics:ChartNoAxesCombined,reports:FileText,audit:ClipboardCheck,documents:FileText,
+ finance:Wallet,interventions:Layers3
+};
+const primaryMobileTabs:Record<Role,string[]>={
+ student:["dashboard","schedule","assignments","grades"],
+ guardian:["dashboard","children","schedule","payments"],
+ teacher:["dashboard","attendance","schedule","learning"],
+ pedagogy:["dashboard","classes","timetable","reviews"],
+ secretary:["dashboard","students","admissions","documents"],
+ reception:["dashboard","admissions","appointments","messages"],
+ finance:["dashboard","validation","obligations","accounts"],
+ executive:["dashboard","analytics","reports","audit"]
+};
 export function RoleShell(){
  const {role}=useParams();const navigate=useNavigate();const location=useLocation();
  const {role:activeRole,leave,state,reset}=useDemo();
@@ -14,9 +33,13 @@ export function RoleShell(){
  if(!activeRole||activeRole!==role)return <Navigate to="/login" replace/>;
  const cfg=ROLE_DEFS[role];
  const familyIds=guardianStudents(state).map(s=>s.id);
- const familyAlerts=state.events.filter(e=>e.studentId&&familyIds.includes(e.studentId)&&(e.kind==="attendance"||e.kind==="message")).length;
- const section=location.pathname.split("/").at(-1)||"dashboard";
+ const familyIncidents=state.attendance.filter(a=>familyIds.includes(a.studentId)&&a.status!=="present"&&
+  !state.justifications.some(j=>j.attendanceId===a.id&&j.status==="approved")).length;
+ const unreadNotices=state.notices.filter(n=>(!n.studentId||familyIds.includes(n.studentId))&&!n.readBy.includes("ENC-001")).length;
+ const familyAlerts=familyIncidents+unreadNotices;
+ const section=location.pathname.split("/")[3]||"dashboard";
  const selected=cfg.items.find(x=>x.path===section);
+ const mobileItems=primaryMobileTabs[role].map(path=>cfg.items.find(i=>i.path===path)).filter((x):x is typeof cfg.items[number]=>!!x);
  const leavePortal=()=>{leave();navigate("/login",{replace:true})};
  return <div className="min-h-screen bg-[#F5F7F8] text-[#102231]">
   {menu&&<button aria-label="Fechar menu lateral" className="fixed inset-0 z-30 bg-[#071A2A]/60 lg:hidden" onClick={()=>setMenu(false)}/>}
@@ -32,10 +55,10 @@ export function RoleShell(){
    </div>
    <nav aria-label={"Navegação "+cfg.short} className="mt-7 flex flex-1 flex-col gap-1 px-3">
     {!collapsed&&<p className="px-3 pb-2 text-[10px] font-bold uppercase tracking-[.16em] text-white/40">Área de trabalho</p>}
-    {cfg.items.map((item,i)=><NavLink key={item.path} to={"/app/"+role+"/"+item.path} onClick={()=>setMenu(false)}
+    {cfg.items.map(item=><NavLink key={item.path} to={"/app/"+role+"/"+item.path} onClick={()=>setMenu(false)}
       className={({isActive})=>"flex min-h-11 items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-semibold transition "+(isActive?"bg-[#F18136] text-[#071A2A]":"text-white/70 hover:bg-white/10 hover:text-white")}
       title={item.label}>
-      <span className="flex h-5 w-5 shrink-0 items-center justify-center text-xs font-extrabold">{i===0?"◉":String(i).padStart(2,"0")}</span>
+      <span className="flex h-5 w-5 shrink-0 items-center justify-center">{(() => {const Icon=navIcons[item.path]??Layers3;return <Icon size={18} aria-hidden="true"/>;})()}</span>
       {!collapsed&&<span>{item.label}</span>}
      </NavLink>)}
    </nav>
@@ -59,7 +82,7 @@ export function RoleShell(){
     <div className="flex items-center gap-2">
      {familyAlerts>0&&role==="guardian"&&<span className="flex items-center gap-1 rounded-full bg-[#F18136]/15 px-3 py-2 text-xs font-bold text-[#9E5018]"><Bell size={14}/> {familyAlerts}</span>}
      <span className="hidden rounded-full bg-[#0C5898]/10 px-3 py-2 text-[10px] font-extrabold uppercase tracking-wider text-[#0C5898] sm:inline">Modo demo</span>
-     <button title="Reiniciar dados da demonstração" aria-label="Reiniciar dados da demonstração" className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#071A2A]/10 text-[#65727C] hover:bg-[#FFF8EF]" onClick={reset}><RotateCcw size={17}/></button>
+     <button title="Reiniciar dados da demonstração" aria-label="Reiniciar dados da demonstração" className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#071A2A]/10 text-[#65727C] hover:bg-[#FFF8EF]" onClick={()=>{if(window.confirm("Reiniciar os dados fictícios da demonstração? As alterações locais serão substituídas pelo cenário inicial."))reset();}}><RotateCcw size={17}/></button>
      <button className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#071A2A] text-white" onClick={leavePortal} aria-label="Trocar perfil"><ArrowLeftRight size={18}/></button>
     </div>
    </header>
@@ -70,8 +93,8 @@ export function RoleShell(){
    </footer>
   </div>
   <nav className="fixed inset-x-0 bottom-0 z-20 flex items-center justify-around border-t border-[#071A2A]/10 bg-white/95 px-2 pb-[env(safe-area-inset-bottom)] backdrop-blur lg:hidden" aria-label="Navegação rápida mobile">
-   {cfg.items.slice(0,4).map((item,i)=><NavLink key={item.path} to={"/app/"+role+"/"+item.path} className={({isActive})=>"flex min-h-[62px] min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-lg px-1 text-[10px] font-bold "+(isActive?"text-[#0C5898]":"text-[#65727C]")}>
-    <span className="text-base">{i===0?"◉":String(i).padStart(2,"0")}</span><span className="max-w-full truncate">{item.label}</span>
+   {mobileItems.map(item=><NavLink key={item.path} to={"/app/"+role+"/"+item.path} onClick={()=>setMenu(false)} className={({isActive})=>"flex min-h-[62px] min-w-0 flex-1 flex-col items-center justify-center gap-1 rounded-lg px-1 text-[10px] font-bold "+(isActive?"text-[#0C5898]":"text-[#65727C]")}>
+    {(() => {const Icon=navIcons[item.path]??Layers3;return <Icon size={19} aria-hidden="true"/>;})()}<span className="max-w-full truncate">{item.label}</span>
    </NavLink>)}
   </nav>
  </div>;
