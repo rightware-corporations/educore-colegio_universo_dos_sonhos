@@ -280,7 +280,7 @@ export function DemoProvider({children}:PropsWithChildren){
    mutate(s=>{
     const lesson=s.lessons.find(l=>l.id===lessonId&&l.teacherId==="PROF-001");
     const student=s.students.find(st=>st.id===studentId&&st.classId===lesson?.classId&&st.status==="active");
-    if(!lesson||!student)return s;
+    if(!lesson||!student||new Date(date+"T12:00:00").getDay()!==lesson.weekday)return s;
     const previous=s.attendance.find(a=>a.lessonId===lessonId&&a.date===date&&a.studentId===studentId);
     if(previous&&s.justifications.some(j=>j.attendanceId===previous.id))return s;
     const row:Attendance={id:previous?.id??uid("ATT"),studentId,classId:lesson.classId,date,status,teacherId:lesson.teacherId,lessonId};

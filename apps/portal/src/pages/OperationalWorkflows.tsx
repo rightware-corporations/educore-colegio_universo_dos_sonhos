@@ -26,9 +26,10 @@ export function TeacherSessionAttendance(){
  const {state,recordSession}=useDemo();
  const lessons=state.lessons.filter(l=>l.teacherId==="PROF-001").sort((a,b)=>a.weekday-b.weekday||a.start.localeCompare(b.start));
  const [lessonId,setLessonId]=useState(lessons[0]?.id??"");
- const [date,setDate]=useState("2026-10-20");
+ const [date,setDate]=useState("2026-10-19");
  const [search,setSearch]=useState("");
  const lesson=lessons.find(l=>l.id===lessonId);
+ const validDate=!!lesson&&new Date(date+"T12:00:00").getDay()===lesson.weekday;
  const students=activeStudents(state).filter(x=>x.classId===lesson?.classId&&x.name.toLowerCase().includes(search.toLowerCase()));
  const entries=state.attendance.filter(a=>a.date===date&&a.lessonId===lessonId);
  const number=entries.filter(a=>a.status==="present").length,absent=entries.filter(a=>a.status==="absent"||a.status==="late").length;
@@ -40,6 +41,7 @@ export function TeacherSessionAttendance(){
      {lessons.map(l=><option key={l.id} value={l.id}>{state.classes.find(c=>c.id===l.classId)?.name} · {["","Segunda","Terça","Quarta","Quinta","Sexta"][l.weekday]} {l.start} · {state.staff.find(t=>t.id===l.teacherId)?.subject}</option>)}</select></label>
     <label className="space-y-2 text-xs font-extrabold">Data<input className={control+" block w-full"} type="date" aria-label="Data da chamada" value={date} onChange={e=>setDate(e.target.value)}/></label>
    </div>
+   {!validDate&&<p role="alert" className="mb-4 rounded-xl bg-amber-50 p-3 text-xs font-bold text-amber-900">A data selecionada não corresponde ao dia da semana desta aula. Altere a data para efetuar a chamada.</p>}
    <Summary items={[{label:"Alunos da turma",value:students.length},{label:"Presenças registadas",value:number},{label:"Faltas ou atrasos",value:absent},{label:"Por registar",value:Math.max(0,students.length-entries.length)}]}/>
    <div className="my-5 flex items-center gap-2 rounded-xl border border-[#E0E7ED] px-3"><Search size={16} className="text-[#687782]"/><input className="h-11 w-full text-sm outline-none" aria-label="Pesquisar estudante na chamada" value={search} onChange={e=>setSearch(e.target.value)} placeholder="Pesquisar aluno da turma"/></div>
    <div className="divide-y divide-[#E6EDF1]">{students.map(st=>{
@@ -48,7 +50,7 @@ export function TeacherSessionAttendance(){
     return <div key={st.id} className="flex flex-wrap items-center justify-between gap-3 py-3">
      <div><p className="text-sm font-bold">{st.name}</p><p className="mt-1 text-xs text-[#697A84]">{st.id}{locked?" · Justificação em análise":""}</p></div>
      <div className="flex flex-wrap items-center gap-2"><Status type={a?.status==="present"?"success":a?"attention":"neutral"}>{a?.status==="present"?"Presente":a?.status==="absent"?"Falta":a?.status==="late"?"Atraso":"Sem chamada"}</Status>
-      {(["present","absent","late"] as const).map(status=><button key={status} type="button" disabled={!lesson||locked} aria-label={status+" "+st.name}
+      {(["present","absent","late"] as const).map(status=><button key={status} type="button" disabled={!validDate||locked} aria-label={status+" "+st.name}
        onClick={()=>lesson&&recordSession(lesson.id,date,st.id,status)} className={secondary+" disabled:opacity-40"}>{status==="present"?"Presente":status==="absent"?"Falta":"Atraso"}</button>)}
      </div>
     </div>
