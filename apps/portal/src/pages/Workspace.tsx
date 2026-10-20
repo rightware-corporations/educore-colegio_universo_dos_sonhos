@@ -13,6 +13,7 @@ import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
 import { TeacherSessionAttendance, AbsenceCases, AssessmentWorkflow, NoticesWorkspace, DocumentsWorkspace, FinanceOperations, InterventionsWorkspace, ExecutiveReports } from "./OperationalWorkflows";
 import { LearningWorkspace, StudentRecord } from "./LearningWorkflows";
 import { SchoolAppointments } from "./SchoolAppointments";
+import { GuardianChildren } from "./GuardianChildren";
 import { OperationalPriorities } from "../components/DashboardActionCenter";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
@@ -179,7 +180,7 @@ function OtherModule({role,section}:{role:Role;section:string}){
  if(section==="messages")return role==="reception"?<AdmissionsDesk role={role}/>:<MessagesDesk role={role}/>;
  if(section==="schedule")return role==="pedagogy"?<CurriculumDesk/>:<Empty>Horário escolar indisponível neste perfil.</Empty>;
  if(section==="subjects")return <SubjectsSpotlight/>;
- if(section==="children")return <GuardianSpotlight/>;
+ if(section==="children"&&role==="guardian")return <GuardianChildren/>;
  if(section==="assignments"&&role==="student")return <StudentWork/>;
  if(section==="analytics")return <div className="grid gap-5 lg:grid-cols-2"><Panel title="Distribuição por ciclo"><GradeDistribution data={state}/></Panel><Panel title="Assiduidade"><AttendanceChart data={state}/></Panel></div>;
  if(section==="documents")return <Panel title="Arquivo administrativo" subtitle="Gestão da documentação do processo escolar.">
