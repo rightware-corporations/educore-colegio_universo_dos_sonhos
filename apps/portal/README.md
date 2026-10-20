@@ -85,3 +85,7 @@ Revisão e decisões em [COLUS V6 — auditoria UX e fluxos](docs/COLUS-V6-UX-FU
 ## V7 · Turmas, TPC com anexos e scheduling público
 
 Consultar [handoff funcional e plano de integração](docs/COLUS-V7-CLASS-GRADEBOOK-TPC-SCHEDULING-2026-10-20.md). Agendamentos reais exigem API PostgreSQL e credenciais de Receção, descritos em `../scheduling-api/README.md`.
+
+## Evidência visual V7.1
+
+Consultar [auditoria do Diário de notas, TPC e agendamento público](docs/COLUS-V7-1-VISUAL-QA-2026-10-20.md), com evidência Chromium em 390 e 1440 px. A agenda real continua dependente da API PostgreSQL publicada e autorizada.

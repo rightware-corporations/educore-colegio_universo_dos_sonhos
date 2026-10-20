@@ -809,3 +809,15 @@ Após seis capturas Edge do responsável foi identificada falha de profundidade 
 **Qualidade:** testes de motor em GitHub Actions `COLUS Scheduling API QA`; regressão portal Chromium aumentada para pauta por turma e upload. A conclusão de CI **não equivale** à aprovação visual COLUS ou prontidão para operação real. Continua a faltar autenticação institutional, storage seguro de ficheiros, notificações, consentimento/privacidade e confirmação de horários do colégio.
 
 **Referência técnica e pendências:** `apps/portal/docs/COLUS-V7-CLASS-GRADEBOOK-TPC-SCHEDULING-2026-10-20.md`. Sem merge em main, sem deployment, sem eliminar backups/branches. Não importar indevidamente nomes ou marca de outros colégios.
+
+## 50. REVISÃO VISUAL V7.1 — PAUTA PAGINADA, TPC COMPACTO E AGENDAMENTO 390/1440 (2026-10-20)
+
+**Pedido:** continuar V7, terminar validação da landing, rever screenshots reais do Chromium e consolidar visualmente o portal. Trabalhado apenas em `develop`, sem merge/deploy.
+
+**Evidências:** artefactos dos runs `39477317664` (portal), `39477317729` (landing), `39481310288` (novas capturas V7) e `39481475177` (rota /agendar 390/1440). Ao visualizar, foi confirmado que a pauta mobile mantinha todos os 19 alunos da turma 9A numa lista extensa e que os três indicadores de TPC ocupavam excessiva altura. Landing pública /agendar apresentou serviços, calendário e formulário, mas desabilitou envio enquanto API estiver ausente.
+
+**Correções:** `pages/Gradebook.tsx`: pauta de Professor com 8 alunos por página, pesquisa, navegação anterior/seguinte, cartões legíveis a 390 px e tabela completa em desktop. `pages/LearningWorkflows.tsx`: grelha compacta de KPI mobile e melhor proporção do Hero. Regressões Playwright registadas em `apps/portal/scripts/qa-browser.mjs` e `frontend/scripts/qa-public-booking-browser.mjs` com capturas e verificação de overflow. Não alterar o Hero/identidade/assets da landing.
+
+**Resultados finais do ciclo:** Portal QA [39482111096](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39482111096) SUCCESS; Frontend QA [39482110994](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39482110994) SUCCESS, no código `a7df1fb`. A API em PostgreSQL já passara teste ponta a ponta em CI [39477001023](https://github.com/rightware-corporations/educore-colegio_universo_dos_sonhos/actions/runs/39477001023). **Isto não significa que a agenda pública esteja publicada ou sincronizada no ambiente real**. Sem API configurada, não cria reservas.
+
+**Relatório integral:** `apps/portal/docs/COLUS-V7-1-VISUAL-QA-2026-10-20.md`. Aprovação visual do cliente, regras de negócio e credenciais de produção permanecem pendentes. Não alterar `main`, PRs históricos ou backups.
