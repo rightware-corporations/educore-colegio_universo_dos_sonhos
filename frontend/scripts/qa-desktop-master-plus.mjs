@@ -209,6 +209,24 @@ try {
       results.push({ viewport: viewport.width, chapter: "Pertencer", state: step.name, phase: step.phase });
     }
 
+    // Guard the approved desktop copy against an isolated "se" line at 1024px.
+    // This checks real computed text wrapping, not just font-size classes.
+    const futuroHeading = await page.locator("#futuro [data-colus-desktop-futuro-headline]").evaluate(el => {
+      const style = getComputedStyle(el);
+      const lineHeight = parseFloat(style.lineHeight);
+      return {
+        text: el.textContent.trim(),
+        lines: el.getBoundingClientRect().height / lineHeight,
+        fontSize: parseFloat(style.fontSize),
+      };
+    });
+    assert.equal(futuroHeading.text, "O futuro também se aprende.",
+      "Futuro editorial copy is protected");
+    assert.ok(futuroHeading.lines >= 2.7 && futuroHeading.lines <= 3.3,
+      "Futuro desktop heading must occupy THREE balanced lines without a lone 'se': " +
+      JSON.stringify({ viewport: viewport.width, ...futuroHeading }));
+    results.push({ viewport: viewport.width, chapter: "Futuro typography", ...futuroHeading });
+
     // FUTURO: the SAME scene-window node must survive changes of all four
     // scenes. Only media content transforms inside the fixed approved mask.
     const window = page.locator("#futuro [data-colus-desktop-scene-window]");
