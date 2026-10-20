@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState, type PropsWithChildren } from "react";
 import { isRole, type Role } from "../config/roles";
-import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event, type Lesson, gradeSubjects, type AbsenceJustification, type AssessmentPlan, type SchoolDocument, type SchoolNotice, type Intervention, type LearningItem, type WorkSubmission } from "../data/school";
+import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event, type Lesson, gradeSubjects, type AbsenceJustification, type AssessmentPlan, type SchoolDocument, type SchoolNotice, type Intervention, type LearningItem, type WorkSubmission, type SchoolAppointment } from "../data/school";
 
 const DB_KEY="colus.portal.sandbox.v4";
 const PREVIOUS_KEY="colus.portal.sandbox.v3";
@@ -32,7 +32,7 @@ const mergeWeekSeed=(previous:SchoolData):SchoolData=>{
  return {...previous,staff,lessons};
 };
 const hydrate=(s:SchoolData):SchoolData=>({...s,
- justifications:s.justifications??[],assessmentPlans:s.assessmentPlans??[],documents:s.documents??[],notices:s.notices??[],interventions:s.interventions??[],learningItems:s.learningItems??createSchool().learningItems,workSubmissions:s.workSubmissions??[]
+ justifications:s.justifications??[],assessmentPlans:s.assessmentPlans??[],documents:s.documents??[],notices:s.notices??[],interventions:s.interventions??[],learningItems:s.learningItems??createSchool().learningItems,workSubmissions:s.workSubmissions??[],appointments:s.appointments??[]
 });
 const read=():SchoolData=>{
  try{
@@ -94,6 +94,8 @@ type Ctx={
  createLearningItem:(classId:string,title:string,details:string,kind:LearningItem["kind"],dueDate?:string)=>void;
  submitWork:(itemId:string,response:string)=>void;
  reviewWork:(submissionId:string,feedback:string)=>void;
+ requestAppointment:(studentId:string,reason:string,date:string,time:string)=>void;
+ decideAppointment:(id:string,confirm:boolean)=>void;
  sendMessage:(text:string,studentId?:string)=>void;
 };
 const Context=createContext<Ctx|null>(null);
@@ -419,6 +421,24 @@ export function DemoProvider({children}:PropsWithChildren){
     if(!submission||!item)return s;
     return {...s,workSubmissions:s.workSubmissions.map(x=>x.id===submissionId?{...x,status:"reviewed",feedback:feedback.trim()}:x),
       events:[makeEvent("learning","Trabalho revisto",item.title,submission.studentId),...s.events]};
+   });
+  },
+  requestAppointment(studentId,reason,date,time){
+   if(role!=="guardian"||reason.trim().length<5||reason.length>300||!/^\d{4}-\d{2}-\d{2}$/.test(date)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(time)||time<"08:00"||time>"16:00")return;
+   mutate(s=>{
+    const student=s.students.find(x=>x.id===studentId&&x.guardianId==="ENC-001");
+    if(!student)return s;
+    const appointment:SchoolAppointment={id:uid("ATD"),studentId,guardianName:s.guardians.find(x=>x.id==="ENC-001")?.name??"Encarregado",reason:reason.trim(),date,time,status:"requested"};
+    return {...s,appointments:[appointment,...s.appointments],events:[makeEvent("appointment","Atendimento solicitado",reason.trim(),studentId),...s.events]};
+   });
+  },
+  decideAppointment(id,confirm){
+   if(role!=="reception")return;
+   mutate(s=>{
+    const appointment=s.appointments.find(x=>x.id===id&&x.status==="requested");if(!appointment)return s;
+    if(confirm&&s.appointments.some(x=>x.status==="confirmed"&&x.date===appointment.date&&x.time===appointment.time))return s;
+    return {...s,appointments:s.appointments.map(x=>x.id===id?{...x,status:confirm?"confirmed" as const:"cancelled" as const}:x),
+     events:[makeEvent("appointment",confirm?"Atendimento confirmado":"Atendimento cancelado",appointment.date+" · "+appointment.time,appointment.studentId),...s.events]};
    });
   },
   sendMessage(text,studentId="ALU-001"){

@@ -12,6 +12,7 @@ import { ClassesManagement, TeachersManagement, AssignmentsManagement, Timetable
 import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
 import { TeacherSessionAttendance, AbsenceCases, AssessmentWorkflow, NoticesWorkspace, DocumentsWorkspace, FinanceOperations, InterventionsWorkspace, ExecutiveReports } from "./OperationalWorkflows";
 import { LearningWorkspace, StudentRecord } from "./LearningWorkflows";
+import { SchoolAppointments } from "./SchoolAppointments";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
 const focusStudent="ALU-001";
@@ -236,6 +237,8 @@ export function Workspace(){
  if(allowedRole==="pedagogy"&&active==="attendance")return <PageContainer><PedagogyAttendance/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="grades")return <PageContainer><PedagogyAssessments/></PageContainer>;
  if(allowedRole==="teacher"&&active==="attendance")return <PageContainer><TeacherSessionAttendance/></PageContainer>;
+ if((allowedRole==="guardian"||allowedRole==="reception")&&active==="appointments")
+  return <PageContainer><SchoolAppointments role={allowedRole}/></PageContainer>;
  if(allowedRole==="teacher"&&active==="assessments")return <PageContainer><AssessmentWorkflow role="teacher"/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="reviews")return <PageContainer><AssessmentWorkflow role="pedagogy"/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="justifications")return <PageContainer><AbsenceCases role="pedagogy"/></PageContainer>;
