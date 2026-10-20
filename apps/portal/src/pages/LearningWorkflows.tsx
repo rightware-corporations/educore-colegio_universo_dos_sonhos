@@ -2,7 +2,7 @@ import { useState } from "react";
 import { BookOpen, ClipboardList, FileText, ArrowLeft, CalendarDays, UserRound, GraduationCap, Printer } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useDemo } from "../state/DemoProvider";
-import { activeStudents, guardianStudents, average, attendanceRate } from "../data/school";
+import { guardianStudents, average, attendanceRate } from "../data/school";
 const control="min-h-11 rounded-xl border border-[#DAE4EC] bg-white px-3 text-sm outline-none focus:border-[#0C5898]";
 const action="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#0C5898] px-4 text-xs font-bold text-white";
 const frame="rounded-2xl border border-[#DFE8EE] bg-white p-5 sm:p-6";
