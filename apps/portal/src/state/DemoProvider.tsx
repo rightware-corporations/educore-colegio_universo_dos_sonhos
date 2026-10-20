@@ -1,6 +1,6 @@
 import { createContext, useContext, useMemo, useState, type PropsWithChildren } from "react";
 import { isRole, type Role } from "../config/roles";
-import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event, type Lesson, gradeSubjects, type AbsenceJustification, type AssessmentPlan, type SchoolDocument, type SchoolNotice, type Intervention, type LearningItem, type WorkSubmission, type SchoolAppointment } from "../data/school";
+import { createSchool, type SchoolData, type Student, type Admission, type Attendance, type Assessment, type Message, type Event, type Lesson, gradeSubjects, type AbsenceJustification, type AssessmentPlan, type SchoolDocument, type SchoolNotice, type Intervention, type LearningItem, type WorkSubmission, type SchoolAppointment, type DemoAttachment } from "../data/school";
 
 const DB_KEY="colus.portal.sandbox.v4";
 const PREVIOUS_KEY="colus.portal.sandbox.v3";
@@ -34,6 +34,9 @@ const mergeWeekSeed=(previous:SchoolData):SchoolData=>{
 const hydrate=(s:SchoolData):SchoolData=>({...s,
  justifications:s.justifications??[],assessmentPlans:s.assessmentPlans??[],documents:s.documents??[],notices:s.notices??[],interventions:s.interventions??[],learningItems:s.learningItems??createSchool().learningItems,workSubmissions:s.workSubmissions??[],appointments:s.appointments??[]
 });
+const acceptedAttachment=(a?:DemoAttachment)=>!a||(a.size>0&&a.size<=512*1024&&a.name.length<=140&&
+  /^(application\\/pdf|image\\/(png|jpeg)|text\\/plain|application\\/vnd\\.openxmlformats-officedocument\\.wordprocessingml\\.document)$/.test(a.type)&&
+  a.dataUrl.startsWith("data:"+a.type+";base64,")&&a.dataUrl.length<=720000);
 const read=():SchoolData=>{
  try{
   const raw=localStorage.getItem(DB_KEY);
@@ -91,8 +94,8 @@ type Ctx={
  acknowledgeNotice:(id:string)=>void;
  openIntervention:(studentId:string,note:string,followUp:string)=>void;
  closeIntervention:(id:string)=>void;
- createLearningItem:(classId:string,title:string,details:string,kind:LearningItem["kind"],dueDate?:string)=>void;
- submitWork:(itemId:string,response:string)=>void;
+ createLearningItem:(classId:string,title:string,details:string,kind:LearningItem["kind"],dueDate?:string,attachment?:DemoAttachment)=>void;
+ submitWork:(itemId:string,response:string,attachment?:DemoAttachment)=>void;
  reviewWork:(submissionId:string,feedback:string)=>void;
  requestAppointment:(studentId:string,reason:string,date:string,time:string)=>void;
  decideAppointment:(id:string,confirm:boolean)=>void;
@@ -395,21 +398,21 @@ export function DemoProvider({children}:PropsWithChildren){
     return {...s,interventions:s.interventions.map(x=>x.id===id?{...x,status:"closed"}:x),events:[makeEvent("intervention","Acompanhamento encerrado","Intervenção concluída",v.studentId),...s.events]};
    });
   },
-  createLearningItem(classId,title,details,kind,dueDate){
-   if(role!=="teacher"||title.trim().length<3||title.length>120||details.trim().length<5||details.length>600||!["material","assignment"].includes(kind)||kind==="assignment"&&!/^\d{4}-\d{2}-\d{2}$/.test(dueDate??""))return;
+  createLearningItem(classId,title,details,kind,dueDate,attachment){
+   if(role!=="teacher"||title.trim().length<3||title.length>120||(!attachment&&details.trim().length<5)||details.length>600||!acceptedAttachment(attachment)||!["material","assignment"].includes(kind)||kind==="assignment"&&!/^\d{4}-\d{2}-\d{2}$/.test(dueDate??""))return;
    mutate(s=>{
     const teacher=s.staff.find(t=>t.id==="PROF-001"&&t.role==="teacher"&&t.classIds?.includes(classId));if(!teacher)return s;
-    const item:LearningItem={id:uid("MAT"),classId,subject:teacher.subject??"",teacherId:teacher.id,title:title.trim(),details:details.trim(),kind,dueDate};
+    const item:LearningItem={id:uid("MAT"),classId,subject:teacher.subject??"",teacherId:teacher.id,title:title.trim(),details:details.trim(),kind,dueDate,attachment};
     return {...s,learningItems:[item,...s.learningItems],events:[makeEvent("learning","Conteúdo publicado",item.title),...s.events]};
    });
   },
-  submitWork(itemId,response){
-   if(role!=="student"||response.trim().length<5||response.length>1200)return;
+  submitWork(itemId,response,attachment){
+   if(role!=="student"||(!attachment&&response.trim().length<5)||response.length>1200||!acceptedAttachment(attachment))return;
    mutate(s=>{
     const item=s.learningItems.find(i=>i.id===itemId&&i.kind==="assignment");
     const student=s.students.find(x=>x.id==="ALU-001"&&x.status==="active"&&x.classId===item?.classId);
     if(!item||!student||s.workSubmissions.some(x=>x.itemId===itemId&&x.studentId===student.id))return s;
-    const submission:WorkSubmission={id:uid("SUB"),itemId,studentId:student.id,response:response.trim(),status:"submitted"};
+    const submission:WorkSubmission={id:uid("SUB"),itemId,studentId:student.id,response:response.trim(),status:"submitted",attachment};
     return {...s,workSubmissions:[submission,...s.workSubmissions],events:[makeEvent("learning","Trabalho entregue",item.title,student.id),...s.events]};
    });
   },

@@ -13,6 +13,7 @@ import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
 import { TeacherSessionAttendance, AbsenceCases, AssessmentWorkflow, NoticesWorkspace, DocumentsWorkspace, FinanceOperations, InterventionsWorkspace, ExecutiveReports } from "./OperationalWorkflows";
 import { LearningWorkspace, StudentRecord } from "./LearningWorkflows";
 import { SchoolAppointments } from "./SchoolAppointments";
+import { TeacherGradebook, LearnerGrades } from "./Gradebook";
 import { GuardianChildren } from "./GuardianChildren";
 import { OperationalPriorities } from "../components/DashboardActionCenter";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
@@ -207,6 +208,8 @@ export function Workspace(){
  if(allowedRole==="pedagogy"&&active==="timetable")return <PageContainer><TimetableManagement/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="attendance")return <PageContainer><PedagogyAttendance/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="grades")return <PageContainer><PedagogyAssessments/></PageContainer>;
+ if(active==="grades"&&allowedRole==="teacher")return <PageContainer><TeacherGradebook/></PageContainer>;
+ if(active==="grades"&&(allowedRole==="student"||allowedRole==="guardian"))return <PageContainer><LearnerGrades role={allowedRole}/></PageContainer>;
  if(allowedRole==="teacher"&&active==="attendance")return <PageContainer><TeacherSessionAttendance/></PageContainer>;
  if((allowedRole==="guardian"||allowedRole==="reception")&&active==="appointments")
   return <PageContainer><SchoolAppointments role={allowedRole}/></PageContainer>;

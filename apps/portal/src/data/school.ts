@@ -15,8 +15,9 @@ export type AssessmentPlan={id:string;classId:string;teacherId:string;subject:st
 export type SchoolDocument={id:string;studentId:string;kind:string;status:"requested"|"issued";createdAt:string};
 export type SchoolNotice={id:string;title:string;text:string;studentId?:string;at:string;readBy:string[]};
 export type Intervention={id:string;studentId:string;note:string;followUp:string;status:"open"|"closed"};
-export type LearningItem={id:string;classId:string;subject:string;teacherId:string;title:string;details:string;kind:"material"|"assignment";dueDate?:string};
-export type WorkSubmission={id:string;itemId:string;studentId:string;response:string;status:"submitted"|"reviewed";feedback?:string};
+export type DemoAttachment={name:string;type:string;size:number;dataUrl:string};
+export type LearningItem={id:string;classId:string;subject:string;teacherId:string;title:string;details:string;kind:"material"|"assignment";dueDate?:string;attachment?:DemoAttachment};
+export type WorkSubmission={id:string;itemId:string;studentId:string;response:string;status:"submitted"|"reviewed";feedback?:string;attachment?:DemoAttachment};
 export type SchoolAppointment={id:string;studentId:string;guardianName:string;reason:string;date:string;time:string;status:"requested"|"confirmed"|"cancelled"};
 export type SchoolData={appointments:SchoolAppointment[];learningItems:LearningItem[];workSubmissions:WorkSubmission[];justifications:AbsenceJustification[];assessmentPlans:AssessmentPlan[];documents:SchoolDocument[];notices:SchoolNotice[];interventions:Intervention[];lessons:Lesson[];students:Student[];guardians:Guardian[];staff:Staff[];classes:SchoolClass[];attendance:Attendance[];assessments:Assessment[];fees:Fee[];admissions:Admission[];events:Event[];messages:Message[]};
 const schoolClass=(grade:number,letter="A"):SchoolClass=>({id:"CL-"+String(grade).padStart(2,"0")+"-"+letter,grade,name:grade+"ª "+letter,capacity:30,active:true});
