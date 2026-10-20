@@ -21,7 +21,7 @@ export function ReceptionPublicBookings(){
  },[]);
  useEffect(()=>{if(!API)return;fetch(API+"/v1/services").then(r=>r.json()).then(d=>setServices(d.services??[])).catch(()=>setError("A agenda não está disponível neste momento. Tente novamente mais tarde."));},[]);
  useEffect(()=>{if(!API||!date||!service)return;let alive=true;fetch(API+"/v1/slots?date="+date+"&serviceId="+service).then(r=>r.json()).then(d=>{if(alive)setSlots(d.slots??[])}).catch(()=>{if(alive)setSlots([])});return()=>{alive=false}},[date,service]);
- useEffect(()=>{if(!connected||!token)return;const interval=window.setInterval(()=>load(token).catch(e=>{setConnected(false);setError("Não foi possível atualizar as marcações. Tente novamente.")}),20000);return()=>clearInterval(interval)},[connected,token,load]);
+ useEffect(()=>{if(!connected||!token)return;const interval=window.setInterval(()=>load(token).catch(()=>{setConnected(false);setError("Não foi possível atualizar as marcações. Tente novamente.")}),20000);return()=>clearInterval(interval)},[connected,token,load]);
  const modify=async(id:string,status:"confirmed"|"cancelled"|"completed")=>{
   setBusy(id);try{const res=await fetch(API+"/v1/bookings/"+id,{method:"PATCH",headers:{"Content-Type":"application/json",Authorization:"Bearer "+token},body:JSON.stringify({status})});const d=await res.json();if(!res.ok)throw Error(d.error??"Não foi possível atualizar.");await load(token)}
   catch(e){setError("Não foi possível guardar a alteração. Tente novamente.")}finally{setBusy("")}
