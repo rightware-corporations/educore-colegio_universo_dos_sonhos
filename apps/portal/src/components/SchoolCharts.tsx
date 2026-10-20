@@ -19,7 +19,7 @@ export function AttendanceChart({data}:{data:SchoolData}){
  return <div className="h-60 w-full" aria-label="Gráfico: assiduidade registada por turma">
  <ResponsiveContainer width="100%" height="100%"><BarChart data={series} margin={{top:8,right:8,left:-25,bottom:4}}>
  <CartesianGrid strokeDasharray="3 3" stroke="#E9EEF3" vertical={false}/><XAxis dataKey="name" tick={{fontSize:11}} tickLine={false} axisLine={false}/><YAxis domain={[0,100]} tick={{fontSize:11}} tickLine={false} axisLine={false}/>
- <Tooltip contentStyle={toolStyle} formatter={(n:number)=>n+"%"}/><Bar dataKey="taxa" name="Assiduidade" fill="#40A68A" radius={[7,7,0,0]}/></BarChart></ResponsiveContainer></div>;
+ <Tooltip contentStyle={toolStyle}/><Bar dataKey="taxa" name="Assiduidade" fill="#40A68A" radius={[7,7,0,0]}/></BarChart></ResponsiveContainer></div>;
 }
 export function FinanceChart({data}:{data:SchoolData}){
  const statuses=[{name:"Validados",key:"validated"},{name:"Submetidos",key:"submitted"},{name:"Pendentes",key:"pending"}];
