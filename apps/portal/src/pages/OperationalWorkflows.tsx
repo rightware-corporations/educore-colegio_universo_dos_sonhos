@@ -165,6 +165,8 @@ export function DocumentsWorkspace(){
 export function FinanceOperations({section}:{section:"obligations"|"validation"|"receipts"|"accounts"}){
  const {state,createObligation,validateFee,rejectFee}=useDemo();
  const [studentId,setStudentId]=useState("ALU-001"),[description,setDescription]=useState("Mensalidade de novembro 2026"),[amount,setAmount]=useState("8500"),[dueDate,setDueDate]=useState("2026-11-10"),[query,setQuery]=useState("");
+ const [receiptId,setReceiptId]=useState<string|null>(null);
+ const receipt=state.fees.find(f=>f.id===receiptId&&f.status==="validated");
  const rows=state.fees.filter(f=>section!=="validation"||f.status==="submitted").filter(f=>section!=="receipts"||f.status==="validated")
   .filter(f=>!query||[f.description,state.students.find(x=>x.id===f.studentId)?.name].join(" ").toLowerCase().includes(query.toLowerCase()));
  const headline={obligations:"Obrigações escolares",validation:"Validação de pagamentos",receipts:"Comprovativos validados",accounts:"Contas dos alunos"}[section];
@@ -183,10 +185,23 @@ export function FinanceOperations({section}:{section:"obligations"|"validation"|
     <div className="flex flex-wrap items-center gap-2"><strong className="mr-2 text-sm">{mt(f.amount)}</strong><Status type={f.status==="validated"?"success":f.status==="submitted"?"attention":"neutral"}>{{pending:"Pendente",submitted:"Submetido",validated:"Validado",rejected:"Rejeitado"}[f.status]}</Status>
      {f.status==="submitted"&&section==="validation"&&<><button className={button} onClick={()=>validateFee(f.id)}>Validar</button>
      <button className={secondary} onClick={()=>{const reason=window.prompt("Motivo da rejeição");if(reason?.trim()&&reason.length>=3)rejectFee(f.id,reason)}}>Rejeitar</button></>}
-     {f.status==="validated"&&<button className={secondary} onClick={()=>window.print()}><Printer size={14}/> Imprimir referência</button>}
+     {f.status==="validated"&&<button className={secondary} onClick={()=>setReceiptId(f.id)}><FileText size={14}/> Ver comprovativo</button>}
     </div></article>)}</div>{rows.length===0&&<Empty>Sem movimentos correspondentes aos filtros.</Empty>}
   </section>
-  <p className="text-xs text-[#876632]">A impressão é apenas uma referência de demonstração e não constitui recibo fiscal ou declaração de pagamento oficial.</p>
+  <p className="text-xs text-[#876632]">Os comprovativos são ilustrativos e não constituem recibos fiscais ou declarações oficiais de pagamento.</p>
+  {receipt&&<div className="fixed inset-0 z-[100] flex items-center justify-center bg-[#071A2A]/70 p-4" role="dialog" aria-modal="true" aria-label="Comprovativo demonstrativo" onClick={()=>setReceiptId(null)}>
+   <div className="max-h-[90vh] w-full max-w-xl overflow-y-auto rounded-2xl bg-white p-6 shadow-xl sm:p-8" onClick={e=>e.stopPropagation()}>
+    <div className="flex items-start justify-between gap-3"><div><p className="text-[11px] font-extrabold uppercase tracking-[.15em] text-[#F18136]">Documento ilustrativo</p>
+     <h2 className="mt-2 text-xl font-extrabold">COLUS · Comprovativo demonstrativo</h2></div><button className={secondary} onClick={()=>setReceiptId(null)}>Fechar</button></div>
+    <p className="mt-5 border-y border-[#DFE6EC] py-3 text-xs font-bold text-red-700">SEM VALIDADE FISCAL · NÃO CONFIRMA UMA TRANSAÇÃO REAL</p>
+    <dl className="mt-5 grid grid-cols-2 gap-4 text-sm">
+     <div><dt className="text-xs text-[#687782]">Referência</dt><dd className="mt-1 font-bold">{receipt.id}</dd></div>
+     <div><dt className="text-xs text-[#687782]">Estado</dt><dd className="mt-1 font-bold">Validado na demonstração</dd></div>
+     <div><dt className="text-xs text-[#687782]">Aluno</dt><dd className="mt-1 font-bold">{state.students.find(s=>s.id===receipt.studentId)?.name}</dd></div>
+     <div><dt className="text-xs text-[#687782]">Montante</dt><dd className="mt-1 font-bold">{mt(receipt.amount)}</dd></div>
+     <div className="col-span-2"><dt className="text-xs text-[#687782]">Conceito</dt><dd className="mt-1 font-bold">{receipt.description}</dd></div>
+    </dl><p className="mt-5 text-xs leading-6 text-[#687782]">Simulação local, sem faturação, integração bancária ou assinatura institucional. Use apenas para avaliação do fluxo.</p>
+   </div></div>}
  </div>;
 }
 export function InterventionsWorkspace(){
