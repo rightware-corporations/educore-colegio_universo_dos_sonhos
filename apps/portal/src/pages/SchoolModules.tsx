@@ -16,15 +16,24 @@ export function Empty({children}:{children:React.ReactNode}){return <p className
 export function StudentRegistry(){
  const {state,createStudent,editStudent,archiveStudent}=useDemo();
  const [open,setOpen]=useState(false),[query,setQuery]=useState(""),[showArchived,setShowArchived]=useState(false);
+ const [gradeFilter,setGradeFilter]=useState("all"),[page,setPage]=useState(1);
+ const pageSize=15;
  const [name,setName]=useState(""),[grade,setGrade]=useState(9),[guardianId,setGuardian]=useState("ENC-001");
  const [editing,setEditing]=useState<Student|null>(null);
- const rows=state.students.filter(s=>(showArchived||s.status==="active")&&s.name.toLocaleLowerCase().includes(query.toLocaleLowerCase()));
+ const filtered=state.students.filter(s=>(showArchived||s.status==="active")&&(gradeFilter==="all"||s.grade===Number(gradeFilter))&&
+ (s.name.toLocaleLowerCase().includes(query.toLocaleLowerCase())||s.id.toLocaleLowerCase().includes(query.toLocaleLowerCase()))).slice().reverse();
+ const pages=Math.max(1,Math.ceil(filtered.length/pageSize));
+ const safePage=Math.min(page,pages);
+ const rows=filtered.slice((safePage-1)*pageSize,safePage*pageSize);
  function save(e:React.FormEvent){e.preventDefault();if(editing){editStudent(editing.id,{name,guardianId});setEditing(null);}else{createStudent({name,grade,guardianId});}setOpen(false);setName("");}
  return <Panel title="Registo de alunos" subtitle="Cadastro escolar e gestão documental; histórico conservado ao arquivar." action={
  <button className="action" onClick={()=>{setEditing(null);setName("");setGrade(9);setGuardian("ENC-001");setOpen(v=>!v);}}><UserPlus size={16}/> Novo aluno</button>}>
   <div className="mb-5 flex flex-wrap gap-3">
-   <label className="flex min-w-[200px] flex-1 items-center gap-2 rounded-xl border border-border bg-white px-3"><Search size={16} className="text-muted-foreground"/><input aria-label="Pesquisar aluno" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Pesquisar por nome" className="h-11 min-w-0 flex-1 outline-none"/></label>
-   <label className="flex cursor-pointer items-center gap-2 text-xs font-bold text-muted-foreground"><input type="checkbox" checked={showArchived} onChange={e=>setShowArchived(e.target.checked)}/> Mostrar arquivados</label>
+   <label className="flex min-w-[200px] flex-1 items-center gap-2 rounded-xl border border-border bg-white px-3"><Search size={16} className="text-muted-foreground"/><input aria-label="Pesquisar aluno" value={query} onChange={e=>{setQuery(e.target.value);setPage(1);}} placeholder="Pesquisar por nome ou código" className="h-11 min-w-0 flex-1 outline-none"/></label>
+   <select aria-label="Filtrar alunos por classe" className="h-11 rounded-xl border border-border bg-white px-3 text-xs" value={gradeFilter} onChange={e=>{setGradeFilter(e.target.value);setPage(1);}}>
+    <option value="all">Todas as classes</option>{CURRICULUM.map(x=><option value={x.grade} key={x.grade}>{x.label}</option>)}
+   </select>
+   <label className="flex cursor-pointer items-center gap-2 text-xs font-bold text-muted-foreground"><input type="checkbox" checked={showArchived} onChange={e=>{setShowArchived(e.target.checked);setPage(1);}}/> Mostrar arquivados</label>
   </div>
   {open&&<form className="mb-6 grid gap-4 rounded-2xl border border-[#0C5898]/15 bg-[#F5FAFE] p-5 sm:grid-cols-2" onSubmit={save}>
    <div className="sm:col-span-2"><p className="text-sm font-extrabold">{editing?"Editar ficha do aluno":"Nova ficha do aluno"}</p><p className="mt-1 text-xs text-muted-foreground">Utilizar apenas nomes fictícios nesta apresentação.</p></div>
@@ -46,6 +55,11 @@ export function StudentRegistry(){
     </>}</div></td>
   </tr>)}</tbody></table></div>
   {rows.length===0&&<Empty>Nenhum aluno corresponde à pesquisa.</Empty>}
+  <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-border pt-4">
+   <p className="text-xs text-muted-foreground">{filtered.length} registo(s) · Página {safePage} de {pages}</p>
+   <div className="flex gap-2"><button type="button" disabled={safePage<=1} onClick={()=>setPage(x=>Math.max(1,x-1))} className="action-secondary disabled:opacity-40">Anterior</button>
+   <button type="button" disabled={safePage>=pages} onClick={()=>setPage(x=>Math.min(pages,x+1))} className="action-secondary disabled:opacity-40">Seguinte</button></div>
+  </div>
  </Panel>;
 }
 export function ClassAssignments({role}:{role:Role}){
