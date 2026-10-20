@@ -89,3 +89,7 @@ Consultar [handoff funcional e plano de integração](docs/COLUS-V7-CLASS-GRADEB
 ## Evidência visual V7.1
 
 Consultar [auditoria do Diário de notas, TPC e agendamento público](docs/COLUS-V7-1-VISUAL-QA-2026-10-20.md), com evidência Chromium em 390 e 1440 px. A agenda real continua dependente da API PostgreSQL publicada e autorizada.
+
+## Pré-deploy e interface de Receção
+
+Consultar [checklist de publicação e limpeza de mensagens técnicas](docs/COLUS-DEPLOYMENT-READINESS-2026-10-20.md). O portal continua uma demonstração com dados fictícios; não publicar como sistema de produção sem backend e identidade seguros.
