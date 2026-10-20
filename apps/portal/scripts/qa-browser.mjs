@@ -18,6 +18,7 @@ try{
  page.on("pageerror",e=>errors.push(e.message));
  await page.goto(base+"/welcome",{waitUntil:"networkidle"});
  assert.equal(await page.locator('img[alt="Comunidade escolar COLUS"]').count(),1,"Welcome must use official COLUS scene");
+ await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"welcome-desktop.png"),fullPage:true});
  await page.getByRole("link",{name:/Explorar o portal/}).click();
  assert.match(page.url(),/\/login$/);
@@ -26,6 +27,7 @@ try{
  await page.getByRole("button",{name:/Entrar como Professor/}).click();
  assert.match(page.url(),/\/app\/teacher\/dashboard$/);
  assert.equal(await page.getByRole("button",{name:/Registar falta/}).count(),1);
+ await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"professor-dashboard.png"),fullPage:true});
  await page.getByRole("button",{name:/Registar falta/}).click();
  assert.ok((await page.locator("main").innerText()).includes("Falta registada"));
@@ -33,6 +35,7 @@ try{
  await enter(page,"Encarregado");
  assert.match(page.url(),/\/app\/guardian\/dashboard$/);
  assert.ok((await page.locator("main").innerText()).includes("Falta registada"),"Guardian must see teacher absence");
+ await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"encarregado-after-absence.png"),fullPage:true});
  records.push({step:"guardian cross-role attendance",status:"pass"});
  await enter(page,"Finanças");
@@ -44,6 +47,7 @@ try{
  await page.reload({waitUntil:"networkidle"});
  assert.match(page.url(),/\/app\/guardian\/dashboard$/);
  assert.ok((await page.locator("main").innerText()).includes("Validado"),"Demo state should survive same-tab reload");
+ await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"encarregado-after-payment.png"),fullPage:true});
  records.push({step:"guardian cross-role payment and refresh",status:"pass"});
  await enter(page,"Secretaria");
@@ -75,6 +79,7 @@ try{
  await page.goto(base+"/welcome",{waitUntil:"networkidle"});
  const overflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
  assert.ok(overflow<=3,"Welcome mobile horizontal overflow "+overflow);
+ await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"welcome-mobile.png"),fullPage:true});
  await page.goto(base+"/login",{waitUntil:"networkidle"});
  await page.screenshot({path:resolve(dir,"login-mobile.png"),fullPage:true});
@@ -82,6 +87,7 @@ try{
  await page.getByRole("button",{name:/Entrar como Aluno/}).click();
  const appOverflow=await page.evaluate(()=>document.documentElement.scrollWidth-window.innerWidth);
  assert.ok(appOverflow<=3,"App mobile horizontal overflow "+appOverflow);
+ await page.waitForTimeout(900); // allow approved intro and route animations to settle
  await page.screenshot({path:resolve(dir,"aluno-mobile.png"),fullPage:true});
  const studentText=(await page.locator("main").innerText()).toLocaleLowerCase();
  assert.ok(!/propina|pagamento|finan[cç]/i.test(studentText),"Student must never see finance or payment info");
