@@ -9,6 +9,7 @@ import { ScheduleCard } from "../components/ScheduleCard";
 import { QuickActionCard } from "../components/QuickActionCard";
 import { AttendanceChart, FinanceChart, GradeDistribution, PerformanceChart } from "../components/SchoolCharts";
 import { ClassesManagement, TeachersManagement, AssignmentsManagement, TimetableManagement } from "./AcademicManagement";
+import { PedagogyAttendance, PedagogyAssessments } from "./AcademicMonitoring";
 import { AdmissionsDesk, AttendanceDesk, ClassAssignments, CurriculumDesk, Empty, FinanceDesk, GradesDesk, LinkFeature, MessagesDesk, Panel, Pill, StudentRegistry } from "./SchoolModules";
 
 const focusStudent="ALU-001";
@@ -214,6 +215,8 @@ export function Workspace(){
  if(allowedRole==="pedagogy"&&active==="staff")return <PageContainer><TeachersManagement/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="assignments")return <PageContainer><AssignmentsManagement/></PageContainer>;
  if(allowedRole==="pedagogy"&&active==="timetable")return <PageContainer><TimetableManagement/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="attendance")return <PageContainer><PedagogyAttendance/></PageContainer>;
+ if(allowedRole==="pedagogy"&&active==="grades")return <PageContainer><PedagogyAssessments/></PageContainer>;
  return <PageContainer>
   <div className="mb-7"><Link to={"/app/"+allowedRole+"/dashboard"} className="inline-flex items-center gap-2 text-xs font-extrabold text-[#0C5898]"><ArrowRight className="rotate-180" size={14}/> Regressar ao painel</Link>
   <p className="eyebrow mt-6">COLUS · {info.short}</p>
